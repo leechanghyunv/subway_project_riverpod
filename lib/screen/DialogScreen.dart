@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,7 @@ class DialogPage extends ConsumerWidget {
     double appHeight = MediaQuery.of(context).size.height;
     final latlongData = ref.watch(latlngProvider);
     final initialdata = ref.watch(dataProviderInside);
+
     return Scaffold(
       body: latlongData.when(
         error: (err, stack) => Center(
@@ -46,24 +48,25 @@ class DialogPage extends ConsumerWidget {
                                 Get.dialog(
                                   AlertDialog(
                                     title: DialogDesign(
-                                        designText: 'Subway Location Map '),
+                                        designText: 'Subway Location'),
                                     content: Container(
                                       width: double.maxFinite,
                                       height: appHeight * 0.52,/// 330
                                       child: MapSample(row.lat, row.lng),
                                     ),
                                     actions: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          DialogButton(
-                                            comment: 'Exit',
-                                            onPressed: (){
-                                              // Navigator.pop(context);
-                                            },
-                                          )
-                                        ],
-                                      ),
+                                      // Row(
+                                      //   mainAxisAlignment: MainAxisAlignment.end,
+                                      //   children: [
+                                      //     DialogButton(
+                                      //       comment: 'Exit',
+                                      //       onPressed: (){
+                                      //
+                                      //         // Navigator.pop(context);
+                                      //       },
+                                      //     )
+                                      //   ],
+                                      // ),
                                     ],
                                   ),
                                 );
@@ -111,7 +114,6 @@ class DialogPage extends ConsumerWidget {
                                   ],
                                 ),
                               );
-
                             },
                               backgroundColor: Colors.grey.shade400,
                               foregroundColor: Colors.black,

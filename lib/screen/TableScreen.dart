@@ -35,9 +35,6 @@ class TableScreen extends ConsumerWidget {
               child: TextFrame(comment: 'loading.....')),
           data: (data){
             if(data.isNotEmpty){
-              Fluttertoast.showToast(
-                  msg:'   상행               하행   ',
-                  gravity: ToastGravity.CENTER);
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -83,7 +80,11 @@ class TableScreen extends ConsumerWidget {
                               TimerBuilder.periodic(
                                 const Duration(seconds: 1),
                                 builder: (context) {
-                                  return TextFrame(comment: formatDate(DateTime.now(), [' ',HH, ':', nn, ':', ss, ' ']));
+                                  return Row(
+                                    children: [
+                                      TextFrame(comment: formatDate(DateTime.now(), [' ',HH, ':', nn, ':', ss, ' '])),
+                                    ],
+                                  );
                                 },
                               ),
                               SizedBox(width: 10,),

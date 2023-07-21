@@ -1,6 +1,5 @@
 import UIKit
 import Flutter
-import GoogleMaps
 import flutter_local_notifications
 
 @UIApplicationMain
@@ -18,7 +17,6 @@ import flutter_local_notifications
    UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
  }
 
-    GMSServices.provideAPIKey("AIzaSyCKaXE63hpo1lIcjEqF2NYoOzfJpKuzX3Y")
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

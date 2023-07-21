@@ -35,10 +35,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   flutter_local_notifications: ^14.0.0
-  google_maps_flutter: ^2.2.3
-  flutter_naver_map: ^1.0.2
   tutorial_coach_mark: ^1.2.8
   freezed_annotation: ^2.2.0
+  flutter_naver_map: ^1.0.2
   loading_indicator: ^3.1.0
   flutter_riverpod: ^2.3.6
   flutter_slidable: ^3.0.0

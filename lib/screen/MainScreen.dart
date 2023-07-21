@@ -4,10 +4,28 @@ import '../model/DistModel.dart';
 import 'LinePickerA.dart';
 import 'TableScreen.dart';
 
-class HomePage extends ConsumerWidget {
+
+
+class HomePage extends ConsumerStatefulWidget {
+  const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  ConsumerState<HomePage> createState() => _HomePageState();
+}
+
+
+ class _HomePageState extends ConsumerState<HomePage>  {
+
+   late Future<String> _futureData;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureData = _fetchData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     late List<dynamic> subwayList = [];
     double appHeight = MediaQuery.of(context).size.height;  ///  896.0 IPHONE11
     double appWidth = MediaQuery.of(context).size.width;  /// 414.0 IPHONE11
@@ -21,7 +39,7 @@ class HomePage extends ConsumerWidget {
     });
 
     return FutureBuilder(
-        future: _fetchData(),
+        future: _futureData,
         builder: (BuildContext context, AsyncSnapshot<String> snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
             return LoadingPage();
@@ -83,7 +101,6 @@ class HomePage extends ConsumerWidget {
                                             ),
                                           ),
                                           actions: [
-
                                             DialogButton(
                                               onPressed: (){
                                                 if(filted.first.subname != 'SEOUL'){
@@ -184,6 +201,7 @@ class HomePage extends ConsumerWidget {
                               ),
                             ],
                           ),
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
@@ -358,7 +376,6 @@ class HomePage extends ConsumerWidget {
           }
         }
         );
-
   }
 
 

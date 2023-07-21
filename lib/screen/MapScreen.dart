@@ -24,7 +24,7 @@ class MapSample extends ConsumerWidget {
           activeLayerGroups: [NLayerGroup.transit,NLayerGroup.building],
           initialCameraPosition: NCameraPosition(
             target: NLatLng(maplat, maplng),
-            zoom: 15,
+            zoom: 16,
           ),
           scrollGesturesEnable: true,
           locationButtonEnable: true,

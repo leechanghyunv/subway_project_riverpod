@@ -90,9 +90,10 @@ class LinePickerA extends ConsumerWidget {
                                   filtered = List.from(filtered.map((e) {
                                     if(e.line_ui == filtered[index].line_ui){
                                       lineNumber = filtered[index].line_ui;
-                                      print('lineNumber: ${lineNumber}');
+
                                       ref.read(infoProvider.notifier).searchSubway(
                                           name: filtered[0].subname, line: lineNumber);
+
                                       Navigator.pop(context);
                                       setState(() {});
                                       return e.copyWith(isSelected: true);
