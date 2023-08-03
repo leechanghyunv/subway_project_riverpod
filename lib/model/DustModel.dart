@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../chopper_refository/RestApi_Room.dart';
 part 'DustModel.g.dart';
 part 'DustModel.freezed.dart';
 
@@ -27,9 +27,9 @@ class DustInfo with _$DustInfo{
 
 final dustLevelProvider = FutureProvider<List<DustModel>>((ref) async {
 
-  final String key = '4c6f72784b6272613735677166456d';
-  final Url = 'http://openapi.seoul.go.kr:8088/$key/json/RealtimeCityAir/1/25';
-  final response = await http.get(Uri.parse(Url));
+  final apiservice = SeoulApiService.create();
+  final response = await apiservice.getDust();
+
   if (response.statusCode == 200){
     final List<dynamic> jsonBody = jsonDecode(response.body)['RealtimeCityAir']['row'];
     return jsonBody.map((e) => DustModel.fromJson(e)).toList();
@@ -46,7 +46,6 @@ final dustProvider = Provider<List<DustInfo>>((ref) {
   if(dustlevel.value != null){
     double? level = double.tryParse(dustlevel.value!.map((e) => e.pm10).
     reduce((a, b) => a+b/dustlevel.value!.length).toStringAsFixed(2));
-
     if(level != null){
       if (level < 20.0) {
         return  [

@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:subway_project_230704/setting/InitivalValue.dart';
-
 import '../screen/LayoutScreen.dart';
-import '../screen/MainScreen.dart';
+
 
 class TextContainerB extends ConsumerWidget {
   @override
@@ -53,27 +52,40 @@ class TextContainerB extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
-                  Text(
-                    'CODE',
-                    style: TextStyle(
-                        color: Colors.black,
+                  Tooltip(
+                    message: '출발지점의 역사코드',
+                    textStyle: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: mainBoxHeight / 25),
-                  ),
-                  SizedBox(
-                    height: mainBoxHeight / 60,
-                  ),
-                  Consumer(builder: (context,ref,child){
-                    final code = ref.watch(codeConveyProvider);
-                    return Text(code.isNotEmpty
-                        ? '${code}'
-                        : '0000',
+                        color: Colors.white),
+                    child: Text(
+                      'CODE',
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: mainBoxHeight / 25),
-                    );
-                  }),
+                    ),
+                  ),
+                  SizedBox(
+                    height: mainBoxHeight / 60,
+                  ),
+                  Tooltip(
+                    message: '출발지점의 역사코드',
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                    child: Consumer(
+                        builder: (context,ref,child){
+                      final code = ref.watch(codeConveyProvider);
+                      return Text(code.isNotEmpty
+                          ? '${code}'
+                          : '0000',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: mainBoxHeight / 25),
+                      );
+                    }),
+                  ),
 
                 ],
               ),
@@ -85,30 +97,41 @@ class TextContainerB extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'CLASS',
-                    style: TextStyle(
-                        color: Colors.black,
+                  Tooltip(
+                    message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : TIX(T)',
+                    textStyle: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: mainBoxHeight / 25),
+                        color: Colors.white),
+                    child: Text(
+                      'CLASS',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: mainBoxHeight / 25),
+                    ),
                   ),
                   SizedBox(
                     height: mainBoxHeight / 60,
                   ),
-                  Text(
-                    // controllerAPI_D.Type == null? 'NOR(S)'
-                    //   : controllerAPI_D.Type == '급행'? 'EXP(S)'
-                    //   : controllerAPI_D.Type == 'ITX' ? 'ITX(T)' :
-                    'NOR(S)',
-
-                    style: TextStyle(
-                        color: Colors.black,
+                  Tooltip(
+                    message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : TIX(T)',
+                    textStyle: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: mainBoxHeight / 25),
+                        color: Colors.white),
+                    child: Text(
+                      // controllerAPI_D.Type == null? 'NOR(S)'
+                      //   : controllerAPI_D.Type == '급행'? 'EXP(S)'
+                      //   : controllerAPI_D.Type == 'ITX' ? 'ITX(T)' :
+                      'NOR(S)',
+
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: mainBoxHeight / 25),
+                    ),
                   ),
                 ],
               ),
-
               /// CLASS
             ],
           ),

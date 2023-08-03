@@ -12,6 +12,8 @@ class InputSubway extends StatelessWidget {
     Key? key,
     this.onSelected}) : super(key: key);
 
+  static String displayStringForOptionB (String e) => e;
+
   @override
   Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;///  896.0 IPHONE11
@@ -35,6 +37,7 @@ class InputSubway extends StatelessWidget {
                       return option.contains(textEditingValue.text.toLowerCase());
                     });
                   },
+                  displayStringForOption: displayStringForOptionB,
                   fieldViewBuilder: (
                       BuildContext context,
                       TextEditingController textEditingController,

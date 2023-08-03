@@ -1,9 +1,9 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../custom/TextFrame_Error.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../custom/TextFrame.dart';
-import '../custom/TextFrame_Error.dart';
 import '../model/ArrivalModel.dart';
+import '../custom/TextFrame.dart';
 import '../model/DataModel.dart';
 
 class LinePickerB extends ConsumerWidget {
@@ -25,6 +25,8 @@ class LinePickerB extends ConsumerWidget {
               : filtered.length == 4 ? 420
               : filtered.length == 5 ? 470
               : 520,
+          alignment: Alignment.center,
+          width: double.maxFinite,
           child: Column(
             children: [
               Padding(
@@ -88,7 +90,6 @@ class LinePickerB extends ConsumerWidget {
                                           name: filtered[0].subname, line: lineNumber);
                                       ref.read(storeProviderA.notifier).storeSubData('T');
                                       Navigator.pop(context);
-                                      setState(() {});
                                       return e.copyWith(isSelected: true);
                                     } else {
                                       return e;
@@ -96,13 +97,40 @@ class LinePickerB extends ConsumerWidget {
                                   })
                                   );
                                 }
-                              })),
+                                setState(() {});
+                              }),
+                  ),
                 ),
               ),
             ],
           ),
         );
       }),
+      actions: [
+        Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.
+                    all(Colors.grey[300]),
+                  ),
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Done',style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black
+                  ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 

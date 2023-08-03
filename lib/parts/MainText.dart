@@ -20,21 +20,27 @@ class MainText extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(name == 'SEOUL' ? 'SEOUL' : '${name}역',
-              maxLines: 1,
-              style: TextStyle(
-                color: Colors.black,
+          Tooltip(
+            message: ref.watch(routeProvider),
+            textStyle: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: name.length == 2 ? mainBoxHeight / 8/// 80
-                    : name.length == 3 ? mainBoxHeight / 8.5/// 80
-                    : name.length == 4 ? mainBoxHeight / 8.5/// 80
-                    : name.length == 5 ? mainBoxHeight / 8.6/// 60
-                    : name.length == 6 ? mainBoxHeight / 8.6/// 60
-                    : name.length == 7 ? mainBoxHeight / 11.4/// 45
-                    : name.length == 8 ? mainBoxHeight / 11.4/// 45
-                    : mainBoxHeight / 14.4,
-                overflow: TextOverflow.ellipsis,
-              )),
+                color: Colors.white),
+            child: Text(name == 'SEOUL' ? 'SEOUL' : '${name}역',
+                maxLines: 1,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: name.length == 2 ? mainBoxHeight / 8/// 80
+                      : name.length == 3 ? mainBoxHeight / 8.5/// 80
+                      : name.length == 4 ? mainBoxHeight / 8.5/// 80
+                      : name.length == 5 ? mainBoxHeight / 8.6/// 60
+                      : name.length == 6 ? mainBoxHeight / 8.6/// 60
+                      : name.length == 7 ? mainBoxHeight / 11.4/// 45
+                      : name.length == 8 ? mainBoxHeight / 11.4/// 45
+                      : mainBoxHeight / 14.4,
+                  overflow: TextOverflow.ellipsis,
+                )),
+          ),
               Text(
               engName == 'SEOUL' ? ' SEOUL' : ' ${engName}',
               style: TextStyle(

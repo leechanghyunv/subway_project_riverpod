@@ -1,12 +1,12 @@
-import 'dart:convert';
-import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:flutter/services.dart';
 import '../custom/SwitchDialogB.dart';
 import '../screen/LayoutScreen.dart';
 import '../setting/Geolocator.dart';
 import 'CodeModel.dart';
+import 'dart:convert';
 part 'DataModel.freezed.dart';
 part 'DataModel.g.dart';
 
@@ -40,10 +40,11 @@ final dataProviderInside = FutureProvider<List<SubwayModel>>((ref) async {
 });
 /// subwayname, line을 사용자가 선택한 이후에 결과를 가지고 데이터 필터링
 
+
 class DataController extends StateNotifier<List<SubwayModel>>{
+
   final AsyncValue<List<SubwayModel>> subwaydata;
   DataController(this.subwaydata) : super([]);
-
 
   void searchSubway({required name, String? line}) {
     subwaydata.whenData((value){
@@ -55,6 +56,7 @@ class DataController extends StateNotifier<List<SubwayModel>>{
         }
       }
       ).toList();
+      print('InfoProvider 저장완료 ');
       state = searchResults;
     });
   }
@@ -71,80 +73,78 @@ final infoProviderB = StateNotifierProvider<DataController, /// popupmenu를 위
   final database = ref.watch(dataProviderInside);
   return DataController(database);
 });
-
-
-
 /// /// /// /// /// /// /// /// /// //
 class StoreDataController extends StateNotifier<List<SubwayModel>>{
 
   final AsyncValue<List<CodeModel>> subCode;
   final List<SubwayModel> subInfo;
 
+  // late List<dynamic> subwayList = [];
+
   StoreDataController(this.subCode, this.subInfo) : super([]);
 
-  void storeSubData(String value){
+  Future<void> storeSubData(String value) async {
+
     switch(value){
       case 'A':
-        subCode.whenData((value){
-          final index = subCode.value?.indexWhere((e) => e.line == subInfo[0].line);
-          var result = subCode.value?[index!].stationCd;
-          box.write('codeA',result);
-          print('codeA : $result');
-        });
-        box.write('nameA',subInfo.first.subname);
-        box.write('latA',subInfo.first.lat);
-        box.write('lngA',subInfo.first.lng);
-        box.write('engnameA',subInfo.first.engname);
-        box.write('lineA',subInfo.first.line_ui);
-        box.write('sublistA',subInfo.first.subwayid.toString());
-        box.write('lineAA',subInfo.first.line);
-        box.write('headingA',subInfo.first.heading);
-        return print('SaveA and $subInfo');
+          subCode.whenData((value){
+            final index = subCode.value?.indexWhere((e) => e.line == subInfo[0].line);
+            var result = subCode.value?[index!].stationCd;
+            box.write('codeA',result);
+            print('codeA');
+          });
+          await box.write('nameA',subInfo.first.subname);
+          await box.write('latA',subInfo.first.lat);
+          await box.write('lngA',subInfo.first.lng);
+          await box.write('engnameA',subInfo.first.engname);
+          await box.write('lineA',subInfo.first.line_ui);
+          await box.write('sublistA',subInfo.first.subwayid.toString());
+          await box.write('lineAA',subInfo.first.line);
+          await box.write('headingA',subInfo.first.heading);
+          return print('SaveA');
       case 'B':
-        subCode.whenData((value){
-          final index = subCode.value?.indexWhere((e) => e.line == subInfo[0].line);
-          var result = subCode.value?[index!].stationCd;
-          box.write('codeB',result);
-          print('codeB : ${result}');
-        });
-        box.write('nameB',subInfo.first.subname);
-        box.write('latB',subInfo.first.lat);
-        box.write('lngB',subInfo.first.lng);
-        box.write('engnameB',subInfo.first.engname);
-        box.write('lineB',subInfo.first.line_ui);
-        box.write('sublistB',subInfo.first.subwayid.toString());
-        box.write('lineBB',subInfo.first.line);
-        box.write('headingB',subInfo.first.heading);
-        return print('SaveB and $subInfo');
+          subCode.whenData((value){
+            final index = subCode.value?.indexWhere((e) => e.line == subInfo[0].line);
+            var result = subCode.value?[index!].stationCd;
+            box.write('codeB',result);
+            print('codeB');
+          });
+          await box.write('nameB',subInfo.first.subname);
+          await box.write('latB',subInfo.first.lat);
+          await box.write('lngB',subInfo.first.lng);
+          await box.write('engnameB',subInfo.first.engname);
+          await box.write('lineB',subInfo.first.line_ui);
+          await box.write('sublistB',subInfo.first.subwayid.toString());
+          await box.write('lineBB',subInfo.first.line);
+          await box.write('headingB',subInfo.first.heading);
+          return print('SaveB');
       case 'T':
-        subCode.whenData((value){
-          final index = subCode.value?.indexWhere((e) => e.line == subInfo[0].line);
-          var result = subCode.value?[index!].stationCd;
-          box.write('codeT',result);
-        });
-        box.write('nameT',subInfo.first.subname);
-        box.write('latT',subInfo.first.lat);
-        box.write('lngT',subInfo.first.lng);
-        box.write('engnameT',subInfo.first.engname);
-        box.write('lineT',subInfo.first.line_ui);
-        box.write('sublistT',subInfo.first.subwayid.toString());
-        box.write('lineTT',subInfo.first.line);
-        box.write('headingT',subInfo.first.heading);
-        return print('SaveT');
+          subCode.whenData((value){
+            final index = subCode.value?.indexWhere((e) => e.line == subInfo[0].line);
+            var result = subCode.value?[index!].stationCd;
+            box.write('codeT',result);
+          });
+          await box.write('nameT',subInfo.first.subname);
+          await box.write('latT',subInfo.first.lat);
+          await box.write('lngT',subInfo.first.lng);
+          await box.write('engnameT',subInfo.first.engname);
+          await box.write('lineT',subInfo.first.line_ui);
+          await box.write('sublistT',subInfo.first.subwayid.toString());
+          await box.write('lineTT',subInfo.first.line);
+          await box.write('headingT',subInfo.first.heading);
+          return print('SaveT');
     }
   }
 }
+
 final storeProviderA = StateNotifierProvider<
     StoreDataController, List<SubwayModel>>((ref){
   final subInfo = ref.watch(infoProvider);
   final subCode = ref.watch(apiCodeProvider); /// infoProvider에서 나오는 전역변수를 바탕으로 업데이트
   return StoreDataController(subCode,subInfo);
 });
-
-
 /// distance calculator
 final latlngProvider = FutureProvider.autoDispose<List<SubwayModel>>((ref) async {
-
   final Distance _distance =  Distance();
   final location = ref.watch(locationProvider);
   final line = ref.watch(latlonglineProvier);
@@ -153,7 +153,7 @@ final latlngProvider = FutureProvider.autoDispose<List<SubwayModel>>((ref) async
   data.whenData((value){
     for (var i = 0; i < data.value!.length; i++) {
       final km = _distance.as(
-          LengthUnit.Kilometer,
+          LengthUnit.Meter,
           LatLng(location.value!.latitude, location.value!.longitude),
           LatLng(data.value![i].lat, data.value![i].lng));
       data.value![i] = data.value![i].setKm(km);

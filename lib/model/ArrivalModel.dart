@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:subway_project_230704/chopper_refository/RestApi_Room.dart';
 import '../screen/LayoutScreen.dart';
 import 'DataModel.dart';
 part 'ArrivalModel.freezed.dart';
@@ -27,15 +27,14 @@ class ArrivalModel with _$ArrivalModel{
   factory ArrivalModel.fromJson(Map<String, Object?> json) => _$ArrivalModelFromJson(json);
 }
 
-final String key = '4c6f72784b6272613735677166456d';
-
+final apiservice = ArrivalApiService.create();
 
 final arrivalProvider = StreamProvider.autoDispose<List<ArrivalModel>>((ref) async* {
+
   final subwayinfo = ref.watch(infoProvider);
   final name = subwayinfo.elementAtOrNull(0)?.subname;
-  final Url = 'http://swopenapi.seoul.go.kr/api/subway/$key/json/realtimeStationArrival/0/16/$name';
+  final response = await apiservice.getArrival(name!);
 
-  final response = await http.get(Uri.parse(Url));
   if (response.statusCode == 200) {
     final List<dynamic> jsonBody = jsonDecode(response.body)['realtimeArrivalList'];
     yield jsonBody.map((e) => ArrivalModel.fromJson(e)).toList();
@@ -48,10 +47,10 @@ final arrivalProvider = StreamProvider.autoDispose<List<ArrivalModel>>((ref) asy
 
 
 final arrivalProviderT = StreamProvider.autoDispose<List<ArrivalModel>>((ref) async* {
-  final name = box.read('nameT');
-  final Url = 'http://swopenapi.seoul.go.kr/api/subway/$key/json/realtimeStationArrival/0/16/$name';
 
-  final response = await http.get(Uri.parse(Url));
+  final name = box.read('nameT');
+  final response = await apiservice.getArrival(name!);
+
   if (response.statusCode == 200) {
     final List<dynamic> jsonBody = jsonDecode(response.body)['realtimeArrivalList'];
     yield jsonBody.map((e) => ArrivalModel.fromJson(e)).toList();

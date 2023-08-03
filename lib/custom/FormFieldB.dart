@@ -35,20 +35,9 @@ class _TextFormBState extends State<TextFormB> {
   @override
   void initState() {
     super.initState();
-    firstguide();
   }
 
-  void firstguide(){
-    bool SaveB = box.read('SaveB') ?? true;
-    if (SaveB){
-      box.write('SaveB', false);
-      Get.snackbar(
-          'Save 버튼 사용법',
-          '\nSave를 짧게 누르면 목적지(출발지점)A 저장\nSave를 길게 누르면 목적지(도착지점)B 저장');
-    }else {
 
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

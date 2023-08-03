@@ -4,8 +4,6 @@ import '../model/DistModel.dart';
 import 'LinePickerA.dart';
 import 'TableScreen.dart';
 
-
-
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
@@ -13,10 +11,13 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-
  class _HomePageState extends ConsumerState<HomePage>  {
 
    late Future<String> _futureData;
+   late List<dynamic> subwayList = [];
+
+   late String subwayname = 'SEOUL';
+   late String subwaynameT = 'SEOUL';
 
   @override
   void initState() {
@@ -26,7 +27,6 @@ class HomePage extends ConsumerStatefulWidget {
 
   @override
   Widget build(BuildContext context) {
-    late List<dynamic> subwayList = [];
     double appHeight = MediaQuery.of(context).size.height;  ///  896.0 IPHONE11
     double appWidth = MediaQuery.of(context).size.width;  /// 414.0 IPHONE11
     double appRatio = MediaQuery.of(context).size.aspectRatio;
@@ -35,7 +35,7 @@ class HomePage extends ConsumerStatefulWidget {
     final filted = ref.watch(infoProvider);
     ref.listen(dustProvider, (previous, next) {
       ref.read(lineProvier.notifier).update((state) =>
-      state = ref.watch(dustProvider).elementAtOrNull(0)!.barLevel.toString());
+      state = ref.watch(dustProvider).elementAtOrNull(0)!.barLevel.toString());;
     });
 
     return FutureBuilder(
@@ -89,6 +89,9 @@ class HomePage extends ConsumerStatefulWidget {
                                             height: appHeight * 0.3907, /// 0.3907
                                             child: TextFormA(
                                               onSelected: (value){
+                                                setState(() {
+                                                  subwayname = value;
+                                                });
                                                 ref.read(infoProvider.notifier).searchSubway(name: value);
                                                 Get.dialog(
                                                   LinePickerA(),
@@ -102,21 +105,25 @@ class HomePage extends ConsumerStatefulWidget {
                                           ),
                                           actions: [
                                             DialogButton(
-                                              onPressed: (){
-                                                if(filted.first.subname != 'SEOUL'){
-                                                  ref.read(storeProviderA.notifier).storeSubData('A');
-                                                  addlist(subwayList,filted.first.subname); /// state.first.subname
-                                                  Navigator.pop(context);
-                                                } else if(filted.first.subname == 'SEOUL'){
+                                              onPressed: () async {
+                                                if(subwayname != 'SEOUL'){
+                                                    await ref.read(storeProviderA.notifier).storeSubData('A');
+                                                    savemsg('목적지 A', box.read('nameA'), box.read('engnameA'));
+                                                    addlist(subwayList,box.read('nameA'));
+                                                    Navigator.pop(context);
+                                                } else if(
+                                                subwayname == 'SEOUL'){
                                                   showmsg();
                                                 }
                                               },
-                                              onLongPress: (){
-                                                if(filted.first.subname != 'SEOUL'){
-                                                  ref.read(storeProviderA.notifier).storeSubData('B');
-                                                  addlist(subwayList,filted.first.subname);
+                                              onLongPress: () async {
+                                                if(subwayname != 'SEOUL'){
+                                                  await ref.read(storeProviderA.notifier).storeSubData('B');
+                                                  savemsg('목적지 B', box.read('nameB'), box.read('engnameB'));
+                                                  addlist(subwayList,box.read('nameB'));
                                                   Navigator.pop(context);
-                                                } else if(filted.first.subname != 'SEOUL'){
+                                                } else if(
+                                                subwayname == 'SEOUL'){
                                                   showmsg();
                                                 }
                                               },
@@ -137,12 +144,18 @@ class HomePage extends ConsumerStatefulWidget {
                                             height: appHeight * 0.45,
                                             child: TextFormB(
                                               onSelectedA: (valueA){
+                                                setState(() {
+                                                  subwayname = 'valueA';
+                                                });
                                                 ref.read(infoProvider.notifier).searchSubway(name: valueA);
                                                 Get.dialog(
                                                   LinePickerA(),
                                                 );
                                               },
                                               onSelectedB: (valueB){
+                                                setState(() {
+                                                  subwaynameT = 'valueB';
+                                                });
                                                 ref.read(infoProvider.notifier).searchSubway(name: valueB);
                                                 Get.dialog(
                                                   LinePickerB(),
@@ -156,21 +169,25 @@ class HomePage extends ConsumerStatefulWidget {
                                           ),
                                           actions: [
                                             DialogButton(
-                                              onPressed: (){
-                                                if(filted.first.subname != 'SEOUL'){
-                                                  ref.read(storeProviderA.notifier).storeSubData('A');
-                                                  addlist(subwayList,filted.first.subname);
+                                              onPressed: () async {
+                                                if(subwayname != 'SEOUL'){
+                                                  await ref.read(storeProviderA.notifier).storeSubData('A');
+                                                  savemsg('목적지 A', box.read('nameA'), box.read('engnameA'));
+                                                  addlist(subwayList,box.read('nameA'));
                                                   Navigator.pop(context);
-                                                } else if(filted.first.subname == 'SEOUL'){
+                                                } else if(
+                                                subwayname == 'SEOUL'){
                                                   showmsg();
                                                 }
                                               },
-                                              onLongPress: (){
-                                                if(filted.first.subname != 'SEOUL'){
-                                                  ref.read(storeProviderA.notifier).storeSubData('B');
-                                                  addlist(subwayList,filted.first.subname);
+                                              onLongPress: () async {
+                                                if(subwayname != 'SEOUL'){
+                                                  await ref.read(storeProviderA.notifier).storeSubData('B');
+                                                  savemsg('목적지 B', box.read('nameB'), box.read('engnameB'));
+                                                  addlist(subwayList,box.read('nameB'));
                                                   Navigator.pop(context);
-                                                } else if(filted.first.subname != 'SEOUL'){
+                                                } else if(
+                                                subwayname == 'SEOUL'){
                                                   showmsg();
                                                 }
                                               },
@@ -234,11 +251,10 @@ class HomePage extends ConsumerStatefulWidget {
                                                 builder: (__,StateSetter setState){
                                                   return DialogButton(
                                                     onPressed: (){
-                                                      print('call data');
                                                       var data = DistModel(
                                                         latA: box.read('latA').toString(),
                                                         lngA: box.read('lngA').toString(),
-                                                        latB: box.read('latA').toString(),
+                                                        latB: box.read('latB').toString(),
                                                         lngB: box.read('lngB').toString(),
                                                         nameA: box.read('nameA'),
                                                         nameB: box.read('nameB'),
@@ -262,30 +278,26 @@ class HomePage extends ConsumerStatefulWidget {
                                     }
                                   }else if(index == 1){
                                     subwayList = box.read('list') ?? [];
+                                    print(subwayList);
                                     Get.dialog(
                                       AlertDialog(
                                         content: SwitchDialogB(subwayList),
                                         actions: [
                                           DialogButton(
-                                            onPressed: () {
-                                              if(filted.first.subname != 'SEOUL'){
-                                                ref.read(storeProviderA.notifier).storeSubData('A');
-                                                addlist(subwayList,filted.first.subname);
-                                                Navigator.pop(context);
-                                              } else if(filted.first.subname == 'SEOUL'){
-                                                showmsg();
-                                              }
+                                            onPressed: () async {
+                                              await ref.read(storeProviderA.notifier).storeSubData('A');
+                                              savemsg('목적지 A', box.read('nameA'), box.read('engnameA'));
+                                              addlist(subwayList,box.read('nameA'));
+                                              Navigator.pop(context);
                                             },
-                                            onLongPress: (){
-                                              if(filted.first.subname != 'SEOUL'){
-                                                ref.read(storeProviderA.notifier).storeSubData('B');
-                                                addlist(subwayList,filted.first.subname);
-                                                Navigator.pop(context);
-                                              } else if(filted.first.subname != 'SEOUL'){
-                                                showmsg();
-                                              }
+                                            onLongPress: () async {
+                                              await ref.read(storeProviderA.notifier).storeSubData('B');
+                                              savemsg('목적지 A', box.read('nameB'), box.read('engnameB'));
+                                              addlist(subwayList,box.read('nameB'));
+                                              Navigator.pop(context);
                                             },
-                                            comment: 'Save',),
+                                            comment: 'Save',
+                                          ),
                                           DialogButton(
                                               comment: 'Adapt',
                                               onPressed: () => Navigator.pop(context)
@@ -323,7 +335,7 @@ class HomePage extends ConsumerStatefulWidget {
                                                     latA: box.read('latB').toString(),
                                                     lngA: box.read('lngB').toString(),
                                                     latB: box.read('latA').toString(),
-                                                    lngB: box.read('lngB').toString(),
+                                                    lngB: box.read('lngA').toString(),
                                                     nameA: box.read('nameB'),
                                                     nameB: box.read('nameA'),
                                                   );
@@ -364,7 +376,17 @@ class HomePage extends ConsumerStatefulWidget {
                                   child:  Center(
                                     child: codeConvey == ''
                                         ? TextFrame(comment: '목적지를 설정해주세요')
-                                        : TableScreen(),
+                                        : TableScreen(
+                                        ref.read(nameProvier.notifier).state == box.read('nameA') ? box.read('nameB')
+                                            :  ref.read(nameProvier.notifier).state == box.read('nameB')
+                                            ? box.read('nameA')
+                                            : '',
+
+                                        ref.read(engNameProvier.notifier).state == box.read('engnameA') ? box.read('engnameB')
+                                            : ref.read(engNameProvier.notifier).state == box.read('engnameB')
+                                            ? box.read('engnameA')
+                                            : '',
+                                    ),
                                   ));
                             });
                       },
@@ -378,24 +400,32 @@ class HomePage extends ConsumerStatefulWidget {
         );
   }
 
+   void addlist (List<dynamic> list,String name){
+     if(list.length <= 5){
+       list.add(name);
+       box.write('list', list);
+     } else {
+       list.removeAt(0);
+       box.write('list', list);
+     }
+   }
 
   Future<String> _fetchData() async {
     await Future.delayed(Duration(milliseconds: 1950));
     return "Data loaded successfully";
   }
 
+   Future<bool?> savemsg(String position, String name, String ename) async
+   => await Fluttertoast.showToast(
+       msg:'${position} ${name}역 저장되었습니다.\n${ename}',
+       gravity: ToastGravity.CENTER);
+
+
   Future<bool?> showmsg() => Fluttertoast.showToast(
       msg:'목적지를 입력해주세요',
       gravity: ToastGravity.CENTER);
 
-void addlist (List<dynamic> list,String name){
-  if(list.length <= 5){
-    list.add(name);
-    box.write('list', list);
-  } else {
-    list.removeAt(0);
-    box.write('list', list);
-  }
-}
+
+
 }
 

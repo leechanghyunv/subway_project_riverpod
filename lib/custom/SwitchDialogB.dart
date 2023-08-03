@@ -132,13 +132,6 @@ class SwitchDialogB extends ConsumerWidget {
                       }
                   ),
 
-
-
-
-
-
-
-
             ),
           ),
         ],

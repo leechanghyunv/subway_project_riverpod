@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:subway_project_230704/custom/TextFrame.dart';
+import 'package:subway_project_230704/setting/Export.dart';
 import '../model/ArrivalModel.dart';
 import '../model/WeatherModel.dart';
 import '../parts/QrContainer.dart';
@@ -33,54 +34,60 @@ class SwitchDialogA extends ConsumerWidget {
           DialogDesign(
             designText: 'RealTime Arrival',
           ),
-          Container(
-              color: Colors.grey[100],
-              width: double.maxFinite,
-              child: arrivel.when(
-                loading: () => TextFrame(comment: 'loading.....'),
-                error: (err, stack) => Text(err.toString()),
-                data: (data) {
-                  try {
-                    var filtedArrival = data
-                        .where((element) => element.subwayId == list).toList();
-                    var updnLine1 = ['상행', '내선'], updnLine2 = ['하행', '외선'];
-                    var updn1First = filtedArrival
-                        .where(
-                            (element) => updnLine1.contains(element.updnLine))
-                        .map((e) => '${e.trainLineNm} ${e.arvlMsg2}').first;
-                    var updn1Last = filtedArrival
-                        .where(
-                            (element) => updnLine1.contains(element.updnLine))
-                        .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
-                    var updn2First = filtedArrival
-                        .where(
-                            (element) => updnLine2.contains(element.updnLine))
-                        .map((e) => '${e.trainLineNm} ${e.arvlMsg2}').first;
-                    var updn2Last = filtedArrival
-                        .where(
-                            (element) => updnLine2.contains(element.updnLine))
-                        .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextFrame(
-                          comment: '\n${line} ${name}역 -> ${dest}역\n',
-                        ),
-                        TextFrame(comment: updn1First.toString()),
-                        TextFrame(comment: updn1Last.toString()),
-                        TextFrame(comment: updn2First.toString()),
-                        TextFrame(comment: updn2Last.toString()),
-                      ],
-                    );
-                  } catch (e) {
-                    return Container(
-                        child: Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: TextFrame(comment: '${name}역 실시간 데이터를 가져올 수 없습니다.'),
-                    ));
-                  }
-                },
-              )),
+          Tooltip(
+            message: ref.watch(routeProvider),
+            textStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
+            child: Container(
+                color: Colors.grey[100],
+                width: double.maxFinite,
+                child: arrivel.when(
+                  loading: () => TextFrame(comment: 'loading.....'),
+                  error: (err, stack) => Text(err.toString()),
+                  data: (data) {
+                    try {
+                      var filtedArrival = data
+                          .where((element) => element.subwayId == list).toList();
+                      var updnLine1 = ['상행', '내선'], updnLine2 = ['하행', '외선'];
+                      var updn1First = filtedArrival
+                          .where(
+                              (element) => updnLine1.contains(element.updnLine))
+                          .map((e) => '${e.trainLineNm} ${e.arvlMsg2}').first;
+                      var updn1Last = filtedArrival
+                          .where(
+                              (element) => updnLine1.contains(element.updnLine))
+                          .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
+                      var updn2First = filtedArrival
+                          .where(
+                              (element) => updnLine2.contains(element.updnLine))
+                          .map((e) => '${e.trainLineNm} ${e.arvlMsg2}').first;
+                      var updn2Last = filtedArrival
+                          .where(
+                              (element) => updnLine2.contains(element.updnLine))
+                          .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextFrame(
+                            comment: '\n${line} ${name}역 -> ${dest}역\n',
+                          ),
+                          TextFrame(comment: updn1First.toString()),
+                          TextFrame(comment: updn1Last.toString()),
+                          TextFrame(comment: updn2First.toString()),
+                          TextFrame(comment: updn2Last.toString()),
+                        ],
+                      );
+                    } catch (e) {
+                      return Container(
+                          child: Padding(
+                        padding: const EdgeInsets.all(25.0),
+                        child: TextFrame(comment: '${name}역 실시간 데이터를 가져올 수 없습니다.'),
+                      ));
+                    }
+                  },
+                )),
+          ),
           Container(
             width: double.maxFinite,
             color: Colors.white,
@@ -94,7 +101,6 @@ class SwitchDialogA extends ConsumerWidget {
                       return data;
                     },
                   ),
-                  SizedBox(width: 5,),
                   weather.when(
                     loading: () => const Center(
                         child: TextFrame(comment: 'loading.....')),
@@ -102,9 +108,12 @@ class SwitchDialogA extends ConsumerWidget {
                     data: (data){
                       return Container(
                           color: Colors.white,
-                          child: TextFrame(
-                            comment: data.first.description,
-                            overflow: TextOverflow.fade,));
+                          child: Text(data.first.description,
+                            style: TextStyle(
+                              fontSize: appHeight * 0.0164,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ));
                     },
                   ),
                   Expanded(child: Text('')),

@@ -41,17 +41,26 @@ class TextContainerA extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'GATE',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: mainBoxHeight / 25,
-                    fontWeight: FontWeight.bold),
+              Tooltip(
+                message: '지하철에서 내리는 방향\n급행열차(반대방향)',
+                textStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+                child: Text(
+                  'GATE',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: mainBoxHeight / 25,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               SizedBox(height: mainBoxHeight / 60,),
 
               Tooltip(
                 message: '지하철에서 내리는 방향\n급행열차(반대방향)',
+                textStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
                 showDuration: Duration(seconds: 3),
                 child: Consumer(builder: (context,ref,widget){
                   final gateText = ref.watch(headingProvider);

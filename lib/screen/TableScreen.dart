@@ -1,22 +1,45 @@
+import 'package:subway_project_230704/screen/LayoutScreen.dart';
+import 'package:subway_project_230704/custom/TextFrame.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:timer_builder/timer_builder.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:subway_project_230704/custom/TextFrame.dart';
-import 'package:subway_project_230704/screen/LayoutScreen.dart';
-import 'package:timer_builder/timer_builder.dart';
-import '../model/TableModel.dart';
-import '../model/WeatherModel.dart';
 import '../setting/InitivalValue.dart';
+import '../model/WeatherModel.dart';
+import '../model/TableModel.dart';
 
-class TableScreen extends ConsumerWidget {
+class TableScreen extends ConsumerStatefulWidget {
 
+  final subName;
+  final engName;
+
+  const TableScreen(this.subName, this.engName);
+
+  @override
+  ConsumerState<TableScreen> createState() => _TableScreenState();
+}
+
+class _TableScreenState extends ConsumerState<TableScreen> {
   ScrollController _scrollControllerA = ScrollController();
   ScrollController _scrollControllerB = ScrollController();
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  void initState() {
+    super.initState();
+    print('widget.engName: ${widget.engName}');
+    init_msg();
+  }
+
+  void init_msg(){
+    Fluttertoast.showToast(
+        msg:'${widget.engName} ${widget.subName}',
+        gravity: ToastGravity.CENTER);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;  ///  896.0 IPHONE11
     double appWidth = MediaQuery.of(context).size.width;  /// 414.0 IPHONE11
 
@@ -30,11 +53,21 @@ class TableScreen extends ConsumerWidget {
     return LayoutScreen(
       body: Center(
         child: tableA.when(
-          error: (err, stack) => Text(err.toString()),
+          error: (err, stack) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFrame(
+                    comment: '${widget.subName}역 데이터가 존재하지 않습니다.'),
+              ),
+            ],
+          ),
           loading: () => const Center(
               child: TextFrame(comment: 'loading.....')),
           data: (data){
-            if(data.isNotEmpty){
+            if(data.isNotEmpty && tableA.value != null){
+              // return Text(data.length.toString());
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -49,6 +82,7 @@ class TableScreen extends ConsumerWidget {
                         children: [
                           Row(
                             children: [
+                              SizedBox(width: 5,),
                               svg.when(
                                 loading: () => const Center(
                                     child: TextFrame(comment: 'loading.....')),
@@ -88,6 +122,11 @@ class TableScreen extends ConsumerWidget {
                                 },
                               ),
                               SizedBox(width: 10,),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(width: 15,),
                             ],
                           ),
                         ],
@@ -206,23 +245,23 @@ class TableScreen extends ConsumerWidget {
 
                 ],
               );
-            } else if(data.isEmpty){
-              return Center(
-                  child: Column(
-                    children: [
-                      TextFrame(comment: ''),
-                    ],
-                  ),
-                );
             }
+            return Center(
+              child: Column(
+                children: [
+                  TextFrame(comment: ''),
+                ],
+              ),
+            );
           },
         )
-
 
 
       ),
       floatingActionButton: Stack(
         children: <Widget>[
+
+
           Align(
             alignment: Alignment(Alignment.bottomRight.x, Alignment.bottomRight.y - 0.2),
             child: FloatingActionButton.small(

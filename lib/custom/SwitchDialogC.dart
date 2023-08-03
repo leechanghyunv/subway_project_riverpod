@@ -111,9 +111,16 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
                   data: (data){
                     return Container(
                         color: Colors.white,
-                        child: TextFrame(
-                          comment: data.first.description,
-                          overflow: TextOverflow.fade,));
+                        child: Text(data.first.description,
+                          style: TextStyle(
+                            fontSize: appHeight * 0.0163,
+                            fontWeight: FontWeight.bold,
+
+                          ),
+                        ),
+
+
+                    );
                   },
                 ),
                 const Expanded(child: Text('')),

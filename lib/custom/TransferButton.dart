@@ -1,4 +1,3 @@
-import 'package:loading_indicator/loading_indicator.dart';
 import 'package:subway_project_230704/custom/InputSubway.dart';
 import '../model/ArrivalModel.dart';
 import '../model/WeatherModel.dart';
@@ -136,13 +135,14 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
                       },
                     ),
                     SizedBox(
-                      height: appHeight * 0.1068,
-                      child: LoadingIndicator(
-                      indicatorType: Indicator.ballClipRotateMultiple,
-                      colors: [Colors.grey.shade700],
-                      strokeWidth: 3,
-                      pathBackgroundColor: Colors.black,
-                    ),
+                      height: appHeight * 0.1068, /// 90정도
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Container(
+                          alignment: Alignment.center,
+                        
+                        ),
+                      ),
                     ),
                     Row(
                       children: [

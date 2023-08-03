@@ -30,25 +30,10 @@ class _TextFormAState extends State<TextFormA> {
   @override
   void initState() {
     super.initState();
-    firstguide();
   }
 
 
-  void firstguide(){
-    bool SaveA = box.read('SaveA') ?? true;
-    if (SaveA){
-      box.write('SaveA', false);
-      Get.snackbar(
-        'Save 버튼 사용법',
-        '\nSave를 짧게 누르면 목적지(출발지점)A 저장\nSave를 길게 누르면 목적지(도착지점)B 저장',
-        backgroundColor: Colors.white,
-        duration: Duration(seconds: 5),
-        shouldIconPulse: true,
-      );
-    }else {
 
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +51,8 @@ class _TextFormAState extends State<TextFormA> {
                     height: appHeight * 0.0112,
                   ),
                   InputSubway(
-                      onSelected: widget.onSelected),
+                      onSelected: widget.onSelected
+                  ),
                   SizedBox(
                     height: appHeight * 0.0168,
                   ),

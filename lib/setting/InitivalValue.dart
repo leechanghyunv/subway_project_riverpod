@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userNameProvier = StateProvider<String>((ref) => '');
+final routeProvider = StateProvider<String>((ref) => '');
 final nameProvier = StateProvider<String>((ref) => 'SEOUL');
 final nameProvierT = StateProvider<String>((ref) => '');
 final engNameProvier = StateProvider<String>((ref) => '');

@@ -1,23 +1,22 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:subway_project_230704/custom/DialogButton.dart';
 import 'package:subway_project_230704/setting/Export.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import '../setting/UriController.dart';
 import '../custom/SwitchDialogC.dart';
+import '../parts/DesignDialogC.dart';
+import '../parts/SmsContainer.dart';
+import '../parts/QrContainer.dart';
 import '../custom/TextFrame.dart';
 import '../model/DataModel.dart';
-import '../parts/DesignDialogC.dart';
-import '../parts/QrContainer.dart';
-import '../parts/SmsContainer.dart';
-import '../setting/UriController.dart';
+import 'package:get/get.dart';
 import 'MapScreen.dart';
 
 class DialogPage extends ConsumerWidget {
-  const DialogPage({super.key});
+   DialogPage({super.key});
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
@@ -54,20 +53,6 @@ class DialogPage extends ConsumerWidget {
                                       height: appHeight * 0.52,/// 330
                                       child: MapSample(row.lat, row.lng),
                                     ),
-                                    actions: [
-                                      // Row(
-                                      //   mainAxisAlignment: MainAxisAlignment.end,
-                                      //   children: [
-                                      //     DialogButton(
-                                      //       comment: 'Exit',
-                                      //       onPressed: (){
-                                      //
-                                      //         // Navigator.pop(context);
-                                      //       },
-                                      //     )
-                                      //   ],
-                                      // ),
-                                    ],
                                   ),
                                 );
                               }),
@@ -105,7 +90,11 @@ class DialogPage extends ConsumerWidget {
                                     ),
                                   ),
                                   actions: [
-                                    DialogButton(comment: 'Cancel'),
+                                    DialogButton(
+                                        onPressed: (){
+                                          Navigator.pop(context);
+                                        },
+                                        comment: 'Cancel'),
                                     SizedBox(
                                       child: SmsFunction(
                                           subwayline: row.subname
@@ -147,10 +136,14 @@ class DialogPage extends ConsumerWidget {
                                       comment: 'Save',
                                       onPressed: (){
                                         ref.read(storeProviderA.notifier).storeSubData('A');
+                                        savemsg('목적지 A', row.subname, row.engname);
+
                                         Navigator.pop(context);
                                       },
                                       onLongPress: (){
                                         ref.read(storeProviderA.notifier).storeSubData('B');
+                                        savemsg('목적지 B', row.subname, row.engname);
+
                                         Navigator.pop(context);
                                       },
                                     ),
@@ -196,4 +189,10 @@ class DialogPage extends ConsumerWidget {
       ),
     );
   }
+
+  Future<bool?> savemsg(String position, String name, String ename)
+  => Fluttertoast.showToast(
+      msg:'${position} ${name}가 저장되었습니다.\n${ename}',
+      gravity: ToastGravity.CENTER);
+
 }

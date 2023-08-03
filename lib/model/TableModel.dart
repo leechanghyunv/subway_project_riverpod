@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+
+import '../chopper_refository/RestApi_Room.dart';
 part 'TableModel.g.dart';
 part 'TableModel.freezed.dart';
 
@@ -28,11 +29,12 @@ enum EXPRESS {
   const EXPRESS(this.initial);
 }
 
+final apiservice = SeoulApiService.create();
 
 final subTableProviderA = FutureProvider.family<List<TableModel>,String>((ref,code) async {
 
   String und = '1';
-  String key = '4c6f72784b6272613735677166456d';
+
   final String eee = DateFormat('EEE').format(DateTime.now());
   String callday(String day) {
     if (day == "Sat" || day == "Sun") {
@@ -41,8 +43,8 @@ final subTableProviderA = FutureProvider.family<List<TableModel>,String>((ref,co
       return '1';
     }
   }
-  final Url = 'http://openAPI.seoul.go.kr:8088/$key/json/SearchSTNTimeTableByIDService/1/500/${code}/${callday(eee)}/$und';
-  final response = await http.get(Uri.parse(Url));
+
+    final response = await apiservice.getTable(code, callday(eee), und);
   if (response.statusCode == 200) {
     final List<dynamic> jsonBody =
     jsonDecode(response.body)['SearchSTNTimeTableByIDService']['row'];
@@ -56,7 +58,7 @@ final subTableProviderA = FutureProvider.family<List<TableModel>,String>((ref,co
 final subTableProviderB = FutureProvider.family<List<TableModel>,String>((ref,code) async {
 
   String und = '2';
-  String key = '4c6f72784b6272613735677166456d';
+
   final String eee = DateFormat('EEE').format(DateTime.now());
   String callday(String day) {
     if (day == "Sat" || day == "Sun") {
@@ -65,8 +67,8 @@ final subTableProviderB = FutureProvider.family<List<TableModel>,String>((ref,co
       return '1';
     }
   }
-  final Url = 'http://openAPI.seoul.go.kr:8088/$key/json/SearchSTNTimeTableByIDService/1/500/${code}/${callday(eee)}/$und';
-  final response = await http.get(Uri.parse(Url));
+
+  final response = await apiservice.getTable(code, callday(eee), und);
   if (response.statusCode == 200) {
     final List<dynamic> jsonBody =
     jsonDecode(response.body)['SearchSTNTimeTableByIDService']['row'];

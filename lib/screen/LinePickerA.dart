@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:subway_project_230704/custom/TextFrame_Error.dart';
 import 'package:subway_project_230704/parts/QrContainer.dart';
-import '../custom/TextFrame.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import '../model/ArrivalModel.dart';
+import '../custom/TextFrame.dart';
 import '../model/CodeModel.dart';
 import '../model/DataModel.dart';
+
 
 class LinePickerA extends ConsumerWidget {
   LinePickerA({super.key});
@@ -29,6 +30,8 @@ class LinePickerA extends ConsumerWidget {
                   : filtered.length == 4 ? 420
                   : filtered.length == 5 ? 470
                   : 520,
+              alignment: Alignment.center,
+              width: double.maxFinite,
               child: Column(
                 children: [
                   Padding(
@@ -90,12 +93,6 @@ class LinePickerA extends ConsumerWidget {
                                   filtered = List.from(filtered.map((e) {
                                     if(e.line_ui == filtered[index].line_ui){
                                       lineNumber = filtered[index].line_ui;
-
-                                      ref.read(infoProvider.notifier).searchSubway(
-                                          name: filtered[0].subname, line: lineNumber);
-
-                                      Navigator.pop(context);
-                                      setState(() {});
                                       return e.copyWith(isSelected: true);
                                     } else {
                                       return e;
@@ -103,6 +100,7 @@ class LinePickerA extends ConsumerWidget {
                                   })
                                   );
                                 }
+                                setState(() {});
                               })),
                     ),
                   ),
@@ -123,12 +121,19 @@ class LinePickerA extends ConsumerWidget {
                       all(Colors.grey[300]),
                     ),
                     onPressed: (){
+                      ref.read(infoProvider.notifier).searchSubway(
+                          name: filtered[0].subname, line: lineNumber);
+                      print('LinePickerA: ${lineNumber} ${filtered[0].subname}');
+
                       Navigator.of(context).pop();
                 },
-                    child: Text('Done',style: TextStyle(
+                    child: Text('Done',
+                      style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black
-                    ),)),
+                    ),
+                    ),
+                ),
               ),
             ),
           ],
@@ -148,20 +153,20 @@ class LinePickerA extends ConsumerWidget {
             : line == 'Line7' ? const Color(0xff525d02)
             : line == 'Line8' ? const Color(0xfff62d37)
             : line == 'Line9' ? const Color(0xff916a2a)
-         : line == '서해' ? const Color(0xff8FC31F)
+            : line == '서해' ? const Color(0xff8FC31F)
             : line == '공항철도' ? const Color(0xff0090D2)
             : line == '경의선' ? const Color(0xff77C4A3)
             : line == '경춘선' ? const Color(0xff0C8E72)
             : line == '수인분당' ? const Color(0xFFE8E818)
             : line == '신분당' ? const Color(0xffD4003B)
-        : line == '경강선' ? const Color(0xff003DA5)
-        : line == '인천1선' ? const Color(0xff7CA8D5)
-        : line == '인천2선' ? const Color(0xffED8B00)
-        : line == '에버라인' ? const Color(0xff6FB245)
-        : line == '의정부' ? const Color(0xffFDA600)
+            : line == '경강선' ? const Color(0xff003DA5)
+            : line == '인천1선' ? const Color(0xff7CA8D5)
+            : line == '인천2선' ? const Color(0xffED8B00)
+            : line == '에버라인' ? const Color(0xff6FB245)
+            : line == '의정부' ? const Color(0xffFDA600)
             : line == '우이신설' ? const Color(0xffB7C452)
             : line == '김포골드' ? const Color(0xffA17800)
-        : line == '신림' ? const Color(0xff6789CA)
+            : line == '신림' ? const Color(0xff6789CA)
             : Colors.black,
       );
 }

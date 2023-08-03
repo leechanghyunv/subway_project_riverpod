@@ -2,6 +2,15 @@
 
 A new Flutter project.
 
+main package : 
+riverpod_flutter,
+freezed,chopper,
+local_notification,
+cloud_firestore,
+get_storage,
+geolocator,
+http,
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

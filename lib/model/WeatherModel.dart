@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart' as http;
+import '../chopper_refository/RestApi_Room.dart';
+import '../setting/Geolocator.dart';
 part 'WeatherModel.freezed.dart';
 part 'WeatherModel.g.dart';
 
@@ -31,38 +31,21 @@ class Weather with _$Weather{
   factory Weather.fromJson(Map<String, Object?> json) => _$WeatherFromJson(json);
 }
 
-final
-locationProvider = FutureProvider.autoDispose<Position>((ref) async {
-  LocationPermission permission;
-  permission = await Geolocator.checkPermission();
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      return Future.error('Location permissions are denied');
-    }
-  }
-  if (permission == LocationPermission.deniedForever) {  /// deniedForever
-    return Future.error(
-        'Location permissions are permanently denied, we cannot request permissions.');
-  }
-  Position position = await Geolocator.getCurrentPosition(
-    desiredAccuracy: LocationAccuracy.bestForNavigation,
-  );
-  return position;
-});
 
 final key = '391af738f3d6aea930da389c0e6041ff';
 
+final apiservice = WeatherApiService.create();
+
 final weatherProvider = FutureProvider.autoDispose<List<Weather>>((ref) async {
+
   final location = ref.watch(locationProvider);
+
   if(location.value != null){
 
     var lat = location.value?.latitude.toString();
     var lng = location.value?.longitude.toString();
-    print('${lat}  ${lng}');
-    final response = await http.get(Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=$key')
-    );
+
+    final response = await apiservice.getWeather(lat!, lng!, key);
     if(response.statusCode == 200){
       final List<dynamic> jsonBody = jsonDecode(response.body)['weather'];
       print(jsonBody);
@@ -77,12 +60,14 @@ final weatherProvider = FutureProvider.autoDispose<List<Weather>>((ref) async {
 
 final tempProvider = FutureProvider.autoDispose<Main>((ref) async {
   final location = ref.watch(locationProvider);
+
   if(location.value != null){
+
     var lat = location.value?.latitude.toString();
     var lng = location.value?.longitude.toString();
-    final response = await http.get(Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=$key')
-    );
+
+    final response = await apiservice.getWeather(lat!, lng!, key);
+
     if(response.statusCode == 200){
       final Map<String, Object?> jsonBody = jsonDecode(response.body)['main'];
       print(jsonBody);
