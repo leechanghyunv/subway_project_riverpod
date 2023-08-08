@@ -18,6 +18,7 @@ import 'MapScreen.dart';
 class DialogPage extends ConsumerWidget {
    DialogPage({super.key});
 
+
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     double appHeight = MediaQuery.of(context).size.height;
@@ -133,23 +134,11 @@ class DialogPage extends ConsumerWidget {
                                   ),
                                   actions: [
                                     DialogButton(
-                                      comment: 'Save',
+                                      comment: 'Select',
                                       onPressed: (){
-                                        ref.read(storeProviderA.notifier).storeSubData('A');
-                                        savemsg('목적지 A', row.subname, row.engname);
-
-                                        Navigator.pop(context);
-                                      },
-                                      onLongPress: (){
-                                        ref.read(storeProviderA.notifier).storeSubData('B');
-                                        savemsg('목적지 B', row.subname, row.engname);
-
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                    DialogButton(
-                                      comment: 'Exit',
-                                      onPressed: (){
+                                        Fluttertoast.showToast(
+                                            msg: '${row.subname}역을 선택하셨습니다',
+                                            gravity: ToastGravity.CENTER);
                                         Navigator.pop(context);
                                       },),
                                   ],
@@ -194,5 +183,7 @@ class DialogPage extends ConsumerWidget {
   => Fluttertoast.showToast(
       msg:'${position} ${name}가 저장되었습니다.\n${ename}',
       gravity: ToastGravity.CENTER);
+
+
 
 }

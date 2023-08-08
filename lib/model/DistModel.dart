@@ -69,14 +69,14 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
 
       /// pathType 1-지하철, pathType 2-버스, pathType 3-버스+지하철
       var pathtype = utfIntoList.first.pathType.toString();
-      var routename = utfIntoList.first.legs.map((e) => '${e.route}').toSet().toList();
+      var routename = utfIntoList.first.legs.map((e) => '${e.route}').where((e) => e != 'null').toSet().toList();
       var route = utfIntoList.first.legs.map((e) => '${e.end.name}').toSet().toList();
       String formattedRoute = route.join(' > ');
       String formattedpathtype = routename.join(' - ');
       var Time = utfIntoList.first.totalTime; ///  시간순
       Get.snackbar(
-        '(지하철기준) 적합한 경로가 없습니다.',
-        '빠른경로 ${pathtype == '2' ? '버스' : pathtype == '3' ? '버스-지하철' : '---'} : ${formattedpathtype}\n${formattedRoute}\n${(Time/60).toStringAsFixed(0)}분 소요',
+        '지하철기준 빠른 경로가 없습니다.',
+        '빠른경로 ${pathtype == '2' ? '(버스)' : pathtype == '3' ? '(버스-지하철)' : '---'} : ${formattedpathtype}\n${formattedRoute}\n${(Time/60).toStringAsFixed(0)}분 소요',
         backgroundColor: Colors.grey[100],
         shouldIconPulse: true,
         duration: Duration(seconds: 7),

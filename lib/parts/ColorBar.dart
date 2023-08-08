@@ -56,10 +56,11 @@ class ColorBar extends ConsumerWidget {
                 loading: () =>  TextFrame(comment: 'loading.....'),
                 error: (err, stack) => Text(err.toString()),
                 data: (data){
+                  var pm10 = data.map((e) => e.pm10).reduce((v, e) => v + e)/data.length;
                   return Row(
                     children: [
                       TextFrame(
-                          comment: '미세먼지농도 ${data.elementAtOrNull(0)!.pm10.toString()}pm  ${dust.first.commnet.toString()}',
+                          comment: '미세먼지농도 ${pm10.toString()}pm ${dust.first.commnet.toString()}',
                           overflow: TextOverflow.fade),
                     ],
                   );

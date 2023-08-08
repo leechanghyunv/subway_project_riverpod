@@ -33,8 +33,6 @@ final apiservice = SeoulApiService.create();
 
 final subTableProviderA = FutureProvider.family<List<TableModel>,String>((ref,code) async {
 
-  String und = '1';
-
   final String eee = DateFormat('EEE').format(DateTime.now());
   String callday(String day) {
     if (day == "Sat" || day == "Sun") {
@@ -44,7 +42,7 @@ final subTableProviderA = FutureProvider.family<List<TableModel>,String>((ref,co
     }
   }
 
-    final response = await apiservice.getTable(code, callday(eee), und);
+    final response = await apiservice.getTable(code, callday(eee), '1');
   if (response.statusCode == 200) {
     final List<dynamic> jsonBody =
     jsonDecode(response.body)['SearchSTNTimeTableByIDService']['row'];
@@ -57,8 +55,6 @@ final subTableProviderA = FutureProvider.family<List<TableModel>,String>((ref,co
 
 final subTableProviderB = FutureProvider.family<List<TableModel>,String>((ref,code) async {
 
-  String und = '2';
-
   final String eee = DateFormat('EEE').format(DateTime.now());
   String callday(String day) {
     if (day == "Sat" || day == "Sun") {
@@ -68,7 +64,7 @@ final subTableProviderB = FutureProvider.family<List<TableModel>,String>((ref,co
     }
   }
 
-  final response = await apiservice.getTable(code, callday(eee), und);
+  final response = await apiservice.getTable(code, callday(eee), '2');
   if (response.statusCode == 200) {
     final List<dynamic> jsonBody =
     jsonDecode(response.body)['SearchSTNTimeTableByIDService']['row'];

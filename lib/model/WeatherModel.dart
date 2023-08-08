@@ -59,6 +59,7 @@ final weatherProvider = FutureProvider.autoDispose<List<Weather>>((ref) async {
 
 
 final tempProvider = FutureProvider.autoDispose<Main>((ref) async {
+
   final location = ref.watch(locationProvider);
 
   if(location.value != null){

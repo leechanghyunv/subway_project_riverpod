@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'firebase_options.dart';
 import 'package:get/get.dart';
-
 import 'dart:developer';
 
 void main() async {
