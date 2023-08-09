@@ -1,6 +1,6 @@
-import 'package:subway_project_230704/setting/GoogleServey.dart';
+import 'package:subway_project_230704/setting/google_servey.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
-import 'package:subway_project_230704/screen/MainScreen.dart';
+import 'package:subway_project_230704/screen/main_screen.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
