@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +25,7 @@ class _DropdownCustomState extends State<DropdownCustom> {
   @override
   Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;///  896.0 IPHONE11
-    double appWidth = MediaQuery.of(context).size.width;/// 414.0 IPHONE11
+    double appWidth = appHeight * 0.462;
     double mainBoxHeight = appHeight * 0.58;/// 520   ~ 519.68
 
     return Column(

@@ -1,10 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:subway_project_230704/setting/export.dart';
 import '../custom/text_frame_error.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../model/arrival_model.dart';
 import '../custom/text_frame.dart';
 import '../model/data_model.dart';
+import '../parts/qr_container.dart';
 
 class LinePickerB extends ConsumerWidget {
    LinePickerB({super.key});
@@ -14,10 +17,12 @@ class LinePickerB extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     double appHeight = MediaQuery.of(context).size.height;///  896.0 IPHONE11
+    double appWidth = MediaQuery.of(context).size.width;
     var filtered = ref.watch(infoProvider);
     final arrivel = ref.watch(arrivalProvider);
     return AlertDialog(
-      content: StatefulBuilder(builder: (__, StateSetter setState){
+      content: StatefulBuilder(
+          builder: (__, StateSetter setState){
         return Container(
           height: filtered.length == 1 ? 270
               : filtered.length == 2 ? 320
@@ -31,9 +36,11 @@ class LinePickerB extends ConsumerWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: TextFrame(comment: '${filtered[0].subname}'),
+                child: DialogDesign(
+                    designText: '${filtered[0].subname}역'),
               ),
               Container(
+                color: Colors.grey[200],
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: List.generate(filtered.length,
@@ -71,7 +78,7 @@ class LinePickerB extends ConsumerWidget {
                                         "-")[1]}  -  ${updn2First.split("-")[1]}'
                                         : '',
                                       style: TextStyle(
-                                        fontSize: appHeight * 0.0115,
+                                        fontSize: appWidth * 0.0242,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
@@ -86,10 +93,6 @@ class LinePickerB extends ConsumerWidget {
                                   filtered = List.from(filtered.map((e) {
                                     if(e.line_ui == filtered[index].line_ui){
                                       lineNumber = filtered[index].line_ui;
-                                      ref.read(infoProvider.notifier).searchSubway(
-                                          name: filtered[0].subname, line: lineNumber);
-                                      ref.read(storeProviderA.notifier).storeSubData('T');
-                                      Navigator.pop(context);
                                       return e.copyWith(isSelected: true);
                                     } else {
                                       return e;
@@ -118,9 +121,16 @@ class LinePickerB extends ConsumerWidget {
                     all(Colors.grey[300]),
                   ),
                   onPressed: (){
+                    ref.read(infoProviderB.notifier).searchSubway(
+                        name: filtered[0].subname, line: lineNumber);
+                    ref.read(storeProviderA.notifier).storeSubData('T');
+                    Fluttertoast.showToast(
+                        msg:'환승역 ${filtered[0].subname}역 저장되었습니다.',
+                        gravity: ToastGravity.CENTER);
                     Navigator.of(context).pop();
                   },
-                  child: Text('Done',style: TextStyle(
+                  child: Text('Done',
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black
                   ),

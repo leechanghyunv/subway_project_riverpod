@@ -20,10 +20,13 @@ class _InputNameState extends State<InputName> {
   @override
   Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;    ///  896.0 IPHONE11
+    double appWidth = MediaQuery.of(context).size.width;    ///  896.0 IPHONE11
+    double iconSize = appWidth * 0.06039;
+    double textSize = appWidth * 0.0362;
 
     return Container(
-      width: appHeight * 0.2791,
-      height: appHeight * 0.07255,
+      width: appWidth * 0.604,
+      height: appWidth * 0.156,
       child: TextField(
         decoration: InputDecoration(
           border: OutlineInputBorder(
@@ -31,6 +34,7 @@ class _InputNameState extends State<InputName> {
           ),
           prefixIcon: Icon(
             Icons.person,
+            size: iconSize,
             color: Colors.black,
           ),
           suffixIcon: Material(
@@ -42,6 +46,7 @@ class _InputNameState extends State<InputName> {
               },
               child: Icon(
                 Icons.clear,
+                size: iconSize,
                 color: Colors.black,
               ),
             ),
@@ -49,6 +54,8 @@ class _InputNameState extends State<InputName> {
           labelText: 'Enter your name',
           hintStyle: TextStyle(color: Colors.black),
           hintText: '입력 후 완료버튼을 누르세요',
+          labelStyle: TextStyle(
+              fontSize: textSize),
         ),
         onChanged: widget.onSubmitted,
       ),

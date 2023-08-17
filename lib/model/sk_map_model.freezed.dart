@@ -1544,6 +1544,7 @@ StationList _$StationListFromJson(Map<String, dynamic> json) {
 mixin _$StationList {
   int get index => throw _privateConstructorUsedError;
   String? get stationName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'stationID')
   String? get stationId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1558,7 +1559,10 @@ abstract class $StationListCopyWith<$Res> {
           StationList value, $Res Function(StationList) then) =
       _$StationListCopyWithImpl<$Res, StationList>;
   @useResult
-  $Res call({int index, String? stationName, String? stationId});
+  $Res call(
+      {int index,
+      String? stationName,
+      @JsonKey(name: 'stationID') String? stationId});
 }
 
 /// @nodoc
@@ -1603,7 +1607,10 @@ abstract class _$$_StationListCopyWith<$Res>
       __$$_StationListCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int index, String? stationName, String? stationId});
+  $Res call(
+      {int index,
+      String? stationName,
+      @JsonKey(name: 'stationID') String? stationId});
 }
 
 /// @nodoc
@@ -1643,8 +1650,8 @@ class __$$_StationListCopyWithImpl<$Res>
 class _$_StationList implements _StationList {
   _$_StationList(
       {required this.index,
-      required this.stationName,
-      required this.stationId});
+      this.stationName = "정보없음",
+      @JsonKey(name: 'stationID') this.stationId = "정보없음"});
 
   factory _$_StationList.fromJson(Map<String, dynamic> json) =>
       _$$_StationListFromJson(json);
@@ -1652,8 +1659,10 @@ class _$_StationList implements _StationList {
   @override
   final int index;
   @override
+  @JsonKey()
   final String? stationName;
   @override
+  @JsonKey(name: 'stationID')
   final String? stationId;
 
   @override
@@ -1694,8 +1703,8 @@ class _$_StationList implements _StationList {
 abstract class _StationList implements StationList {
   factory _StationList(
       {required final int index,
-      required final String? stationName,
-      required final String? stationId}) = _$_StationList;
+      final String? stationName,
+      @JsonKey(name: 'stationID') final String? stationId}) = _$_StationList;
 
   factory _StationList.fromJson(Map<String, dynamic> json) =
       _$_StationList.fromJson;
@@ -1705,6 +1714,7 @@ abstract class _StationList implements StationList {
   @override
   String? get stationName;
   @override
+  @JsonKey(name: 'stationID')
   String? get stationId;
   @override
   @JsonKey(ignore: true)

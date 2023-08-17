@@ -1,8 +1,7 @@
 import 'package:subway_project_230704/custom/input_subway.dart';
+import '../api_provider/weather_provider.dart';
 import '../model/arrival_model.dart';
-import '../model/weather_model.dart';
 import '../parts/qr_container.dart';
-import '../screen/line_pickerA.dart';
 import '../setting/export.dart';
 
 class TransferIcon extends ConsumerStatefulWidget {
@@ -16,6 +15,9 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
   @override
   Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height; ///  896.0 IPHONE11
+    double appWidth = MediaQuery.of(context).size.width;
+    double appRatio = MediaQuery.of(context).size.aspectRatio;
+
     final arrivel = ref.watch(arrivalProviderT);
     final temp = ref.watch(tempProvider);
     final svg = ref.watch(svgProvider);
@@ -25,12 +27,12 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
           Get.dialog(
               AlertDialog(
                 content: Container(
-                  height: appHeight * 0.4,
+                  height: appWidth * 0.9,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       DialogDesign(
-                        designText: 'RealTime Arrival T',
+                        designText: 'RealTime Arrival',
                       ),
                       Container(
                         color: Colors.grey[100],
@@ -82,7 +84,7 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
                           },
                         ),
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(height: 20,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -117,7 +119,9 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
               AlertDialog(
               content: Container(
                 color: Colors.white,
-                height: appHeight * 0.34,  /// 0.27
+                height: appWidth * 0.7355,  /// 0.27
+
+
                 child: Column(
                   children: <Widget>[
                     DialogDesign(
@@ -130,7 +134,7 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
                       onSelected: (value){
                         ref.read(infoProvider.notifier).searchSubway(name: value);
                         Get.dialog(
-                          LinePickerA(),
+                          LinePickerB(), ///LinePickerB
                         );
                       },
                     ),
@@ -198,6 +202,7 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
             // : box.read('lineT') == '김포골드'? const Color(0xffA17800)
             // : box.read('lineT') == '신림'?   const Color(0xff6789CA)
             : Colors.black,
+        size: appWidth * 0.0604,
       ),
 
     );

@@ -28,7 +28,7 @@ class _LoadingPageState extends State<LoadingPage> {
     double appHeight = MediaQuery.of(context).size.height;
     bool isFirstBuild = box.read('isFirstBuild') ?? true;
     if (isFirstBuild) {
-      return LayoutScreen(
+      return Scaffold(
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

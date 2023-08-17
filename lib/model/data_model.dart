@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter/services.dart';
+import '../api_provider/code_provider.dart';
 import '../custom/switch_dialogB.dart';
 import '../screen/layout_screen.dart';
 import '../setting/geolocator.dart';
@@ -79,8 +80,6 @@ class StoreDataController extends StateNotifier<List<SubwayModel>>{
   final AsyncValue<List<CodeModel>> subCode;
   final List<SubwayModel> subInfo;
 
-  // late List<dynamic> subwayList = [];
-
   StoreDataController(this.subCode, this.subInfo) : super([]);
 
   Future<void> storeSubData(String value) async {
@@ -144,6 +143,7 @@ final storeProviderA = StateNotifierProvider<
   return StoreDataController(subCode,subInfo);
 });
 /// distance calculator
+
 final latlngProvider = FutureProvider.autoDispose<List<SubwayModel>>((ref) async {
   final Distance _distance =  Distance();
   final location = ref.watch(locationProvider);

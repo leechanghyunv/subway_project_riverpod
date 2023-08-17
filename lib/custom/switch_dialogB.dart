@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
+import '../api_provider/dust_provider.dart';
 import '../model/data_model.dart';
-import '../model/microdust_model.dart';
 import '../screen/dialog_screen.dart';
 import '../screen/line_pickerA.dart';
 import '../setting/initival_value.dart';
@@ -15,7 +15,7 @@ List<Color> kDefaultRainbowColors2 = [
   Colors.grey.shade600,
 ];
 
-final latlonglineProvier = StateProvider<String>((ref) => 'Line2');
+final latlonglineProvier = StateProvider<String>((ref) => ref.watch(lineProvier));
 
 class SwitchDialogB extends ConsumerWidget {
 
@@ -26,6 +26,8 @@ class SwitchDialogB extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     double appHeight = MediaQuery.of(context).size.height;
+    double appWidth = MediaQuery.of(context).size.width;
+    double appRatio = MediaQuery.of(context).size.aspectRatio;
     double mainBoxHeight = appHeight * 0.58;
     ref.listen(lineProvier, (previous, next) {
       ref.read(latlonglineProvier.notifier).update((state) =>
@@ -34,7 +36,7 @@ class SwitchDialogB extends ConsumerWidget {
 
     return Container(
       color: Colors.white,
-      height: appHeight * 0.51,
+      height: appRatio >= 0.5 ? appWidth * 0.9662 : appWidth * 1.1,
       child: Column(
         children: [
           Row(
@@ -49,11 +51,11 @@ class SwitchDialogB extends ConsumerWidget {
           ),
           Container(
             color: Colors.grey,
-            height: appHeight * 0.2907,
+            height: appRatio >= 0.5 ? appWidth * 0.51 : appWidth * 0.6268,
             child: DialogPage(),
           ),
           Container(
-            height: appHeight * 0.03907,
+            height: appWidth * 0.0845,
             color: Colors.white,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -62,14 +64,14 @@ class SwitchDialogB extends ConsumerWidget {
                   child: Container(
                     alignment: Alignment.centerRight,
                     color: Colors.grey[100],
-                    height: appHeight * 0.03907,
+                    height: appWidth * 0.0845,
                   ),
                 ),
                 Container(
                   alignment: Alignment.center,
                   color: Colors.grey[300],
-                  width: 75,
-                  height: appHeight * 0.03907,
+                  width: appWidth * 0.1812,
+                  height: appWidth * 0.0845,
                   child: DropdownButton(
                       value: ref.watch(latlonglineProvier),
                       dropdownColor: Colors.grey[200],
@@ -85,7 +87,7 @@ class SwitchDialogB extends ConsumerWidget {
                             child: Text(
                               value,
                               style: TextStyle(
-                                  fontSize: mainBoxHeight / 37,
+                                  fontSize: appWidth * 0.0362,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),)
                         );
@@ -103,7 +105,7 @@ class SwitchDialogB extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Container(
-              height: 35,
+              height: appWidth * 0.09,
               color: Colors.white,
               alignment: Alignment.center,
               width: double.maxFinite,

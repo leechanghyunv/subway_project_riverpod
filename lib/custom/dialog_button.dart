@@ -13,7 +13,7 @@ class DialogButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;///  896.0 IPHONE11
-
+    double appWidth = MediaQuery.of(context).size.width;
     return SizedBox(
       child: GestureDetector(
         child: TextButton(
@@ -23,9 +23,10 @@ class DialogButton extends StatelessWidget {
             child: Text(
               comment,
               style: TextStyle(
-                  fontSize: appHeight * 0.0168,
+                  fontSize: appWidth * 0.0362,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black),
+                  color: Colors.black
+              ),
             ),
           ),
         ),

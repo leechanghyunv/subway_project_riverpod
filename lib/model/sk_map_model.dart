@@ -99,8 +99,8 @@ class PassStopList with _$PassStopList {
 class StationList with _$StationList {
   factory StationList({
     required int index,
-    required String? stationName,
-    required String? stationId,
+    @Default("정보없음") String? stationName,
+    @Default("정보없음") @JsonKey(name: 'stationID') String? stationId,
   }) = _StationList;
 
   factory StationList.fromJson(Map<String, dynamic> json) =>

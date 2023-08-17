@@ -41,7 +41,7 @@ class UpandDown extends StatelessWidget {
                   onTap: onTap1,
                   child: Icon(
                     Icons.keyboard_double_arrow_up,
-                    size: 30,
+                    size: appHeight * 0.0339,
                     color: Colors.black,
                   ),
                 ),
@@ -54,7 +54,7 @@ class UpandDown extends StatelessWidget {
                   onTap: onTap2,
                   child: Icon(
                     Icons.keyboard_double_arrow_down,
-                    size: 30,
+                    size: appHeight * 0.0339,
                   ),
                 ),
               ),

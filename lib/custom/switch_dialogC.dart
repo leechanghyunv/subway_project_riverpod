@@ -2,11 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:subway_project_230704/model/data_model.dart';
+import '../api_provider/weather_provider.dart';
 import '../model/arrival_model.dart';
-import '../model/weather_model.dart';
 import '../parts/qr_container.dart';
-import '../screen/layout_screen.dart';
-import '../setting/initival_value.dart';
 import 'text_frame.dart';
 
 class SwitchDialogC extends ConsumerStatefulWidget {
@@ -27,13 +25,18 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
   @override
   Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;
+    double appWidth = MediaQuery.of(context).size.width;
+    double appRatio = MediaQuery.of(context).size.aspectRatio;
     final arrivel = ref.watch(arrivalProvider);
     final weather = ref.watch(weatherProvider);
     final subdata = ref.watch(infoProvider);
     final temp = ref.watch(tempProvider);
     final svg = ref.watch(svgProvider);
+
+    double textSize = appWidth * 0.0362;
     return Container(
-      height: appHeight * 0.42,
+      height: appRatio >= 0.5 ? appWidth * 0.8 : appWidth * 0.9075,
+      /// appRatio >= 0.5 ? appWidth * 0.87 : appWidth * 0.9075,
       width: double.maxFinite,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,7 +116,7 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
                         color: Colors.white,
                         child: Text(data.first.description,
                           style: TextStyle(
-                            fontSize: appHeight * 0.0163,
+                            fontSize: textSize,
                             fontWeight: FontWeight.bold,
 
                           ),

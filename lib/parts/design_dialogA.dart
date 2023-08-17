@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:subway_project_230704/model/data_model.dart';
 import 'package:subway_project_230704/setting/initival_value.dart';
 import '../screen/layout_screen.dart';
-import '../screen/main_screen.dart';
 import 'color_container.dart';
 
 class DialogDesignBoxA extends ConsumerWidget {
@@ -13,67 +11,75 @@ class DialogDesignBoxA extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     double appHeight = MediaQuery.of(context).size.height;
+    double appWidth = MediaQuery.of(context).size.width;
+
+    double sizeWidth = appWidth * 0.0242;
+    double textSize = appWidth * 0.0362;
+
+    double contHeight = appWidth * 0.1686;
+    double contWidth = appWidth * 0.0242;
+
     final stringNumber = ref.watch(lineProvier);
 
     return Container(
-      height: appHeight * 0.0672,
+      height: appWidth * 0.1449,
       decoration: BoxDecoration(color: Colors.white),
       child: Row(
         children: [
           SizedBox(
-            height: appHeight * 0.0672,
-            width: appHeight * 0.0168,
+            height: appWidth * 0.1449,
+            width: appWidth * 0.0362,
             child: ColorContainer(
                 stringNumber: stringNumber),
           ),
           SizedBox(
-            width: appHeight * 0.0112,
+            width: sizeWidth,
           ),
           Container(
-            height: appHeight * 0.0784,
-            width: appHeight * 0.0560,
+            height: contHeight,
+            width: appWidth * 0.1256,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: appHeight * 0.0112,
+                  height: sizeWidth,
                 ),
                 Text('Date',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: appHeight * 0.0168)),
+                        fontSize: textSize)),
                 SizedBox(
-                  height: appHeight * 0.0112,
+                  height: sizeWidth,
                 ),
                 Text(
                     DateFormat('MM-dd').format(DateTime.now()),
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: appHeight * 0.0168)),
+                        fontSize: textSize)),
               ],
             ),
           ),
           SizedBox(
-            width: appHeight * 0.0112,
+            width: sizeWidth,
           ),
           Container(
-            height: appHeight * 0.0784,
-            width: appHeight * 0.0784,
+            height: appWidth * 0.1686,
+            width: appWidth * 0.1686,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: appHeight * 0.0112,
+                  height: sizeWidth,
                 ),
                 Text('Location',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: appHeight * 0.0168)),
+                        fontSize: textSize)),
                 SizedBox(
-                  height: appHeight * 0.0112,
+                  height: sizeWidth,
                 ),
 
 
@@ -88,7 +94,7 @@ class DialogDesignBoxA extends ConsumerWidget {
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
-                            fontSize: appHeight * 0.0168),
+                            fontSize: textSize),
                         overflow: TextOverflow.ellipsis);
                   }
                   return Text('');
@@ -97,31 +103,32 @@ class DialogDesignBoxA extends ConsumerWidget {
               ],
             ),
           ),
+
           SizedBox(
-            width: appHeight * 0.0112,
+            width: sizeWidth,
           ),
           Container(
-            height: appHeight * 0.0784,
-            width: appHeight * 0.1008,
+            height: appWidth * 0.1686,
+            width: appWidth * 0.2174,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: appHeight * 0.0112,
+                  height: sizeWidth,
                 ),
                 Text('Passenger',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: appHeight * 0.0168)),
+                        fontSize: textSize)),
                 SizedBox(
-                  height: appHeight * 0.0112,
+                  height: sizeWidth,
                 ),
                 Text(box.read('name') ?? '',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: appHeight * 0.0168),
+                        fontSize: textSize),
                     overflow: TextOverflow.ellipsis)
               ],
             ),

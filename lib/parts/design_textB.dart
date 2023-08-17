@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:subway_project_230704/setting/initival_value.dart';
+import '../custom/tool_tip.dart';
 import '../screen/layout_screen.dart';
 
 
 class TextContainerB extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-
     double appHeight = MediaQuery.of(context).size.height;
+    double appWidth = MediaQuery.of(context).size.width;
     double mainBoxHeight = appHeight * 0.58;
-    final userName = ref.watch(userNameProvier);
 
+    final userName = ref.watch(userNameProvier);
     return RotatedBox(
       quarterTurns: 3,
       child: Column(
@@ -24,41 +25,10 @@ class TextContainerB extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'DATE',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: mainBoxHeight / 25),
-                  ),
-                  SizedBox(
-                    height: mainBoxHeight / 60,
-                  ),
-                  Text(
-                    DateFormat('MM/dd ').format(DateTime.now()),
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: mainBoxHeight / 25),
-                  ),
-                ],
-              ),
-
-              /// DATE
-              SizedBox(
-                width: mainBoxHeight / 27.5,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  Tooltip(
-                    message: '출발지점의 역사코드',
-                    textStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                  ToopTipWidget(
+                    message: DateFormat('EEEE\naa hh:mm').format(DateTime.now()),
                     child: Text(
-                      'CODE',
+                      'DATE',
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -68,40 +38,77 @@ class TextContainerB extends ConsumerWidget {
                   SizedBox(
                     height: mainBoxHeight / 60,
                   ),
-                  Tooltip(
-                    message: '출발지점의 역사코드',
-                    textStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                    child: Consumer(
-                        builder: (context,ref,child){
-                      final code = ref.watch(codeConveyProvider);
-                      return Text(code.isNotEmpty
-                          ? '${code}'
-                          : '0000',
+                  ToopTipWidget(
+                        message: DateFormat('EEEE\naa hh:mm').format(DateTime.now()),
+                        child: Text(
+                          DateFormat('MM/dd ').format(DateTime.now()),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: mainBoxHeight / 25),
+                        ),
+                      ),
+
+                ],
+              ),
+
+              /// DATE
+              SizedBox(
+                width: mainBoxHeight / 27.5,
+              ),
+
+
+
+              Consumer(
+                builder: (context,ref,child){
+                  final code = ref.watch(codeConveyProvider);
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ToopTipWidget(
+                      message: '출발지점의 역사코드\n열차번호: ${code}',
+                      child: Text(
+                        'CODE',
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                             fontSize: mainBoxHeight / 25),
-                      );
-                    }),
-                  ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: mainBoxHeight / 60,
+                    ),
+                    ToopTipWidget(
+                            message: '출발지점 역사코드\n열차번호: ${code}',
+                            child: Text(code.isNotEmpty
+                                ? '${code}'
+                                : '0000',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: mainBoxHeight / 25),
+                            ),
+                          ),
 
-                ],
+                  ],
+                );
+                }
+
               ),
 
               /// SEAT
               SizedBox(
                 width: mainBoxHeight / 27.5,
               ),
+
+
+
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Tooltip(
+
+                  ToopTipWidget(
                     message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : TIX(T)',
-                    textStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
                     child: Text(
                       'CLASS',
                       style: TextStyle(
@@ -113,26 +120,45 @@ class TextContainerB extends ConsumerWidget {
                   SizedBox(
                     height: mainBoxHeight / 60,
                   ),
-                  Tooltip(
-                    message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : TIX(T)',
-                    textStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                    child: Text(
-                      // controllerAPI_D.Type == null? 'NOR(S)'
-                      //   : controllerAPI_D.Type == '급행'? 'EXP(S)'
-                      //   : controllerAPI_D.Type == 'ITX' ? 'ITX(T)' :
-                      'NOR(S)',
 
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: mainBoxHeight / 25),
-                    ),
-                  ),
+                  Consumer(builder: (context, ref, widget){
+                    final upDown = ref.watch(upDownProvider);
+                    /// btrainSttus
+                    if(upDown == 1){
+                      return ToopTipWidget(
+                        message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : TIX(T)',
+                        child: Text( '${sttuus(box.read('state1') ?? 'NOR(S)')}',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: mainBoxHeight / 25),
+                        ),
+                      );
+                    }else if(upDown == -1){
+
+                      return ToopTipWidget(
+                        message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : TIX(T)',
+                        child: Text( '${sttuus(box.read('state2') ?? 'NOR(S)')}',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: mainBoxHeight / 25),
+                        ),
+                      );
+                    }
+                    return ToopTipWidget(
+                      message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : TIX(T)',
+                      child: Text( 'NOR(S)',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: mainBoxHeight / 25),
+                      ),
+                    );
+                  }),
+
                 ],
               ),
-              /// CLASS
             ],
           ),
           SizedBox(
@@ -160,10 +186,19 @@ class TextContainerB extends ConsumerWidget {
               ),
             ],
           ),
-
           /// PASSENGER NAME
         ],
       ),
     );
   }
+
+  String sttuus (String state){
+    if(state == '일반'){
+      return 'NOR(S)';
+    }else if(state == '급행'){
+      return 'EXP(S)';
+    }
+    return 'TIX(T)';
+  }
+
 }

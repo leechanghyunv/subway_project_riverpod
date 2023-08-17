@@ -17,10 +17,13 @@ class ToggleController extends StatefulWidget {
 class _Toggle_ControllerState extends State<ToggleController> {
   @override
   Widget build(BuildContext context) {
+    double appHeight = MediaQuery.of(context).size.height;  ///  896.0 IPHONE11
+    double appWidth = MediaQuery.of(context).size.width;  /// 414.0 IPHONE11
+    double iconSize = appWidth * 0.0485;
     return ToggleSwitch(
-      minWidth: 40.0,
-      minHeight: 25.0,
-      fontSize: 15.0,
+      minWidth: appWidth * 0.1024,
+      minHeight: appWidth * 0.0604,  /// 25
+      fontSize: appWidth * 0.0362,  /// 15
       totalSwitches: 3,
       initialLabelIndex: null,
       doubleTapDisable: true,
@@ -29,19 +32,19 @@ class _Toggle_ControllerState extends State<ToggleController> {
       inactiveBgColor: Colors.grey[200],
       inactiveFgColor: Colors.black,
       customIcons: [
-        const Icon(
+         Icon(
           Icons.keyboard_double_arrow_right,
           color: Colors.black,
-          size: 20.0,
+          size: iconSize,
         ),
-        const Icon(
+         Icon(
           Icons.settings,
-          size: 20.0,
+          size: iconSize,
         ),
-        const Icon(
+         Icon(
           Icons.keyboard_double_arrow_left,
           color: Colors.black,
-          size: 20.0,
+          size: iconSize,
         ),
       ],
       onToggle: widget.onToggle,

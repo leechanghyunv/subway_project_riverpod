@@ -17,20 +17,23 @@ class InputSubway extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;///  896.0 IPHONE11
+    double appWidth = MediaQuery.of(context).size.width;
+    double iconSize = appWidth * 0.06039;
+    double textSize = appWidth * 0.0362;
     return Consumer(
         builder: (context, ref, child){
           final subwayData = ref.watch(dataProviderInside);
           return subwayData.when(
             loading: () => Container(
-                width: appHeight * 0.2791,
-                height: appHeight * 0.07255,
+                width: appWidth * 0.604,
+                height: appWidth * 0.156,
                 child: TextFrame(comment: 'Loading.....')),
             error: (err, stack) => Text(err.toString()),
             data: (data) {
               final filteredname = data.map((e) => e.subname).toSet().toList();
               return Container(
-                width: appHeight * 0.2791,
-                height: appHeight * 0.07255,
+                width: appWidth * 0.604,
+                height: appWidth * 0.156,
                 child: RawAutocomplete<String>(
                   optionsBuilder: (TextEditingValue textEditingValue){
                     return filteredname.where((String option) {
@@ -51,11 +54,13 @@ class InputSubway extends StatelessWidget {
                         hintText: '입력 후 완료버튼을 누르세요',
                         labelText: 'Enter Destination',
                         hintStyle: TextStyle(color: Colors.black),
+                        labelStyle: TextStyle(fontSize: textSize),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                         prefixIcon: Icon(
                           Icons.subway,
+                          size: iconSize,
                           color: Colors.black,
                         ),
                         suffixIcon: Material(
@@ -67,6 +72,7 @@ class InputSubway extends StatelessWidget {
                             },
                             child: Icon(
                                 Icons.clear,
+                                size: iconSize,
                                 color: Colors.black
                             ),
                           ),

@@ -15,7 +15,7 @@ class TopDesign extends StatelessWidget {
     double appWidth = MediaQuery.of(context).size.width;
     double appRatio = MediaQuery.of(context).size.aspectRatio;
     double mainBoxHeight = appHeight * 0.58;
-    double mainBoxWidth = appWidth * 0.915;
+    double mainBoxWidth = appHeight * 0.462 * 0.915;
 
     return Container(
       color: Colors.transparent,
@@ -34,7 +34,7 @@ class TopDesign extends StatelessWidget {
                 child: QrImageView(data: qrdata)),
           ),
           SizedBox(
-            width: appRatio >= 0.5 ? mainBoxHeight / 6 : mainBoxHeight / 15,
+            width: mainBoxHeight / 15,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,9 +48,7 @@ class TopDesign extends StatelessWidget {
                     DateFormat('y-MM-dd EEE').format(DateTime.now()),
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: appRatio >= 0.5
-                            ? mainBoxHeight / 22
-                            : mainBoxHeight / 25,
+                        fontSize:  mainBoxHeight / 25,
                         color: text_color),
                   ),
                   SizedBox(

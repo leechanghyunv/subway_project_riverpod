@@ -22,6 +22,8 @@ class DialogPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     double appHeight = MediaQuery.of(context).size.height;
+    double appWidth = MediaQuery.of(context).size.width;
+    double appRatio = MediaQuery.of(context).size.aspectRatio;
     final latlongData = ref.watch(latlngProvider);
     final initialdata = ref.watch(dataProviderInside);
 
@@ -51,7 +53,7 @@ class DialogPage extends ConsumerWidget {
                                         designText: 'Subway Location'),
                                     content: Container(
                                       width: double.maxFinite,
-                                      height: appHeight * 0.52,/// 330
+                                      height: appRatio >= 0.5 ? appWidth * 0.95 : appWidth * 1.1,/// 330
                                       child: MapSample(row.lat, row.lng),
                                     ),
                                   ),
@@ -71,7 +73,7 @@ class DialogPage extends ConsumerWidget {
                               Get.dialog(
                                 AlertDialog(
                                   content: Container(
-                                    height: appHeight * 0.369,/// 330
+                                    height: appWidth * 0.89, /// 330 // 0.7971
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: <Widget>[
@@ -122,7 +124,7 @@ class DialogPage extends ConsumerWidget {
                                   content: initialdata.when(
                                     loading: () => Container(
                                         color: Colors.white,
-                                        height: appHeight * 0.42,
+                                        height: appWidth * 0.9075,
                                         alignment: Alignment.center,
                                         child: TextFrame(comment: 'loading.....')),
                                     error: (err, stack) => Text(err.toString()),
@@ -158,7 +160,7 @@ class DialogPage extends ConsumerWidget {
                                 children: [
                                   Text('${row.subname}',
                                     style: TextStyle(
-                                        fontSize:appHeight * 0.015,
+                                        fontSize: appWidth * 0.0338,
                                         fontWeight:FontWeight.bold,
                                         color: Colors.black,
                                         overflow: TextOverflow.ellipsis
@@ -168,7 +170,7 @@ class DialogPage extends ConsumerWidget {
                               ),
                               trailing: Text('${row.km?.toStringAsFixed(0)}m',
                                 style: TextStyle(
-                                    fontSize:appHeight * 0.0165,
+                                    fontSize: appWidth * 0.0338,
                                     fontWeight:FontWeight.bold,
                                     color: Colors.black,
                                     overflow: TextOverflow.ellipsis

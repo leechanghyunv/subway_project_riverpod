@@ -1,14 +1,6 @@
-
-
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
-import '../model/data_model.dart';
 import '../parts/design_dialogB.dart';
 import '../parts/qr_container.dart';
-import '../screen/layout_screen.dart';
-import '../screen/main_screen.dart';
 import 'input_name.dart';
 import 'input_subway.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'color_container.dart';
 
 class DialogDesignBoxC extends StatelessWidget {
@@ -15,99 +14,106 @@ class DialogDesignBoxC extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;
+    double appWidth = MediaQuery.of(context).size.width;
+    double appRatio = MediaQuery.of(context).size.aspectRatio;
+
+    double sizeWidth = appWidth * 0.0242;
+    double sizeWidth2 = appWidth * 0.018;
+    double textSize = appWidth * 0.0362;
+
+    double contHeight = appWidth * 0.1686;
+    double contWidth = appWidth * 0.0242;
+
 
     return Container(
-      height: appHeight * 0.0672,/// appHeight * 0.0672
-      decoration: BoxDecoration(
-        // color: b1
-      ),
+      height: appWidth * 0.1449,  /// 60
       child: Row(
         children: [
           SizedBox(
-            height: appHeight * 0.0672,
-            width: appHeight * 0.0168,
+            height: appWidth * 0.1449,
+            width: appWidth * 0.0362,
             child: ColorContainer(
                 stringNumber: stringNumber),
           ),
           SizedBox(
-            width: appHeight * 0.0112,
+            width: sizeWidth2,
           ),
           Container(
-            height: appHeight * 0.0784,
-            width: appHeight * 0.0560,
+            height: contHeight,
+            width: appWidth * 0.12,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: appHeight * 0.0112,
+                  height: sizeWidth,
                 ),
                 Text('LineN',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: appHeight * 0.0168)),
+                        fontSize: textSize)),
                 SizedBox(
-                  height: appHeight * 0.0112,
+                  height: sizeWidth,
                 ),
                 Text(
                   '${stringNumber}',
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
-                      fontSize: appHeight * 0.0168),
+                      fontSize: textSize),
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
           ),
           SizedBox(
-            width: appHeight * 0.0112,
+            width: sizeWidth2,
           ),
           Container(
-            height: appHeight * 0.0784,
-            width: appHeight * 0.0784,
+            height: contHeight,
+            width: appWidth * 0.16,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: appHeight * 0.0112,
+                  height: sizeWidth,
                 ),
                 Text('Location',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: appHeight * 0.0168)),
+                        fontSize: textSize)),
                 SizedBox(
-                  height: appHeight * 0.0112,
+                  height: sizeWidth,
                 ),
                 Text('${subwayName}역',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: appHeight * 0.0168),
+                        fontSize: textSize),
                     overflow: TextOverflow.ellipsis),
               ],
             ),
           ),
           SizedBox(
-            width: appHeight * 0.0112,
+            width: sizeWidth2,
           ),
           Container(
-            height: appHeight * 0.0784,
-            width: appHeight * 0.1,
+            height: contHeight,
+            width: appHeight * 0.12,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: appHeight * 0.0112,
+                  height: sizeWidth,
                 ),
                 Text('SMS Call',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: appHeight * 0.0168)),
+                        fontSize: textSize)),
                 SizedBox(
-                  height: appHeight * 0.0112,
+                  height: sizeWidth,
                 ),
                 Text( stringNumber == 'Line1' ? '1577-1234'
                     : stringNumber == 'Line2' ? '1577-1234'
@@ -123,7 +129,7 @@ class DialogDesignBoxC extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: appHeight * 0.0168),
+                        fontSize: textSize),
                     overflow: TextOverflow.ellipsis)
               ],
             ),

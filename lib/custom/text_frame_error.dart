@@ -10,9 +10,10 @@ class TextFrame_Error extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;  ///  896.0 IPHONE11
+    double appWidth = MediaQuery.of(context).size.width;
     return Text(comment,
     style: TextStyle(
-      fontSize: appHeight * 0.0118,
+      fontSize: appWidth * 0.0242,
       fontWeight: FontWeight.bold,
       color: color,
     ),);

@@ -1,3 +1,4 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,12 +7,13 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:subway_project_230704/custom/dialog_button.dart';
-import 'package:subway_project_230704/model/microdust_model.dart';
+import 'package:timer_builder/timer_builder.dart';
+import '../api_provider/dust_provider.dart';
+import '../api_provider/weather_provider.dart';
 import '../custom/question_box.dart';
 import '../custom/question_tilebox.dart';
 import '../custom/text_frame.dart';
 import '../model/feedback_model.dart';
-import '../model/weather_model.dart';
 import '../setting/google_servey.dart';
 import 'color_container.dart';
 import 'qr_container.dart';
@@ -28,7 +30,8 @@ class ColorBar extends ConsumerWidget {
     String q1 = '', q2 = '',  q3 = '', q4 = '', q5 = '', q6 = '';
 
     double appHeight = MediaQuery.of(context).size.height;
-    double appWidth = MediaQuery.of(context).size.width;
+    double appWidth =  appHeight * 0.462;
+    double appRatio = MediaQuery.of(context).size.aspectRatio;
     double mainBoxHeight = appHeight * 0.58;
     final temp = ref.watch(tempProvider); ///temp
     final svg = ref.watch(svgProvider); /// icon
@@ -52,31 +55,56 @@ class ColorBar extends ConsumerWidget {
                   return data;
                 },
               ),
-              titleText: dustlevel.when(
-                loading: () =>  TextFrame(comment: 'loading.....'),
-                error: (err, stack) => Text(err.toString()),
-                data: (data){
-                  var pm10 = data.map((e) => e.pm10).reduce((v, e) => v + e)/data.length;
+              titleText: TimerBuilder.periodic(
+                const Duration(seconds: 1),
+                builder: (context) {
                   return Row(
                     children: [
                       TextFrame(
-                          comment: '미세먼지농도 ${pm10.toString()}pm ${dust.first.commnet.toString()}',
-                          overflow: TextOverflow.fade),
+                        comment:
+                        DateFormat('M월 dd일').format(DateTime.now()),
+                      ),
+                      TextFrame(
+                          comment: formatDate(DateTime.now(),
+                              [' ',am == 'AM' ? '오전' : '오후' ,  ' ', hh, '시 ', nn, '분'])
+                      ),
                     ],
                   );
                 },
               ),
-              messageText: Row(
+              messageText: Column(
                 children: [
-                  TextFrame(comment: '현재온도'),
-                  SizedBox(width: 8.0),
-                  temp.when(
-                    loading: () => const Center(
-                        child: TextFrame(comment: 'loading.....')),
-                    error: (err, stack) => Text(err.toString()),
-                    data: (data){
-                      return TextFrame(comment: '${(data.temp - 273.15).toStringAsFixed(1)}\u2103');
-                    },
+                  Row(
+                    children: [
+                      dustlevel.when(
+                        loading: () =>  TextFrame(comment: 'loading.....'),
+                        error: (err, stack) => Text(err.toString()),
+                        data: (data){
+                          var pm10 = data.map((e) => e.pm10).reduce((v, e) => v + e)/data.length;
+                          return Row(
+                            children: [
+                              TextFrame(
+                                  comment: '미세먼지농도 ${pm10.toString()}pm ${dust.first.commnet.toString()}',
+                                  overflow: TextOverflow.fade),
+                            ],
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      TextFrame(comment: '현재온도'),
+                      SizedBox(width: 8.0),
+                      temp.when(
+                        loading: () => const Center(
+                            child: TextFrame(comment: 'loading.....')),
+                        error: (err, stack) => Text(err.toString()),
+                        data: (data){
+                          return TextFrame(comment: '${(data.temp - 273.15).toStringAsFixed(1)}\u2103');
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -230,7 +258,7 @@ class ColorBar extends ConsumerWidget {
             );
           },
           child: SizedBox(
-            height: appHeight * 0.58 * 0.90,
+            height: appRatio >= 0.5 ? appHeight * 0.58 : appHeight * 0.58 * 0.90,
             width: appWidth * 0.08,
             child: ColorContainer(
                 stringNumber: stringNumber

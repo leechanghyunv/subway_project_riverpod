@@ -17,12 +17,14 @@ class TextFrame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;  ///  896.0 IPHONE11
+    double appWidth = MediaQuery.of(context).size.width;
     final nameWithoutParentheses = comment.replaceAll(RegExp(r'\([^()]*\)'), '');
     if(comment.contains('급행')){ /// 급행일때는 깜빡이고 도착일때는 색깔이 바뀌는 에니매이션을 고려중이다.
       return BlinkText(
         nameWithoutParentheses,
         style: TextStyle(
-          fontSize: appHeight * 0.0168,
+          fontSize: appWidth * 0.0362,
+          /// 0.0362
           fontWeight: FontWeight.bold,
           color: color,
         ),
@@ -34,7 +36,7 @@ class TextFrame extends StatelessWidget {
       return BlinkText(
         nameWithoutParentheses,
         style: TextStyle(
-          fontSize: appHeight * 0.0168,
+          fontSize: appWidth * 0.0362,
           fontWeight: FontWeight.bold,
         ),
         beginColor: Colors.black,
@@ -45,7 +47,7 @@ class TextFrame extends StatelessWidget {
       return Text(
         nameWithoutParentheses,
         style: TextStyle(
-          fontSize: appHeight * 0.0168,
+          fontSize: appWidth * 0.0362,
           fontWeight: FontWeight.bold,
           color: color,
         ),

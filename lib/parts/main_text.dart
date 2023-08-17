@@ -10,18 +10,23 @@ class MainText extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     double appHeight = MediaQuery.of(context).size.height;
+    double appRatio = MediaQuery.of(context).size.aspectRatio;
     double mainBoxHeight = appHeight * 0.58;
     final name = ref.watch(nameProvier);
+    final time = ref.watch(timeProvider);
+    final fare = ref.watch(costProvider);
     final engName = ref.watch(engNameProvier);
+    final firstRoute = ref.watch(routeProvider);
+    final secondRoute = ref.watch(secondRouteProvider);
     return Container(
-      height: appHeight * 0.58 * 0.75,
+      height: appRatio >= 0.5 ? appHeight * 0.58 * 0.85 : appHeight * 0.58 * 0.75,
       child: RotatedBox(
         quarterTurns: 3,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Tooltip(
-            message: ref.watch(routeProvider),
+            message: firstRoute == '' ? '${secondRoute}\n요금: ${fare}원\n${time.toString()}' : '${firstRoute}\n운행요금: ${fare}원\n소요시간: ${(time/60).toStringAsFixed(0)}분',
             textStyle: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white),
@@ -39,7 +44,8 @@ class MainText extends ConsumerWidget {
                       : name.length == 8 ? mainBoxHeight / 11.4/// 45
                       : mainBoxHeight / 14.4,
                   overflow: TextOverflow.ellipsis,
-                )),
+                )
+            ),
           ),
               Text(
               engName == 'SEOUL' ? ' SEOUL' : ' ${engName}',

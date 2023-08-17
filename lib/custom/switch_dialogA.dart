@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:subway_project_230704/custom/text_frame.dart';
+import 'package:subway_project_230704/custom/tool_tip.dart';
 import 'package:subway_project_230704/setting/export.dart';
+import '../api_provider/weather_provider.dart';
 import '../model/arrival_model.dart';
-import '../model/weather_model.dart';
 import '../parts/qr_container.dart';
 import 'transfer_button.dart';
 
-class SwitchDialogA extends ConsumerWidget {
+class SwitchDialogA extends ConsumerStatefulWidget {
   final String name;
   final String list;
   final String dest;
@@ -17,16 +18,29 @@ class SwitchDialogA extends ConsumerWidget {
   const SwitchDialogA(this.name, this.list, this.dest, this.line, {super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SwitchDialogA> createState() => _SwitchDialogAState();
+}
+
+class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
+
+  @override
+  void initState() {
+    super.initState();
+    box.write('SubListId', widget.list);
+    print('SubListId: ${box.read('SubListId')}');
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;
+    double appWidth = MediaQuery.of(context).size.width;
     final arrivel = ref.watch(arrivalProvider);
     final weather = ref.watch(weatherProvider);
     final temp = ref.watch(tempProvider);
     final svg = ref.watch(svgProvider);
 
     return Container(
-      height: appHeight * 0.42,
-      /// appHeight * 0.4,
+      height: appWidth * 0.9075,  /// 0.9075
       width: double.maxFinite,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,11 +48,8 @@ class SwitchDialogA extends ConsumerWidget {
           DialogDesign(
             designText: 'RealTime Arrival',
           ),
-          Tooltip(
+          ToopTipWidget(
             message: ref.watch(routeProvider),
-            textStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white),
             child: Container(
                 color: Colors.grey[100],
                 width: double.maxFinite,
@@ -48,7 +59,7 @@ class SwitchDialogA extends ConsumerWidget {
                   data: (data) {
                     try {
                       var filtedArrival = data
-                          .where((element) => element.subwayId == list).toList();
+                          .where((element) => element.subwayId == widget.list).toList();
                       var updnLine1 = ['상행', '내선'], updnLine2 = ['하행', '외선'];
                       var updn1First = filtedArrival
                           .where(
@@ -66,11 +77,52 @@ class SwitchDialogA extends ConsumerWidget {
                           .where(
                               (element) => updnLine2.contains(element.updnLine))
                           .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
+                      /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
+                      var subNumber1 = filtedArrival.where(
+                              (element) => updnLine1.contains(element.updnLine))
+                          .map((e) => '${e.btrainNo}').first;
+                      box.write('subNumber1', subNumber1);
+                     var subState1 = filtedArrival.where(
+                              (element) => updnLine1.contains(element.updnLine))
+                          .map((e) => '${e.arvlCd}').first;
+                      box.write('subState1', subState1);
+
+                      var subSttus1 = filtedArrival.where(
+                              (element) => updnLine1.contains(element.updnLine))
+                          .map((e) => '${e.btrainSttus}').first;
+                      box.write('state1', subSttus1);
+
+                      var destination1 = filtedArrival.where(
+                              (element) => updnLine1.contains(element.updnLine))
+                          .map((e) => '${e.trainLineNm}').first;
+                      String filtedDestination1 = destination1.split(" - ")[0];
+                      box.write('destination1', filtedDestination1);
+                      /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
+                      var subNumber2 = filtedArrival.where(
+                              (element) => updnLine2.contains(element.updnLine))
+                          .map((e) => '${e.btrainNo}').first;
+                      box.write('subNumber2', subNumber2);
+                      var subState2 = filtedArrival.where(
+                              (element) => updnLine2.contains(element.updnLine))
+                          .map((e) => '${e.arvlCd}').first;
+                      box.write('subState2', subState2);
+
+                      var subSttus2 = filtedArrival.where(
+                              (element) => updnLine1.contains(element.updnLine))
+                          .map((e) => '${e.btrainSttus}').first;
+                      box.write('state2', subSttus2);
+
+                      var destination2 = filtedArrival.where(
+                              (element) => updnLine1.contains(element.updnLine))
+                          .map((e) => '${e.trainLineNm}').first;
+                      String filtedDestination2 = destination2.split(" - ")[0];
+                      box.write('destination2', filtedDestination2);
+                      /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextFrame(
-                            comment: '\n${line} ${name}역 -> ${dest}역\n',
+                            comment: '\n${widget.line} ${widget.name}역 -> ${widget.dest}역\n',
                           ),
                           TextFrame(comment: updn1First.toString()),
                           TextFrame(comment: updn1Last.toString()),
@@ -82,7 +134,7 @@ class SwitchDialogA extends ConsumerWidget {
                       return Container(
                           child: Padding(
                         padding: const EdgeInsets.all(25.0),
-                        child: TextFrame(comment: '${name}역 실시간 데이터를 가져올 수 없습니다.'),
+                        child: TextFrame(comment: '${widget.name}역 실시간 데이터를 가져올 수 없습니다.'),
                       ));
                     }
                   },
@@ -110,7 +162,7 @@ class SwitchDialogA extends ConsumerWidget {
                           color: Colors.white,
                           child: Text(data.first.description,
                             style: TextStyle(
-                              fontSize: appHeight * 0.0164,
+                              fontSize: appWidth * 0.0362,
                               fontWeight: FontWeight.bold,
                             ),
                           ));
@@ -127,4 +179,6 @@ class SwitchDialogA extends ConsumerWidget {
       ),
     );
   }
+
+
 }

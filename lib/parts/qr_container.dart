@@ -19,20 +19,20 @@ class DialogDesign extends StatelessWidget {
   Widget build(BuildContext context) {
 
     double appHeight = MediaQuery.of(context).size.height; /// 896.0 IPHONE11
-
+    double appWidth = MediaQuery.of(context).size.width; /// 896.0 IPHONE11
     return Container(
 
       child: Row(
         children: [
           Container(
-            width: appHeight * 0.0903,  /// 80 /// 0.893
-            height: appHeight * 0.0903,
+            width: appWidth * 0.1932,  /// 80 /// 0.893
+            height: appWidth * 0.1932,
             child: QrImageView(
               data: qrdata,
             ),
           ),
           SizedBox(
-            width: appHeight * 0.020,
+            width: appWidth * 0.0388,
           ),   ///appHeight * 0.0280
 
           Column(
@@ -50,7 +50,10 @@ class DialogDesign extends StatelessWidget {
               TimerBuilder.periodic(
                 const Duration(seconds: 1),
                 builder: (context) {
-                  return TextFrame(comment: formatDate(DateTime.now(), [am , ' ', hh, ':', nn, ':', ss, ' ']));
+                  return TextFrame(
+                      comment: formatDate(DateTime.now(),
+                          [am , ' ', hh, ':', nn, ':', ss, ' '])
+                  );
                 },
               ),
             ],

@@ -25,7 +25,8 @@ void main() async {
           observers: [
             Logger(),
           ],
-          child: const MyApp()));
+          child: const MyApp())
+  );
 
   await GetStorage.init();
   FlutterError.demangleStackTrace = (StackTrace stack) {

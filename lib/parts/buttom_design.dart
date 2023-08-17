@@ -12,7 +12,7 @@ class BottomDesign extends StatelessWidget {
   Widget build(BuildContext context) {
 
     double appHeight = MediaQuery.of(context).size.height;  ///  896.0 IPHONE11
-    double appWidth = MediaQuery.of(context).size.width;  /// 414.0 IPHONE11
+    double appWidth = appHeight * 0.462;
 
     return Container(
       height: appHeight * 0.125,
@@ -32,7 +32,8 @@ class BottomDesign extends StatelessWidget {
             child: BarcodeWidget(
               data: '------LAFAYETTE.co-------',
               style: TextStyle(
-                  fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.bold,
+                fontSize: appHeight * 0.016,
               ),
               color: Colors.black,
               barcode: Barcode.code128(),

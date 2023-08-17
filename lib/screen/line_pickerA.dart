@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../model/arrival_model.dart';
 import '../custom/text_frame.dart';
-import '../model/code_model.dart';
 import '../model/data_model.dart';
 
 
@@ -17,8 +16,8 @@ class LinePickerA extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     double appHeight = MediaQuery.of(context).size.height;
+    double appWidth = MediaQuery.of(context).size.width;
     var filtered = ref.watch(infoProvider);
-    final subCode = ref.watch(apiCodeProvider);
     final arrivel = ref.watch(arrivalProvider);
     return AlertDialog(
       content: StatefulBuilder(
@@ -78,7 +77,7 @@ class LinePickerA extends ConsumerWidget {
                                         "-")[1]}  -  ${updn2First.split("-")[1]}'
                                         : '',
                                       style: TextStyle(
-                                        fontSize: appHeight * 0.0115,
+                                        fontSize: appWidth * 0.0242,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),

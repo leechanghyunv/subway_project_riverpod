@@ -19,7 +19,7 @@ class LayoutScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.black,
           body: body,
           floatingActionButton: floatingActionButton,
         )
