@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-import '../parts/main_text.dart';
+import 'package:subway_project_230704/setting/export.dart';
+import 'display_object/main_text.dart';
 
 const Color DropDown_color = Colors.black;
 const Color DropDown_textcolor = Colors.black;

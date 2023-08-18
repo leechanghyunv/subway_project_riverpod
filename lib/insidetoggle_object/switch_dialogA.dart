@@ -1,13 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:subway_project_230704/custom/text_frame.dart';
-import 'package:subway_project_230704/custom/tool_tip.dart';
 import 'package:subway_project_230704/setting/export.dart';
 import '../api_provider/weather_provider.dart';
-import '../model/arrival_model.dart';
-import '../parts/qr_container.dart';
-import 'transfer_button.dart';
 
 class SwitchDialogA extends ConsumerStatefulWidget {
   final String name;
@@ -61,6 +53,7 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                       var filtedArrival = data
                           .where((element) => element.subwayId == widget.list).toList();
                       var updnLine1 = ['상행', '내선'], updnLine2 = ['하행', '외선'];
+                      /// /// /// 상행선 상행선 상행선 상행선 상행선 상행선 상행선 /// /// /// /// ///
                       var updn1First = filtedArrival
                           .where(
                               (element) => updnLine1.contains(element.updnLine))
@@ -69,6 +62,7 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                           .where(
                               (element) => updnLine1.contains(element.updnLine))
                           .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
+                      /// /// /// 하행선 하행선 하행선 하행선 하행선 하행선 하행선  /// /// /// /// /// ///
                       var updn2First = filtedArrival
                           .where(
                               (element) => updnLine2.contains(element.updnLine))
@@ -108,12 +102,12 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                       box.write('subState2', subState2);
 
                       var subSttus2 = filtedArrival.where(
-                              (element) => updnLine1.contains(element.updnLine))
+                              (element) => updnLine2.contains(element.updnLine))
                           .map((e) => '${e.btrainSttus}').first;
                       box.write('state2', subSttus2);
 
                       var destination2 = filtedArrival.where(
-                              (element) => updnLine1.contains(element.updnLine))
+                              (element) => updnLine2.contains(element.updnLine))
                           .map((e) => '${e.trainLineNm}').first;
                       String filtedDestination2 = destination2.split(" - ")[0];
                       box.write('destination2', filtedDestination2);

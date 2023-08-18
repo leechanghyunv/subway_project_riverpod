@@ -1,11 +1,4 @@
-
-
-import 'dart:convert';
-
 import 'package:intl/intl.dart';
-
-import '../chopper_refository/restApi_room.dart';
-import '../model/schedule_model.dart';
 import '../setting/export.dart';
 
 final apiservice = SeoulApiService.create();

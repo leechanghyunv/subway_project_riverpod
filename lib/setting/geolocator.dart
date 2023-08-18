@@ -1,5 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:subway_project_230704/setting/export.dart';
 
 final locationProvider = FutureProvider.autoDispose<Position>((ref) async {
   LocationPermission permission;

@@ -1,8 +1,4 @@
-import 'package:subway_project_230704/custom/input_subway.dart';
-import '../api_provider/weather_provider.dart';
-import '../model/arrival_model.dart';
-import '../parts/qr_container.dart';
-import '../setting/export.dart';
+import 'package:subway_project_230704/setting/export.dart';
 
 class TransferIcon extends ConsumerStatefulWidget {
   const TransferIcon({super.key});
@@ -17,10 +13,7 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
     double appHeight = MediaQuery.of(context).size.height; ///  896.0 IPHONE11
     double appWidth = MediaQuery.of(context).size.width;
     double appRatio = MediaQuery.of(context).size.aspectRatio;
-
     final arrivel = ref.watch(arrivalProviderT);
-    final temp = ref.watch(tempProvider);
-    final svg = ref.watch(svgProvider);
     return IconButton(
       onPressed: () async {
         if(box.read('nameT') != null){

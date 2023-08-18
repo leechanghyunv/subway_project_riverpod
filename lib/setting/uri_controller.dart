@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:subway_project_230704/setting/export.dart';
 
 class SmsFunction extends StatelessWidget {
 

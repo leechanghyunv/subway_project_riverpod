@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:subway_project_230704/setting/export.dart';
 
 class DialogButton extends StatelessWidget {
   final void Function()? onLongPress;

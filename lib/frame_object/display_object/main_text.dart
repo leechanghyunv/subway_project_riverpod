@@ -1,8 +1,4 @@
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../setting/initival_value.dart';
+import 'package:subway_project_230704/setting/export.dart';
 
 class MainText extends ConsumerWidget {
   const MainText({super.key});

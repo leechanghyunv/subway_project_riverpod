@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:group_button/group_button.dart';
-import 'text_frame.dart';
+import 'package:subway_project_230704/setting/export.dart';
+
 
 class QuestionTile extends StatefulWidget {
   final String text;

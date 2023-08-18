@@ -1,15 +1,15 @@
-import 'package:subway_project_230704/custom/dialog_button.dart';
+import 'package:subway_project_230704/insidedialog_object/dialog_button.dart';
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../insidetoggle_object/switch_dialogC.dart';
 import '../setting/uri_controller.dart';
-import '../custom/switch_dialogC.dart';
-import '../parts/design_dialogC.dart';
-import '../parts/sms_container.dart';
-import '../parts/qr_container.dart';
+import '../insidedialog_object/display_object/design_dialogC.dart';
+import '../insidedialog_object/display_object/sms_container.dart';
+import '../insidedialog_object/design_object/qr_container.dart';
 import '../custom/text_frame.dart';
 import '../model/data_model.dart';
 import 'package:get/get.dart';
@@ -78,7 +78,7 @@ class DialogPage extends ConsumerWidget {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: <Widget>[
                                         DialogDesign(designText: 'civil complaint Box'),
-                                        const Padding(
+                                         Padding(
                                           padding: EdgeInsets.all(8.0),
                                           child: SmsContainer(),
                                         ),
@@ -192,7 +192,4 @@ class DialogPage extends ConsumerWidget {
   => Fluttertoast.showToast(
       msg:'${position} ${name}가 저장되었습니다.\n${ename}',
       gravity: ToastGravity.CENTER);
-
-
-
 }

@@ -1,10 +1,4 @@
-
-
-import 'dart:convert';
-
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
-import '../model/distance_model.dart';
 import '../model/sk_map_model.dart';
 import '../setting/export.dart';
 import '../setting/notification.dart';

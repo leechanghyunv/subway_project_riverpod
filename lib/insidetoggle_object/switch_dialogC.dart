@@ -1,11 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:subway_project_230704/model/data_model.dart';
+import 'package:subway_project_230704/setting/export.dart';
 import '../api_provider/weather_provider.dart';
-import '../model/arrival_model.dart';
-import '../parts/qr_container.dart';
-import 'text_frame.dart';
 
 class SwitchDialogC extends ConsumerStatefulWidget {
 

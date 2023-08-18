@@ -1,9 +1,8 @@
 import 'package:subway_project_230704/screen/loading_screen.dart';
 import 'package:subway_project_230704/setting/export.dart';
 import '../api_provider/discance_provider.dart';
-import '../api_provider/dust_provider.dart';
-import '../model/distance_model.dart';
-import 'line_pickerA.dart';
+import '../insidetoggle_object/switch_dialogA.dart';
+import '../insidetoggle_object/switch_dialogB.dart';
 import 'table_screen.dart';
 
 class HomePage extends ConsumerStatefulWidget {

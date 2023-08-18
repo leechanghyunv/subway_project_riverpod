@@ -1,8 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../model/data_model.dart';
-import 'text_frame.dart';
+import 'package:subway_project_230704/setting/export.dart';
 
 class InputSubway extends StatelessWidget {
 

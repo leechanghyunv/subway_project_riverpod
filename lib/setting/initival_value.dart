@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:subway_project_230704/setting/export.dart';
 
 final userNameProvier = StateProvider<String>((ref) => '');
 final routeProvider = StateProvider<String>((ref) => '');

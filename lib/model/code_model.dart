@@ -1,8 +1,6 @@
-import 'dart:convert';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../chopper_refository/restApi_room.dart';
-import 'data_model.dart';
+
 part 'code_model.freezed.dart';
 part 'code_model.g.dart';
 

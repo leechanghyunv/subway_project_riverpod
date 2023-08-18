@@ -1,10 +1,4 @@
-import 'dart:convert';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
-import '../chopper_refository/restApi_room.dart';
-import '../model/weather_model.dart';
+import 'package:subway_project_230704/setting/export.dart';
 import '../setting/geolocator.dart';
 
 final key = '391af738f3d6aea930da389c0e6041ff';

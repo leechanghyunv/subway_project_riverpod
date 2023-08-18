@@ -1,19 +1,13 @@
-import 'package:blinking_text/blinking_text.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:subway_project_230704/setting/export.dart';
 
-import '../screen/layout_screen.dart';
-import '../setting/initival_value.dart';
 
 class SmsContainer extends ConsumerWidget {
-  const SmsContainer({Key? key}) : super(key: key);
+   SmsContainer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     double appHeight = MediaQuery.of(context).size.height;///  896.0 IPHONE11
     double appWidth = MediaQuery.of(context).size.width;/// 414.0 IPHONE11
-
     double textSize = appWidth * 0.0362;
     double textSize2 = appWidth * 0.0335;
 
@@ -43,8 +37,11 @@ class SmsContainer extends ConsumerWidget {
           ),
           Consumer(builder: (context, ref, widget){
             final upDown = ref.watch(upDownProvider);
-            final name = ref.watch(nameProvier);
             if(upDown == 1){
+              print('상행상행상행 ${box.read('destination1') ?? ''}');
+              Clipboard.setData(
+                /// destination 당고개행 /// subNumber1 1239
+                  ClipboardData(text: '${box.read('destination1') ?? ''} ${box.read('subNumber1') ?? '0000'}번'));
               return BlinkText(
                 '\n출발지 열차정보: (${box.read('destination1') ?? ''}) ${box.read('subNumber1') ?? '0000'}번',
                 style: TextStyle(
@@ -55,8 +52,12 @@ class SmsContainer extends ConsumerWidget {
                 times: 2, /// 깜빡이는 횟수라고 한다.
               );
             }else if(upDown == -1){
+              print('하행하행하행 ${box.read('destination2') ?? ''}');
+              Clipboard.setData(
+                /// destination 당고개행 /// subNumber1 1239
+                  ClipboardData(text: '${box.read('destination2') ?? ''} ${box.read('subNumber2') ?? '0000'}번'));
               return BlinkText(
-                '\n출발지 열차정보: (${box.read('destination1') ?? ''}) ${box.read('subNumber2') ?? '0000'}번',
+                '\n출발지 열차정보: (${box.read('destination2') ?? ''}) ${box.read('subNumber2') ?? '0000'}번',
                 style: TextStyle(
                     fontSize: textSize2,
                     fontWeight: FontWeight.bold,

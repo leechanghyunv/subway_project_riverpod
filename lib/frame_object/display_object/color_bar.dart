@@ -1,22 +1,8 @@
-import 'package:date_format/date_format.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:subway_project_230704/setting/export.dart';
+import '../../api_provider/weather_provider.dart';
 import 'package:intl/intl.dart';
-import 'package:subway_project_230704/custom/dialog_button.dart';
-import 'package:timer_builder/timer_builder.dart';
-import '../api_provider/dust_provider.dart';
-import '../api_provider/weather_provider.dart';
-import '../custom/question_box.dart';
-import '../custom/question_tilebox.dart';
-import '../custom/text_frame.dart';
-import '../model/feedback_model.dart';
-import '../setting/google_servey.dart';
-import 'color_container.dart';
-import 'qr_container.dart';
+
+
 
 class ColorBar extends ConsumerWidget {
 

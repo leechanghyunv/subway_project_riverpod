@@ -1,8 +1,5 @@
+import 'package:subway_project_230704/setting/export.dart';
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_naver_map/flutter_naver_map.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MapSample extends ConsumerWidget {
 

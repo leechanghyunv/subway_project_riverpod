@@ -1,15 +1,13 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:subway_project_230704/setting/export.dart';
 import 'package:intl/intl.dart';
-import 'package:subway_project_230704/setting/initival_value.dart';
-import '../screen/layout_screen.dart';
-import 'color_container.dart';
 
-class DialogDesignBoxA extends ConsumerWidget {
+class DialogDesignBoxB extends StatelessWidget {
+
+
+  const DialogDesignBoxB({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;
     double appWidth = MediaQuery.of(context).size.width;
 
@@ -19,18 +17,16 @@ class DialogDesignBoxA extends ConsumerWidget {
     double contHeight = appWidth * 0.1686;
     double contWidth = appWidth * 0.0242;
 
-    final stringNumber = ref.watch(lineProvier);
-
     return Container(
       height: appWidth * 0.1449,
-      decoration: BoxDecoration(color: Colors.white),
+      // color: b1,
       child: Row(
         children: [
           SizedBox(
             height: appWidth * 0.1449,
             width: appWidth * 0.0362,
             child: ColorContainer(
-                stringNumber: stringNumber),
+                stringNumber: box.read('lineT') ?? 'Line2'),
           ),
           SizedBox(
             width: sizeWidth,
@@ -73,7 +69,7 @@ class DialogDesignBoxA extends ConsumerWidget {
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('Location',
+                Text('Transfer',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -81,29 +77,18 @@ class DialogDesignBoxA extends ConsumerWidget {
                 SizedBox(
                   height: sizeWidth,
                 ),
-
-
-                Consumer(
-                    builder: (__,ref,widget){
-                  final subwayName = ref.watch(nameProvier);
-                  if(subwayName.isNotEmpty){
-                    return Text(
-                        subwayName == 'SEOUL'
-                            ? 'SEOUL'
-                            : '${subwayName}역',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: textSize),
-                        overflow: TextOverflow.ellipsis);
-                  }
-                  return Text('');
-                }),
-
+                Text(
+                    box.read('nameT') != null
+                        ? '${box.read('nameT')}역'
+                        : '',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: textSize),
+                    overflow: TextOverflow.ellipsis),
               ],
             ),
           ),
-
           SizedBox(
             width: sizeWidth,
           ),

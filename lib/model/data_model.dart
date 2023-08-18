@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter/services.dart';
 import '../api_provider/code_provider.dart';
-import '../custom/switch_dialogB.dart';
+import '../insidetoggle_object/switch_dialogB.dart';
 import '../screen/layout_screen.dart';
 import '../setting/geolocator.dart';
 import 'code_model.dart';

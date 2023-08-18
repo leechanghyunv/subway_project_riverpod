@@ -1,14 +1,6 @@
-import 'package:subway_project_230704/screen/layout_screen.dart';
-import 'package:subway_project_230704/custom/text_frame.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:timer_builder/timer_builder.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:date_format/date_format.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:subway_project_230704/setting/export.dart';
 import '../api_provider/timetable_provider.dart';
 import '../api_provider/weather_provider.dart';
-import '../setting/initival_value.dart';
 
 class TableScreen extends ConsumerStatefulWidget {
 

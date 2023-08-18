@@ -1,8 +1,4 @@
-import 'package:subway_project_230704/screen/layout_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:blinking_text/blinking_text.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:subway_project_230704/setting/export.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({Key? key}) : super(key: key);

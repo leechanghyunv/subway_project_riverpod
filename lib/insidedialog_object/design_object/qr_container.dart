@@ -1,9 +1,5 @@
-import 'package:date_format/date_format.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:subway_project_230704/setting/export.dart';
 import 'package:intl/intl.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:timer_builder/timer_builder.dart';
-import '../custom/text_frame.dart';
 
 class DialogDesign extends StatelessWidget {
 

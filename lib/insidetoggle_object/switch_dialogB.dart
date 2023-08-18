@@ -1,13 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
-import '../api_provider/dust_provider.dart';
-import '../model/data_model.dart';
-import '../screen/dialog_screen.dart';
-import '../screen/line_pickerA.dart';
-import '../setting/initival_value.dart';
-import '../parts/qr_container.dart';
-import 'text_frame.dart';
+import 'package:subway_project_230704/setting/export.dart';
 
 List<Color> kDefaultRainbowColors2 = [
   Colors.grey.shade600,

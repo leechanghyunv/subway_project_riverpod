@@ -1,11 +1,4 @@
-import 'package:subway_project_230704/custom/text_frame_error.dart';
-import 'package:subway_project_230704/parts/qr_container.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import '../model/arrival_model.dart';
-import '../custom/text_frame.dart';
-import '../model/data_model.dart';
+import 'package:subway_project_230704/setting/export.dart';
 
 
 class LinePickerA extends ConsumerWidget {

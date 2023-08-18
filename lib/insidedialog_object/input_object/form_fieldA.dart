@@ -1,40 +1,34 @@
-import 'package:flutter/cupertino.dart';
-import '../parts/design_dialogB.dart';
-import '../parts/qr_container.dart';
+import 'package:subway_project_230704/setting/export.dart';
+import '../display_object/design_dialogA.dart';
 import 'input_name.dart';
-import 'input_subway.dart';
 
-class TextFormB extends StatefulWidget {
-  final void Function(String)? onSelectedA;
-  final void Function(String)? onSelectedB;
+class TextFormA extends StatefulWidget {
+  final void Function(String)? onSelected;
   final Function(String) onSubmitted;
 
-  const TextFormB(
+
+  const TextFormA(
       {Key? key,
-        required this.onSelectedA,
-        required this.onSelectedB,
+        required this.onSelected,
         required this.onSubmitted,
-        })
+       })
       : super(key: key);
 
   @override
-  State<TextFormB> createState() => _TextFormBState();
+  State<TextFormA> createState() => _TextFormAState();
 }
 
-class _TextFormBState extends State<TextFormB> {
-
+class _TextFormAState extends State<TextFormA> {
 
   @override
   void initState() {
     super.initState();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;///  896.0 IPHONE11
-
+    double appWidth = MediaQuery.of(context).size.width;
     return Form(
         child: Column(
           children: [
@@ -43,26 +37,25 @@ class _TextFormBState extends State<TextFormB> {
             ),
             Container(
               child: Column(
-                children: [
+                children: <Widget>[
                   SizedBox(
-                    height: appHeight * 0.0112,
+                    height: appWidth * 0.0242,
                   ),
-                  InputSubway(onSelected: widget.onSelectedA),
-                  SizedBox(
-                    height: appHeight * 0.0168,
+                  InputSubway(
+                      onSelected: widget.onSelected
                   ),
-                  InputSubway(onSelected: widget.onSelectedB),
                   SizedBox(
-                    height: appHeight * 0.0168,
+                    height: appWidth * 0.0362,
                   ),
                   InputName(
                     onSubmitted: widget.onSubmitted,
                   ),
                   SizedBox(
-                    height: appHeight * 0.015,
+                    height: appWidth * 0.0362,
                   ),
-                  DialogDesignBoxB(
-
+                  DialogDesignBoxA(),
+                  SizedBox(
+                    height: appWidth * 0.0362,
                   ),
                 ],
               ),

@@ -1,11 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:subway_project_230704/setting/export.dart';
 import 'package:intl/intl.dart';
-import 'package:subway_project_230704/setting/initival_value.dart';
-import '../custom/tool_tip.dart';
-import '../screen/layout_screen.dart';
-
 
 class TextContainerB extends ConsumerWidget {
   @override

@@ -1,15 +1,7 @@
-import 'package:subway_project_230704/setting/google_servey.dart';
+import 'package:subway_project_230704/setting/export.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
-import 'package:subway_project_230704/screen/main_screen.dart';
-import 'package:flutter_naver_map/flutter_naver_map.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:get_storage/get_storage.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'firebase_options.dart';
-import 'package:get/get.dart';
 import 'dart:developer';
 
 void main() async {

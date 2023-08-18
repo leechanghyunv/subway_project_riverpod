@@ -1,7 +1,4 @@
-import 'dart:convert';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../chopper_refository/restApi_room.dart';
 part 'microdust_model.g.dart';
 part 'microdust_model.freezed.dart';
 
