@@ -20,13 +20,7 @@ class _TableScreenState extends ConsumerState<TableScreen> {
   @override
   void initState() {
     super.initState();
-    init_msg();
-  }
-
-  void init_msg(){
-    Fluttertoast.showToast(
-        msg:'${widget.engName} ${widget.subName}',
-        gravity: ToastGravity.CENTER);
+    tablemsg(widget.engName,widget.subName);
   }
 
   @override
@@ -317,9 +311,7 @@ class _TableScreenState extends ConsumerState<TableScreen> {
               ),
               elevation: 0.1,
               onPressed: (){
-                Fluttertoast.showToast(
-                    msg:'${widget.subName}역 막차 시간표로 이동합니다.',
-                    gravity: ToastGravity.CENTER);
+                tableLast(widget.subName);
                 final double endA = _scrollControllerA.position.maxScrollExtent;
                 final double endB = _scrollControllerB.position.maxScrollExtent;
                 _scrollControllerA.animateTo(endA,duration: Duration(milliseconds: 800),curve: Curves.easeIn);

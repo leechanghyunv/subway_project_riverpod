@@ -1,9 +1,4 @@
-import 'dart:convert';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:subway_project_230704/chopper_refository/restApi_room.dart';
-import '../screen/layout_screen.dart';
-import 'data_model.dart';
+import 'package:subway_project_230704/setting/export.dart';
 part 'arrival_model.freezed.dart';
 part 'arrival_model.g.dart';
 
@@ -26,36 +21,3 @@ class ArrivalModel with _$ArrivalModel{
   }) = _ArrivalModel;
   factory ArrivalModel.fromJson(Map<String, Object?> json) => _$ArrivalModelFromJson(json);
 }
-
-final apiservice = ArrivalApiService.create();
-
-final arrivalProvider = StreamProvider.autoDispose<List<ArrivalModel>>((ref) async* {
-
-  final subwayinfo = ref.watch(infoProvider);
-  final name = subwayinfo.elementAtOrNull(0)?.subname;
-  final response = await apiservice.getArrival(name!);
-
-
-  if (response.statusCode == 200) {
-    final List<dynamic> jsonBody = jsonDecode(response.body)['realtimeArrivalList'];
-    yield jsonBody.map((e) => ArrivalModel.fromJson(e)).toList();
-  } else {
-    throw Exception('Failed to load user data');
-  }
-
-});
-
-
-final arrivalProviderT = StreamProvider.autoDispose<List<ArrivalModel>>((ref) async* {
-
-  final name = box.read('nameT');
-  final response = await apiservice.getArrival(name!);
-
-  if (response.statusCode == 200) {
-    final List<dynamic> jsonBody = jsonDecode(response.body)['realtimeArrivalList'];
-    yield jsonBody.map((e) => ArrivalModel.fromJson(e)).toList();
-
-  } else {
-    throw Exception('Failed to load user data');
-  }
-});

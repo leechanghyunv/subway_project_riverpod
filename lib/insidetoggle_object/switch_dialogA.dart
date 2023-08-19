@@ -47,7 +47,7 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                 width: double.maxFinite,
                 child: arrivel.when(
                   loading: () => TextFrame(comment: 'loading.....'),
-                  error: (err, stack) => Text(err.toString()),
+                  error: (err, stack) => TextFrame(comment: '데이터를 불러올 수 없습니다'),
                   data: (data) {
                     try {
                       var filtedArrival = data

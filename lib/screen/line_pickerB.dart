@@ -47,7 +47,7 @@ class LinePickerB extends ConsumerWidget {
                               ),
                               subtitle: arrivel.when(
                                 loading: () => TextFrame(comment: 'loading.....'),
-                                error: (err, stack) => Text(err.toString()),
+                                error: (err, stack) => TextFrame(comment: '데이터를 불러올 수 없습니다'),
                                 data: (data){
                                   try{
                                     var lineList = filtered[index].subwayid.toString();
@@ -115,9 +115,7 @@ class LinePickerB extends ConsumerWidget {
                     ref.read(infoProviderB.notifier).searchSubway(
                         name: filtered[0].subname, line: lineNumber);
                     ref.read(storeProviderA.notifier).storeSubData('T');
-                    Fluttertoast.showToast(
-                        msg:'환승역 ${filtered[0].subname}역 저장되었습니다.',
-                        gravity: ToastGravity.CENTER);
+                    savemsg2(filtered[0].subname);
                     Navigator.of(context).pop();
                   },
                   child: Text('Done',

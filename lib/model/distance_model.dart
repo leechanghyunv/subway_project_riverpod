@@ -1,10 +1,6 @@
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:subway_project_230704/setting/export.dart';
 part 'distance_model.freezed.dart';
 part 'distance_model.g.dart';
-
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
 
 @Freezed()
 class DistModel with _$DistModel{

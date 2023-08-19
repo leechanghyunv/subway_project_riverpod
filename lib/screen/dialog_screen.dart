@@ -1,18 +1,5 @@
-import 'package:subway_project_230704/insidedialog_object/dialog_button.dart';
 import 'package:subway_project_230704/setting/export.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import '../insidetoggle_object/switch_dialogC.dart';
-import '../setting/uri_controller.dart';
-import '../insidedialog_object/display_object/design_dialogC.dart';
-import '../insidedialog_object/display_object/sms_container.dart';
-import '../insidedialog_object/design_object/qr_container.dart';
-import '../custom/text_frame.dart';
-import '../model/data_model.dart';
-import 'package:get/get.dart';
 import 'map_screen.dart';
 
 class DialogPage extends ConsumerWidget {
@@ -70,6 +57,7 @@ class DialogPage extends ConsumerWidget {
                           motion: StretchMotion(),
                           children: [
                             SlidableAction(onPressed: (onPressed){
+                              smsguide();
                               Get.dialog(
                                 AlertDialog(
                                   content: Container(
@@ -144,9 +132,7 @@ class DialogPage extends ConsumerWidget {
                                     DialogButton(
                                       comment: 'Select',
                                       onPressed: (){
-                                        Fluttertoast.showToast(
-                                            msg: '${row.subname}역을 선택하셨습니다',
-                                            gravity: ToastGravity.CENTER);
+                                        Select(row.subname);
                                         Navigator.pop(context);
                                       },
                                     ),
@@ -188,8 +174,5 @@ class DialogPage extends ConsumerWidget {
     );
   }
 
-  Future<bool?> savemsg(String position, String name, String ename)
-  => Fluttertoast.showToast(
-      msg:'${position} ${name}가 저장되었습니다.\n${ename}',
-      gravity: ToastGravity.CENTER);
+
 }

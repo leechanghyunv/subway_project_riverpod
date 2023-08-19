@@ -14,7 +14,6 @@ class QuestionBox extends StatefulWidget {
 class _QuestionBoxState extends State<QuestionBox> {
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;
     return Container(
       width: double.maxFinite * 0.7,
       height: 50,

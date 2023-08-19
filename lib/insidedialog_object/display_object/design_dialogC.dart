@@ -31,7 +31,7 @@ class DialogDesignBoxC extends StatelessWidget {
                 stringNumber: stringNumber),
           ),
           SizedBox(
-            width: sizeWidth2,
+            width: appWidth * 0.018,
           ),
           Container(
             height: contHeight,
@@ -62,7 +62,7 @@ class DialogDesignBoxC extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: sizeWidth2,
+            width: appWidth * 0.01,
           ),
           Container(
             height: contHeight,

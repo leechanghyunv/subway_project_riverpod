@@ -1,6 +1,4 @@
-
-import 'package:flutter/cupertino.dart';
-import 'package:subway_project_230704/screen/layout_screen.dart';
+import 'package:subway_project_230704/setting/export.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});

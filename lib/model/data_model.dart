@@ -1,13 +1,8 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:subway_project_230704/setting/export.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:flutter/services.dart';
 import '../api_provider/code_provider.dart';
-import '../insidetoggle_object/switch_dialogB.dart';
-import '../screen/layout_screen.dart';
 import '../setting/geolocator.dart';
 import 'code_model.dart';
-import 'dart:convert';
 part 'data_model.freezed.dart';
 part 'data_model.g.dart';
 

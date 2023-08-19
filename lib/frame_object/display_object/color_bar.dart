@@ -2,8 +2,6 @@ import 'package:subway_project_230704/setting/export.dart';
 import '../../api_provider/weather_provider.dart';
 import 'package:intl/intl.dart';
 
-
-
 class ColorBar extends ConsumerWidget {
 
   final String stringNumber;
@@ -31,6 +29,7 @@ class ColorBar extends ConsumerWidget {
         ),
         GestureDetector(
           onTap: (){
+            barguide();
             Get.snackbar(
               'Snackbar Title',
               'This is a snackbar message',
@@ -219,9 +218,7 @@ class ColorBar extends ConsumerWidget {
                                                 print('time : ${time}');
                                                 await GoogleSheetsData.insert(
                                                     [user.toJson()]);
-                                                Fluttertoast.showToast(
-                                                    msg: '의견이 전달되었습니다',
-                                                    gravity: ToastGravity.CENTER);
+                                                serveymsg();
                                                 Navigator.pop(context);
                                               },
                                               comment: '의견을 제출해주세요')),

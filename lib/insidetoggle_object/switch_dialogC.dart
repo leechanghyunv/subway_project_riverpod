@@ -21,9 +21,9 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
     double appHeight = MediaQuery.of(context).size.height;
     double appWidth = MediaQuery.of(context).size.width;
     double appRatio = MediaQuery.of(context).size.aspectRatio;
-    final arrivel = ref.watch(arrivalProvider);
     final weather = ref.watch(weatherProvider);
     final subdata = ref.watch(infoProvider);
+    final arrivel = ref.watch(arrivalProvider);
     final temp = ref.watch(tempProvider);
     final svg = ref.watch(svgProvider);
 
@@ -43,7 +43,7 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
             width: double.maxFinite,
             child: arrivel.when(
               loading: () => TextFrame(comment: 'loading.....'),
-              error: (err, stack) => Text(err.toString()),
+              error: (err, stack) => TextFrame(comment: '데이터를 불러올 수 없습니다'),
               data: (data) {
                 try {
                   var filtedArrival = data

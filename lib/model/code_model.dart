@@ -1,6 +1,5 @@
-
+import 'package:subway_project_230704/setting/export.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 part 'code_model.freezed.dart';
 part 'code_model.g.dart';
 
