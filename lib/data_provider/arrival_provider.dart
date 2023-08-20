@@ -11,12 +11,13 @@ final arrivalProvider = StreamProvider.autoDispose<List<ArrivalModel>>((ref) asy
 
   if (response.statusCode == 200) {
     final List<dynamic> jsonBody = jsonDecode(response.body)['realtimeArrivalList'];
-
     yield jsonBody.map((e) => ArrivalModel.fromJson(e)).toList();
   } else {
     throw Exception('Failed to load user data');
   }
 });
+
+
 
 
 
