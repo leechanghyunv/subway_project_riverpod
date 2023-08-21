@@ -23,19 +23,24 @@ class BottomDesign extends StatelessWidget {
             height: appHeight * 0.12,
             color: Colors.transparent,
           ),
-          Container(
-            alignment: Alignment.center,
-            width: appWidth * 0.55,
-            height: appHeight * 0.125,
-            child: BarcodeWidget(
-              data: '------LAFAYETTE.co-------',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                fontSize: appHeight * 0.016,
-              ),
-              color: Colors.black,
-              barcode: Barcode.code128(),
-            )),
+          GestureDetector(
+              onTap: (){
+                tableguide();
+              },
+            child: Container(
+              alignment: Alignment.center,
+              width: appWidth * 0.55,
+              height: appHeight * 0.125,
+              child: BarcodeWidget(
+                data: '------LAFAYETTE.co-------',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  fontSize: appHeight * 0.016,
+                ),
+                color: Colors.black,
+                barcode: Barcode.code128(),
+              )),
+          ),
           AnimatedContainer(
             duration: Duration(seconds: 3),
             child: Material(

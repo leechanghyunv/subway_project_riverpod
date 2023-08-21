@@ -30,6 +30,7 @@ class MapSample extends ConsumerWidget {
           logoClickEnable: false,
           indoorEnable: true,
           logoAlign: NLogoAlign.leftTop,
+
         ),
         onMapReady: (controller) async {
           _mapController = controller;

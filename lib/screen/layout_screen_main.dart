@@ -1,6 +1,5 @@
 import '../setting/export.dart';
 
-
 class LayoutMainScreen extends StatelessWidget {
 
   final List<Widget> children1;
@@ -53,6 +52,7 @@ class LayoutMainScreen extends StatelessWidget {
                     ),
                   ),
                   BottomDesign(
+                    key: key,
                     onTap: onTap,
                   ),
                 ],

@@ -1,4 +1,3 @@
-import '../model/code_model.dart';
 import '../setting/export.dart';
 
 final apiCodeProvider = FutureProvider<List<CodeModel>>((ref) async {
@@ -20,6 +19,6 @@ final apiCodeProvider = FutureProvider<List<CodeModel>>((ref) async {
     return jsonBody.map((e) => CodeModel.fromJson(e)).toList();
 
   } else {
-    throw Exception('Failed to load user data');
+    throw Exception('Failed to load code data');
   }
 });

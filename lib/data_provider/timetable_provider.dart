@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import '../setting/export.dart';
+import '../../setting/export.dart';
 
 final apiservice = SeoulApiService.create();
 
@@ -19,7 +19,7 @@ final subTableProviderA = FutureProvider.family<List<TableModel>,String>((ref,co
     final List<dynamic> jsonBody = jsonDecode(response.body)['SearchSTNTimeTableByIDService']['row'];
     return jsonBody.map((e) => TableModel.fromJson(e)).toList();
   } else {
-    throw Exception('Failed to load user data');
+    throw Exception('Failed to load table data');
   }
 }
 );
@@ -41,7 +41,7 @@ final subTableProviderB = FutureProvider.family<List<TableModel>,String>((ref,co
     jsonDecode(response.body)['SearchSTNTimeTableByIDService']['row'];
     return jsonBody.map((e) => TableModel.fromJson(e)).toList();
   } else {
-    throw Exception('Failed to load user data');
+    throw Exception('Failed to load table data');
   }
 }
 );

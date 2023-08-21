@@ -1,5 +1,4 @@
 import 'package:subway_project_230704/setting/export.dart';
-import '../api_provider/discance_provider.dart';
 import 'layout_screen_main.dart';
 import 'table_screen.dart';
 
@@ -12,6 +11,7 @@ class HomePage extends ConsumerStatefulWidget {
 
  class _HomePageState extends ConsumerState<HomePage>  {
 
+
    late Future<String> _futureData;
    late List<dynamic> subwayList = [];
 
@@ -23,6 +23,7 @@ class HomePage extends ConsumerStatefulWidget {
     super.initState();
     _futureData = fetchData();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,7 @@ class HomePage extends ConsumerStatefulWidget {
             return LayoutMainScreen(
               children1: <Widget>[
                 ColorBar(
+                  // key: key1,
                   stringNumber: ref.watch(lineProvier),
                 ),
                 SizedBox(
@@ -63,6 +65,7 @@ class HomePage extends ConsumerStatefulWidget {
                       height: appRatio >= 0.5 ? appWidth * 0.08447 : appWidth * 0.0604,
                     ),
                     IconCustom(
+                      // key: key2,
                       onTap: (){
                         iconbuttonguide();
                         Get.dialog(
@@ -72,9 +75,7 @@ class HomePage extends ConsumerStatefulWidget {
                               height: appRatio >= 0.5 ? appWidth : appWidth * 0.8447, /// 0.3907
                               child: TextFormA(
                                 onSelected: (value){
-                                  setState(() {
-                                    subwayname = value;
-                                  });
+                                  setState(() => subwayname = value);
                                   ref.read(infoProvider.notifier).searchSubway(name: value);
                                   Get.dialog(
                                     LinePickerA(),
@@ -93,6 +94,7 @@ class HomePage extends ConsumerStatefulWidget {
                                     await ref.read(storeProviderA.notifier).storeSubData('A');
                                     savemsg('목적지 A', box.read('nameA'), box.read('engnameA'));
                                     addlist(subwayList,box.read('nameA'));
+                                    print('box.read codeA ${box.read('codeA')}');
                                     Navigator.pop(context);
                                   } else if(
                                   subwayname == 'SEOUL'){
@@ -104,6 +106,7 @@ class HomePage extends ConsumerStatefulWidget {
                                     await ref.read(storeProviderA.notifier).storeSubData('B');
                                     savemsg('목적지 B', box.read('nameB'), box.read('engnameB'));
                                     addlist(subwayList,box.read('nameB'));
+                                    print('box.read codeA ${box.read('codeB')}');
                                     Navigator.pop(context);
                                   } else if(
                                   subwayname == 'SEOUL'){
@@ -128,18 +131,14 @@ class HomePage extends ConsumerStatefulWidget {
                               height: appRatio >= 0.5 ? appWidth * 1.15 : appWidth * 0.9662,
                               child: TextFormB(
                                 onSelectedA: (valueA){
-                                  setState(() {
-                                    subwayname = valueA;
-                                  });
+                                  setState(() => subwayname = valueA);
                                   ref.read(infoProvider.notifier).searchSubway(name: valueA);
                                   Get.dialog(
                                     LinePickerA(),
                                   );
                                 },
                                 onSelectedB: (valueB){
-                                  setState(() {
-                                    subwaynameT = valueB;
-                                  });
+                                  setState(() => subwayname = valueB);
                                   ref.read(infoProvider.notifier).searchSubway(name: valueB);
                                   Get.dialog(
                                     LinePickerB(),
@@ -190,14 +189,16 @@ class HomePage extends ConsumerStatefulWidget {
                     UpandDown(
                       color1: ref.watch(convertProvier) == true ? Colors.grey[100] : Colors.grey[400],
                       onTap1: () {
+                        initialmsg();
                         ref.read(convertProvier.notifier).update((state) => state = false);
                       },
                       color2: ref.watch(convertProvier) == false ? Colors.grey[100] : Colors.grey[400],
                       onTap2: ()  {
+                        initialmsg();
                         ref.read(convertProvier.notifier).update((state) => state = true);
                       },
                     ),
-                    SizedBox(height: appRatio >= 0.5 ? appWidth * 0.0485 : 0,
+                    SizedBox(height: appRatio >= 0.5 ? appWidth * 0.065 : appWidth * 0.028,
                     ),
                     TextContainerB(),
                   ],
@@ -205,6 +206,7 @@ class HomePage extends ConsumerStatefulWidget {
               ],
               children2: [
                 ToggleController(
+                  // key: key3,
                   onToggle: (index) {
                     if(index == 0){
                       if(box.read('nameA') != null || box.read('nameB') != null){
@@ -225,9 +227,7 @@ class HomePage extends ConsumerStatefulWidget {
                             ),
                             actions: [
                               DialogButton(
-                                onPressed: (){
-                                  Navigator.pop(context);
-                                },
+                                onPressed: () => Navigator.pop(context),
                                 comment: 'Cancel',
                               ),
                               StatefulBuilder(
@@ -243,11 +243,11 @@ class HomePage extends ConsumerStatefulWidget {
                                           nameB: box.read('nameB'),
                                         );
                                         ref.read(apiresult(data));
-                                        ref.read(nameProvier.notifier).state = box.read('nameA');
-                                        ref.read(engNameProvier.notifier).state = box.read('engnameA');
-                                        ref.read(lineProvier.notifier).state = box.read('lineA');
-                                        ref.read(headingProvider.notifier).state = box.read('headingA');
-                                        ref.read(codeConveyProvider.notifier).state = box.read('codeB');
+                                        ref.read(nameProvier.notifier).state = box.read('nameA') ?? '';
+                                        ref.read(engNameProvier.notifier).state = box.read('engnameA') ?? '';
+                                        ref.read(lineProvier.notifier).state = box.read('lineA') ?? '';
+                                        ref.read(headingProvider.notifier).state = box.read('headingA') ?? '';
+                                        ref.read(codeConveyProvider.notifier).state = box.read('codeB') ?? '';
                                         Navigator.pop(context);
                                       },
                                       comment: 'Adapt',
@@ -309,9 +309,7 @@ class HomePage extends ConsumerStatefulWidget {
                             ),
                             actions: [
                               DialogButton(
-                                onPressed: (){
-                                  Navigator.pop(context);
-                                },
+                                onPressed: () => Navigator.pop(context),
                                 comment: 'Cancel',
                               ),
                               StatefulBuilder(builder: (__,StateSetter setState){
@@ -326,11 +324,11 @@ class HomePage extends ConsumerStatefulWidget {
                                       nameB: box.read('nameA'),
                                     );
                                     ref.read(apiresult(data));
-                                    ref.read(nameProvier.notifier).state = box.read('nameB');
-                                    ref.read(engNameProvier.notifier).state = box.read('engnameB');
-                                    ref.read(lineProvier.notifier).state = box.read('lineB');
-                                    ref.read(headingProvider.notifier).state = box.read('headingB');
-                                    ref.read(codeConveyProvider.notifier).state = box.read('codeA');
+                                    ref.read(nameProvier.notifier).state = box.read('nameB') ?? '';
+                                    ref.read(engNameProvier.notifier).state = box.read('engnameB') ?? '';
+                                    ref.read(lineProvier.notifier).state = box.read('lineB') ?? '';
+                                    ref.read(headingProvider.notifier).state = box.read('headingB') ?? '';
+                                    ref.read(codeConveyProvider.notifier).state = box.read('codeA') ?? '';
                                     Navigator.pop(context);
                                   },
                                   comment: 'Adapt',
@@ -346,6 +344,7 @@ class HomePage extends ConsumerStatefulWidget {
                   },
                 ),
               ],
+              // key: key4,
               onTap: (){
                 var codeConvey = ref.read(codeConveyProvider.notifier).state;
                 showModalBottomSheet(
@@ -354,7 +353,7 @@ class HomePage extends ConsumerStatefulWidget {
                     builder: (context){
                       return SizedBox(
                           height: MediaQuery.of(context).size.height * 0.765,
-                          child:  Center(
+                          child: Center(
                             child: codeConvey == ''
                                 ? TextFrame(comment: '목적지를 설정해주세요')
                                 : TableScreen(

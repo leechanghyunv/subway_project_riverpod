@@ -1,5 +1,7 @@
 import 'package:subway_project_230704/setting/export.dart';
 
+import '../data_provider/filted_provider/filter_provider.dart';
+
 List<Color> kDefaultRainbowColors2 = [
   Colors.grey.shade600,
   Colors.grey.shade600,
@@ -19,6 +21,7 @@ class SwitchDialogB extends ConsumerWidget {
     double appHeight = MediaQuery.of(context).size.height;
     double appWidth = MediaQuery.of(context).size.width;
     double appRatio = MediaQuery.of(context).size.aspectRatio;
+    final initialdata = ref.watch(dataProviderInside);
     double mainBoxHeight = appHeight * 0.58;
     ref.listen(lineProvier, (previous, next) {
       ref.read(latlonglineProvier.notifier).update((state) =>
@@ -117,7 +120,37 @@ class SwitchDialogB extends ConsumerWidget {
                             onSelected: (isSelected) {
                               ref.read(infoProvider.notifier).searchSubway(name: row);
                               Get.dialog(
-                                LinePickerA(),
+                                AlertDialog(
+                                  content: initialdata.when(
+                                    loading: () => Container(
+                                        color: Colors.white,
+                                        height: appWidth * 0.9075,
+                                        alignment: Alignment.center,
+                                        child: TextFrame(comment: 'loading.....')),
+                                    error: (err, stack) => Text(err.toString()),
+                                    data: (data){
+                                      ref.read(infoProvider.notifier).searchSubway(name: row);
+                                      ref.read(infoProviderB.notifier).searchSubway(name: row);
+                                      return SwitchDialogC();
+                                    },
+                                  ),
+                                  actions: [
+                                    DialogButton(
+                                      comment: 'Cencel',
+                                      onPressed: (){
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    DialogButton(
+                                      comment: 'Select',
+                                      onPressed: (){
+                                        Select(row);
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                // LinePickerA(),
                               );
                             },
                           ),

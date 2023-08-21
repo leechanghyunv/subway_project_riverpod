@@ -6,7 +6,7 @@ class IconCustom extends StatelessWidget {
   final void Function()? onLongPress;
 
   const IconCustom({
-    Key? key,
+    key,
     this.onTap,
     this.onLongPress}) : super(key: key);
 
@@ -19,6 +19,7 @@ class IconCustom extends StatelessWidget {
       onTap: onTap,
       onLongPress: onLongPress,
       child: SizedBox(
+        key: key,
         width: appWidth * 0.3623,  /// 150
         child: Icon(
           Icons.subway,

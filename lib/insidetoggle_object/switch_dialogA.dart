@@ -1,5 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
-import '../api_provider/weather_provider.dart';
+import '../data_provider/weather_provider.dart';
 
 class SwitchDialogA extends ConsumerStatefulWidget {
   final String name;
@@ -53,7 +53,7 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                       var filtedArrival = data
                           .where((element) => element.subwayId == widget.list).toList();
                       var updnLine1 = ['상행', '내선'], updnLine2 = ['하행', '외선'];
-                      /// /// /// 상행선 상행선 상행선 상행선 상행선 상행선 상행선 /// /// /// /// ///
+                      /// dp용 /// 상행선 상행선 상행선 상행선 상행선 상행선 상행선 /// /// /// /// ///
                       var updn1First = filtedArrival
                           .where(
                               (element) => updnLine1.contains(element.updnLine))
@@ -62,7 +62,7 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                           .where(
                               (element) => updnLine1.contains(element.updnLine))
                           .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
-                      /// /// /// 하행선 하행선 하행선 하행선 하행선 하행선 하행선  /// /// /// /// /// ///
+                      /// dp용 /// 하행선 하행선 하행선 하행선 하행선 하행선 하행선  /// /// /// /// /// ///
                       var updn2First = filtedArrival
                           .where(
                               (element) => updnLine2.contains(element.updnLine))
@@ -71,7 +71,7 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                           .where(
                               (element) => updnLine2.contains(element.updnLine))
                           .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
-                      /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
+                      /// 저장용 /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
                       var subNumber1 = filtedArrival.where(
                               (element) => updnLine1.contains(element.updnLine))
                           .map((e) => '${e.btrainNo}').first;

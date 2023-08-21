@@ -1,12 +1,15 @@
 import 'package:subway_project_230704/setting/export.dart';
-import '../../api_provider/weather_provider.dart';
+import '../../data_provider/weather_provider.dart';
 import 'package:intl/intl.dart';
 
 class ColorBar extends ConsumerWidget {
 
   final String stringNumber;
+  // final Key key;
 
-  ColorBar({super.key, required this.stringNumber});
+  ColorBar({
+    // required this.key,
+    required this.stringNumber});
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
@@ -51,7 +54,7 @@ class ColorBar extends ConsumerWidget {
                       ),
                       TextFrame(
                           comment: formatDate(DateTime.now(),
-                              [' ',am == 'AM' ? '오전' : '오후' ,  ' ', hh, '시 ', nn, '분'])
+                              [' ',am ,  ' ', hh, '시 ', nn, '분'])
                       ),
                     ],
                   );
@@ -226,9 +229,6 @@ class ColorBar extends ConsumerWidget {
                                   ),
                                 ));
                           }),
-
-
-
                     )
                     );
               },
@@ -244,7 +244,7 @@ class ColorBar extends ConsumerWidget {
             height: appRatio >= 0.5 ? appHeight * 0.58 : appHeight * 0.58 * 0.90,
             width: appWidth * 0.08,
             child: ColorContainer(
-                stringNumber: stringNumber
+                 stringNumber: stringNumber,
             ),
           ),
         )
@@ -252,3 +252,7 @@ class ColorBar extends ConsumerWidget {
     );
   }
 }
+
+
+
+

@@ -1,6 +1,6 @@
 import 'package:subway_project_230704/setting/export.dart';
-import '../api_provider/timetable_provider.dart';
-import '../api_provider/weather_provider.dart';
+import '../data_provider/timetable_provider.dart';
+import 'layout_screen_table.dart';
 
 class TableScreen extends ConsumerStatefulWidget {
 
@@ -29,306 +29,186 @@ class _TableScreenState extends ConsumerState<TableScreen> {
     double appWidth = MediaQuery.of(context).size.width;  /// 414.0 IPHONE11
     double appRatio = MediaQuery.of(context).size.aspectRatio;
     double containerWidth = appRatio >= 0.5 ? appHeight * 0.49 : appWidth;
-
     double textSize = appRatio >= 0.5 ? appWidth * 0.0255 : appWidth * 0.0289;
 
     final tableA = ref.watch(subTableProviderA(ref.watch(codeConveyProvider)));
     final tableB = ref.watch(subTableProviderB(ref.watch(codeConveyProvider)));
 
-    final weather = ref.watch(weatherProvider);
-    final temp = ref.watch(tempProvider);
-    final svg = ref.watch(svgProvider);
-
-    return LayoutScreen(
-      body: Center(
-        child: Container(
-          alignment: Alignment.center,
-          color: Colors.white,
-          height: appHeight,
-          width: appRatio >= 0.5 ? appHeight * 0.49 :  double.maxFinite,
-          // width: appHeight * 0.462,
-          child: Center(
-            child: tableA.when(
-              error: (err, stack) => Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+    return LayoutTable(
+      child: Consumer(
+          builder: (__,ref,widget){
+            tableA.value?.sort((a,b)=>a.arrivetime.compareTo(b.arrivetime));
+            tableB.value?.sort((a,b)=>a.arrivetime.compareTo(b.arrivetime));
+            var filtedtableA = tableA.value?.where((e) => e.arrivetime != '00:00:00').toList();
+            var filtedtableB = tableB.value?.where((e) => e.arrivetime != '00:00:00').toList();
+            if(filtedtableA != null && filtedtableB != null){
+              return Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFrame(
-                        comment: '${widget.subName}역 데이터가 존재하지 않습니다.'),
-                  ),
-                ],
-              ),
-              loading: () => const Center(
-                  child: TextFrame(comment: 'loading.....')),
-              data: (data){
-                if(data.isNotEmpty && tableA.value != null){
-                  /// 시간표가 순서대로 되어있지 않아서 시간순으로 정렬함
-                  tableA.value?.sort((a,b)=>a.arrivetime.compareTo(b.arrivetime));
-                  tableB.value?.sort((a,b)=>a.arrivetime.compareTo(b.arrivetime));
-                   var filtedtableA = tableA.value?.where((e) => e.arrivetime != '00:00:00').toList();
-                   var filtedtableB = tableB.value?.where((e) => e.arrivetime != '00:00:00').toList();
-                  if(filtedtableA != null && filtedtableB != null){
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                            color: Colors.grey[300],
-                            width: appRatio >= 0.5 ? appHeight * 0.49 :  double.maxFinite,
-                            alignment: Alignment.centerLeft,
-                            height: appWidth * 0.1449,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                  Container(
+                    width: containerWidth * 0.5,
+                    height: appHeight * 0.90,
+                    alignment: Alignment.center,
+                    child: ListView.builder(
+                        controller: _scrollControllerA,
+                        itemCount: filtedtableA.length,
+                        itemBuilder:(context, index){
+                          var row = filtedtableA[index];
+                          return ListTile(
+                            title: Row(
                               children: [
-                                Row(
-                                  children: [
-                                    SizedBox(width: 5,),
-                                    svg.when(
-                                      loading: () => const Center(
-                                          child: TextFrame(comment: 'loading.....')),
-                                      error: (err, stack) => Text(err.toString()),
-                                      data: (data){
-                                        return data;
-                                      },
-                                    ),
-                                    weather.when(
-                                      loading: () => const Center(
-                                          child: TextFrame(comment: 'loading.....')),
-                                      error: (err, stack) => Text(err.toString()),
-                                      data: (data){
-                                        return  TextFrame(
-                                          comment: data.first.description,
-                                          overflow: TextOverflow.fade,);
-                                      },
-                                    ),
-                                    SizedBox(width: 5,),
-                                    temp.when(
-                                      loading: () => const Center(
-                                          child: TextFrame(comment: '')),
-                                      error: (err, stack) => Text(err.toString()),
-                                      data: (data){
-                                        return TextFrame(
-                                            comment: '${(data.temp- 273.15).toStringAsFixed(0)}\u2103');
-                                      },
-                                    ),
-                                    Expanded(child: Text('')),
-                                    TimerBuilder.periodic(
-                                      const Duration(seconds: 1),
-                                      builder: (context) {
-                                        return Row(
-                                          children: [
-                                            TextFrame(
-                                                comment: formatDate(
-                                                    DateTime.now(),
-                                                    [' ',HH, ':', nn, ':', ss, ' '])),
-                                          ],
-                                        );
-                                      },
-                                    ),
-                                    SizedBox(width: 10,),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    SizedBox(width: 15,),
-                                  ],
-                                ),
-                              ],
-                            )
-                        ),
-                        Expanded(
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: containerWidth * 0.5,
-                                  height: appHeight * 0.90,
-                                  alignment: Alignment.center,
-                                  child: ListView.builder(
-                                      controller: _scrollControllerA,
-                                      itemCount: filtedtableA.length,
-                                      itemBuilder:(context, index){
-                                        var row = filtedtableA![index];
-                                        return ListTile(
-                                          title: Row(
-                                            children: [
-                                              Expanded(
-                                                child: Text.rich(
-                                                  TextSpan(
-                                                      children: [
-                                                        TextSpan(
-                                                          text: '${row.sname} > ${row.ename}행 \n',
-                                                          style: TextStyle(
-                                                              fontSize: textSize,
-                                                              fontWeight: FontWeight.bold,
-                                                              overflow: TextOverflow.ellipsis),
-                                                        ),
-                                                        TextSpan(
-                                                          text:'${row.express.name == 'GENERAL'
-                                                              ? '${row.express.name}(일반)'
-                                                              : '${row.express.name}(급행)'}',
-                                                          style: TextStyle(
-                                                              fontSize: textSize,
-                                                              color: row.express.name == 'GENERAL'
-                                                                  ? Colors.black
-                                                                  : Colors.red,
-                                                              fontWeight: FontWeight.bold,
-                                                              overflow: TextOverflow.ellipsis),
-                                                        ),
-                                                      ]
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          trailing: Text(
-                                            '${row.arrivetime}'.substring(0,5),
+                                Expanded(
+                                  child: Text.rich(
+                                    TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: '${row.sname} > ${row.ename}행 \n',
                                             style: TextStyle(
                                                 fontSize: textSize,
-                                                fontWeight: FontWeight.bold),
+                                                fontWeight: FontWeight.bold,
+                                                overflow: TextOverflow.ellipsis),
                                           ),
-                                        );
-                                      }),
-
-                                ),
-                                Container(
-                                  width: containerWidth * 0.5,
-                                  height: appHeight * 0.90,
-                                  alignment: Alignment.center,
-                                  child: ListView.builder(
-                                      controller: _scrollControllerB,
-                                      itemCount: filtedtableB.length,
-                                      itemBuilder:(context, index){
-                                        var row = filtedtableB[index];
-                                        return ListTile(
-                                          title: Row(
-                                            children: [
-                                              Expanded(
-                                                child: Text.rich(
-                                                  TextSpan(
-                                                      children: [
-                                                        TextSpan(
-                                                          text: '${row.sname} > ${row.ename}행 \n',
-                                                          style: TextStyle(
-                                                              fontSize: textSize,
-                                                              fontWeight: FontWeight.bold,
-                                                              overflow: TextOverflow.ellipsis),
-                                                        ),
-                                                        TextSpan(
-                                                          text:'${row.express.name == 'GENERAL'
-                                                              ? '${row.express.name}(일반)'
-                                                              : '${row.express.name}(급행)'}',
-                                                          style: TextStyle(
-                                                              fontSize: textSize,
-                                                              color: row.express.name == 'GENERAL'
-                                                                  ? Colors.black
-                                                                  : Colors.red,
-                                                              fontWeight: FontWeight.bold,
-                                                              overflow: TextOverflow.ellipsis),
-                                                        ),
-                                                      ]
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          trailing: Text(
-                                            '${row.arrivetime}'.substring(0,5),
+                                          TextSpan(
+                                            text:'${row.express.name == 'GENERAL'
+                                                ? '${row.express.name}(일반)'
+                                                : '${row.express.name}(급행)'}',
                                             style: TextStyle(
                                                 fontSize: textSize,
-                                                fontWeight: FontWeight.bold),
+                                                color: row.express.name == 'GENERAL'
+                                                    ? Colors.black
+                                                    : Colors.red,
+                                                fontWeight: FontWeight.bold,
+                                                overflow: TextOverflow.ellipsis),
                                           ),
-                                        );
-                                      }),
+                                        ]
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                        ),
+                            trailing: Text(
+                              '${row.arrivetime}'.substring(0,5),
+                              style: TextStyle(
+                                  fontSize: textSize,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          );
+                        }),
 
-
-
-                      ],
-                    );
-                  }
-
-                }
-                return Center(
-                  child: Column(
-                    children: [
-                      TextFrame(comment: ''),
-                    ],
                   ),
-                );
-              },
-            )
+                  Container(
+                    width: containerWidth * 0.5,
+                    height: appHeight * 0.90,
+                    alignment: Alignment.center,
+                    child: ListView.builder(
+                        controller: _scrollControllerB,
+                        itemCount: filtedtableB.length,
+                        itemBuilder:(context, index){
+                          var row = filtedtableB[index];
+                          return ListTile(
+                            title: Row(
+                              children: [
+                                Expanded(
+                                  child: Text.rich(
+                                    TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: '${row.sname} > ${row.ename}행 \n',
+                                            style: TextStyle(
+                                                fontSize: textSize,
+                                                fontWeight: FontWeight.bold,
+                                                overflow: TextOverflow.ellipsis),
+                                          ),
+                                          TextSpan(
+                                            text:'${row.express.name == 'GENERAL'
+                                                ? '${row.express.name}(일반)'
+                                                : '${row.express.name}(급행)'}',
+                                            style: TextStyle(
+                                                fontSize: textSize,
+                                                color: row.express.name == 'GENERAL'
+                                                    ? Colors.black
+                                                    : Colors.red,
+                                                fontWeight: FontWeight.bold,
+                                                overflow: TextOverflow.ellipsis),
+                                          ),
+                                        ]
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            trailing: Text(
+                              '${row.arrivetime}'.substring(0,5),
+                              style: TextStyle(
+                                  fontSize: textSize,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          );
+                        }),
+                  ),
+                ],
+              );
+            }
+            return TextFrame(comment: '현재 외부로부터 시간 데이터를 제공받을 수 없습니다.');
+      }),
+        floatingActionButton: Stack(
+          children: <Widget>[
+            Align(
+              alignment: Alignment(
+                  appRatio >= 0.5
+                      ? Alignment.bottomRight.x - 0.1
+                      : Alignment.bottomRight.x,
 
+                  Alignment.bottomRight.y - 0.2
+              ),
+              child: FloatingActionButton.small(
+                backgroundColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0))
+                ),
+                elevation: 0.1,
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.keyboard_return,
+                  color: Colors.white,
+                  size: appWidth * 0.0602,
+                ),
+              ),
+            ),
 
-          ),
+            Align(
+              alignment: Alignment(
+                  appRatio >= 0.5
+                      ? Alignment.bottomRight.x - 0.1
+                      : Alignment.bottomRight.x,
+
+                  Alignment.bottomRight.y
+              ),
+              child: FloatingActionButton.small(
+                backgroundColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0))
+                ),
+                elevation: 0.1,
+                onPressed: (){
+                  tableLast(widget.subName);
+                  final double endA = _scrollControllerA.position.maxScrollExtent;
+                  final double endB = _scrollControllerB.position.maxScrollExtent;
+                  _scrollControllerA.animateTo(endA,duration: Duration(milliseconds: 800),curve: Curves.easeIn);
+                  _scrollControllerB.animateTo(endB,duration: Duration(milliseconds: 800),curve: Curves.easeIn);
+                },
+                child: Icon(
+                  Icons.arrow_downward,
+                  color: Colors.white,
+                  size: appWidth * 0.0602,
+                ),
+              ),
+            ),
+          ],
         ),
-      ),
-      floatingActionButton: Stack(
-        children: <Widget>[
-          Align(
-            alignment: Alignment(
-                appRatio >= 0.5
-                    ? Alignment.bottomRight.x - 0.1
-                    : Alignment.bottomRight.x,
-
-                Alignment.bottomRight.y - 0.2
-            ),
-            child: FloatingActionButton.small(
-              backgroundColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0))
-              ),
-              elevation: 0.1,
-              onPressed: (){
-                Navigator.pop(context);
-              },
-              child: Icon(
-                Icons.keyboard_return,
-                color: Colors.white,
-                size: appWidth * 0.0602,
-              ),
-            ),
-          ),
-
-          Align(
-            alignment: Alignment(
-                appRatio >= 0.5
-                    ? Alignment.bottomRight.x - 0.1
-                    : Alignment.bottomRight.x,
-
-                Alignment.bottomRight.y
-            ),
-            child: FloatingActionButton.small(
-              backgroundColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0))
-              ),
-              elevation: 0.1,
-              onPressed: (){
-                tableLast(widget.subName);
-                final double endA = _scrollControllerA.position.maxScrollExtent;
-                final double endB = _scrollControllerB.position.maxScrollExtent;
-                _scrollControllerA.animateTo(endA,duration: Duration(milliseconds: 800),curve: Curves.easeIn);
-                _scrollControllerB.animateTo(endB,duration: Duration(milliseconds: 800),curve: Curves.easeIn);
-              },
-              child: Icon(
-                Icons.arrow_downward,
-                color: Colors.white,
-                size: appWidth * 0.0602,
-              ),
-            ),
-          ),
-        ],
-      ),
-
-
-
     );
+
+
   }
 }

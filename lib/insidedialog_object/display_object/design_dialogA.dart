@@ -11,9 +11,7 @@ class DialogDesignBoxA extends ConsumerWidget {
 
     double sizeWidth = appWidth * 0.0242;
     double textSize = appWidth * 0.0362;
-
     double contHeight = appWidth * 0.1686;
-    double contWidth = appWidth * 0.0242;
 
     final stringNumber = ref.watch(lineProvier);
 

@@ -1,4 +1,3 @@
-
 import '../setting/export.dart';
 
 final apiservice = ArrivalApiService.create();
@@ -13,12 +12,9 @@ final arrivalProvider = StreamProvider.autoDispose<List<ArrivalModel>>((ref) asy
     final List<dynamic> jsonBody = jsonDecode(response.body)['realtimeArrivalList'];
     yield jsonBody.map((e) => ArrivalModel.fromJson(e)).toList();
   } else {
-    throw Exception('Failed to load user data');
+    throw Exception('Failed to load arrival data');
   }
 });
-
-
-
 
 
 
@@ -32,6 +28,6 @@ final arrivalProviderT = StreamProvider.autoDispose<List<ArrivalModel>>((ref) as
     yield jsonBody.map((e) => ArrivalModel.fromJson(e)).toList();
 
   } else {
-    throw Exception('Failed to load user data');
+    throw Exception('Failed to load arrival data');
   }
 });

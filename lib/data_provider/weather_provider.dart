@@ -20,10 +20,10 @@ final weatherProvider = FutureProvider.autoDispose<List<Weather>>((ref) async {
       print(jsonBody);
       return jsonBody.map((e) => Weather.fromJson(e)).toList();
     } else {
-      throw Exception('Failed to load user data Weather');
+      throw Exception('Failed to load Weather data');
     }
   }
-  throw Exception('Failed to load user data');
+  throw Exception('Failed to load Weather data');
 });
 
 
@@ -43,10 +43,10 @@ final tempProvider = FutureProvider.autoDispose<Main>((ref) async {
       print(jsonBody);
       return Main.fromJson(jsonBody);
     } else {
-      throw Exception('Failed to load user data Main');
+      throw Exception('Failed to load Main data');
     }
   }
-  throw Exception('Failed to load user data');
+  throw Exception('Failed to load Main data');
 });
 
 

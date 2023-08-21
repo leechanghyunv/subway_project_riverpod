@@ -1,5 +1,7 @@
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import '../data_provider/filted_provider/filter_provider.dart';
+import '../data_provider/filted_provider/latlong_provider.dart';
 import 'map_screen.dart';
 
 class DialogPage extends ConsumerWidget {
@@ -168,7 +170,6 @@ class DialogPage extends ConsumerWidget {
                       ));
                 }),
           );
-
         },
       ),
     );

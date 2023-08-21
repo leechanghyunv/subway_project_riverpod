@@ -40,14 +40,16 @@ class _LoadingPageState extends State<LoadingPage> {
                       );
                     }
                     if (snapshot.connectionState == ConnectionState.done) {
-                      return BlinkText(
-                        snapshot.data['comment'],
-                        style: TextStyle(
-                          fontSize: appHeight * 0.020,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                      return Container(
+                        child: BlinkText(
+                          snapshot.data['comment'],
+                          style: TextStyle(
+                            fontSize: appHeight * 0.020,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                          duration: Duration(milliseconds: 410), /// 깜빡이는 간격이라고 한다
                         ),
-                        duration: Duration(milliseconds: 410), /// 깜빡이는 간격이라고 한다
                       );
                     }
                     return Center(

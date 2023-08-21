@@ -26,10 +26,12 @@ class TopDesign extends StatelessWidget {
             padding: const EdgeInsets.all(6.0),
             child: GestureDetector(
                 onTap: () {
+                  box.remove('maintextguide');
                   box.remove('iconbuttonguide');
                   box.remove('iconbuttonguide2');
                   box.remove('toggleguide');
                   box.remove('toggleguide2');
+                  box.remove('tableguide');
                   box.remove('smsguide');
                   box.remove('barguide');
                   print('QRCODE');

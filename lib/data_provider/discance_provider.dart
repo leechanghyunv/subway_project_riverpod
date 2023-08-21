@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
-import '../model/sk_map_model.dart';
-import '../setting/export.dart';
-import '../setting/notification.dart';
+import '../../model/sk_map_model.dart';
+import '../../setting/export.dart';
+import '../../setting/notification.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 FlutterLocalNotificationsPlugin();
@@ -12,7 +12,6 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
 
   try{
     final url = Uri.parse('http://apis.openapi.sk.com/transit/routes');
-
     final headers = {
       'accept': 'application/json',
       'appKey': 'ceevGND92fauEWQ8gfEnJ2i2gTlX1sxT2DBh3XRh',
@@ -60,6 +59,7 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
         var value2 = firstElement?.elementAt(1);
         int? intValue1 = int.tryParse(value1!);
         int? intValue2 = int.tryParse(value2!);
+
         if(intValue1 != null && intValue2 != null){
           print('${intValue1-intValue2}'); // 1이면 상행 -1이면 하행
           ref.read(upDownProvider.notifier).state = (intValue1-intValue2);
@@ -70,18 +70,19 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
         ref.read(costProvider.notifier).state = fare.toString();
         return utfIntoList;
       }
-
       /// pathType 1-지하철, pathType 2-버스, pathType 3-버스+지하철
       var pathtype = utfIntoList.first.pathType.toString();
       var routename = utfIntoList.first.legs.map((e) => '${e.route}').where((e) => e != 'null').toSet().toList();
-
+      var fare = utfIntoList.where((element) => element.pathType != 1).first.fare.regular.totalFare;
       var route = utfIntoList.first.legs.map((e) => '${e.end.name}').toSet().toList();
       String formattedRoute = route.join(' > ');
       String formattedpathtype = routename.join(' - ');
 
       ref.read(secondRouteProvider.notifier).state = formattedpathtype;
-
+      ref.read(secondRoadProvider.notifier).state = formattedRoute;
       var time = utfIntoList.first.totalTime; ///  시간순
+      ref.read(secondtimeProvider.notifier).state = time;
+      ref.read(secondCostProvider.notifier).state = fare.toString();
 
       Get.snackbar(
         '지하철기준 빠른 경로가 없습니다.',
@@ -111,10 +112,14 @@ void noticeTime(String nameA, nameB,route, int time){
       title: "목적지에 곧 도착합니다.",
       body: "목적지인 ${nameA}(으)로 이동합니다. 내리실때 안전에 유의해 주시기 바랍니다.",
       scheduledNotificationDateTime: DateTime.now().
-      add(Duration(minutes: time-120))).then((value) =>
-      Noti.scheduleNotification(
-          title: "목적지에 곧 도착합니다.",
-          body: "목적지인 ${nameA}(으)로 이동합니다. 내리실때 안전에 유의해 주시기 바랍니다.",
-          scheduledNotificationDateTime: DateTime.now().
-          add(Duration(seconds: time-120))));
+      add(Duration(minutes: time-120)));
+  noticeAgain(nameA,time);
+}
+
+void noticeAgain(String name, int time){
+  Noti.scheduleNotification(
+      title: "목적지에 곧 도착합니다.",
+      body: "목적지인 ${name}(으)로 이동합니다. 내리실때 안전에 유의해 주시기 바랍니다.",
+      scheduledNotificationDateTime: DateTime.now().
+      add(Duration(minutes: time-120)));
 }

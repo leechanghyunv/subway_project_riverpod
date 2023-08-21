@@ -5,7 +5,7 @@ class ColorContainer extends StatelessWidget {
   final String stringNumber;
 
   const ColorContainer({
-    required this.stringNumber,
+    required this.stringNumber
   });
 
   @override

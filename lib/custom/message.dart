@@ -39,6 +39,10 @@ Future<bool?> showmsg() => Fluttertoast.showToast(
     msg:'목적지를 입력해주세요',
     gravity: ToastGravity.CENTER);
 
+Future<bool?> initialmsg() => Fluttertoast.showToast(
+    msg:'앱 안에있는 모든 글자와 아이콘을 꾸욱 눌러보세요',
+    gravity: ToastGravity.CENTER);
+
 
 /// guide guide guide guide guide guide guide guide guide guide
 
@@ -91,7 +95,7 @@ void toggleguide(){
 void toggleguide2(){
   if(box.read('toggleguide2') ?? true){
     Fluttertoast.showToast(
-        msg:'지하철역명을 탭하면 목적지 저장이 가능합니다\n좌우 스와이프로 더 많은 기능을 이용하세요 ',
+        msg:'지하철역명을 탭하면 실시간 열차 위치 확인 가능합니다.\n지하철역을 좌우 스와이프 해서 더 많은 기능을 이용해보세요 ',
         gravity: ToastGravity.CENTER,
         toastLength: Toast.LENGTH_LONG,
         timeInSecForIosWeb: 5,
@@ -130,5 +134,35 @@ void barguide(){
     print('${box.read('barguide') ?? ''}');
   }else{
     print('${box.read('barguide') ?? ''}');
+  }
+}
+
+void maintextguide(){
+  if(box.read('maintextguide') ?? true){
+    Fluttertoast.showToast(
+      msg:'목적지를 누르시면 이동경로,이동시간을 알려줍니다\n지하철 이동시간이 너무 길면 다른 경로를 소개합니다',
+      gravity: ToastGravity.CENTER,
+      toastLength: Toast.LENGTH_LONG,
+      timeInSecForIosWeb: 5,
+    );
+    box.write('maintextguide', false);
+    print('${box.read('maintextguide') ?? ''}');
+  }else{
+    print('${box.read('maintextguide') ?? ''}');
+  }
+}
+
+void tableguide(){
+  if(box.read('tableguide') ?? true){
+    Fluttertoast.showToast(
+      msg:'LAFAYETTE 로고의 오른쪽을 빈공간을 탭하시면 출발지점의 시간표를 보실 수 있습니다.',
+      gravity: ToastGravity.CENTER,
+      toastLength: Toast.LENGTH_LONG,
+      timeInSecForIosWeb: 5,
+    );
+    box.write('tableguide', false);
+    print('${box.read('tableguide') ?? ''}');
+  }else{
+    print('${box.read('tableguide') ?? ''}');
   }
 }

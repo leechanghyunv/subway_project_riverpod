@@ -28,7 +28,8 @@ class _DropdownCustomState extends State<DropdownCustom> {
 
     return Column(
       children: [
-        SizedBox(height: mainBoxHeight / 25,
+        SizedBox(
+          height: mainBoxHeight / 25,
         ),
         Container(
           height: appWidth * 0.13,
