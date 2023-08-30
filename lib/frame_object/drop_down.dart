@@ -61,7 +61,7 @@ class _DropdownCustomState extends State<DropdownCustom> {
               }).toList()),
         ),
         SizedBox(
-          height: 3.h,
+          height: 2.h,
         ),
         MainText(),
       ],

@@ -1,38 +1,37 @@
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:subway_project_230704/setting/export.dart';
 
 class DialogDesignBoxC extends StatelessWidget {
 
   final String stringNumber;
   final String subwayName;
-
   DialogDesignBoxC({Key? key, required this.stringNumber, required this.subwayName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;
-    double appWidth = MediaQuery.of(context).size.width;
+    final filtered = subwayName.replaceAll(RegExp(r'\([^()]*\)'), '');
 
-    double sizeWidth = appWidth * 0.0242;
-    double sizeWidth2 = appWidth * 0.018;
-    double textSize = appWidth * 0.0362;
-    double contHeight = appWidth * 0.1686;
+    double sizeWidth = 2.42.w;
+    double sizeWidth2 = 1.8.w;
+    double textSize = 3.6.w;
+    double contHeight = 1.7.w;
 
     return Container(
-      height: appWidth * 0.1449,  /// 60
+      height: 14.5.w,
       child: Row(
         children: [
           SizedBox(
-            height: appWidth * 0.1449,
-            width: appWidth * 0.035,
+            height: 14.5.w,
+            width: 3.6.w,
             child: ColorContainer(
                 stringNumber: stringNumber),
           ),
           SizedBox(
-            width: appWidth * 0.018,
+            width: 1.8.w,
           ),
           Container(
             height: contHeight,
-            width: appWidth * 0.13,
+            width: 1.3.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -59,11 +58,11 @@ class DialogDesignBoxC extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: appWidth * 0.01,
+            width: 1.w,
           ),
           Container(
             height: contHeight,
-            width: appWidth * 0.16,
+            width: 1.6.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -78,7 +77,7 @@ class DialogDesignBoxC extends StatelessWidget {
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('${subwayName}역',
+                Text('${filtered}역',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -92,7 +91,7 @@ class DialogDesignBoxC extends StatelessWidget {
           ),
           Container(
             height: contHeight,
-            width: appHeight * 0.12,
+            width: 12.h,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

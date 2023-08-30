@@ -5,22 +5,20 @@ class DialogDesignBoxA extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double appWidth = MediaQuery.of(context).size.width;
-
-    double sizeWidth = appWidth * 0.0242;
-    double textSize = appWidth * 0.0362;
-    double contHeight = appWidth * 0.1686;
+    double sizeWidth = 2.42.w;
+    double textSize = 3.5.w;
+    double contHeight = 16.8.w;
 
     final stringNumber = ref.watch(lineProvider);
 
     return Container(
-      height: appWidth * 0.1449,
+      height: 16.5.w,
       decoration: BoxDecoration(color: Colors.white),
       child: Row(
         children: [
           SizedBox(
-            height: appWidth * 0.1449,
-            width: appWidth * 0.0362,
+            height: 14.5.w,
+            width: 3.6.w,
             child: ColorContainer(
                 stringNumber: stringNumber),
           ),
@@ -29,7 +27,7 @@ class DialogDesignBoxA extends ConsumerWidget {
           ),
           Container(
             height: contHeight,
-            width: appWidth * 0.1256,
+            width: 12.5.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -57,8 +55,8 @@ class DialogDesignBoxA extends ConsumerWidget {
             width: sizeWidth,
           ),
           Container(
-            height: appWidth * 0.1686,
-            width: appWidth * 0.1686,
+            height: 17.w,
+            width: 17.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -78,11 +76,12 @@ class DialogDesignBoxA extends ConsumerWidget {
                 Consumer(
                     builder: (__,ref,widget){
                   final subwayName = ref.watch(nameProvider);
-                  if(subwayName.isNotEmpty){
+                  final filtered = subwayName.replaceAll(RegExp(r'\([^()]*\)'), '');
+                  if(filtered.isNotEmpty){
                     return Text(
-                        subwayName == 'SEOUL'
+                        filtered == 'SEOUL'
                             ? 'SEOUL'
-                            : '${subwayName}역',
+                            : '${filtered}역',
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -100,8 +99,8 @@ class DialogDesignBoxA extends ConsumerWidget {
             width: sizeWidth,
           ),
           Container(
-            height: appWidth * 0.1686,
-            width: appWidth * 0.2174,
+            height: 17.w,
+            width: 22.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

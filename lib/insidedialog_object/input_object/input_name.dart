@@ -1,3 +1,4 @@
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:subway_project_230704/setting/export.dart';
 
 class InputName extends StatefulWidget {
@@ -18,14 +19,13 @@ class _InputNameState extends State<InputName> {
 
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;    ///  896.0 IPHONE11
-    double appWidth = MediaQuery.of(context).size.width;    ///  896.0 IPHONE11
-    double iconSize = appWidth * 0.06039;
-    double textSize = appWidth * 0.0362;
+
+    double iconSize = 6.w;
+    double textSize = 3.62.w;
 
     return Container(
-      width: appWidth * 0.604,
-      height: appWidth * 0.156,
+      width: 61.w,
+      height: 15.6.w,
       child: TextField(
         decoration: InputDecoration(
           border: OutlineInputBorder(

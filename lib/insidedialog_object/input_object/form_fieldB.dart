@@ -1,3 +1,4 @@
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:subway_project_230704/setting/export.dart';
 import '../display_object/design_dialogB.dart';
 import 'input_name.dart';
@@ -21,17 +22,8 @@ class TextFormB extends StatefulWidget {
 
 class _TextFormBState extends State<TextFormB> {
 
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;///  896.0 IPHONE11
 
     return Form(
         child: Column(
@@ -43,24 +35,23 @@ class _TextFormBState extends State<TextFormB> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: appHeight * 0.0112,
+                    height: 2.42.w,
                   ),
                   InputSubway(onSelected: widget.onSelectedA),
                   SizedBox(
-                    height: appHeight * 0.0168,
+                    height: 3.62.w,
                   ),
                   InputSubway(onSelected: widget.onSelectedB),
                   SizedBox(
-                    height: appHeight * 0.0168,
+                    height: 3.62.w,
                   ),
                   InputName(
                     onSubmitted: widget.onSubmitted,
                   ),
                   SizedBox(
-                    height: appHeight * 0.015,
+                    height: 3.5.w,
                   ),
                   DialogDesignBoxB(
-
                   ),
                 ],
               ),

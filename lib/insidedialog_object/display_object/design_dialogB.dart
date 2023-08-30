@@ -8,21 +8,21 @@ class DialogDesignBoxB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double appWidth = MediaQuery.of(context).size.width;
+    final String subwayName = box.read('nameT') ?? '';
+    final filtered = subwayName.replaceAll(RegExp(r'\([^()]*\)'), '');
 
-    double sizeWidth = appWidth * 0.0242;
-    double textSize = appWidth * 0.0362;
-
-    double contHeight = appWidth * 0.1686;
+    double sizeWidth = 2.42.w;
+    double textSize = 3.5.w;
+    double contHeight = 16.8.w;
 
     return Container(
-      height: appWidth * 0.1449,
+      height: 16.5.w,
       // color: b1,
       child: Row(
         children: [
           SizedBox(
-            height: appWidth * 0.1449,
-            width: appWidth * 0.0362,
+            height: 14.5.w,
+            width: 3.6.w,
             child: ColorContainer(
                 stringNumber: box.read('lineT') ?? 'Line2'),
           ),
@@ -31,7 +31,7 @@ class DialogDesignBoxB extends StatelessWidget {
           ),
           Container(
             height: contHeight,
-            width: appWidth * 0.1256,
+            width: 12.5.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -59,8 +59,8 @@ class DialogDesignBoxB extends StatelessWidget {
             width: sizeWidth,
           ),
           Container(
-            height: appWidth * 0.1686,
-            width: appWidth * 0.1686,
+            height: 17.w,
+            width: 17.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -77,7 +77,7 @@ class DialogDesignBoxB extends StatelessWidget {
                 ),
                 Text(
                     box.read('nameT') != null
-                        ? '${box.read('nameT')}역'
+                        ? '${filtered}역'
                         : '',
                     style: TextStyle(
                         color: Colors.black,
@@ -91,8 +91,8 @@ class DialogDesignBoxB extends StatelessWidget {
             width: sizeWidth,
           ),
           Container(
-            height: appWidth * 0.1686,
-            width: appWidth * 0.2174,
+            height: 17.w,
+            width: 22.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

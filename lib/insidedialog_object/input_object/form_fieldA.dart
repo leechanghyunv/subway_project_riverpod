@@ -1,3 +1,4 @@
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:subway_project_230704/setting/export.dart';
 import '../display_object/design_dialogA.dart';
 import 'input_name.dart';
@@ -5,7 +6,6 @@ import 'input_name.dart';
 class TextFormA extends StatefulWidget {
   final void Function(String)? onSelected;
   final Function(String) onSubmitted;
-
 
   const TextFormA(
       {Key? key,
@@ -21,11 +21,6 @@ class TextFormA extends StatefulWidget {
 class _TextFormAState extends State<TextFormA> {
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;///  896.0 IPHONE11
     double appWidth = MediaQuery.of(context).size.width;
@@ -39,23 +34,23 @@ class _TextFormAState extends State<TextFormA> {
               child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: appWidth * 0.0242,
+                    height: 2.42.w,
                   ),
                   InputSubway(
                       onSelected: widget.onSelected
                   ),
                   SizedBox(
-                    height: appWidth * 0.0362,
+                    height: 3.62.w,
                   ),
                   InputName(
                     onSubmitted: widget.onSubmitted,
                   ),
                   SizedBox(
-                    height: appWidth * 0.0362,
+                    height: 3.62.w,
                   ),
                   DialogDesignBoxA(),
                   SizedBox(
-                    height: appWidth * 0.0362,
+                    height: 3.62.w,
                   ),
                 ],
               ),

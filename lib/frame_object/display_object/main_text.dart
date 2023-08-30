@@ -19,7 +19,7 @@ class MainText extends ConsumerWidget {
     final secondTime = ref.watch(secondtimeProvider);
 
     return Container(
-      height: Device.aspectRatio >= 0.5 ? 49.3.h : 43.5.h,
+      height: Device.aspectRatio >= 0.5 ? 50.3.h : 44.5.h,
       child: RotatedBox(
         quarterTurns: 3,
       child: Column(
@@ -45,10 +45,15 @@ class MainText extends ConsumerWidget {
                         : name.length == 3 ? mainBoxHeight / 8/// 80
                         : name.length == 4 ? mainBoxHeight / 8/// 80
                         : name.length == 5 ? mainBoxHeight / 8/// 60
-                        : name.length == 6 ? mainBoxHeight / 8/// 60
+                        : name.length == 6 ? mainBoxHeight / 9/// 60
                         : name.length == 7 ? mainBoxHeight / 10/// 45
-                        : name.length == 8 ? mainBoxHeight / 10/// 45
-                        : mainBoxHeight / 13,
+                        : name.length == 8 ? mainBoxHeight / 11/// 45
+                        : name.length == 9 ? mainBoxHeight / 11/// 45
+                        : name.length == 10 ? mainBoxHeight / 11/// 45
+                        : name.length == 11 ? mainBoxHeight / 13/// 45
+                        : name.length == 12 ? mainBoxHeight / 13/// 45
+                        : name.length == 13 ? mainBoxHeight / 15/// 45
+                        : mainBoxHeight / 18,
                     overflow: TextOverflow.ellipsis,
                   )
               ),
@@ -58,8 +63,7 @@ class MainText extends ConsumerWidget {
               engName == 'SEOUL' ? ' SEOUL' : ' ${engName}',
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: engName.length < 35 ?
-                  mainBoxHeight / 35 : mainBoxHeight / 40,
+                  fontSize: engName.length < 35 ? mainBoxHeight / 35 : mainBoxHeight / 45,
                   fontWeight: FontWeight.bold,overflow: TextOverflow.ellipsis),
             ),
         ],
