@@ -86,7 +86,7 @@ class InputSubway extends StatelessWidget {
                       child: Material(
                         child: SizedBox(
                           width: 28.h,
-                          height: 3.h,
+                          height: 25.h,
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.white12,
@@ -117,11 +117,7 @@ class InputSubway extends StatelessWidget {
                 ),
               );
             },
-
           );
         });
-
-
-
   }
 }
