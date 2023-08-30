@@ -1,6 +1,6 @@
 import 'package:subway_project_230704/setting/export.dart';
-
-import '../data_provider/filted_provider/filter_provider.dart';
+import 'package:subway_project_230704/setting/export+.dart';
+import 'package:subway_project_230704/setting/geolocator.dart';
 
 List<Color> kDefaultRainbowColors2 = [
   Colors.grey.shade600,
@@ -8,7 +8,7 @@ List<Color> kDefaultRainbowColors2 = [
   Colors.grey.shade600,
 ];
 
-final latlonglineProvier = StateProvider<String>((ref) => ref.watch(lineProvier));
+final latlonglineProvier = StateProvider<String>((ref) => ref.watch(lineProvider));
 
 class SwitchDialogB extends ConsumerWidget {
 
@@ -18,19 +18,15 @@ class SwitchDialogB extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double appHeight = MediaQuery.of(context).size.height;
     double appWidth = MediaQuery.of(context).size.width;
-    double appRatio = MediaQuery.of(context).size.aspectRatio;
     final initialdata = ref.watch(dataProviderInside);
-    double mainBoxHeight = appHeight * 0.58;
-    ref.listen(lineProvier, (previous, next) {
+    ref.listen(lineProvider, (previous, next) {
       ref.read(latlonglineProvier.notifier).update((state) =>
       state = ref.watch(dustProvider).elementAtOrNull(0)!.barLevel.toString());
     });
-
     return Container(
       color: Colors.white,
-      height: appRatio >= 0.5 ? appWidth * 0.9662 : appWidth * 1.1,
+      height: Device.aspectRatio >= 0.5 ? appWidth * 0.9662 : appWidth * 1.1,
       child: Column(
         children: [
           Row(
@@ -45,7 +41,7 @@ class SwitchDialogB extends ConsumerWidget {
           ),
           Container(
             color: Colors.grey,
-            height: appRatio >= 0.5 ? appWidth * 0.51 : appWidth * 0.6268,
+            height: Device.aspectRatio >= 0.5 ? appWidth * 0.51 : appWidth * 0.6268,
             child: DialogPage(),
           ),
           Container(
@@ -87,7 +83,8 @@ class SwitchDialogB extends ConsumerWidget {
                         );
                       }).toList(),
                       onChanged: (val){
-                        print(val);
+                        ref.read(latlngProvider);
+                        ref.read(locationProvider);
                         ref.read(latlonglineProvier.notifier).
                         update((state) => state = val);
                       }),
@@ -127,7 +124,11 @@ class SwitchDialogB extends ConsumerWidget {
                                         height: appWidth * 0.9075,
                                         alignment: Alignment.center,
                                         child: TextFrame(comment: 'loading.....')),
-                                    error: (err, stack) => Text(err.toString()),
+                                    error: (err, stack) => Container(
+                                        child: Padding(
+                                      padding: const EdgeInsets.all(25.0),
+                                      child: Text(err.toString()),
+                                    )),
                                     data: (data){
                                       ref.read(infoProvider.notifier).searchSubway(name: row);
                                       ref.read(infoProviderB.notifier).searchSubway(name: row);

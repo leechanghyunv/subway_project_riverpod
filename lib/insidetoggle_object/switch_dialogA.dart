@@ -1,4 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 import '../data_provider/weather_provider.dart';
 
 class SwitchDialogA extends ConsumerStatefulWidget {
@@ -24,15 +25,12 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
 
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;
-    double appWidth = MediaQuery.of(context).size.width;
     final arrivel = ref.watch(arrivalProvider);
     final weather = ref.watch(weatherProvider);
-    final temp = ref.watch(tempProvider);
     final svg = ref.watch(svgProvider);
 
     return Container(
-      height: appWidth * 0.9075,  /// 0.9075
+      height: 90.8.w,
       width: double.maxFinite,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +45,13 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                 width: double.maxFinite,
                 child: arrivel.when(
                   loading: () => TextFrame(comment: 'loading.....'),
-                  error: (err, stack) => TextFrame(comment: '데이터를 불러올 수 없습니다'),
+                  error: (err, stack) => Container(
+                    alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.all(25.0),
+                        child: TextFrame(comment: '데이터를 불러올 수 없습니다'),
+                      )
+                  ),
                   data: (data) {
                     try {
                       var filtedArrival = data
@@ -113,17 +117,17 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                       box.write('destination2', filtedDestination2);
                       /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
                       return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextFrame(
-                            comment: '\n${widget.line} ${widget.name}역 -> ${widget.dest}역\n',
-                          ),
-                          TextFrame(comment: updn1First.toString()),
-                          TextFrame(comment: updn1Last.toString()),
-                          TextFrame(comment: updn2First.toString()),
-                          TextFrame(comment: updn2Last.toString()),
-                        ],
-                      );
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextFrame(
+                                comment: '\n${widget.line} ${widget.name}역 -> ${widget.dest}역\n',
+                              ),
+                              TextFrame(comment: updn1First.toString()),
+                              TextFrame(comment: updn1Last.toString()),
+                              TextFrame(comment: updn2First.toString()),
+                              TextFrame(comment: updn2Last.toString()),
+                            ],
+                          );
                     } catch (e) {
                       return Container(
                           child: Padding(
@@ -156,7 +160,7 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                           color: Colors.white,
                           child: Text(data.first.description,
                             style: TextStyle(
-                              fontSize: appWidth * 0.0362,
+                              fontSize: 3.7.w,
                               fontWeight: FontWeight.bold,
                             ),
                           ));

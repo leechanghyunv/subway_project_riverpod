@@ -1,4 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 
 class BottomDesign extends StatelessWidget {
 
@@ -8,38 +9,32 @@ class BottomDesign extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    double appHeight = MediaQuery.of(context).size.height;  ///  896.0 IPHONE11
-    double appWidth = appHeight * 0.462;
-
     return Container(
-      height: appHeight * 0.125,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
-            width: appWidth * 0.15,
-            height: appHeight * 0.12,
+            width: 15.w,
+            height: 12.h,
             color: Colors.transparent,
           ),
           GestureDetector(
-              onTap: (){
-                tableguide();
-              },
+            onTap: (){
+            },
             child: Container(
-              alignment: Alignment.center,
-              width: appWidth * 0.55,
-              height: appHeight * 0.125,
-              child: BarcodeWidget(
-                data: '------LAFAYETTE.co-------',
-                style: TextStyle(
+                alignment: Alignment.center,
+                width: 55.w,
+                height: 12.h,
+                child: BarcodeWidget(
+                  data: '------LAFAYETTE.co-------',
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                  fontSize: appHeight * 0.016,
-                ),
-                color: Colors.black,
-                barcode: Barcode.code128(),
-              )),
+                    fontSize: Device.aspectRatio >= 0.5 ? 2.h : 1.8.h,
+                  ),
+                  color: Colors.black,
+                  barcode: Barcode.code128(),
+                )),
           ),
           AnimatedContainer(
             duration: Duration(seconds: 3),
@@ -48,8 +43,8 @@ class BottomDesign extends StatelessWidget {
               child: InkWell(
                 onTap: onTap,
                 child: Container(
-                  width: appWidth * 0.15,
-                  height: appHeight * 0.12,
+                  width: 15.w,
+                  height: 12.h,
                   color: Colors.transparent,
                 ),
               ),

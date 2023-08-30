@@ -1,5 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
-import 'dart:async';
+import 'package:subway_project_230704/setting/export+.dart';
 
 class MapSample extends ConsumerWidget {
 
@@ -15,13 +15,13 @@ class MapSample extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     return Scaffold(
-      body:  NaverMap(
+      body: NaverMap(
         options: NaverMapViewOptions(
           mapType: NMapType.basic,
           activeLayerGroups: [NLayerGroup.transit,NLayerGroup.building],
           initialCameraPosition: NCameraPosition(
             target: NLatLng(maplat, maplng),
-            zoom: 16,
+            zoom: 15,
           ),
           scrollGesturesEnable: true,
           locationButtonEnable: true,
@@ -30,7 +30,6 @@ class MapSample extends ConsumerWidget {
           logoClickEnable: false,
           indoorEnable: true,
           logoAlign: NLogoAlign.leftTop,
-
         ),
         onMapReady: (controller) async {
           _mapController = controller;

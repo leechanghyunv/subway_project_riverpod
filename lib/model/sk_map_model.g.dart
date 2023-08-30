@@ -143,7 +143,7 @@ Map<String, dynamic> _$$_PassStopListToJson(_$_PassStopList instance) =>
 
 _$_StationList _$$_StationListFromJson(Map<String, dynamic> json) =>
     _$_StationList(
-      index: json['index'] as int,
+      index: json['index'] as int? ?? 000000,
       stationName: json['stationName'] as String? ?? "정보없음",
       stationId: json['stationID'] as String? ?? "정보없음",
     );

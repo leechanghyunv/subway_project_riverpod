@@ -98,7 +98,7 @@ class PassStopList with _$PassStopList {
 @freezed
 class StationList with _$StationList {
   factory StationList({
-    required int index,
+    @Default(000000) int? index,
     @Default("정보없음") String? stationName,
     @Default("정보없음") @JsonKey(name: 'stationID') String? stationId,
   }) = _StationList;

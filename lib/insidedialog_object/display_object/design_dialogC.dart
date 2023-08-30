@@ -11,14 +11,11 @@ class DialogDesignBoxC extends StatelessWidget {
   Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;
     double appWidth = MediaQuery.of(context).size.width;
-    double appRatio = MediaQuery.of(context).size.aspectRatio;
 
     double sizeWidth = appWidth * 0.0242;
     double sizeWidth2 = appWidth * 0.018;
     double textSize = appWidth * 0.0362;
-
     double contHeight = appWidth * 0.1686;
-    double contWidth = appWidth * 0.0242;
 
     return Container(
       height: appWidth * 0.1449,  /// 60

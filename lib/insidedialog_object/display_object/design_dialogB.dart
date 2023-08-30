@@ -1,5 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
-import 'package:intl/intl.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 
 class DialogDesignBoxB extends StatelessWidget {
 
@@ -8,14 +8,12 @@ class DialogDesignBoxB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;
     double appWidth = MediaQuery.of(context).size.width;
 
     double sizeWidth = appWidth * 0.0242;
     double textSize = appWidth * 0.0362;
 
     double contHeight = appWidth * 0.1686;
-    double contWidth = appWidth * 0.0242;
 
     return Container(
       height: appWidth * 0.1449,

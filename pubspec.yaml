@@ -35,11 +35,13 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   flutter_local_notifications: ^14.0.0
+  tutorial_coach_mark: ^1.2.9
   freezed_annotation: ^2.2.0
   flutter_naver_map: ^1.0.2
   loading_indicator: ^3.1.0
   flutter_riverpod: ^2.3.6
   flutter_slidable: ^3.0.0
+  responsive_sizer: ^3.2.0
   cupertino_icons: ^1.0.2
   json_annotation: ^4.8.1
   cloud_firestore: ^4.8.4
@@ -64,6 +66,7 @@ dependencies:
   timezone: ^0.9.1
   gsheets: ^0.4.2
   chopper: ^6.1.4
+  sizer: ^2.0.15
   intl: ^0.18.0
   get: ^4.6.5
 
@@ -110,6 +113,7 @@ flutter:
      - assets/test.json
      - appIcon/appstore.png
      - svg/
+     - images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,5 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
-import '../data_provider/filted_provider/filter_provider.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 import '../data_provider/weather_provider.dart';
 
 class SwitchDialogC extends ConsumerStatefulWidget {
@@ -19,18 +19,15 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
 
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;
     double appWidth = MediaQuery.of(context).size.width;
-    double appRatio = MediaQuery.of(context).size.aspectRatio;
     final weather = ref.watch(weatherProvider);
     final subdata = ref.watch(infoProvider);
     final arrivel = ref.watch(arrivalProvider);
-    final temp = ref.watch(tempProvider);
     final svg = ref.watch(svgProvider);
 
     double textSize = appWidth * 0.0362;
     return Container(
-      height: appRatio >= 0.5 ? appWidth * 0.8 : appWidth * 0.9075,
+      height: Device.aspectRatio >= 0.5 ? appWidth * 0.8 : appWidth * 0.9075,
       /// appRatio >= 0.5 ? appWidth * 0.87 : appWidth * 0.9075,
       width: double.maxFinite,
       child: Column(
@@ -44,7 +41,11 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
             width: double.maxFinite,
             child: arrivel.when(
               loading: () => TextFrame(comment: 'loading.....'),
-              error: (err, stack) => TextFrame(comment: '데이터를 불러올 수 없습니다'),
+              error: (err, stack) => Container(
+                  child: Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: TextFrame(comment: '데이터를 불러올 수 없습니다'),
+              )),
               data: (data) {
                 try {
                   var filtedArrival = data
@@ -66,23 +67,25 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
                       .where(
                           (element) => updnLine2.contains(element.updnLine))
                       .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFrame(
-                        comment: '\n${subdata.first.line} ${subdata.first.subname}역\n',
-                      ),
-                      TextFrame(comment: updn1First.toString()),
-                      TextFrame(comment: updn1Last.toString()),
-                      TextFrame(comment: updn2First.toString()),
-                      TextFrame(comment: updn2Last.toString()),
-                    ],
-                  );
+                  return
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextFrame(
+                            comment: '\n${subdata.first.line} ${subdata.first.subname}역\n',
+                          ),
+                          TextFrame(comment: updn1First.toString()),
+                          TextFrame(comment: updn1Last.toString()),
+                          TextFrame(comment: updn2First.toString()),
+                          TextFrame(comment: updn2Last.toString()),
+                        ],
+                      );
                 } catch (e) {
                   return Container(
                       child: Padding(
                         padding: const EdgeInsets.all(25.0),
-                        child: TextFrame(comment: '${subdata.first.subname}역 실시간 데이터를 가져올 수 없습니다.'),
+                        child: TextFrame(
+                            comment: '${subdata.first.subname}역 실시간 데이터를 가져올 수 없습니다.'),
                       ));
                 }
               },

@@ -1,12 +1,14 @@
 import 'package:subway_project_230704/setting/export.dart';
-import 'package:intl/intl.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 
 class TextContainerB extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double appHeight = MediaQuery.of(context).size.height;
-    double appWidth = MediaQuery.of(context).size.width;
-    double mainBoxHeight = appHeight * 0.58;
+    final common = TextStyle(
+      fontSize: Device.aspectRatio >= 0.5 ? 19.sp : 18.sp,
+      fontWeight: FontWeight.bold,
+      color: Colors.black,
+    );
 
     final userName = ref.watch(userNameProvier);
     return RotatedBox(
@@ -25,30 +27,24 @@ class TextContainerB extends ConsumerWidget {
                       message: DateFormat('EEEE\naa hh:mm').format(DateTime.now()),
                       child: Text(
                         'DATE',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: mainBoxHeight / 25),
+                        style: common,
                       ),
                     ),
                     SizedBox(
-                      height: mainBoxHeight / 60,
+                      height: 2.w,
                     ),
                     ToopTipWidget(
                           message: DateFormat('EEEE\naa hh:mm').format(DateTime.now()),
                           child: Text(
                             DateFormat('MM/dd ').format(DateTime.now()),
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: mainBoxHeight / 25),
+                            style: common,
                           ),
                         ),
                   ],
                 ),
                 /// DATE
                 SizedBox(
-                  width: mainBoxHeight / 27.5,
+                  width: 4.5.w,
                 ),
                 Consumer(
                   builder: (context,ref,child){
@@ -60,24 +56,18 @@ class TextContainerB extends ConsumerWidget {
                         message: '출발지점의 역사코드\n열차번호: ${code}',
                         child: Text(
                           'CODE',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: mainBoxHeight / 25),
+                          style: common,
                         ),
                       ),
                       SizedBox(
-                        height: mainBoxHeight / 60,
+                        height: 2.w,
                       ),
                       ToopTipWidget(
                               message: '출발지점 역사코드\n열차번호: ${code}',
                               child: Text(code.isNotEmpty
                                   ? '${code}'
                                   : '0000',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: mainBoxHeight / 25),
+                                style: common,
                               ),
                             ),
                     ],
@@ -86,23 +76,20 @@ class TextContainerB extends ConsumerWidget {
                 ),
                 /// SEAT
                 SizedBox(
-                  width: mainBoxHeight / 27.5,
+                  width: 4.w,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ToopTipWidget(
-                      message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : TIX(T)',
+                      message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : ITX(T)',
                       child: Text(
                         'CLASS',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: mainBoxHeight / 25),
+                        style: common,
                       ),
                     ),
                     SizedBox(
-                      height: mainBoxHeight / 60,
+                      height: 2.w,
                     ),
 
                     Consumer(builder: (context, ref, widget){
@@ -110,33 +97,24 @@ class TextContainerB extends ConsumerWidget {
                       /// btrainSttus
                       if(upDown == 1){
                         return ToopTipWidget(
-                          message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : TIX(T)',
+                          message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : ITX(T)',
                           child: Text( '${sttuus(box.read('state1') ?? 'NOR(S)')}',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: mainBoxHeight / 25),
+                            style: common,
                           ),
                         );
                       }else if(upDown == -1){
 
                         return ToopTipWidget(
-                          message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : TIX(T)',
+                          message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : ITX(T)',
                           child: Text( '${sttuus(box.read('state2') ?? 'NOR(S)')}',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: mainBoxHeight / 25),
+                            style: common,
                           ),
                         );
                       }
                       return ToopTipWidget(
                         message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : TIX(T)',
                         child: Text( 'NOR(S)',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: mainBoxHeight / 25),
+                          style: common,
                         ),
                       );
                     }),
@@ -146,27 +124,24 @@ class TextContainerB extends ConsumerWidget {
               ],
             ),
             SizedBox(
-              height: mainBoxHeight / 10,
+              height: 12.w,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'PASSENGER :',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: mainBoxHeight / 25),
+                  style: common,
                 ),
                 SizedBox(
-                  height: mainBoxHeight / 40,
+                  height: 1.4.h,
                 ),
                 Text(
                   box.read('name') ?? userName,
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
-                      fontSize: mainBoxHeight / 30),
+                      fontSize: 17.sp),
                 ),
               ],
             ),
@@ -183,7 +158,7 @@ class TextContainerB extends ConsumerWidget {
     }else if(state == '급행'){
       return 'EXP(S)';
     }
-    return 'TIX(T)';
+    return 'ITX(T)';
   }
 
 }

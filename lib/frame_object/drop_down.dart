@@ -1,4 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 import 'display_object/main_text.dart';
 
 const Color DropDown_color = Colors.black;
@@ -22,18 +23,14 @@ class DropdownCustom<T> extends StatefulWidget {
 class _DropdownCustomState extends State<DropdownCustom> {
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;///  896.0 IPHONE11
-    double appWidth = appHeight * 0.462;
-    double mainBoxHeight = appHeight * 0.58;/// 520   ~ 519.68
-
     return Column(
       children: [
         SizedBox(
-          height: mainBoxHeight / 25,
+          height: 5.w,
         ),
         Container(
-          height: appWidth * 0.13,
-          width: mainBoxHeight / 5.5,
+          height: 12.5.w,
+          width: 22.w,
           color: DropDown_color,
           alignment: Alignment.center,
           child: DropdownButton<dynamic>(
@@ -56,7 +53,7 @@ class _DropdownCustomState extends State<DropdownCustom> {
                   child: Text(
                     value,
                     style: TextStyle(
-                        fontSize: mainBoxHeight / 25,
+                        fontSize: 18.5.sp,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
@@ -64,7 +61,7 @@ class _DropdownCustomState extends State<DropdownCustom> {
               }).toList()),
         ),
         SizedBox(
-          height: mainBoxHeight / 25,
+          height: 3.h,
         ),
         MainText(),
       ],

@@ -1,5 +1,6 @@
 import '../data_provider/weather_provider.dart';
 import '../setting/export.dart';
+import '../setting/export+.dart';
 
 
 class LayoutTable extends ConsumerWidget {
@@ -15,7 +16,6 @@ class LayoutTable extends ConsumerWidget {
   Widget build(BuildContext context,WidgetRef ref) {
     double appHeight = MediaQuery.of(context).size.height;  ///  896.0 IPHONE11
     double appWidth = MediaQuery.of(context).size.width;  /// 414.0 IPHONE11
-    double appRatio = MediaQuery.of(context).size.aspectRatio;
 
     return SafeArea(
         child: Scaffold(
@@ -26,8 +26,8 @@ class LayoutTable extends ConsumerWidget {
               child: Container(
                 alignment: Alignment.center,
                 color: Colors.white,
-                height: appHeight,
-                width: appRatio >= 0.5 ? appHeight * 0.49 :  double.maxFinite,
+                height: 100.h,
+                width: double.maxFinite,
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,9 +38,9 @@ class LayoutTable extends ConsumerWidget {
                         final svg = ref.watch(svgProvider);
                         return Container(
                           color: Colors.grey[300],
-                          width: appRatio >= 0.5 ? appHeight * 0.49 :  double.maxFinite,
+                          width:  double.maxFinite,
                           alignment: Alignment.centerLeft,
-                          height: appWidth * 0.1449,
+                          height: 14.4.w, /// appWidth * 0.1449,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,

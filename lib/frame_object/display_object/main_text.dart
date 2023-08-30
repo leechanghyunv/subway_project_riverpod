@@ -1,4 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 
 class MainText extends ConsumerWidget {
   const MainText({super.key});
@@ -6,12 +7,11 @@ class MainText extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     double appHeight = MediaQuery.of(context).size.height;
-    double appRatio = MediaQuery.of(context).size.aspectRatio;
     double mainBoxHeight = appHeight * 0.58;
-    final name = ref.watch(nameProvier);
+    final name = ref.watch(nameProvider);
     final time = ref.watch(timeProvider);
     final fare = ref.watch(costProvider);
-    final engName = ref.watch(engNameProvier);
+    final engName = ref.watch(engNameProvider);
     final firstRoute = ref.watch(routeProvider);
     final secondRoute = ref.watch(secondRouteProvider);
     final secondRoad = ref.watch(secondRoadProvider);
@@ -19,14 +19,16 @@ class MainText extends ConsumerWidget {
     final secondTime = ref.watch(secondtimeProvider);
 
     return Container(
-      height: appRatio >= 0.5 ? appHeight * 0.58 * 0.85 : appHeight * 0.58 * 0.75,
+      height: Device.aspectRatio >= 0.5 ? 49.3.h : 43.5.h,
       child: RotatedBox(
         quarterTurns: 3,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Tooltip(
-            message: firstRoute == '' ? '${secondRoute}\n${secondRoad}\n운행요금: ${secondfare}원\n소요시간: ${(secondTime/60).toStringAsFixed(0)}분' : '${firstRoute}\n운행요금: ${fare}원\n소요시간: ${(time/60).toStringAsFixed(0)}분',
+            message: firstRoute == ''
+                ? '${secondRoute}\n${secondRoad}\n운행요금: ${secondfare}원\n소요시간: ${(secondTime/60).toStringAsFixed(0)}분'
+                : '${firstRoute}\n운행요금: ${fare}원\n소요시간: ${(time/60).toStringAsFixed(0)}분',
             textStyle: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white),
@@ -39,14 +41,14 @@ class MainText extends ConsumerWidget {
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
-                    fontSize: name.length == 2 ? mainBoxHeight / 8/// 80
-                        : name.length == 3 ? mainBoxHeight / 8.5/// 80
-                        : name.length == 4 ? mainBoxHeight / 8.5/// 80
-                        : name.length == 5 ? mainBoxHeight / 8.6/// 60
-                        : name.length == 6 ? mainBoxHeight / 8.6/// 60
-                        : name.length == 7 ? mainBoxHeight / 11.4/// 45
-                        : name.length == 8 ? mainBoxHeight / 11.4/// 45
-                        : mainBoxHeight / 14.4,
+                    fontSize: name.length == 2 ? mainBoxHeight / 7.5/// 80
+                        : name.length == 3 ? mainBoxHeight / 8/// 80
+                        : name.length == 4 ? mainBoxHeight / 8/// 80
+                        : name.length == 5 ? mainBoxHeight / 8/// 60
+                        : name.length == 6 ? mainBoxHeight / 8/// 60
+                        : name.length == 7 ? mainBoxHeight / 10/// 45
+                        : name.length == 8 ? mainBoxHeight / 10/// 45
+                        : mainBoxHeight / 13,
                     overflow: TextOverflow.ellipsis,
                   )
               ),

@@ -1,5 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
-import 'package:intl/intl.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 
 class TopDesign extends StatelessWidget {
 
@@ -8,83 +8,108 @@ class TopDesign extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;
-    double appWidth = MediaQuery.of(context).size.width;
-    double appRatio = MediaQuery.of(context).size.aspectRatio;
-    double mainBoxHeight = appHeight * 0.58;
-    double mainBoxWidth = appHeight * 0.462 * 0.915;
+    if(Device.aspectRatio >= 0.5){
+      return Container_Se();
+    }
+    return Container_nomal();
+  }
+}
 
-    return Container(
-      color: Colors.transparent,
-      height: appHeight * 0.17,
+Widget Container_Se() =>
+    Container(
+      color: Colors.white,
+      height:  20.h,
       child: Row(
         children: <Widget>[
-          SizedBox(
-            width: mainBoxWidth / 40,
-          ),
+          SizedBox(width: 1.5.h),
           Padding(
             padding: const EdgeInsets.all(6.0),
-            child: GestureDetector(
-                onTap: () {
-                  box.remove('maintextguide');
-                  box.remove('iconbuttonguide');
-                  box.remove('iconbuttonguide2');
-                  box.remove('toggleguide');
-                  box.remove('toggleguide2');
-                  box.remove('tableguide');
-                  box.remove('smsguide');
-                  box.remove('barguide');
-                  print('QRCODE');
-                },
-                child: QrImageView(data: qrdata)),
+                child: QrImageView(data: '1234ffov3pp5oq23lk')
           ),
           SizedBox(
-            width: mainBoxHeight / 15,
+            width: 3.h, /// 520
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: mainBoxHeight / 25,
+                height: 3.h,
               ),
-              Row(
-                children: [
-                  Text(
-                    DateFormat('y-MM-dd EEE').format(DateTime.now()),
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize:  mainBoxHeight / 25,
-                        color: text_color),
-                  ),
-                  SizedBox(
-                    width: mainBoxHeight / 50,
-                  ),
-                ],
+              Text(
+                DateFormat('y-MM-dd EEE').format(DateTime.now()),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize:  19.9.sp, /// 520
+                    color: Colors.black),
               ),
               SizedBox(
-                height: mainBoxHeight / 50,
+                height: 1.h,  /// 520
               ),
               Container(
-                height: mainBoxHeight / 7,
-                width: mainBoxWidth / 2.2,
+                height: 11.2.h, /// 520
+                width: 26.h, /// 378.8
                 child: GestureDetector(
                   child: BarcodeWidget(
-                    color: text_color,
+                    color: Colors.black,
                     data: 'FR9XZ227A93V6',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: mainBoxHeight / 35),
+                        fontSize: 17.sp), /// 520
                     barcode: Barcode.code93(),
                   ),
                 ),
               ),
+
+            ],
+          ),
+        ],
+      ),
+    );
+
+Widget Container_nomal() =>
+    Container(
+      color: Colors.white,
+      height:  17.h,
+      child: Row(
+        children: <Widget>[
+          SizedBox(width: 1.5.h),
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: QrImageView(data: '1234ffov3pp5oq23lk'),
+          ),
+          SizedBox(width: 3.h,),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               SizedBox(
-                height: 3,
+                height: 2.h,
+              ),
+              Text(
+                DateFormat('y-MM-dd EEE').format(DateTime.now()),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize:  18.5.sp, /// 520
+                    color: Colors.black),
+              ),
+              SizedBox(
+                height: 1.h,  /// 520
+              ),
+              Container(
+                height: 10.h, /// 520
+                width: 20.h, /// 378.8
+                child: GestureDetector(
+                  child: BarcodeWidget(
+                    color: Colors.black,
+                    data: 'FR9XZ227A93V6',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17.sp), /// 520
+                    barcode: Barcode.code93(),
+                  ),
+                ),
               ),
             ],
           ),
         ],
       ),
     );
-  }
-}

@@ -22,6 +22,8 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
     double appHeight = MediaQuery.of(context).size.height;
+    double appWidth = MediaQuery.of(context).size.width;
+
     bool isFirstBuild = box.read('isFirstBuild') ?? true;
     if (isFirstBuild) {
       return Scaffold(
@@ -41,6 +43,9 @@ class _LoadingPageState extends State<LoadingPage> {
                     }
                     if (snapshot.connectionState == ConnectionState.done) {
                       return Container(
+                        alignment: Alignment.center,
+                        height: appHeight * 0.15,
+                        width: appWidth * 0.7,
                         child: BlinkText(
                           snapshot.data['comment'],
                           style: TextStyle(

@@ -1,3 +1,4 @@
+import 'package:subway_project_230704/setting/export+.dart';
 import 'package:subway_project_230704/setting/export.dart';
 
 
@@ -6,14 +7,13 @@ class SmsContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double appHeight = MediaQuery.of(context).size.height;///  896.0 IPHONE11
     double appWidth = MediaQuery.of(context).size.width;/// 414.0 IPHONE11
     double textSize = appWidth * 0.0362;
     double textSize2 = appWidth * 0.0335;
 
     return Container(
-      height: appWidth * 0.46,/// 150
-      width: appWidth * 0.6268,/// 260
+      height: 46.w,/// 150
+      width: 62.6.w,/// 260
       // color: b1,
       alignment: Alignment.center,
       child: Column(

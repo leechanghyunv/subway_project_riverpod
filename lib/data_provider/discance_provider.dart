@@ -1,7 +1,6 @@
 import 'package:http/http.dart' as http;
-import '../../model/sk_map_model.dart';
 import '../../setting/export.dart';
-import '../../setting/notification.dart';
+import '../../setting/export+.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 FlutterLocalNotificationsPlugin();
@@ -48,11 +47,13 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
         var time = utfIntoList.where((element) => element.pathType == 1).first.totalTime; /// 지하철기준 시간순
         ref.read(timeProvider.notifier).state = time;
         noticeTime(dist.nameA,dist.nameB,formattedRoute,time);
-
         /// 상행선일까 하행선일까 상행선일까 하행선일까 구분/// /// /// /// /// /// /// /// /// /// ///
         var subId = utfIntoList.where((element) => element.pathType == 1).first.legs.where((e) => e.route != null).map((e) => e.passStopList?.stationList.map((e) => e.stationId));
+        
         var subName = utfIntoList.where((element) => element.pathType == 1).first.legs.
-        where((e) => e.route != null).map((e) => e.passStopList?.stationList.map((e) => e.stationName));
+        where((e) => e.route != null).map((e) => e.passStopList?.stationList.map((e) => e.stationName)).toList();
+        var subIndex = utfIntoList.where((element) => element.pathType == 1).first.legs.
+        where((e) => e.route != null).map((e) => e.passStopList?.stationList.map((e) => e.index)).toList();
 
         var firstElement = subId.elementAt(0);
         var value1 = firstElement?.elementAt(0);
@@ -63,7 +64,10 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
         if(intValue1 != null && intValue2 != null){
           print('${intValue1-intValue2}'); // 1이면 상행 -1이면 하행
           ref.read(upDownProvider.notifier).state = (intValue1-intValue2);
-          print('updown: ${subName}');
+
+
+          print('route: ${subName}');
+
         }
         /// 요금정보 /// /// /// //// /// /// /// //// /// /// /// //// /// /// /// //// /// /// /// /
         var fare = utfIntoList.where((element) => element.pathType == 1).first.fare.regular.totalFare;
@@ -83,7 +87,7 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
       var time = utfIntoList.first.totalTime; ///  시간순
       ref.read(secondtimeProvider.notifier).state = time;
       ref.read(secondCostProvider.notifier).state = fare.toString();
-
+      noticeTime(dist.nameA,dist.nameB,formattedRoute,time);
       Get.snackbar(
         '지하철기준 빠른 경로가 없습니다.',
         '빠른경로 ${pathtype == '2' ? '(버스)' : pathtype == '3' ? '(버스-지하철)' : '---'} : ${formattedpathtype}\n${formattedRoute}\n${(time/60).toStringAsFixed(0)}분 소요',
@@ -100,9 +104,10 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
 });
 
 void noticeTime(String nameA, nameB,route, int time){
+  print('start scheduleNotification');
   Get.snackbar(
     '$nameB -> $nameA (${(time/60).toStringAsFixed(0)}분 소요)',
-    '도착 시간 2분전에 알람 울릴께요.\n\n이동경로 : ${route}',
+    '도착 시간 2분전에 알람을 울립니다.\n\n이동경로 : ${route}',
     backgroundColor: Colors.grey[100],
     icon: Icon(Icons.subway),
     shouldIconPulse: true,
@@ -112,14 +117,16 @@ void noticeTime(String nameA, nameB,route, int time){
       title: "목적지에 곧 도착합니다.",
       body: "목적지인 ${nameA}(으)로 이동합니다. 내리실때 안전에 유의해 주시기 바랍니다.",
       scheduledNotificationDateTime: DateTime.now().
-      add(Duration(minutes: time-120)));
-  noticeAgain(nameA,time);
-}
-
-void noticeAgain(String name, int time){
+      add(Duration(minutes: time-120))).then((value) =>
+      Noti.scheduleNotification(
+          title: "목적지에 곧 도착합니다.",
+          body: "목적지인 ${nameA}(으)로 이동합니다. 내리실때 안전에 유의해 주시기 바랍니다.",
+          scheduledNotificationDateTime: DateTime.now().
+          add(Duration(seconds: time-120))));
   Noti.scheduleNotification(
       title: "목적지에 곧 도착합니다.",
-      body: "목적지인 ${name}(으)로 이동합니다. 내리실때 안전에 유의해 주시기 바랍니다.",
+      body: "목적지인 ${nameA}(으)로 이동합니다. 내리실때 안전에 유의해 주시기 바랍니다.",
       scheduledNotificationDateTime: DateTime.now().
-      add(Duration(minutes: time-120)));
+      add(Duration(seconds: time-120)));
 }
+

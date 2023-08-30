@@ -1,8 +1,8 @@
 import 'package:subway_project_230704/setting/export.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
 import 'package:timezone/data/latest.dart' as tz;
 import 'firebase_options.dart';
-import 'dart:developer';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,9 +49,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType){
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: HomePage(),
+        );
+      }
     );
   }
 }

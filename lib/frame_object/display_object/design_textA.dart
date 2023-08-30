@@ -1,4 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 
 class TextContainerA extends ConsumerWidget {
 
@@ -7,15 +8,17 @@ class TextContainerA extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double appHeight = MediaQuery.of(context).size.height;
-    double appWidth = MediaQuery.of(context).size.width;
-    double mainBoxHeight = appHeight * 0.58;
+    final common = TextStyle(
+      fontSize: Device.aspectRatio >= 0.5 ? 19.sp : 18.sp,
+      fontWeight: FontWeight.bold,
+      color: Colors.black,
+    );
 
-    final state = ref.watch(lineProvier);
+    final state = ref.watch(lineProvider);
     return Container(
       color: Colors.transparent,
-      width: appHeight * 0.224,
-      height: appHeight * 0.067,
+      width:  48.w,
+      height: Device.aspectRatio >= 0.5 ? 7.8.h : 6.85.h,
       child: Center(
         child: Row(
             children: [
@@ -25,14 +28,10 @@ class TextContainerA extends ConsumerWidget {
               ToopTipWidget(
                 message: '(열차번호)C0:진입\n(열차번호)C1:도착\n(열차번호)C2:출발\n(열차번호)C3:전역출발\n(열차번호)C4:전역진입\n(열차번호)C5:전역도착\n(열차번호)C99:운행중',
                 child: Text('NUMBER',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: mainBoxHeight / 25,
-                    fontWeight: FontWeight.bold
-                ),
+                  style: common,
                 ),
               ),
-              SizedBox(height: mainBoxHeight / 60,
+              SizedBox(height: 2.w,
               ),
               Consumer(builder: (context, ref, widget){
                 final upDown = ref.watch(upDownProvider);
@@ -40,39 +39,28 @@ class TextContainerA extends ConsumerWidget {
                   return ToopTipWidget(
                     message: '(열차번호)C0:진입\n(열차번호)C1:도착\n(열차번호)C2:출발\n(열차번호)C3:전역출발\n(열차번호)C4:전역진입\n(열차번호)C5:전역도착\n(열차번호)C99:운행중',
                     child: Text('${box.read('subNumber1')}C${box.read('subState1')}',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: mainBoxHeight / 25,
-                          fontWeight: FontWeight.bold
-                      ),
+                      style: common,
                     ),
                   );
                 }else if(upDown == -1){
                   return ToopTipWidget(
                     message: '(열차번호)C0:진입\n(열차번호)C1:도착\n(열차번호)C2:출발\n(열차번호)C3:전역출발\n(열차번호)C4:전역진입\n(열차번호)C5:전역도착\n(열차번호)C99:운행중',
                     child: Text('${box.read('subNumber2')}C${box.read('subState2')}',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: mainBoxHeight / 25,
-                          fontWeight: FontWeight.bold
-                      ),
+                      style: common,
                     ),
                   );
                 }
                 return ToopTipWidget(
                   message: '(열차번호)C0:진입\n(열차번호)C1:도착\n(열차번호)C2:출발\n(열차번호)C3:전역출발\n(열차번호)C4:전역진입\n(열차번호)C5:전역도착\n(열차번호)C99:운행중',
                   child: Text('3728C99',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: mainBoxHeight / 25,
-                      fontWeight: FontWeight.bold
-                  ),
+                    style: common,
                   ),
                 );
               }),
             ],
           ),
-          SizedBox(width: mainBoxHeight / 20,
+          SizedBox(
+            width: 6.w,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,15 +69,13 @@ class TextContainerA extends ConsumerWidget {
                 message: '열차에서 내리는 방향\n급행열차(반대방향)',
                 child: Text(
                   'GATE',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: mainBoxHeight / 25,
-                      fontWeight: FontWeight.bold),
+                  style: common,
                 ),
               ),
 
               SizedBox(
-                height: mainBoxHeight / 60,),
+                height: 2.w,
+              ),
 
               ToopTipWidget(
                 message: '열차에서 내리는 방향\n급행열차(반대방향)',
@@ -103,12 +89,13 @@ class TextContainerA extends ConsumerWidget {
                               text:
                               gateText == 'RIGHT' ? 'RIGH'
                                   : gateText == 'LEFT' ? 'L'
+                                  : gateText == null ? '01'
                                   : '01',
                               style: TextStyle(
                                   color: gateText == 'LEFT'
                                       ? headingColor(state)
                                       : Colors.black,
-                                  fontSize: mainBoxHeight / 25,
+                                  fontSize: Device.aspectRatio >= 0.5 ? 19.sp : 18.sp,
                                   fontWeight: FontWeight.bold),
                             ),
 
@@ -116,11 +103,12 @@ class TextContainerA extends ConsumerWidget {
                               text:
                               gateText == 'RIGHT' ? 'T'
                                   : gateText == 'LEFT' ? 'EFT'
+                                  : gateText == null ? '00'
                                   : '00',
                               style: TextStyle(
                                   color: gateText == 'RIGHT' ? headingColor(state)
                                       : Colors.black,
-                                  fontSize: mainBoxHeight / 25,
+                                  fontSize: Device.aspectRatio >= 0.5 ? 19.sp : 18.sp,
                                   fontWeight: FontWeight.bold),
                             ),
                           ],

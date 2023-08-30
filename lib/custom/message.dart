@@ -1,7 +1,7 @@
 import 'package:subway_project_230704/setting/export.dart';
 
 Future<String> fetchData() async {
-  await Future.delayed(Duration(milliseconds: 1950));
+  await Future.delayed(Duration(milliseconds: 2150));
   return "Data loaded successfully";
 }
 
@@ -39,10 +39,20 @@ Future<bool?> showmsg() => Fluttertoast.showToast(
     msg:'목적지를 입력해주세요',
     gravity: ToastGravity.CENTER);
 
-Future<bool?> initialmsg() => Fluttertoast.showToast(
-    msg:'앱 안에있는 모든 글자와 아이콘을 꾸욱 눌러보세요',
-    gravity: ToastGravity.CENTER);
-
+void initialmsg(){
+  if(box.read('initialmsg') ?? true){
+    Fluttertoast.showToast(
+      msg:'앱 안에있는 모든 글자와 아이콘을 눌러보세요',
+      gravity: ToastGravity.CENTER,
+      toastLength: Toast.LENGTH_LONG,
+      timeInSecForIosWeb: 5
+    );
+    box.write('initialmsg', false);
+    print('${box.read('initialmsg') ?? ''}');
+  } else {
+    print('${box.read('initialmsg') ?? ''}');
+  }
+}
 
 /// guide guide guide guide guide guide guide guide guide guide
 
@@ -89,13 +99,12 @@ void toggleguide(){
   } else {
     print('${box.read('toggleguide') ?? ''}');
   }
-
 }
 
 void toggleguide2(){
   if(box.read('toggleguide2') ?? true){
     Fluttertoast.showToast(
-        msg:'지하철역명을 탭하면 실시간 열차 위치 확인 가능합니다.\n지하철역을 좌우 스와이프 해서 더 많은 기능을 이용해보세요 ',
+        msg:'지하철역명 탭으로 열차 위치 확인\n\n왼쪽으로 스와이프하면 지하철민원\n오른쪽으로 스와이프시 네이버지도 ',
         gravity: ToastGravity.CENTER,
         toastLength: Toast.LENGTH_LONG,
         timeInSecForIosWeb: 5,
@@ -153,16 +162,15 @@ void maintextguide(){
 }
 
 void tableguide(){
-  if(box.read('tableguide') ?? true){
-    Fluttertoast.showToast(
-      msg:'LAFAYETTE 로고의 오른쪽을 빈공간을 탭하시면 출발지점의 시간표를 보실 수 있습니다.',
-      gravity: ToastGravity.CENTER,
-      toastLength: Toast.LENGTH_LONG,
-      timeInSecForIosWeb: 5,
-    );
-    box.write('tableguide', false);
-    print('${box.read('tableguide') ?? ''}');
-  }else{
-    print('${box.read('tableguide') ?? ''}');
-  }
+  Fluttertoast.showToast(
+    msg:'LAFAYETTE 로고의 오른쪽을 빈공간을 탭하시면 출발지점의 시간표를 보실 수 있습니다.',
+    gravity: ToastGravity.CENTER,
+    toastLength: Toast.LENGTH_LONG,
+    timeInSecForIosWeb: 5,
+  );
 }
+
+
+
+
+

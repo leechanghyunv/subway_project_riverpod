@@ -1,5 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
-import 'package:intl/intl.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 
 class DialogDesign extends StatelessWidget {
 
@@ -14,21 +14,18 @@ class DialogDesign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    double appHeight = MediaQuery.of(context).size.height; /// 896.0 IPHONE11
-    double appWidth = MediaQuery.of(context).size.width; /// 896.0 IPHONE11
     return Container(
-
       child: Row(
         children: [
           Container(
-            width: appWidth * 0.1932,  /// 80 /// 0.893
-            height: appWidth * 0.1932,
+            width: 19.3.w,
+            height: 19.3.w,
             child: QrImageView(
               data: qrdata,
             ),
           ),
           SizedBox(
-            width: appWidth * 0.0388,
+            width: 3.88.w,
           ),   ///appHeight * 0.0280
 
           Column(

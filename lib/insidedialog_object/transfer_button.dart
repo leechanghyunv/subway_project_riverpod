@@ -1,6 +1,5 @@
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:subway_project_230704/setting/export.dart';
-
-import '../data_provider/filted_provider/filter_provider.dart';
 
 class TransferIcon extends ConsumerStatefulWidget {
   const TransferIcon({super.key});
@@ -12,9 +11,6 @@ class TransferIcon extends ConsumerStatefulWidget {
 class _TransferIconState extends ConsumerState<TransferIcon> {
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height; ///  896.0 IPHONE11
-    double appWidth = MediaQuery.of(context).size.width;
-    double appRatio = MediaQuery.of(context).size.aspectRatio;
     final arrivel = ref.watch(arrivalProviderT);
     return IconButton(
       onPressed: () async {
@@ -22,7 +18,7 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
           Get.dialog(
               AlertDialog(
                 content: Container(
-                  height: appWidth * 0.9,
+                  height: 90.w,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -114,16 +110,14 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
               AlertDialog(
               content: Container(
                 color: Colors.white,
-                height: appWidth * 0.7355,  /// 0.27
-
-
+                height: 73.5.w,  /// 0.27
                 child: Column(
                   children: <Widget>[
                     DialogDesign(
                       designText: 'Transfer Station',
                     ),
                     SizedBox(
-                      height: appHeight * 0.0112,
+                      height: 1.2.h,
                     ),
                     InputSubway(
                       onSelected: (value){
@@ -134,7 +128,7 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
                       },
                     ),
                     SizedBox(
-                      height: appHeight * 0.1068, /// 90정도
+                      height: 10.6.h, /// 90정도
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Container(
@@ -156,7 +150,8 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
                               child: TextFrame(comment: 'Done',color: Colors.black,),
                               style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(Colors.grey[300]),
-                                padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 10)),
+                                padding: MaterialStateProperty.
+                                all(EdgeInsets.symmetric(horizontal: 10)),
                               ),
                             ),
                           ),
@@ -197,9 +192,8 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
             // : box.read('lineT') == '김포골드'? const Color(0xffA17800)
             // : box.read('lineT') == '신림'?   const Color(0xff6789CA)
             : Colors.black,
-        size: appWidth * 0.0604,
+        size: 6.w,
       ),
-
     );
   }
 }

@@ -1542,7 +1542,7 @@ StationList _$StationListFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$StationList {
-  int get index => throw _privateConstructorUsedError;
+  int? get index => throw _privateConstructorUsedError;
   String? get stationName => throw _privateConstructorUsedError;
   @JsonKey(name: 'stationID')
   String? get stationId => throw _privateConstructorUsedError;
@@ -1560,7 +1560,7 @@ abstract class $StationListCopyWith<$Res> {
       _$StationListCopyWithImpl<$Res, StationList>;
   @useResult
   $Res call(
-      {int index,
+      {int? index,
       String? stationName,
       @JsonKey(name: 'stationID') String? stationId});
 }
@@ -1578,15 +1578,15 @@ class _$StationListCopyWithImpl<$Res, $Val extends StationList>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? index = null,
+    Object? index = freezed,
     Object? stationName = freezed,
     Object? stationId = freezed,
   }) {
     return _then(_value.copyWith(
-      index: null == index
+      index: freezed == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       stationName: freezed == stationName
           ? _value.stationName
           : stationName // ignore: cast_nullable_to_non_nullable
@@ -1608,7 +1608,7 @@ abstract class _$$_StationListCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int index,
+      {int? index,
       String? stationName,
       @JsonKey(name: 'stationID') String? stationId});
 }
@@ -1624,15 +1624,15 @@ class __$$_StationListCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? index = null,
+    Object? index = freezed,
     Object? stationName = freezed,
     Object? stationId = freezed,
   }) {
     return _then(_$_StationList(
-      index: null == index
+      index: freezed == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       stationName: freezed == stationName
           ? _value.stationName
           : stationName // ignore: cast_nullable_to_non_nullable
@@ -1649,7 +1649,7 @@ class __$$_StationListCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_StationList implements _StationList {
   _$_StationList(
-      {required this.index,
+      {this.index = 000000,
       this.stationName = "정보없음",
       @JsonKey(name: 'stationID') this.stationId = "정보없음"});
 
@@ -1657,7 +1657,8 @@ class _$_StationList implements _StationList {
       _$$_StationListFromJson(json);
 
   @override
-  final int index;
+  @JsonKey()
+  final int? index;
   @override
   @JsonKey()
   final String? stationName;
@@ -1702,7 +1703,7 @@ class _$_StationList implements _StationList {
 
 abstract class _StationList implements StationList {
   factory _StationList(
-      {required final int index,
+      {final int? index,
       final String? stationName,
       @JsonKey(name: 'stationID') final String? stationId}) = _$_StationList;
 
@@ -1710,7 +1711,7 @@ abstract class _StationList implements StationList {
       _$_StationList.fromJson;
 
   @override
-  int get index;
+  int? get index;
   @override
   String? get stationName;
   @override

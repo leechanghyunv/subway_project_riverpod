@@ -1,14 +1,12 @@
+import 'package:subway_project_230704/setting/export+.dart';
 import 'package:subway_project_230704/setting/export.dart';
 import '../../data_provider/weather_provider.dart';
-import 'package:intl/intl.dart';
 
 class ColorBar extends ConsumerWidget {
 
   final String stringNumber;
-  // final Key key;
 
   ColorBar({
-    // required this.key,
     required this.stringNumber});
 
   @override
@@ -16,10 +14,6 @@ class ColorBar extends ConsumerWidget {
 
     String q1 = '', q2 = '',  q3 = '', q4 = '', q5 = '', q6 = '';
 
-    double appHeight = MediaQuery.of(context).size.height;
-    double appWidth =  appHeight * 0.462;
-    double appRatio = MediaQuery.of(context).size.aspectRatio;
-    double mainBoxHeight = appHeight * 0.58;
     final temp = ref.watch(tempProvider); ///temp
     final svg = ref.watch(svgProvider); /// icon
     final dustlevel = ref.watch(dustLevelProvider);
@@ -28,7 +22,7 @@ class ColorBar extends ConsumerWidget {
     return Column(
       children: [
         SizedBox(
-          height: mainBoxHeight / 20,
+          height: 6.w,
         ),
         GestureDetector(
           onTap: (){
@@ -241,8 +235,11 @@ class ColorBar extends ConsumerWidget {
             );
           },
           child: SizedBox(
-            height: appRatio >= 0.5 ? appHeight * 0.58 : appHeight * 0.58 * 0.90,
-            width: appWidth * 0.08,
+            height: Device.aspectRatio >= 0.5
+                ? 58.5.h
+                : 52.h,
+
+            width: 8.w,
             child: ColorContainer(
                  stringNumber: stringNumber,
             ),

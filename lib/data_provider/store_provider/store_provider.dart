@@ -1,6 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
 import '../code_provider.dart';
-import '../filted_provider/filter_provider.dart';
 
 class StoreDataController extends StateNotifier<List<SubwayModel>>{
 
@@ -16,7 +15,6 @@ class StoreDataController extends StateNotifier<List<SubwayModel>>{
         subCode.whenData((value){
           final index = subCode.value?.indexWhere((e) => e.line == subInfo[0].line);
           var result = subCode.value?[index!].stationCd;
-          print('code result : ${result}');
           box.write('codeA',result);
           print('codeA');
         });

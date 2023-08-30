@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class IconCustom extends StatelessWidget {
   final void Function()? onTap;
@@ -12,18 +13,15 @@ class IconCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;
-    double appWidth = MediaQuery.of(context).size.width;
-    double mainBoxHeight = appHeight * 0.58;
     return GestureDetector(
       onTap: onTap,
       onLongPress: onLongPress,
       child: SizedBox(
         key: key,
-        width: appWidth * 0.3623,  /// 150
+        width: 36.2.w,
         child: Icon(
           Icons.subway,
-          size: appWidth * 0.1812, /// 75
+          size: 18.w
         ),
       ),
     );

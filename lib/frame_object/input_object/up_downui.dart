@@ -1,7 +1,5 @@
-
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class UpandDown extends StatelessWidget {
   final Color? color1;
@@ -19,42 +17,41 @@ class UpandDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;
     return Container(
-      width: appHeight * 0.224,
-      height: appHeight * 0.056,
+      width:  48.w,
+      height: 5.6.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           Container(
-            width: appHeight * 0.132,
-            height: appHeight * 0.056,
+            width: 28.w,
+            height: 5.6.h,
           ),
           Row(
             children: [
               Container(
                 color: color1,
-                width: appHeight * 0.036,
-                height: appHeight * 0.04,
+                width: 7.8.w,
+                height: 4.h,
                 child: GestureDetector(
                   onTap: onTap1,
                   child: Icon(
                     Icons.keyboard_double_arrow_up,
-                    size: appHeight * 0.0339,
+                    size: 7.25.w,
                     color: Colors.black,
                   ),
                 ),
               ),
               Container(
                 color: color2,
-                width: appHeight * 0.036,
-                height: appHeight * 0.04,
+                width: 7.8.w,
+                height: 4.h,
                 child: GestureDetector(
                   onTap: onTap2,
                   child: Icon(
                     Icons.keyboard_double_arrow_down,
-                    size: appHeight * 0.0339,
+                    size: 7.25.w,
                   ),
                 ),
               ),

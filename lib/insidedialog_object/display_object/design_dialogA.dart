@@ -1,19 +1,17 @@
 import 'package:subway_project_230704/setting/export.dart';
-import 'package:intl/intl.dart';
-
+import 'package:subway_project_230704/setting/export+.dart';
 
 class DialogDesignBoxA extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double appHeight = MediaQuery.of(context).size.height;
     double appWidth = MediaQuery.of(context).size.width;
 
     double sizeWidth = appWidth * 0.0242;
     double textSize = appWidth * 0.0362;
     double contHeight = appWidth * 0.1686;
 
-    final stringNumber = ref.watch(lineProvier);
+    final stringNumber = ref.watch(lineProvider);
 
     return Container(
       height: appWidth * 0.1449,
@@ -79,7 +77,7 @@ class DialogDesignBoxA extends ConsumerWidget {
 
                 Consumer(
                     builder: (__,ref,widget){
-                  final subwayName = ref.watch(nameProvier);
+                  final subwayName = ref.watch(nameProvider);
                   if(subwayName.isNotEmpty){
                     return Text(
                         subwayName == 'SEOUL'

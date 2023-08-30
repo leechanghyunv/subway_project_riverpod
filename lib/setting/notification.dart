@@ -1,10 +1,6 @@
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-import '../data_provider/discance_provider.dart';
-
-
-
 class Noti {
   static Future initialize(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {

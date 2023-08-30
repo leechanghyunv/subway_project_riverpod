@@ -1,9 +1,9 @@
-import 'package:latlong2/latlong.dart';
 import 'package:subway_project_230704/setting/export.dart';
-import '../../setting/geolocator.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 
 
 final latlngProvider = FutureProvider.autoDispose<List<SubwayModel>>((ref) async {
+  print('latlong_provider');
   final Distance _distance =  Distance();
   final location = ref.watch(locationProvider);
   final line = ref.watch(latlonglineProvier);

@@ -1,6 +1,7 @@
 import 'package:subway_project_230704/setting/export.dart';
 
 final locationProvider = FutureProvider.autoDispose<Position>((ref) async {
+  print('start locationProvider');
   LocationPermission permission;
   permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {
@@ -14,7 +15,7 @@ final locationProvider = FutureProvider.autoDispose<Position>((ref) async {
         'Location permissions are permanently denied, we cannot request permissions.');
   }
   Position position = await Geolocator.getCurrentPosition(
-    desiredAccuracy: LocationAccuracy.bestForNavigation,
+    desiredAccuracy: LocationAccuracy.best,
   );
   return position;
 });

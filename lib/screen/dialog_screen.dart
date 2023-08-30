@@ -1,25 +1,23 @@
 import 'package:subway_project_230704/setting/export.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import '../data_provider/filted_provider/filter_provider.dart';
-import '../data_provider/filted_provider/latlong_provider.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 import 'map_screen.dart';
 
 class DialogPage extends ConsumerWidget {
    DialogPage({super.key});
 
-
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double appHeight = MediaQuery.of(context).size.height;
     double appWidth = MediaQuery.of(context).size.width;
-    double appRatio = MediaQuery.of(context).size.aspectRatio;
     final latlongData = ref.watch(latlngProvider);
     final initialdata = ref.watch(dataProviderInside);
 
     return Scaffold(
       body: latlongData.when(
-        error: (err, stack) => Center(
-            child: Text(err.toString())),
+        error: (err, stack) => Container(
+            child: Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Text(err.toString()),
+            )),
         loading: () => Center(
             child: TextFrame(comment: 'loading.....')),
         data: (data){
@@ -36,22 +34,37 @@ class DialogPage extends ConsumerWidget {
                           SlidableAction(
                               onPressed: ((context){
                                 ref.read(infoProvider.notifier).searchSubway(name: row.subname);
-                                Get.dialog(
-                                  AlertDialog(
-                                    title: DialogDesign(
-                                        designText: 'Subway Location'),
-                                    content: Container(
-                                      width: double.maxFinite,
-                                      height: appRatio >= 0.5 ? appWidth * 0.95 : appWidth * 1.1,/// 330
-                                      child: MapSample(row.lat, row.lng),
-                                    ),
-                                  ),
-                                );
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context){
+                                      return AlertDialog(
+                                          title: DialogDesign(
+                                              designText: 'Subway Location'),
+                                          content: Container(
+                                            width: double.maxFinite,
+                                            height: Device.aspectRatio >= 0.5
+                                                ? 100.w
+                                                : 120.w,
+                                            child: MapSample(row.lat, row.lng),
+                                          ),
+                                          actions: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(6.0),
+                                              child: DialogButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  comment: 'Done'),
+                                            ),
+
+                                          ],
+                                        );
+                                });
                               }),
                             backgroundColor: Colors.grey.shade400,
                             foregroundColor: Colors.black,
                             icon: Icons.location_on,
-                            label: 'location',
+                            label: 'Map',
                           ),
                         ]
                     ),
@@ -63,7 +76,7 @@ class DialogPage extends ConsumerWidget {
                               Get.dialog(
                                 AlertDialog(
                                   content: Container(
-                                    height: appWidth * 0.89, /// 330 // 0.7971
+                                    height: 89.w,
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: <Widget>[
@@ -114,10 +127,14 @@ class DialogPage extends ConsumerWidget {
                                   content: initialdata.when(
                                     loading: () => Container(
                                         color: Colors.white,
-                                        height: appWidth * 0.9075,
+                                        height: 90.7.w,
                                         alignment: Alignment.center,
                                         child: TextFrame(comment: 'loading.....')),
-                                    error: (err, stack) => Text(err.toString()),
+                                    error: (err, stack) => Container(
+                                        child: Padding(
+                                      padding: const EdgeInsets.all(25.0),
+                                      child: Text(err.toString()),
+                                    )),
                                     data: (data){
                                       ref.read(infoProvider.notifier).searchSubway(name: row.subname, line: row.line_ui);
                                       ref.read(infoProviderB.notifier).searchSubway(name: row.subname);
@@ -148,7 +165,7 @@ class DialogPage extends ConsumerWidget {
                                 children: [
                                   Text('${row.subname}',
                                     style: TextStyle(
-                                        fontSize: appWidth * 0.0338,
+                                        fontSize: 3.3.w,
                                         fontWeight:FontWeight.bold,
                                         color: Colors.black,
                                         overflow: TextOverflow.ellipsis
@@ -158,7 +175,7 @@ class DialogPage extends ConsumerWidget {
                               ),
                               trailing: Text('${row.km?.toStringAsFixed(0)}m',
                                 style: TextStyle(
-                                    fontSize: appWidth * 0.0338,
+                                    fontSize: 3.3.w,
                                     fontWeight:FontWeight.bold,
                                     color: Colors.black,
                                     overflow: TextOverflow.ellipsis
@@ -174,6 +191,4 @@ class DialogPage extends ConsumerWidget {
       ),
     );
   }
-
-
 }

@@ -1,4 +1,5 @@
 import '../setting/export.dart';
+import '../setting/export+.dart';
 
 class TextFrame_Error extends StatelessWidget {
 
@@ -9,14 +10,14 @@ class TextFrame_Error extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;  ///  896.0 IPHONE11
-    double appWidth = MediaQuery.of(context).size.width;
     return Text(comment,
     style: TextStyle(
-      fontSize: appWidth * 0.0242,
+      fontSize: 2.4.w,
       fontWeight: FontWeight.bold,
       color: color,
-    ),);
+    ),
+    );
   }
 }
+
 
