@@ -22,8 +22,7 @@ class HomePage extends ConsumerStatefulWidget {
   }
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;  ///  896.0 IPHONE11
-    double appWidth = appHeight * 0.46;  /// 414.0 IPHONE11
+    double appWidth = 46.h;
     final data = ref.watch(dataProviderInside);
     ref.listen(dustProvider, (previous, next) {
       ref.read(lineProvider.notifier).update((state) =>

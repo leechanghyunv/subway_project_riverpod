@@ -1,6 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:subway_project_230704/setting/export+.dart';
-
 import 'intro_mainframe.dart';
 
 class LayoutIntro extends StatefulWidget {
@@ -39,11 +38,17 @@ class _LayoutIntroState extends State<LayoutIntro> {
     tutorialCoachMark = TutorialCoachMark(
         colorShadow: Colors.grey.shade400,
         textSkip: "**SKIP**",
-        textStyleSkip: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 17.sp),
+        textStyleSkip: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 17.sp),
         paddingFocus: 10,
         opacityShadow: 0.8,
         onFinish: () {
-          print("finish");
+          Get.to(() => HomePage());
+        },
+        onSkip: (){
+          Get.to(() => HomePage());
         },
         targets: targets)..show(context: context);
 
