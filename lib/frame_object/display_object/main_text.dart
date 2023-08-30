@@ -18,7 +18,6 @@ class MainText extends ConsumerWidget {
     final secondTime = ref.watch(secondtimeProvider);
 
     return Container(
-      color: Colors.grey,
       height: Device.aspectRatio >= 0.5 ? 50.3.h : 44.5.h,
       child: RotatedBox(
         quarterTurns: 3,
