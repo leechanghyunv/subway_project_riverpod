@@ -86,7 +86,7 @@ class InputSubway extends StatelessWidget {
                       child: Material(
                         child: SizedBox(
                           width: 28.h,
-                          height: 25.h,
+                          height: 60.w,
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.white12,

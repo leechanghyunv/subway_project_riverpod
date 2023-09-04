@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, screenType){
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          home: HomePage(),
+          home: ScreenController(),
         );
       }
     );

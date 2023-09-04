@@ -19,6 +19,7 @@ final headingProvider = StateProvider<String>((ref) => 'NNNN');
 final codeConveyProvider = StateProvider<String>((ref) => '');
 final nameProviderU = StateProvider<String>((ref) => ''); /// in toggle switch
 final lineProvider = StateProvider<String>((ref) => 'Line2');
+final lineToArrivalProvider = StateProvider<String>((ref) => '');
 final convertProvdier = StateProvider<bool>((ref) => false);
 
 

@@ -31,46 +31,57 @@ dependencies:
   flutter:
     sdk: flutter
 
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  flutter_local_notifications: ^14.0.0
-  tutorial_coach_mark: ^1.2.9
-  freezed_annotation: ^2.2.0
-  flutter_naver_map: ^1.0.2
-  loading_indicator: ^3.1.0
-  flutter_riverpod: ^2.3.6
-  flutter_slidable: ^3.0.0
+  # Ui - design (6)
   responsive_sizer: ^3.2.0
+  barcode_widget: ^2.0.1
+  blinking_text: ^1.0.2
+  dotted_line: ^3.1.0
+  qr_flutter: ^4.0.0
+  sizer: ^2.0.15
+
+  # Ui - design & function (2)
+  timer_builder: ^2.0.0
+  date_format: ^2.0.7
+
+  # function (11)
+  flutter_local_notifications: ^14.0.0
+  freezed_annotation: ^2.2.0
   cupertino_icons: ^1.0.2
   json_annotation: ^4.8.1
-  cloud_firestore: ^4.8.4
-  firebase_core: ^2.15.0
-  barcode_widget: ^2.0.1
-  flutter_switch: ^0.3.2
-  auto_size_text: ^3.0.0
-  blinking_text: ^1.0.2
-  toggle_switch: ^2.0.1
-  timer_builder: ^2.0.0
   url_launcher: ^6.1.9
-  fluttertoast: ^8.1.3
-  group_button: ^5.3.0
-  date_format: ^2.0.7
-  get_storage: ^2.0.3
-  flutter_svg: ^2.0.5
-  dotted_line: ^3.1.0
   geolocator: ^9.0.2
-  qr_flutter: ^4.0.0
-  xml2json: ^6.0.0
   latlong2: ^0.9.0
+  xml2json: ^6.0.0
   timezone: ^0.9.1
   gsheets: ^0.4.2
-  chopper: ^6.1.4
-  sizer: ^2.0.15
   intl: ^0.18.0
+
+  # state_management & data_manager (4)
+  shared_preferences: ^2.2.1
+  flutter_riverpod: ^2.3.6
+  get_storage: ^2.0.3
+  flutter_svg: ^2.0.5
+
+  # network (4)
+  flutter_naver_map: ^1.0.2
+  cloud_firestore: ^4.8.4
+  firebase_core: ^2.15.0
+  chopper: ^6.1.4
+
+  # ux (10)
+  tutorial_coach_mark: ^1.2.9
+  loading_indicator: ^3.1.0
+  flutter_slidable: ^3.0.0
+  page_transition: ^2.0.9
+  flutter_switch: ^0.3.2
+  auto_size_text: ^3.0.0
+  toggle_switch: ^2.0.1
+  fluttertoast: ^8.1.3
+  group_button: ^5.3.0
   get: ^4.6.5
 
-
+  # permission (1)
+  app_tracking_transparency: ^2.0.4
 
 
 dev_dependencies:

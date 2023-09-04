@@ -74,8 +74,7 @@ class SwitchDialogB extends ConsumerWidget {
                           .map<DropdownMenuItem<dynamic>>((dynamic value){
                         return DropdownMenuItem<dynamic>(
                             value: value,
-                            child: Text(
-                              value,
+                            child: Text(value,
                               style: TextStyle(
                                   fontSize: appWidth * 0.0362,
                                   fontWeight: FontWeight.bold,

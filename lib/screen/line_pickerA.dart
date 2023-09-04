@@ -7,7 +7,6 @@ class LinePickerA extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double appHeight = MediaQuery.of(context).size.height;
     double appWidth = MediaQuery.of(context).size.width;
     var filtered = ref.watch(infoProvider);
     final arrivel = ref.watch(arrivalProvider);
@@ -52,8 +51,7 @@ class LinePickerA extends ConsumerWidget {
                                   try{
                                     var lineList = filtered[index].subwayid.toString();
                                     var arrival = data.where((e) => e.subwayId == lineList).toList();
-                                    var updnLine1 = ['상행', '내선'],
-                                        updnLine2 = ['하행', '외선'];
+                                    var updnLine1 = ['상행', '내선'], updnLine2 = ['하행', '외선'];
                                     var updn1First = arrival
                                         .where((element) =>
                                         updnLine1.contains(element.updnLine))

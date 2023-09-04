@@ -45,11 +45,11 @@ class MainText extends ConsumerWidget {
                         : name.length == 6 ? 30.sp /// 60
                         : name.length == 7 ? 29.sp /// 45
                         : name.length == 8 ? 27.5.sp /// 45
-                        : name.length == 9 ? 27.5.sp /// 45
-                        : name.length == 10 ? 27.sp /// 45
-                        : name.length == 11 ? 26.5.sp /// 45
-                        : name.length == 12 ? 25.5.sp /// 45
-                        : name.length == 13 ? 26.sp /// 45
+                        : name.length == 9 ? 26.5.sp /// 45
+                        : name.length == 10 ? 26.5.sp /// 45
+                        : name.length == 11 ? 24.5.sp /// 45
+                        : name.length == 12 ? 24.5.sp /// 45
+                        : name.length == 13 ? 24.sp /// 45
                         : 21.5.sp,
                     overflow: TextOverflow.ellipsis,
                   )

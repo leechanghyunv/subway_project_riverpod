@@ -7,7 +7,6 @@ class DialogPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double appWidth = MediaQuery.of(context).size.width;
     final latlongData = ref.watch(latlngProvider);
     final initialdata = ref.watch(dataProviderInside);
 

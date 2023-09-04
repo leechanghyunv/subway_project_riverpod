@@ -1,10 +1,11 @@
 import 'package:chopper/chopper.dart';
 part 'restApi_room.chopper.dart';
 
+String key = '4c6f72784b6272613735677166456d';
+
 @ChopperApi()
 abstract class SeoulApiService extends ChopperService {
   static SeoulApiService create() {
-    String key = '4c6f72784b6272613735677166456d';
     final client = ChopperClient(
       baseUrl:Uri.parse('http://openapi.seoul.go.kr:8088/$key/json'),
       services: [_$SeoulApiService()],
@@ -31,7 +32,6 @@ abstract class SeoulApiService extends ChopperService {
 @ChopperApi()
 abstract class ArrivalApiService extends ChopperService{
   static ArrivalApiService create(){
-    String key = '4c6f72784b6272613735677166456d';
     final client = ChopperClient(
       baseUrl: Uri.parse('http://swopenapi.seoul.go.kr/api/subway/$key/json'),
       services: [_$ArrivalApiService()],

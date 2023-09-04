@@ -19,16 +19,14 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
 
   @override
   Widget build(BuildContext context) {
-    double appWidth = MediaQuery.of(context).size.width;
     final weather = ref.watch(weatherProvider);
     final subdata = ref.watch(infoProvider);
     final arrivel = ref.watch(arrivalProvider);
     final svg = ref.watch(svgProvider);
 
-    double textSize = appWidth * 0.0362;
+    double textSize = 3.6.w;
     return Container(
-      height: Device.aspectRatio >= 0.5 ? appWidth * 0.8 : appWidth * 0.9075,
-      /// appRatio >= 0.5 ? appWidth * 0.87 : appWidth * 0.9075,
+      height: Device.aspectRatio >= 0.5 ? 80.w : 91.w,
       width: double.maxFinite,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -37,27 +37,33 @@ Widget Layout_Main(
                       ),
                       dropDown,
                       SizedBox(
-                        width: 8.5.w,
+                        width: 8.w,
                       ),
                       Column(
                         children: [
                           SizedBox(
-                            height: 6.w,
+                            height: 2.h,
                           ),
                           SizedBox(
                             width: 36.2.w,
                             child: iconCustom,
                           ),
                           SizedBox(
-                            height: 5.w,
+                            height: 2.h,
                           ),
                           TextContainerA(),
                           upandDown,
+                          SizedBox(
+                            height: 2.5.h,
+                          ),
                           TextContainerB(),
                         ],
                       ),
                     ]
                 ),
+                    SizedBox(
+                      height: 1.h,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -65,7 +71,7 @@ Widget Layout_Main(
                       ],
                     ),
                     SizedBox(
-                      height: 3.w,
+                      height: 1.2.h,
                     ),
                     BottomDesign(
                       onTap: ontap,

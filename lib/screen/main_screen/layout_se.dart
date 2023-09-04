@@ -1,7 +1,7 @@
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:subway_project_230704/setting/export+.dart';
 
-Widget MainLayout_Se(
+Widget Layout_Se(
     Widget colorBar,
     Widget dropDown,
     Widget iconCustom,
@@ -51,7 +51,13 @@ Widget MainLayout_Se(
                           ),
                           TextContainerA(),
                           upandDown,
+                          SizedBox(
+                            height: 1.w,
+                          ),
                           TextContainerB(),
+                          SizedBox(
+                            height: 2.w,
+                          ),
                         ],
                       ),
                     ],
@@ -63,7 +69,7 @@ Widget MainLayout_Se(
                     ],
                   ),
                   SizedBox(
-                    height: 3.w,
+                    height: 2.w,
                   ),
                   BottomDesign(
                     onTap: ontap,

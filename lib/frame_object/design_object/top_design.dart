@@ -79,7 +79,7 @@ Widget Container_nomal() =>
           ),
           SizedBox(width: 3.h,),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 height: 2.h,
@@ -88,7 +88,7 @@ Widget Container_nomal() =>
                 DateFormat('y-MM-dd EEE').format(DateTime.now()),
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize:  18.5.sp, /// 520
+                    fontSize: Device.aspectRatio >= 0.5 ? 20.5.sp : 18.5.sp, /// 520
                     color: Colors.black),
               ),
               SizedBox(
@@ -96,7 +96,7 @@ Widget Container_nomal() =>
               ),
               Container(
                 height: 10.h, /// 520
-                width: 20.h, /// 378.8
+                width: Device.aspectRatio >= 0.5 ? 20.5.h : 21.5.h, /// 378.8
                 child: GestureDetector(
                   child: BarcodeWidget(
                     color: Colors.black,

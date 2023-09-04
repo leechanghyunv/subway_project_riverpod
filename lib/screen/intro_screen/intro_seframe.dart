@@ -68,7 +68,13 @@ Widget IntroLayer_se(iconSize,key1,key2,key3,key4,key5,key6) => Scaffold(
                           color1: Colors.grey[400],
                           color2: Colors.grey[100],
                         ),
+                        SizedBox(
+                          height: 1.w,
+                        ),
                         TextContainerB(),
+                        SizedBox(
+                          height: 2.w,
+                        ),
                       ],
                     ),
                   ],
@@ -112,7 +118,7 @@ Widget IntroLayer_se(iconSize,key1,key2,key3,key4,key5,key6) => Scaffold(
                   ],
                 ),
                 SizedBox(
-                  height: 3.w,
+                  height: 2.w,
                 ),
                 Container(
                   child: Row(

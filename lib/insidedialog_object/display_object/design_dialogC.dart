@@ -14,7 +14,7 @@ class DialogDesignBoxC extends StatelessWidget {
     double sizeWidth = 2.42.w;
     double sizeWidth2 = 1.8.w;
     double textSize = 3.6.w;
-    double contHeight = 1.7.w;
+    double contHeight = 17.w;
 
     return Container(
       height: 14.5.w,
@@ -31,7 +31,7 @@ class DialogDesignBoxC extends StatelessWidget {
           ),
           Container(
             height: contHeight,
-            width: 1.3.w,
+            width: 13.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -62,7 +62,7 @@ class DialogDesignBoxC extends StatelessWidget {
           ),
           Container(
             height: contHeight,
-            width: 1.6.w,
+            width: 16.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

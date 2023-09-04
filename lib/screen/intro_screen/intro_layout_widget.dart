@@ -1,5 +1,7 @@
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:subway_project_230704/setting/export+.dart';
+import '../../setting/shared_manager.dart';
+import '../main_screen.dart';
 import 'intro_mainframe.dart';
 
 class LayoutIntro extends StatefulWidget {
@@ -10,6 +12,8 @@ class LayoutIntro extends StatefulWidget {
 }
 
 class _LayoutIntroState extends State<LayoutIntro> {
+
+  SharedPreManager sharedPreManager = SharedPreManager();
 
   late TutorialCoachMark tutorialCoachMark;
   List<TargetFocus> targets = [];
@@ -26,6 +30,9 @@ class _LayoutIntroState extends State<LayoutIntro> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(_layout);
+    sharedPreManager.init();
+    sharedPreManager.setIsFirst(false);
+    sharedPreManager.setFirstLoading(false);
     initTargets();
   }
 
@@ -41,20 +48,48 @@ class _LayoutIntroState extends State<LayoutIntro> {
         textStyleSkip: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
-            fontSize: 17.sp),
+            fontSize: 17.sp
+        ),
         paddingFocus: 10,
         opacityShadow: 0.8,
         onFinish: () {
-          Get.to(() => HomePage());
+          sharedPreManager.setIsFirst(false);
+          Navigator.push(
+            context, PageTransition(
+              child: HomePage(),
+              type: PageTransitionType.fade
+          ),
+          );
         },
         onSkip: (){
-          Get.to(() => HomePage());
+          sharedPreManager.setIsFirst(false);
+          Navigator.push(
+            context, PageTransition(
+              child: HomePage(),
+              type: PageTransitionType.fade
+          ),
+          );
         },
         targets: targets)..show(context: context);
 
   }
 
+  Widget Comment(String text) =>  Padding(
+    padding:  EdgeInsets.all(8.0),
+    child: Text(
+      text, style: TextStyle(fontWeight: FontWeight.bold),
+    ),
+  );
+
+  Widget ContainImage(String location) => Padding(
+    padding: const EdgeInsets.all(6.0),
+    child: Container(
+      child: Image.asset(location),
+    ),
+  );
+
   void initTargets (){
+    sharedPreManager.setIsFirst(false);
     targets.add(
         TargetFocus(
             identify: "Target 0",
@@ -67,12 +102,7 @@ class _LayoutIntroState extends State<LayoutIntro> {
                   Container(
                     child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: Container(
-                            child: Image.asset('images/weather.png',),
-                          ),
-                        ),
+                        ContainImage('images/weather.png'),
                       ],
                     ),
 
@@ -94,17 +124,8 @@ class _LayoutIntroState extends State<LayoutIntro> {
                   Container(
                     child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('지하철역 검색 저장,이름 저장',
-                            style: TextStyle(fontWeight: FontWeight.bold),),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            child: Image.asset('images/searching.jpg'),
-                          ),
-                        ),
+                        Comment('지하철역 검색 저장,이름 저장'),
+                        ContainImage('images/searching.jpg'),
                       ],
                     ),
                   ),
@@ -125,17 +146,8 @@ class _LayoutIntroState extends State<LayoutIntro> {
                   Container(
                     child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('출발지점 실시간 지하철 이동확인',
-                            style: TextStyle(fontWeight: FontWeight.bold),),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            child: Image.asset('images/realtime1.jpg'),
-                          ),
-                        ),
+                        Comment('출발지점 실시간 지하철 이동확인'),
+                        ContainImage('images/realtime1.jpg'),
                       ],
                     ),
                   ),
@@ -157,17 +169,8 @@ class _LayoutIntroState extends State<LayoutIntro> {
                     child: Column(
                       children: [
                         SizedBox(height: 10),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('가까운 지하철역 리스팅,SMS민원신고,네이버지도',
-                            style: TextStyle(fontWeight: FontWeight.bold),),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            child: Image.asset('images/retreive.jpg'),
-                          ),
-                        ),
+                        Comment('가까운 지하철역 리스팅,SMS민원신고,네이버지도'),
+                        ContainImage('images/retreive.jpg'),
                       ],
                     ),
                   ),
@@ -188,17 +191,8 @@ class _LayoutIntroState extends State<LayoutIntro> {
                   Container(
                     child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('출발지점 실시간 지하철 이동확인(반대방향)',
-                            style: TextStyle(fontWeight: FontWeight.bold),),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            child: Image.asset('images/realtime2.jpg'),
-                          ),
-                        ),
+                        Comment('출발지점 실시간 지하철 이동확인(반대방향)'),
+                        ContainImage('images/realtime2.jpg'),
                       ],
                     ),
                   ),
@@ -219,17 +213,8 @@ class _LayoutIntroState extends State<LayoutIntro> {
                   Container(
                     child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('출발지점의 시간표',
-                            style: TextStyle(fontWeight: FontWeight.bold),),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            child: Image.asset('images/timetable.png'),
-                          ),
-                        ),
+                        Comment('출발지점의 시간표'),
+                        ContainImage('images/timetable.jpg'),
                       ],
                     ),
                   ),
@@ -244,9 +229,11 @@ class _LayoutIntroState extends State<LayoutIntro> {
   Widget build(BuildContext context) {
     double iconSize = 4.85.w;
     if(Device.aspectRatio >= 0.5){
-      return IntroLayer_se(iconSize,button0,button1,button2,button3,button4,button5);
+      return IntroLayer_se(iconSize,button0,button1,button2,
+          button3,button4,button5);
     }
-    return IntroLayer_main(iconSize,button0,button1,button2,button3,button4,button5);
+    return IntroLayer_main(iconSize,button0,button1,button2,
+        button3,button4,button5);
   }
 }
 
@@ -270,25 +257,27 @@ Widget TutorialContainer(List<Widget> widget) => Container(
 
 Widget Container_Left() => Container(
   width: 15.w,
-  height: 12.h,
+  height: Device.aspectRatio >= 0.5 ? 12.h : 11.5.h,
   color: Colors.transparent,
 );
 Widget Container_Right(key) => Container(
   key: key,
   width: 15.w,
-  height: 12.h,
+  height: Device.aspectRatio >= 0.5 ? 12.h : 11.5.h,
   color: Colors.transparent,
 );
 
 Widget BottomForIntro() => Container(
     alignment: Alignment.center,
     width: 55.w,
-    height: 12.h,
+    height: Device.aspectRatio >= 0.5 ? 12.h : 11.5.h,
     child: BarcodeWidget(
       data: '------LAFAYETTE.co-------',
       style: TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: Device.aspectRatio >= 0.5 ? 2.h : 1.8.h,
+        fontSize: Device.aspectRatio >= 0.5
+            ? 2.1.h
+            : 1.8.h,
       ),
       color: Colors.black,
       barcode: Barcode.code128(),

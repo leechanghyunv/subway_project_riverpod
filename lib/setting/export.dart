@@ -10,7 +10,7 @@ export 'package:subway_project_230704/setting/google_servey.dart';
 export 'package:subway_project_230704/screen/layout_screen.dart';
 export 'package:subway_project_230704/screen/line_pickerB.dart';
 export '../insidedialog_object/design_object/qr_container.dart';
-export 'package:subway_project_230704/screen/main_screen.dart';
+export 'package:subway_project_230704/screen/screen_controller.dart';
 export 'package:subway_project_230704/custom/tool_tip.dart';
 export '../frame_object/design_object/buttom_design.dart';
 export '../frame_object/display_object/design_textA.dart';

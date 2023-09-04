@@ -35,21 +35,21 @@ class _TextFormBState extends State<TextFormB> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 2.42.w,
+                    height: 2.4.w,
                   ),
                   InputSubway(onSelected: widget.onSelectedA),
                   SizedBox(
-                    height: 3.62.w,
+                    height: 3.w,
                   ),
                   InputSubway(onSelected: widget.onSelectedB),
                   SizedBox(
-                    height: 3.62.w,
+                    height: 3.w,
                   ),
                   InputName(
                     onSubmitted: widget.onSubmitted,
                   ),
                   SizedBox(
-                    height: 3.5.w,
+                    height: 3.w,
                   ),
                   DialogDesignBoxB(
                   ),

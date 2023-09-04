@@ -53,7 +53,7 @@ class _DropdownCustomState extends State<DropdownCustom> {
                   child: Text(
                     value,
                     style: TextStyle(
-                        fontSize: 18.5.sp,
+                        fontSize: Device.aspectRatio > 0.5 ? 20.sp : 19.sp,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),

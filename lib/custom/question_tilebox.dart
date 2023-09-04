@@ -20,7 +20,6 @@ class QuestionTile extends StatefulWidget {
 class _QuestionTileState extends State<QuestionTile> {
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;
     return Container(
       width: double.maxFinite,
       color: Colors.white,

@@ -52,7 +52,7 @@ Widget IntroLayer_main(iconSize,key1,key2,key3,key4,key5,key6)
                   Column(
                     children: [
                       SizedBox(
-                        height: 6.w,
+                        height: 2.h,
                       ),
                       SizedBox(
                         key: key2,
@@ -62,17 +62,23 @@ Widget IntroLayer_main(iconSize,key1,key2,key3,key4,key5,key6)
                         ),
                       ),
                       SizedBox(
-                        height: 5.w,
+                        height: 2.h,
                       ),
                       TextContainerA(),
                       UpandDown(
                         color1: Colors.grey[400],
                         color2: Colors.grey[100],
                       ),
+                      SizedBox(
+                        height: 2.5.h,
+                      ),
                       TextContainerB(),
                     ],
                   ),
                 ],
+              ),
+              SizedBox(
+                height: 1.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -112,7 +118,7 @@ Widget IntroLayer_main(iconSize,key1,key2,key3,key4,key5,key6)
                 ],
               ),
               SizedBox(
-                height: 3.w,
+                height: 1.2.h,
               ),
               Container(
                 child: Row(
