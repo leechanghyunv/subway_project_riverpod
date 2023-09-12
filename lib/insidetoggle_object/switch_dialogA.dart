@@ -25,7 +25,7 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
 
   @override
   Widget build(BuildContext context) {
-    final arrivel = ref.watch(arrivalProvider);
+
     final weather = ref.watch(weatherProvider);
     final svg = ref.watch(svgProvider);
 
@@ -43,101 +43,57 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
             child: Container(
                 color: Colors.grey[100],
                 width: double.maxFinite,
-                child:
-                arrivel.when(
-                  loading: () => TextFrame(comment: 'loading.....'),
-                  error: (err, stack) => Container(
-                    alignment: Alignment.center,
+                child: Consumer(
+                    builder: (context,ref,child){
+                  final filted = ref.watch(filtedArrivalProvider(widget.list));
+                  return filted.when(
+                    loading: () => TextFrame(comment: 'loading.....'),
+                    error: (err,stack) => Container(
+                      alignment: Alignment.center,
                       child: Padding(
                         padding: const EdgeInsets.all(25.0),
                         child: TextFrame(comment: '데이터를 불러올 수 없습니다'),
-                      )
-                  ),
-                  data: (data) {
-                    try {
-                      var filtedArrival = data
-                          .where((element) => element.subwayId == widget.list).toList();
-                      var updnLine1 = ['상행', '내선'], updnLine2 = ['하행', '외선'];
-                      /// dp용 /// 상행선 상행선 상행선 상행선 상행선 상행선 상행선 /// /// /// /// ///
-                      var updn1First = filtedArrival
-                          .where(
-                              (element) => updnLine1.contains(element.updnLine))
-                          .map((e) => '${e.trainLineNm} ${e.arvlMsg2}').first;
-                      var updn1Last = filtedArrival
-                          .where(
-                              (element) => updnLine1.contains(element.updnLine))
-                          .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
-                      /// dp용 /// 하행선 하행선 하행선 하행선 하행선 하행선 하행선  /// /// /// /// /// ///
-                      var updn2First = filtedArrival
-                          .where(
-                              (element) => updnLine2.contains(element.updnLine))
-                          .map((e) => '${e.trainLineNm} ${e.arvlMsg2}').first;
-                      var updn2Last = filtedArrival
-                          .where(
-                              (element) => updnLine2.contains(element.updnLine))
-                          .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
-                      /// 저장용 /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
-                      var subNumber1 = filtedArrival.where(
-                              (element) => updnLine1.contains(element.updnLine))
-                          .map((e) => '${e.btrainNo}').first;
+                      ),
+                    ),
+                    data: (data){
+                      var arrivalA = data.arrival!.where((e) => updnLine1.contains(e.updnLine));
+                      var arrivalB = data.arrival!.where((e) => updnLine2.contains(e.updnLine));
+
+                      var subNumber1 = arrivalA.map((e) => '${e.btrainNo}').first;
                       box.write('subNumber1', subNumber1);
-                     var subState1 = filtedArrival.where(
-                              (element) => updnLine1.contains(element.updnLine))
-                          .map((e) => '${e.arvlCd}').first;
+                      var subState1 = arrivalA.map((e) => '${e.arvlCd}').first;
                       box.write('subState1', subState1);
-
-                      var subSttus1 = filtedArrival.where(
-                              (element) => updnLine1.contains(element.updnLine))
-                          .map((e) => '${e.btrainSttus}').first;
+                      var subSttus1 = arrivalA.map((e) => '${e.btrainSttus}').first;
                       box.write('state1', subSttus1);
-
-                      var destination1 = filtedArrival.where(
-                              (element) => updnLine1.contains(element.updnLine))
-                          .map((e) => '${e.trainLineNm}').first;
+                      var destination1 = arrivalA.map((e) => '${e.trainLineNm}').first;
                       String filtedDestination1 = destination1.split(" - ")[0];
                       box.write('destination1', filtedDestination1);
-                      /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
-                      var subNumber2 = filtedArrival.where(
-                              (element) => updnLine2.contains(element.updnLine))
-                          .map((e) => '${e.btrainNo}').first;
+
+                      var subNumber2 = arrivalB.map((e) => '${e.btrainNo}').first;
                       box.write('subNumber2', subNumber2);
-                      var subState2 = filtedArrival.where(
-                              (element) => updnLine2.contains(element.updnLine))
-                          .map((e) => '${e.arvlCd}').first;
+                      var subState2 = arrivalB.map((e) => '${e.arvlCd}').first;
                       box.write('subState2', subState2);
-
-                      var subSttus2 = filtedArrival.where(
-                              (element) => updnLine2.contains(element.updnLine))
-                          .map((e) => '${e.btrainSttus}').first;
+                      var subSttus2 = arrivalB.map((e) => '${e.btrainSttus}').first;
                       box.write('state2', subSttus2);
-
-                      var destination2 = filtedArrival.where(
-                              (element) => updnLine2.contains(element.updnLine))
-                          .map((e) => '${e.trainLineNm}').first;
+                      var destination2 = arrivalB.map((e) => '${e.trainLineNm}').first;
                       String filtedDestination2 = destination2.split(" - ")[0];
                       box.write('destination2', filtedDestination2);
-                      /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
                       return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextFrame(
-                                comment: '\n${widget.line} ${widget.name}역 -> ${widget.dest}역\n',
-                              ),
-                              TextFrame(comment: updn1First.toString()),
-                              TextFrame(comment: updn1Last.toString()),
-                              TextFrame(comment: updn2First.toString()),
-                              TextFrame(comment: updn2Last.toString()),
-                            ],
-                          );
-                    } catch (e) {
-                      return Container(
-                          child: Padding(
-                        padding: const EdgeInsets.all(25.0),
-                        child: TextFrame(comment: '${widget.name}역 실시간 데이터를 가져올 수 없습니다.'),
-                      ));
-                    }
-                  },
-                )),
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextFrame(
+                            comment: '\n${widget.line} ${widget.name}역 -> ${widget.dest}역\n',
+                          ),
+                          TextFrame(comment: data.upfirst.toString()),
+                          TextFrame(comment: data.uplast.toString()),
+                          TextFrame(comment: data.downfirst.toString()),
+                          TextFrame(comment: data.downlast.toString()),
+                        ],
+                      );
+                    },
+                  );
+                }),
+            ),
           ),
           Container(
             width: double.maxFinite,
@@ -169,7 +125,6 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                   ),
                   Expanded(child: Text('')),
                   TransferIcon(),
-
                 ],
               ),
           ),

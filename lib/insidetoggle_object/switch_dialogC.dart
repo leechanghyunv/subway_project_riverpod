@@ -21,7 +21,6 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
   Widget build(BuildContext context) {
     final weather = ref.watch(weatherProvider);
     final subdata = ref.watch(infoProvider);
-    final arrivel = ref.watch(arrivalProvider);
     final svg = ref.watch(svgProvider);
 
     double textSize = 3.6.w;
@@ -37,58 +36,33 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
           Container(
             color: Colors.grey[100],
             width: double.maxFinite,
-            child:
-            arrivel.when(
-              loading: () => TextFrame(comment: 'loading.....'),
-              error: (err, stack) => Container(
-                  child: Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: TextFrame(comment: '데이터를 불러올 수 없습니다'),
-              )),
-              data: (data) {
-                try {
-                  var filtedArrival = data
-                      .where((element) => element.subwayId == subdata.first.subwayid.toString()).toList();
-                  var updnLine1 = ['상행', '내선'], updnLine2 = ['하행', '외선'];
-                  var updn1First = filtedArrival
-                      .where(
-                          (element) => updnLine1.contains(element.updnLine))
-                      .map((e) => '${e.trainLineNm} ${e.arvlMsg2}').first;
-                  var updn1Last = filtedArrival
-                      .where(
-                          (element) => updnLine1.contains(element.updnLine))
-                      .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
-                  var updn2First = filtedArrival
-                      .where(
-                          (element) => updnLine2.contains(element.updnLine))
-                      .map((e) => '${e.trainLineNm} ${e.arvlMsg2}').first;
-                  var updn2Last = filtedArrival
-                      .where(
-                          (element) => updnLine2.contains(element.updnLine))
-                      .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
-                  return
-                      Column(
+            child: Consumer(
+                builder: (context,ref,child){
+                  final filted = ref.watch(filtedArrivalProvider(
+                      subdata.first.subwayid.toString()));
+                  return filted.when(
+                    loading: () => TextFrame(comment: 'loading.....'),
+                    error: (err, stack) => Container(
+                        child: Padding(
+                          padding: const EdgeInsets.all(25.0),
+                          child: TextFrame(comment: '데이터를 불러올 수 없습니다'),
+                        )),
+                    data: (data){
+                      return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextFrame(
                             comment: '\n${subdata.first.line} ${subdata.first.subname}역\n',
                           ),
-                          TextFrame(comment: updn1First.toString()),
-                          TextFrame(comment: updn1Last.toString()),
-                          TextFrame(comment: updn2First.toString()),
-                          TextFrame(comment: updn2Last.toString()),
+                          TextFrame(comment: data.upfirst.toString()),
+                          TextFrame(comment: data.uplast.toString()),
+                          TextFrame(comment: data.downfirst.toString()),
+                          TextFrame(comment: data.downlast.toString()),
                         ],
                       );
-                } catch (e) {
-                  return Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(25.0),
-                        child: TextFrame(
-                            comment: '${subdata.first.subname}역 실시간 데이터를 가져올 수 없습니다.'),
-                      ));
-                }
-              },
-            ),
+                    },
+                  );
+            }),
           ),
           Container(
             width: double.maxFinite,
@@ -115,11 +89,8 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
                           style: TextStyle(
                             fontSize: textSize,
                             fontWeight: FontWeight.bold,
-
                           ),
                         ),
-
-
                     );
                   },
                 ),

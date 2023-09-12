@@ -11,7 +11,6 @@ class TransferIcon extends ConsumerStatefulWidget {
 class _TransferIconState extends ConsumerState<TransferIcon> {
   @override
   Widget build(BuildContext context) {
-    final arrivel = ref.watch(arrivalProviderT);
     return IconButton(
       onPressed: () async {
         if(box.read('nameT') != null){
@@ -28,52 +27,33 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
                       Container(
                         color: Colors.grey[100],
                         width: double.maxFinite,
-                        child: arrivel.when(
-                          loading: () => TextFrame(comment: 'loading.....'),
-                          error: (err, stack) => Text(err.toString()),
-                          data: (data) {
-                            try {
-                              var filtedArrival = data
-                                  .where((element) => element.subwayId == box.read('sublistT')).toList();
-                              var updnLine1 = ['상행', '내선'], updnLine2 = ['하행', '외선'];
-                              var updn1First = filtedArrival
-                                  .where(
-                                      (element) => updnLine1.contains(element.updnLine))
-                                  .map((e) => '${e.trainLineNm} ${e.arvlMsg2}').first;
-                              var updn1Last = filtedArrival
-                                  .where(
-                                      (element) => updnLine1.contains(element.updnLine))
-                                  .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
-                              var updn2First = filtedArrival
-                                  .where(
-                                      (element) => updnLine2.contains(element.updnLine))
-                                  .map((e) => '${e.trainLineNm} ${e.arvlMsg2}').first;
-                              var updn2Last = filtedArrival
-                                  .where(
-                                      (element) => updnLine2.contains(element.updnLine))
-                                  .map((e) => '${e.trainLineNm} ${e.arvlMsg2}\n').last;
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextFrame(
-                                    comment: '\n${box.read('lineTT')} ${box.read('nameT')}역\n',
-                                  ),
-                                  
-                                  TextFrame(comment: updn1First.toString()),
-                                  TextFrame(comment: updn1Last.toString()),
-                                  TextFrame(comment: updn2First.toString()),
-                                  TextFrame(comment: updn2Last.toString()),
-                                ],
+                        child: Consumer(
+                            builder: (context,ref,child){
+                              final filted = ref.watch(filtedarrivalProviderT);
+                              return filted.when(
+                                loading: () => TextFrame(comment: 'loading.....'),
+                                error: (err, stack) => Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(25.0),
+                                      child: TextFrame(comment: '데이터를 불러올 수 없습니다'),
+                                    )),
+                                data: (data){
+                                  return Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      TextFrame(
+                                        comment: '\n${box.read('lineTT')} ${box.read('nameT')}역\n',
+                                      ),
+                                      TextFrame(comment: data.upfirst.toString()),
+                                      TextFrame(comment: data.uplast.toString()),
+                                      TextFrame(comment: data.downfirst.toString()),
+                                      TextFrame(comment: data.downlast.toString()),
+                                    ],
+                                  );
+                                },
                               );
-                            } catch (e) {
-                              return Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(25.0),
-                                    child: TextFrame(comment: '실시간 데이터를 가져올 수 없습니다.'),
-                                  ));
-                            }
-                          },
-                        ),
+                            }),
+
                       ),
                       SizedBox(height: 20,),
                       Row(
@@ -133,7 +113,6 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
                         padding: const EdgeInsets.all(16.0),
                         child: Container(
                           alignment: Alignment.center,
-                        
                         ),
                       ),
                     ),
@@ -168,30 +147,21 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
       },
 
       icon: Icon(Icons.cached_rounded,
-        color: box.read('lineT') == 'Line1'? const Color(0xff2a4193)
-            : box.read('lineT') == 'Line2'?  const Color(0xff027a31)
-            : box.read('lineT') == 'Line3'?  const Color(0xffd75e02)
-            : box.read('lineT') == 'Line4'?  const Color(0xff028bb9)
-            : box.read('lineT') == 'Line5'?  const Color(0xff9637b6)
-            : box.read('lineT') == 'Line6'?  const Color(0xff885408)
-            : box.read('lineT') == 'Line7'?  const Color(0xff525d02)
-            : box.read('lineT') == 'Line8'?  const Color(0xfff62d37)
-            : box.read('lineT') == 'Line9'?  const Color(0xff916a2a)
-            // : box.read('lineT') == '서해'?    const Color(0xff8FC31F)
-            // : box.read('lineT') == '공항철도'?    const Color(0xff0090D2)
-            : box.read('lineT') == '경의선'? const Color(0xff77C4A3)
-            : box.read('lineT') == '경춘선'?    const Color(0xff0C8E72)
-            : box.read('lineT') == '수인분당'? const Color(0xFFE7E727)
-            : box.read('lineT') == '신분당'?   const Color(0xffD4003B)
-            // : box.read('lineT') == '경강선'?   const Color(0xff003DA5)
-            // : box.read('lineT') == '인천1선'?  const Color(0xff7CA8D5)
-            // : box.read('lineT') == '인천2선'?  const Color(0xffED8B00)
-            // : box.read('lineT') == '에버라인'?  const Color(0xff6FB245)
-            // : box.read('lineT') == '의정부'?   const Color(0xffFDA600)
-            // : box.read('lineT') == '우이신설'? const Color(0xffB7C452)
-            // : box.read('lineT') == '김포골드'? const Color(0xffA17800)
-            // : box.read('lineT') == '신림'?   const Color(0xff6789CA)
-            : Colors.black,
+        color: switch(box.read('lineT')){
+          'Line1' => Color(0xff2a4193), 'Line2' => Color(0xff027a31),
+          'Line3' => Color(0xffd75e02), 'Line4' => Color(0xff028bb9),
+          'Line5' => Color(0xff9637b6), 'Line6' => Color(0xff885408),
+          'Line7' => Color(0xff525d02), 'Line8' => Color(0xfff62d37),
+          'Line9' => Color(0xff916a2a), '서해' => Color(0xff8FC31F),
+          '공항철도' => Color(0xff0090D2), '경의선' => Color(0xff77C4A3),
+          '경춘선' => Color(0xff0C8E72), '수인분당' => Color(0xFFE7E727),
+          '신분당' => Color(0xffD4003B), '경강선' => Color(0xff003DA5),
+          '인천1선' => Color(0xff7CA8D5), '인천2선' => Color(0xffED8B00),
+          '에버라인' => Color(0xff6FB245), '의정부' => Color(0xffFDA600),
+          '우이신설' => Color(0xffB7C452), '김포골드' => Color(0xffA17800),
+          '신림' => Color(0xff6789CA),
+          _ => Colors.black
+        },
         size: 6.w,
       ),
     );

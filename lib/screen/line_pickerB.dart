@@ -9,7 +9,6 @@ class LinePickerB extends ConsumerWidget {
   Widget build(BuildContext context,WidgetRef ref) {
     double appWidth = MediaQuery.of(context).size.width;
     var filtered = ref.watch(infoProvider);
-    final arrivel = ref.watch(arrivalProvider);
     return AlertDialog(
       content: StatefulBuilder(
           builder: (__, StateSetter setState){
@@ -44,38 +43,26 @@ class LinePickerB extends ConsumerWidget {
                                   TextFrame(comment: filtered[index].line_ui),
                                 ],
                               ),
-                              subtitle: arrivel.when(
-                                loading: () => TextFrame(comment: 'loading.....'),
-                                error: (err, stack) => TextFrame(comment: '데이터를 불러올 수 없습니다'),
-                                data: (data){
-                                  try{
-                                    var lineList = filtered[index].subwayid.toString();
-                                    var arrival = data.where((e) => e.subwayId == lineList).toList();
-                                    var updnLine1 = ['상행', '내선'],
-                                        updnLine2 = ['하행', '외선'];
-                                    var updn1First = arrival
-                                        .where((element) =>
-                                        updnLine1.contains(element.updnLine))
-                                        .map((e) => '${e.trainLineNm}')
-                                        .first;
-                                    var updn2First = arrival
-                                        .where((element) =>
-                                        updnLine2.contains(element.updnLine))
-                                        .map((e) => '${e.trainLineNm}')
-                                        .first;
-                                    return Text(lineList.isNotEmpty
-                                        ? '${updn1First.split(
-                                        "-")[1]}  -  ${updn2First.split("-")[1]}'
-                                        : '',
-                                      style: TextStyle(
-                                        fontSize: appWidth * 0.0242,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                      ),
-                                    );
-                                  }catch(e){
-                                    return TextFrame_Error(comment: '실시간 데이터를 가져올 수 없습니다');
-                                  }
+                              subtitle: Consumer(
+                                builder: (context,ref,child){
+                                  var lineList = filtered[index].subwayid.toString();
+                                  final filted = ref.watch(filtedInPickerProvider(lineList));
+                                  return filted.when(
+                                    loading: () => TextFrame(comment: 'loading.....'),
+                                    error: (err, stack) => TextFrame(comment: '데이터를 불러올 수 없습니다'),
+                                    data: (data){
+                                      return Text(lineList.isNotEmpty
+                                          ? '${filted.value!.upfirst!.split(
+                                          "-")[1]}  -  ${filted.value!.downfirst!.split("-")[1]}'
+                                          : '',
+                                        style: TextStyle(
+                                          fontSize: appWidth * 0.0242,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      );
+                                    },
+                                  );
                                 },
                               ),
                               onChanged: (value){

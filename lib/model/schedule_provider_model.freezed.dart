@@ -107,9 +107,7 @@ class __$$_TableProviderModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TableProviderModel
-    with DiagnosticableTreeMixin
-    implements _TableProviderModel {
+class _$_TableProviderModel implements _TableProviderModel {
   const _$_TableProviderModel(
       {required final List<TableModel> tableA,
       required final List<TableModel> tableB})
@@ -136,17 +134,8 @@ class _$_TableProviderModel
   }
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TableProviderModel(tableA: $tableA, tableB: $tableB)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TableProviderModel'))
-      ..add(DiagnosticsProperty('tableA', tableA))
-      ..add(DiagnosticsProperty('tableB', tableB));
   }
 
   @override
