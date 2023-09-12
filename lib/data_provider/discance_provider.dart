@@ -49,11 +49,10 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
         noticeTime(dist.nameA,dist.nameB,formattedRoute,time);
         /// 상행선일까 하행선일까 상행선일까 하행선일까 구분/// /// /// /// /// /// /// /// /// /// ///
         var subId = utfIntoList.where((element) => element.pathType == 1).first.legs.where((e) => e.route != null).map((e) => e.passStopList?.stationList.map((e) => e.stationId));
-        
+
         var subName = utfIntoList.where((element) => element.pathType == 1).first.legs.
         where((e) => e.route != null).map((e) => e.passStopList?.stationList.map((e) => e.stationName)).toList();
-        var subIndex = utfIntoList.where((element) => element.pathType == 1).first.legs.
-        where((e) => e.route != null).map((e) => e.passStopList?.stationList.map((e) => e.index)).toList();
+        ref.read(routeListProvider.notifier).state = subName.toList();
 
         var firstElement = subId.elementAt(0);
         var value1 = firstElement?.elementAt(0);
@@ -64,7 +63,6 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
         if(intValue1 != null && intValue2 != null){
           print('${intValue1-intValue2}'); // 1이면 상행 -1이면 하행
           ref.read(upDownProvider.notifier).state = (intValue1-intValue2);
-
 
           print('route: ${subName}');
 

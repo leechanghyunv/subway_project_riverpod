@@ -15,11 +15,9 @@ abstract class SeoulApiService extends ChopperService {
  /// 미세먼지 데이터
   @Get(path:'/RealtimeCityAir/1/25')
   Future<Response> getDust();
-
 /// 지하철 코드 데이터
   @Get(path:'/SearchInfoBySubwayNameService/1/5/{name}')
   Future<Response> getCode(@Path() String name);
-
 /// 지하철 테이블 데이터
   @Get(path:'/SearchSTNTimeTableByIDService/1/500/{code}/{week}/{updown}')
   Future<Response> getTable(
@@ -49,7 +47,6 @@ abstract class WeatherApiService extends ChopperService{
     final client = ChopperClient(
       baseUrl: Uri.parse('https://api.openweathermap.org/data/2.5'),
       services: [_$WeatherApiService()],
-
     );
     return _$WeatherApiService(client);
   }

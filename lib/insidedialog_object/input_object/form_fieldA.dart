@@ -22,8 +22,6 @@ class _TextFormAState extends State<TextFormA> {
 
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;///  896.0 IPHONE11
-    double appWidth = MediaQuery.of(context).size.width;
     return Form(
         child: Column(
           children: [

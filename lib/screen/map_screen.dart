@@ -1,5 +1,5 @@
-import 'package:subway_project_230704/setting/export.dart';
-import 'package:subway_project_230704/setting/export+.dart';
+import '../setting/export.dart';
+import '../setting/export+.dart';
 
 class MapSample extends ConsumerWidget {
 

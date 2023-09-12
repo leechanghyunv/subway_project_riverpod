@@ -88,7 +88,7 @@ Widget Container_nomal() =>
                 DateFormat('y-MM-dd EEE').format(DateTime.now()),
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: Device.aspectRatio >= 0.5 ? 20.5.sp : 18.5.sp, /// 520
+                    fontSize: Device.aspectRatio >= 0.5 ? 20.5.sp : 19.5.sp, /// 520
                     color: Colors.black),
               ),
               SizedBox(

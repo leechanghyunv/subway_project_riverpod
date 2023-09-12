@@ -39,6 +39,21 @@ Future<bool?> showmsg() => Fluttertoast.showToast(
     msg:'목적지를 입력해주세요',
     gravity: ToastGravity.CENTER);
 
+
+void accident(){
+  if(box.read('accident') ?? true){
+    Fluttertoast.showToast(
+        msg:'불규칙한 정보 ex)지하철 파업, 열차고장,사고는\n어플 열람시 첫 화면에 보이는 텍스트로 알려드립니다.',
+        gravity: ToastGravity.CENTER,
+        toastLength: Toast.LENGTH_LONG,
+        timeInSecForIosWeb: 5
+    );
+    box.write('accident', false);
+  }
+  print('${box.read('initialmsg') ?? ''}');
+}
+
+
 void initialmsg(){
   if(box.read('initialmsg') ?? true){
     Fluttertoast.showToast(

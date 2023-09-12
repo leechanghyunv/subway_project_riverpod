@@ -19,8 +19,7 @@ class DialogDesignBoxA extends ConsumerWidget {
           SizedBox(
             height: 14.5.w,
             width: 3.6.w,
-            child: ColorContainer(
-                stringNumber: stringNumber),
+            child: ColorContainer(stringNumber),
           ),
           SizedBox(
             width: sizeWidth,

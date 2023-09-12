@@ -23,8 +23,7 @@ class DialogDesignBoxB extends StatelessWidget {
           SizedBox(
             height: 14.5.w,
             width: 3.6.w,
-            child: ColorContainer(
-                stringNumber: box.read('lineT') ?? 'Line2'),
+            child: ColorContainer(box.read('lineT') ?? 'Line2'),
           ),
           SizedBox(
             width: sizeWidth,

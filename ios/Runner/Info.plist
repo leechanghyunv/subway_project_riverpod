@@ -41,6 +41,8 @@
 	<string>udn9m0j2pb</string>
 	<key>NSHumanReadableCopyright</key>
 	<string></string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    	<string>This app needs access to location when using listing Subway Station in order of closest from device.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This app needs access to location when using listing Subway Station in order of closest from device.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

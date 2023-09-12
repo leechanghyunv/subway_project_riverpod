@@ -1,6 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:subway_project_230704/setting/export+.dart';
-import '../../setting/shared_manager.dart';
 import '../main_screen.dart';
 import 'intro_mainframe.dart';
 
@@ -54,6 +53,7 @@ class _LayoutIntroState extends State<LayoutIntro> {
         opacityShadow: 0.8,
         onFinish: () {
           sharedPreManager.setIsFirst(false);
+          accident();
           Navigator.push(
             context, PageTransition(
               child: HomePage(),
@@ -63,6 +63,7 @@ class _LayoutIntroState extends State<LayoutIntro> {
         },
         onSkip: (){
           sharedPreManager.setIsFirst(false);
+          accident();
           Navigator.push(
             context, PageTransition(
               child: HomePage(),

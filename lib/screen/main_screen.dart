@@ -1,6 +1,5 @@
 import '../setting/export.dart';
-import 'package:subway_project_230704/setting/export+.dart';
-import '../setting/shared_manager.dart';
+import '../setting/export+.dart';
 import 'main_screen/layout_screen_widget.dart';
 import 'table_screen.dart';
 
@@ -14,7 +13,6 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
 
   SharedPreManager sharedPreManager = SharedPreManager();
-  late List<dynamic> subwayList = [];
   late String subwayname = 'SEOUL';
 
   @override
@@ -31,7 +29,6 @@ class _HomePageState extends ConsumerState<HomePage> {
       ref.read(lineProvider.notifier).update((state) =>
       state = ref.watch(dustProvider).elementAtOrNull(0)!.barLevel.toString());
     });
-
     return LayoutMainScreen(
       colorBar: ColorBar(
         stringNumber: ref.watch(lineProvider),
@@ -70,7 +67,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       if(subwayname != 'SEOUL'){
                         await ref.read(storeProviderA.notifier).storeSubData('A');
                         savemsg('목적지 A', box.read('nameA'), box.read('engnameA'));
-                        addlist(subwayList,box.read('nameA'));
+                        sharedPreManager.addList(box.read('nameA'));
                         print('box.read codeA ${box.read('codeA')}');
                       } else if(
                       subwayname == 'SEOUL'){
@@ -81,7 +78,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       if(subwayname != 'SEOUL'){
                         await ref.read(storeProviderA.notifier).storeSubData('B');
                         savemsg('목적지 B', box.read('nameB'), box.read('engnameB'));
-                        addlist(subwayList,box.read('nameB'));
+                        sharedPreManager.addList(box.read('nameB'));
                         print('box.read codeA ${box.read('codeB')}');
                       } else if(
                       subwayname == 'SEOUL'){
@@ -131,7 +128,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       if(subwayname != 'SEOUL'){
                         await ref.read(storeProviderA.notifier).storeSubData('A');
                         savemsg('목적지 A', box.read('nameA'), box.read('engnameA'));
-                        addlist(subwayList,box.read('nameA'));
+                        sharedPreManager.addList(box.read('nameA'));
                       } else if(
                       subwayname == 'SEOUL'){
                         showmsg();
@@ -141,7 +138,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       if(subwayname != 'SEOUL'){
                         await ref.read(storeProviderA.notifier).storeSubData('B');
                         savemsg('목적지 B', box.read('nameB'), box.read('engnameB'));
-                        addlist(subwayList,box.read('nameB'));
+                        sharedPreManager.addList(box.read('nameB'));
                       } else if(
                       subwayname == 'SEOUL'){
                         showmsg();
@@ -207,7 +204,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                               ref.read(nameProvider.notifier).state = box.read('nameA') ?? '';
                               ref.read(engNameProvider.notifier).state = box.read('engnameA') ?? '';
                               ref.read(lineProvider.notifier).state = box.read('lineA') ?? '';
-
                               ref.read(headingProvider.notifier).state = box.read('headingA') ?? '';
                               ref.read(codeConveyProvider.notifier).state = box.read('codeB') ?? '';
                               Navigator.pop(context);
@@ -223,23 +219,21 @@ class _HomePageState extends ConsumerState<HomePage> {
             }
           }else if(index == 1){
             toggleguide2();
-            subwayList = box.read('list') ?? [];
-            List<dynamic> settedList = subwayList.toSet().toList();
-            print(settedList);
+            print(sharedPreManager.getList());
             Get.dialog(
               AlertDialog(
-                content: SwitchDialogB(settedList),
+                content: SwitchDialogB(sharedPreManager.getList()),
                 actions: [
                   DialogButton(
                     onPressed: () async {
                       await ref.read(storeProviderA.notifier).storeSubData('A');
                       savemsg('목적지 A', box.read('nameA'), box.read('engnameA'));
-                      addlist(subwayList,box.read('nameA'));
+                      sharedPreManager.addList(box.read('nameA'));
                     },
                     onLongPress: () async {
                       await ref.read(storeProviderA.notifier).storeSubData('B');
                       savemsg('목적지 B', box.read('nameB'), box.read('engnameB'));
-                      addlist(subwayList,box.read('nameB'));
+                      sharedPreManager.addList(box.read('nameB'));
                     },
                     comment: 'Save',
                   ),
@@ -287,7 +281,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                           ref.read(nameProvider.notifier).state = box.read('nameB') ?? '';
                           ref.read(engNameProvider.notifier).state = box.read('engnameB') ?? '';
                           ref.read(lineProvider.notifier).state = box.read('lineB') ?? '';
-
                           ref.read(headingProvider.notifier).state = box.read('headingB') ?? '';
                           ref.read(codeConveyProvider.notifier).state = box.read('codeA') ?? '';
                           Navigator.pop(context);
@@ -306,6 +299,8 @@ class _HomePageState extends ConsumerState<HomePage> {
       ),
       onTap: (){
         var codeConvey = ref.read(codeConveyProvider.notifier).state;
+        var name = ref.read(nameProvider.notifier).state;
+        var eng = ref.read(engNameProvider.notifier).state;
         showModalBottomSheet(
             context: context,
             isScrollControlled: true,
@@ -316,25 +311,17 @@ class _HomePageState extends ConsumerState<HomePage> {
                     child: codeConvey == ''
                         ? TextFrame(comment: '목적지를 설정해주세요')
                         : TableScreen(
-                      ref.read(nameProvider.notifier).state == box.read('nameA')
-                          ? box.read('nameB') :  ref.read(nameProvider.notifier).state == box.read('nameB')
-                          ? box.read('nameA') : '',
-                      ref.read(engNameProvider.notifier).state == box.read('engnameA')
-                          ? box.read('engnameB') : ref.read(engNameProvider.notifier).state == box.read('engnameB')
-                          ? box.read('engnameA') : '',
+                      name == box.read('nameA')
+                          ? box.read('nameB')
+                          : name == box.read('nameB') ? box.read('nameA') : '',
+
+                      eng == box.read('engnameA')
+                          ? box.read('engnameB')
+                          : eng == box.read('engnameB') ? box.read('engnameA') : '',
                     ),
                   ));
             });
       },
     );
-  }
-  void addlist (List<dynamic> list,String name){
-    if(list.length <= 5){
-      list.add(name);
-      box.write('list', list);
-    } else {
-      list.removeAt(0);
-      box.write('list', list);
-    }
   }
 }

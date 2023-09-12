@@ -240,9 +240,7 @@ class ColorBar extends ConsumerWidget {
                 : 52.h,
 
             width: 8.w,
-            child: ColorContainer(
-                 stringNumber: stringNumber,
-            ),
+            child: ColorContainer(stringNumber),
           ),
         )
       ],

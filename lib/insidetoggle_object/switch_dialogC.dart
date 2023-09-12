@@ -37,7 +37,8 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
           Container(
             color: Colors.grey[100],
             width: double.maxFinite,
-            child: arrivel.when(
+            child:
+            arrivel.when(
               loading: () => TextFrame(comment: 'loading.....'),
               error: (err, stack) => Container(
                   child: Padding(

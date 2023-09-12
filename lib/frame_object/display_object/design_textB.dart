@@ -48,14 +48,14 @@ class TextContainerB extends ConsumerWidget {
                 ),
                 Consumer(
                   builder: (context,ref,child){
-                    final code = ref.watch(codeConveyProvider);
+                    final cost = ref.watch(costProvider);
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ToopTipWidget(
-                        message: '출발지점의 역사코드\n열차번호: ${code}',
+                        message: '지하철요금\n${cost}원',
                         child: Text(
-                          'CODE',
+                          'FARE ',
                           style: common,
                         ),
                       ),
@@ -63,9 +63,9 @@ class TextContainerB extends ConsumerWidget {
                         height: 2.w,
                       ),
                       ToopTipWidget(
-                              message: '출발지점 역사코드\n열차번호: ${code}',
-                              child: Text(code.isNotEmpty
-                                  ? '${code}'
+                              message: '지하철요금\n${cost}원',
+                              child: Text(cost.isNotEmpty
+                                  ? '${cost}'
                                   : '0000',
                                 style: common,
                               ),

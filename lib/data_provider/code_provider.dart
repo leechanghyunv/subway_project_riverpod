@@ -17,7 +17,6 @@ final apiCodeProvider = FutureProvider<List<CodeModel>>((ref) async {
     final List<dynamic> jsonBody = jsonDecode(response.body)['SearchInfoBySubwayNameService']['row'];
     print('codeProvider 저장완료');
     return jsonBody.map((e) => CodeModel.fromJson(e)).toList();
-
   } else {
     throw Exception('Failed to load code data');
   }

@@ -13,14 +13,16 @@ final latlonglineProvier = StateProvider<String>((ref) => ref.watch(lineProvider
 class SwitchDialogB extends ConsumerWidget {
 
   final List<dynamic> subwayList;
-
   SwitchDialogB(this.subwayList, {super.key});
+
+  SharedPreManager sharedPreManager = SharedPreManager();
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     double appWidth = MediaQuery.of(context).size.width;
     final initialdata = ref.watch(dataProviderInside);
     ref.listen(lineProvider, (previous, next) {
+      sharedPreManager.init();
       ref.read(latlonglineProvier.notifier).update((state) =>
       state = ref.watch(dustProvider).elementAtOrNull(0)!.barLevel.toString());
     });
@@ -145,6 +147,7 @@ class SwitchDialogB extends ConsumerWidget {
                                       comment: 'Select',
                                       onPressed: (){
                                         Select(row);
+                                        sharedPreManager.addList(row);
                                         Navigator.pop(context);
                                       },
                                     ),
@@ -166,7 +169,7 @@ class SwitchDialogB extends ConsumerWidget {
   }
 
   List<String> menulist = [
-    'Line1', 'Line2', 'Line3', 'Line4', 'Line5', 'Line6', 'Line7', 'Line8', 'Line9', '신분당', '수인분당', '경의선', '우이신설', '신림', '공항철도',
+    'Line1', 'Line2', 'Line3', 'Line4', 'Line5', 'Line6', 'Line7', 'Line8', 'Line9', '신분당', '수인분당', '경의선', '우이신설', '공항철도',
   ];
 }
 

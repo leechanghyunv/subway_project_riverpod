@@ -64,14 +64,14 @@ class _LayoutMainScreenState extends State<LayoutMainScreen> {
           title: DialogDesign(designText: 'Dear User'),
           content: TextFrame(
             comment: 'We care about your privacy and data security. We use data showing NAVER_Map and displaying subway list sorted by proximity to the device'
-              'Can we continue to use your data?\n\nYou can change your choice anytime in the app settings. '
+              ' Can we continue to use your data?\n\nYou can change your choice anytime in the app settings. '
               'We will collect Location data and use a unique identifier on your device.',
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: TextFrame(
-                comment: 'OK',
+                comment: 'Continue',
                 color: Colors.black,
                 overflow: TextOverflow.ellipsis,
               ),

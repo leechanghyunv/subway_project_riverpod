@@ -32,5 +32,4 @@ final infoProviderB = StateNotifierProvider<DataController, /// popupmenu를 위
   final database = ref.watch(dataProviderInside);
   return DataController(database);
 });
-/// /// /// /// /// /// /// /// /// //
 

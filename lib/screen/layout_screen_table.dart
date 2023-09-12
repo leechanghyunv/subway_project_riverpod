@@ -14,9 +14,6 @@ class LayoutTable extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double appHeight = MediaQuery.of(context).size.height;  ///  896.0 IPHONE11
-    double appWidth = MediaQuery.of(context).size.width;  /// 414.0 IPHONE11
-
     return SafeArea(
         child: Scaffold(
           resizeToAvoidBottomInset: false,

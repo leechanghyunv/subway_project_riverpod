@@ -23,8 +23,7 @@ class DialogDesignBoxC extends StatelessWidget {
           SizedBox(
             height: 14.5.w,
             width: 3.6.w,
-            child: ColorContainer(
-                stringNumber: stringNumber),
+            child: ColorContainer(stringNumber),
           ),
           SizedBox(
             width: 1.8.w,

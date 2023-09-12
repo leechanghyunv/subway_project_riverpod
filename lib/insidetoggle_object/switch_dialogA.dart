@@ -43,7 +43,8 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
             child: Container(
                 color: Colors.grey[100],
                 width: double.maxFinite,
-                child: arrivel.when(
+                child:
+                arrivel.when(
                   loading: () => TextFrame(comment: 'loading.....'),
                   error: (err, stack) => Container(
                     alignment: Alignment.center,

@@ -8,11 +8,11 @@ class SmsFunction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double appHeight = MediaQuery.of(context).size.height;///  896.0 IPHONE11
     double appWidth = MediaQuery.of(context).size.width;
 
     return TextButton(
       onPressed: () async {
+
         if (subwayline == 'Line1' || subwayline == 'Line2' ||
             subwayline == 'Line3' || subwayline == 'Line4' ||
             subwayline == 'Line5' || subwayline == 'Line6' ||
@@ -36,6 +36,7 @@ class SmsFunction extends StatelessWidget {
         if (await canLaunchUrl(url)) {
           await launchUrl(url);
         }
+
         Navigator.pop(context);
       },
       child: Text('Send SMS',

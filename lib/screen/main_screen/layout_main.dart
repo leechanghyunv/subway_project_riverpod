@@ -71,7 +71,7 @@ Widget Layout_Main(
                       ],
                     ),
                     SizedBox(
-                      height: 1.2.h,
+                      height: 1.5.h,
                     ),
                     BottomDesign(
                       onTap: ontap,
