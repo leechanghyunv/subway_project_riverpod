@@ -16,7 +16,7 @@ Widget IntroLayer_se(iconSize,key1,key2,key3,key4,key5,key6) => Scaffold(
             width: 88.5.w,
             child: Column(
               children: <Widget>[
-                DottedLine(
+                const DottedLine(
                   dashLength: 12, dashGapLength: 4.5, lineThickness: 5,
                 ),
                 Row(

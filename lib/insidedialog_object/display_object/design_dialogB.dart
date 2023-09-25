@@ -8,11 +8,9 @@ class DialogDesignBoxB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String subwayName = box.read('nameT') ?? '';
-    final filtered = subwayName.replaceAll(RegExp(r'\([^()]*\)'), '');
+    final filtered = nameT.replaceAll(RegExp(r'\([^()]*\)'), '');
 
     double sizeWidth = 2.42.w;
-    double textSize = 3.5.w;
     double contHeight = 16.8.w;
 
     return Container(
@@ -23,7 +21,7 @@ class DialogDesignBoxB extends StatelessWidget {
           SizedBox(
             height: 14.5.w,
             width: 3.6.w,
-            child: ColorContainer(box.read('lineT') ?? 'Line2'),
+            child: ColorContainer(lineT),
           ),
           SizedBox(
             width: sizeWidth,
@@ -37,20 +35,15 @@ class DialogDesignBoxB extends StatelessWidget {
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('Date',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize)),
+                Text('Date', style: dialogABC,
+                ),
                 SizedBox(
                   height: sizeWidth,
                 ),
                 Text(
                     DateFormat('MM-dd').format(DateTime.now()),
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize)),
+                    style: dialogABC,
+                ),
               ],
             ),
           ),
@@ -66,22 +59,16 @@ class DialogDesignBoxB extends StatelessWidget {
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('Transfer',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize)),
+                Text('Transfer', style: dialogABC,
+                ),
                 SizedBox(
                   height: sizeWidth,
                 ),
                 Text(
-                    box.read('nameT') != null
-                        ? '${filtered}역'
+                    nameT.isNotEmpty
+                        ? '$filtered역'
                         : '',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize),
+                    style: dialogABC,
                     overflow: TextOverflow.ellipsis),
               ],
             ),
@@ -98,19 +85,13 @@ class DialogDesignBoxB extends StatelessWidget {
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('Passenger',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize)),
+                Text('Passenger', style: dialogABC,
+                ),
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text(box.read('name') ?? '',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize),
+                Text(name,
+                    style: dialogABC,
                     overflow: TextOverflow.ellipsis)
               ],
             ),

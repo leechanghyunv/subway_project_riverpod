@@ -1,4 +1,3 @@
-import 'package:subway_project_230704/model/schedule_provider_model.dart';
 import '../../setting/export.dart';
 import '../../setting/export+.dart';
 

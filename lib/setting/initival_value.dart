@@ -11,9 +11,7 @@ final upDownProvider = StateProvider<int>((ref) => 0);
 final destination = StateProvider<String>((ref) => '');
 /// sublistA
 final costProvider = StateProvider<String>((ref) => '0000');
-final secondCostProvider = StateProvider<String>((ref) => '');
 final timeProvider = StateProvider<int>((ref) => 0);
-final secondtimeProvider = StateProvider<int>((ref) => 0);
 final engNameProvider = StateProvider<String>((ref) => '');
 final headingProvider = StateProvider<String>((ref) => 'NNNN');
 final codeConveyProvider = StateProvider<String>((ref) => '');
@@ -23,6 +21,10 @@ final lineToArrivalProvider = StateProvider<String>((ref) => '');
 final convertProvdier = StateProvider<bool>((ref) => false);
 
 final routeListProvider = StateProvider<List<Iterable<String?>?>>((ref) => []);
+
+
+
+
 
 
 

@@ -58,3 +58,27 @@ abstract class WeatherApiService extends ChopperService{
       @Query('appid') String Key,
       );
 }
+
+@ChopperApi()
+abstract class SkOpenApiService extends ChopperService{
+  static SkOpenApiService create(){
+    final client = ChopperClient(
+      baseUrl: Uri.parse('http://apis.openapi.sk.com/transit/routes'),
+      services: [_$SkOpenApiService()],
+    );
+    return _$SkOpenApiService(client);
+  }
+  /// Tmap 유료 데이터(지하철 이동 경로, 도착시간, 상하행선 정보 제공)
+  @Post(
+      headers: {
+        'accept': 'application/json',
+        'appKey': 'ceevGND92fauEWQ8gfEnJ2i2gTlX1sxT2DBh3XRh',
+        'content-type': 'application/json',
+        // "lang": '0',
+        // "format": "json",
+        // "count": '10'
+  })
+  Future<Response> getskmapservice(
+      @Body() Map<String, dynamic> body,
+      );
+}

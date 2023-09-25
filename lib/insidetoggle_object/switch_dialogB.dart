@@ -1,6 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:subway_project_230704/setting/export+.dart';
-import 'package:subway_project_230704/setting/geolocator.dart';
 
 List<Color> kDefaultRainbowColors2 = [
   Colors.grey.shade600,
@@ -12,14 +11,14 @@ final latlonglineProvier = StateProvider<String>((ref) => ref.watch(lineProvider
 
 class SwitchDialogB extends ConsumerWidget {
 
-  final List<dynamic> subwayList;
   SwitchDialogB(this.subwayList, {super.key});
 
   SharedPreManager sharedPreManager = SharedPreManager();
 
+  final List<String> subwayList;
+
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double appWidth = MediaQuery.of(context).size.width;
     final initialdata = ref.watch(dataProviderInside);
     ref.listen(lineProvider, (previous, next) {
       sharedPreManager.init();
@@ -28,7 +27,7 @@ class SwitchDialogB extends ConsumerWidget {
     });
     return Container(
       color: Colors.white,
-      height: Device.aspectRatio >= 0.5 ? appWidth * 0.9662 : appWidth * 1.1,
+      height: Device.aspectRatio >= 0.5 ? 97.w : 110.w,
       child: Column(
         children: [
           Row(
@@ -43,11 +42,11 @@ class SwitchDialogB extends ConsumerWidget {
           ),
           Container(
             color: Colors.grey,
-            height: Device.aspectRatio >= 0.5 ? appWidth * 0.51 : appWidth * 0.6268,
+            height: Device.aspectRatio >= 0.5 ? 51.w : 63.w,
             child: DialogPage(),
           ),
           Container(
-            height: appWidth * 0.0845,
+            height: 8.45.w,
             color: Colors.white,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -56,14 +55,14 @@ class SwitchDialogB extends ConsumerWidget {
                   child: Container(
                     alignment: Alignment.centerRight,
                     color: Colors.grey[100],
-                    height: appWidth * 0.0845,
+                    height: 8.45.w,
                   ),
                 ),
                 Container(
                   alignment: Alignment.center,
                   color: Colors.grey[300],
-                  width: appWidth * 0.1812,
-                  height: appWidth * 0.0845,
+                  width: 18.1.w,
+                  height: 8.45.w,
                   child: DropdownButton(
                       value: ref.watch(latlonglineProvier),
                       dropdownColor: Colors.grey[200],
@@ -76,18 +75,14 @@ class SwitchDialogB extends ConsumerWidget {
                           .map<DropdownMenuItem<dynamic>>((dynamic value){
                         return DropdownMenuItem<dynamic>(
                             value: value,
-                            child: Text(value,
-                              style: TextStyle(
-                                  fontSize: appWidth * 0.0362,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),)
+                            child: Text(
+                              value, style: dropdown,
+                            ),
                         );
                       }).toList(),
                       onChanged: (val){
                         ref.read(latlngProvider);
-                        ref.read(locationProvider);
-                        ref.read(latlonglineProvier.notifier).
-                        update((state) => state = val);
+                        ref.read(latlonglineProvier.notifier).update((state) => state = val);
                       }),
                 ),
               ],
@@ -97,7 +92,7 @@ class SwitchDialogB extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Container(
-              height: appWidth * 0.09,
+              height: 9.w,
               color: Colors.white,
               alignment: Alignment.center,
               width: double.maxFinite,
@@ -120,16 +115,9 @@ class SwitchDialogB extends ConsumerWidget {
                               Get.dialog(
                                 AlertDialog(
                                   content: initialdata.when(
-                                    loading: () => Container(
-                                        color: Colors.white,
-                                        height: appWidth * 0.9075,
-                                        alignment: Alignment.center,
-                                        child: TextFrame(comment: 'loading.....')),
-                                    error: (err, stack) => Container(
-                                        child: Padding(
-                                      padding: const EdgeInsets.all(25.0),
-                                      child: Text(err.toString()),
-                                    )),
+                                    loading: () => LoadingBox('loading.....'),
+                                    error: (err, stack) => LoadingBox(
+                                        err.toString()),
                                     data: (data){
                                       ref.read(infoProvider.notifier).searchSubway(name: row);
                                       ref.read(infoProviderB.notifier).searchSubway(name: row);
@@ -148,6 +136,7 @@ class SwitchDialogB extends ConsumerWidget {
                                       onPressed: (){
                                         Select(row);
                                         sharedPreManager.addList(row);
+                                        addlist(subwayList,row);
                                         Navigator.pop(context);
                                       },
                                     ),
@@ -171,6 +160,16 @@ class SwitchDialogB extends ConsumerWidget {
   List<String> menulist = [
     'Line1', 'Line2', 'Line3', 'Line4', 'Line5', 'Line6', 'Line7', 'Line8', 'Line9', '신분당', '수인분당', '경의선', '우이신설', '공항철도',
   ];
+
+  void addlist (List<dynamic> list, String name) async {
+    if(list.length <= 6){
+      list.add(name);
+      await box.write('List', list);
+    } else {
+      list.removeAt(0);
+      await box.write('List', list);
+    }
+  }
 }
 
 

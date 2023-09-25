@@ -1,6 +1,5 @@
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:subway_project_230704/setting/export+.dart';
-import 'package:subway_project_230704/setting/shared_manager.dart';
 import 'main_screen.dart';
 
 class ScreenController extends ConsumerStatefulWidget {
@@ -19,6 +18,7 @@ class ScreenController extends ConsumerStatefulWidget {
     super.initState();
     _futureData = fetchData();
     sharedPreManager.init();
+    ref.read(dustLevelProvider);
   }
   @override
   Widget build(BuildContext context) {

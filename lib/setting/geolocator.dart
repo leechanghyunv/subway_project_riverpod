@@ -1,6 +1,7 @@
 import 'package:subway_project_230704/setting/export.dart';
 
 final locationProvider = FutureProvider.autoDispose<Position>((ref) async {
+
   print('start locationProvider');
   LocationPermission permission;
   permission = await Geolocator.checkPermission();

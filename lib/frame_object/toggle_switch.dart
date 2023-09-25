@@ -18,7 +18,7 @@ class _Toggle_ControllerState extends State<ToggleController> {
     return ToggleSwitch(
       minWidth: 10.5.w,
       minHeight: 6.w,
-      fontSize: 3.5.w,/// 15
+      fontSize: 3.5.w, /// 15
       totalSwitches: 3,
       initialLabelIndex: null,
       doubleTapDisable: true,

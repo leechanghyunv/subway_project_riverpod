@@ -41,12 +41,8 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
                   final filted = ref.watch(filtedArrivalProvider(
                       subdata.first.subwayid.toString()));
                   return filted.when(
-                    loading: () => TextFrame(comment: 'loading.....'),
-                    error: (err, stack) => Container(
-                        child: Padding(
-                          padding: const EdgeInsets.all(25.0),
-                          child: TextFrame(comment: '데이터를 불러올 수 없습니다'),
-                        )),
+                    loading: () => LoadingBox('loading'),
+                    error: (err, stack) => LoadingBox('데이터를 불러올 수 없습니다'),
                     data: (data){
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +68,7 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
                 svg.when(
                   loading: () => const Center(
                       child: TextFrame(comment: 'loading.....')),
-                  error: (err, stack) => Text(err.toString()),
+                  error: (err, stack) => Icon(Icons.question_mark),
                   data: (data){
                     return data;
                   },
@@ -95,6 +91,7 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
                   },
                 ),
                 const Expanded(child: Text('')),
+
                 PopupMenuButton(
                   itemBuilder: (BuildContext context){
                     return ref.watch(infoProviderB).map((e){
@@ -104,10 +101,11 @@ class _SwitchDialogCState extends ConsumerState<SwitchDialogC> {
                       );
                     }).toList();
                   },
-                  child: Icon(Icons.menu),
+                  child: const Icon(Icons.menu),
                   onSelected: (value){
                     print(value);
-                    ref.read(infoProvider.notifier).searchSubway(name: subdata.first.subname,line: value); // line: value
+                    ref.read(infoProvider.notifier).
+                    searchSubway(name: subdata.first.subname,line: value); // line: value
                   },
                 )
               ],

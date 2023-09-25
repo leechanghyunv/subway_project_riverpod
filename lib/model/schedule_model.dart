@@ -1,5 +1,5 @@
-
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'schedule_model.g.dart';
 part 'schedule_model.freezed.dart';
 

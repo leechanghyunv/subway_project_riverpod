@@ -3,8 +3,6 @@ import 'package:subway_project_230704/setting/export+.dart';
 
 class DialogDesign extends StatelessWidget {
 
-  String qrdata = '1234ffov3pp5oq23lk';
-
   late final String designText;
 
   DialogDesign({
@@ -31,9 +29,8 @@ class DialogDesign extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ///
               TextFrame(
-                comment: '${designText}',
+                comment: designText,
                 overflow: TextOverflow.ellipsis,
               ),
 

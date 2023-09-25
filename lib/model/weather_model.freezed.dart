@@ -14,6 +14,184 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+WeatherInfo _$WeatherInfoFromJson(Map<String, dynamic> json) {
+  return _WeatherInfo.fromJson(json);
+}
+
+/// @nodoc
+mixin _$WeatherInfo {
+  Main get main => throw _privateConstructorUsedError;
+  Weather get weather => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $WeatherInfoCopyWith<WeatherInfo> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WeatherInfoCopyWith<$Res> {
+  factory $WeatherInfoCopyWith(
+          WeatherInfo value, $Res Function(WeatherInfo) then) =
+      _$WeatherInfoCopyWithImpl<$Res, WeatherInfo>;
+  @useResult
+  $Res call({Main main, Weather weather});
+
+  $MainCopyWith<$Res> get main;
+  $WeatherCopyWith<$Res> get weather;
+}
+
+/// @nodoc
+class _$WeatherInfoCopyWithImpl<$Res, $Val extends WeatherInfo>
+    implements $WeatherInfoCopyWith<$Res> {
+  _$WeatherInfoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? main = null,
+    Object? weather = null,
+  }) {
+    return _then(_value.copyWith(
+      main: null == main
+          ? _value.main
+          : main // ignore: cast_nullable_to_non_nullable
+              as Main,
+      weather: null == weather
+          ? _value.weather
+          : weather // ignore: cast_nullable_to_non_nullable
+              as Weather,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MainCopyWith<$Res> get main {
+    return $MainCopyWith<$Res>(_value.main, (value) {
+      return _then(_value.copyWith(main: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WeatherCopyWith<$Res> get weather {
+    return $WeatherCopyWith<$Res>(_value.weather, (value) {
+      return _then(_value.copyWith(weather: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_WeatherInfoCopyWith<$Res>
+    implements $WeatherInfoCopyWith<$Res> {
+  factory _$$_WeatherInfoCopyWith(
+          _$_WeatherInfo value, $Res Function(_$_WeatherInfo) then) =
+      __$$_WeatherInfoCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({Main main, Weather weather});
+
+  @override
+  $MainCopyWith<$Res> get main;
+  @override
+  $WeatherCopyWith<$Res> get weather;
+}
+
+/// @nodoc
+class __$$_WeatherInfoCopyWithImpl<$Res>
+    extends _$WeatherInfoCopyWithImpl<$Res, _$_WeatherInfo>
+    implements _$$_WeatherInfoCopyWith<$Res> {
+  __$$_WeatherInfoCopyWithImpl(
+      _$_WeatherInfo _value, $Res Function(_$_WeatherInfo) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? main = null,
+    Object? weather = null,
+  }) {
+    return _then(_$_WeatherInfo(
+      main: null == main
+          ? _value.main
+          : main // ignore: cast_nullable_to_non_nullable
+              as Main,
+      weather: null == weather
+          ? _value.weather
+          : weather // ignore: cast_nullable_to_non_nullable
+              as Weather,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_WeatherInfo implements _WeatherInfo {
+  const _$_WeatherInfo({required this.main, required this.weather});
+
+  factory _$_WeatherInfo.fromJson(Map<String, dynamic> json) =>
+      _$$_WeatherInfoFromJson(json);
+
+  @override
+  final Main main;
+  @override
+  final Weather weather;
+
+  @override
+  String toString() {
+    return 'WeatherInfo(main: $main, weather: $weather)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_WeatherInfo &&
+            (identical(other.main, main) || other.main == main) &&
+            (identical(other.weather, weather) || other.weather == weather));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, main, weather);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_WeatherInfoCopyWith<_$_WeatherInfo> get copyWith =>
+      __$$_WeatherInfoCopyWithImpl<_$_WeatherInfo>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_WeatherInfoToJson(
+      this,
+    );
+  }
+}
+
+abstract class _WeatherInfo implements WeatherInfo {
+  const factory _WeatherInfo(
+      {required final Main main,
+      required final Weather weather}) = _$_WeatherInfo;
+
+  factory _WeatherInfo.fromJson(Map<String, dynamic> json) =
+      _$_WeatherInfo.fromJson;
+
+  @override
+  Main get main;
+  @override
+  Weather get weather;
+  @override
+  @JsonKey(ignore: true)
+  _$$_WeatherInfoCopyWith<_$_WeatherInfo> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 Main _$MainFromJson(Map<String, dynamic> json) {
   return _Main.fromJson(json);
 }

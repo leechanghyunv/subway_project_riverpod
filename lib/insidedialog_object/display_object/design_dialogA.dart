@@ -6,20 +6,19 @@ class DialogDesignBoxA extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     double sizeWidth = 2.42.w;
-    double textSize = 3.5.w;
     double contHeight = 16.8.w;
 
-    final stringNumber = ref.watch(lineProvider);
+    final line = ref.watch(lineProvider);
 
     return Container(
       height: 16.5.w,
-      decoration: BoxDecoration(color: Colors.white),
+      decoration: const BoxDecoration(color: Colors.white),
       child: Row(
         children: [
           SizedBox(
             height: 14.5.w,
             width: 3.6.w,
-            child: ColorContainer(stringNumber),
+            child: ColorContainer(line),
           ),
           SizedBox(
             width: sizeWidth,
@@ -33,20 +32,15 @@ class DialogDesignBoxA extends ConsumerWidget {
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('Date',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize)),
+                Text('Date', style: dialogABC,
+                ),
                 SizedBox(
                   height: sizeWidth,
                 ),
                 Text(
                     DateFormat('MM-dd').format(DateTime.now()),
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize)),
+                    style: dialogABC,
+                ),
               ],
             ),
           ),
@@ -62,11 +56,8 @@ class DialogDesignBoxA extends ConsumerWidget {
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('Location',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize)),
+                Text('Location', style: dialogABC,
+                ),
                 SizedBox(
                   height: sizeWidth,
                 ),
@@ -80,14 +71,11 @@ class DialogDesignBoxA extends ConsumerWidget {
                     return Text(
                         filtered == 'SEOUL'
                             ? 'SEOUL'
-                            : '${filtered}역',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: textSize),
+                            : '$filtered역',
+                        style: dialogABC,
                         overflow: TextOverflow.ellipsis);
                   }
-                  return Text('');
+                  return Text('SEOUL',style: dialogABC);
                 }),
 
               ],
@@ -106,19 +94,13 @@ class DialogDesignBoxA extends ConsumerWidget {
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('Passenger',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize)),
+                Text('Passenger', style: dialogABC,
+                ),
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text(box.read('name') ?? '',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize),
+                Text(name,
+                    style: dialogABC,
                     overflow: TextOverflow.ellipsis)
               ],
             ),

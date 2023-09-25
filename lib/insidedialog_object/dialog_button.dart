@@ -1,3 +1,4 @@
+import 'package:subway_project_230704/setting/export+.dart';
 import 'package:subway_project_230704/setting/export.dart';
 
 class DialogButton extends StatelessWidget {
@@ -11,7 +12,6 @@ class DialogButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double appWidth = MediaQuery.of(context).size.width;
     return SizedBox(
       child: GestureDetector(
         child: TextButton(
@@ -21,7 +21,7 @@ class DialogButton extends StatelessWidget {
             child: Text(
               comment,
               style: TextStyle(
-                  fontSize: appWidth * 0.0362,
+                  fontSize: 3.62.w,
                   fontWeight: FontWeight.bold,
                   color: Colors.black
               ),

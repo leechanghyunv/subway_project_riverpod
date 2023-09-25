@@ -12,13 +12,8 @@ class DialogPage extends ConsumerWidget {
 
     return Scaffold(
       body: latlongData.when(
-        error: (err, stack) => Container(
-            child: Padding(
-              padding: const EdgeInsets.all(25.0),
-              child: Text(err.toString()),
-            )),
-        loading: () => Center(
-            child: TextFrame(comment: 'loading.....')),
+        error: (err, stack) => LoadingBox(err.toString()),
+        loading: () => LoadingBox('loading.....'),
         data: (data){
           return SingleChildScrollView(
             child: ListView.builder(
@@ -70,7 +65,8 @@ class DialogPage extends ConsumerWidget {
                       endActionPane: ActionPane(
                           motion: StretchMotion(),
                           children: [
-                            SlidableAction(onPressed: (onPressed){
+                            SlidableAction(
+                              onPressed: (onPressed){
                               smsguide();
                               Get.dialog(
                                 AlertDialog(
@@ -87,8 +83,8 @@ class DialogPage extends ConsumerWidget {
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: DialogDesignBoxC(
-                                            stringNumber: row.line_ui,
-                                            subwayName: row.subname,
+                                            line: row.line_ui,
+                                            name: row.subname,
                                           ),
                                         ),
                                       ],
@@ -102,7 +98,7 @@ class DialogPage extends ConsumerWidget {
                                         comment: 'Cancel'),
                                     SizedBox(
                                       child: SmsFunction(
-                                          subwayline: row.subname
+                                          line: row.line_ui
                                       ),
                                     ),
                                   ],
@@ -124,16 +120,8 @@ class DialogPage extends ConsumerWidget {
                               Get.dialog(
                                 AlertDialog(
                                   content: initialdata.when(
-                                    loading: () => Container(
-                                        color: Colors.white,
-                                        height: 90.7.w,
-                                        alignment: Alignment.center,
-                                        child: TextFrame(comment: 'loading.....')),
-                                    error: (err, stack) => Container(
-                                        child: Padding(
-                                      padding: const EdgeInsets.all(25.0),
-                                      child: Text(err.toString()),
-                                    )),
+                                    loading: () => LoadingBox('loading.....'),
+                                    error: (err, stack) => LoadingBox(err.toString()),
                                     data: (data){
                                       ref.read(infoProvider.notifier).searchSubway(name: row.subname, line: row.line_ui);
                                       ref.read(infoProviderB.notifier).searchSubway(name: row.subname);
@@ -162,23 +150,14 @@ class DialogPage extends ConsumerWidget {
                               selectedColor: Colors.grey[300],
                               title: Row(
                                 children: [
-                                  Text('${row.subname}',
-                                    style: TextStyle(
-                                        fontSize: 3.3.w,
-                                        fontWeight:FontWeight.bold,
-                                        color: Colors.black,
-                                        overflow: TextOverflow.ellipsis
-                                    ),
+                                  Text(row.subname,
+                                    style: dialogcommon,
                                   ),
                                 ],
                               ),
-                              trailing: Text('${row.km?.toStringAsFixed(0)}m',
-                                style: TextStyle(
-                                    fontSize: 3.3.w,
-                                    fontWeight:FontWeight.bold,
-                                    color: Colors.black,
-                                    overflow: TextOverflow.ellipsis
-                                ),
+                              trailing: Text(
+                                '${row.km?.toStringAsFixed(0)}m',
+                                style: dialogcommon,
                               ),
                             ),
                           ),

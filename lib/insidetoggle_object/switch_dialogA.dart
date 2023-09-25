@@ -38,7 +38,8 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
           DialogDesign(
             designText: 'RealTime Arrival',
           ),
-          ToopTipWidget(
+
+          ToolTipWidget(
             message: ref.watch(routeProvider),
             child: Container(
                 color: Colors.grey[100],
@@ -47,35 +48,29 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                     builder: (context,ref,child){
                   final filted = ref.watch(filtedArrivalProvider(widget.list));
                   return filted.when(
-                    loading: () => TextFrame(comment: 'loading.....'),
-                    error: (err,stack) => Container(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: const EdgeInsets.all(25.0),
-                        child: TextFrame(comment: '데이터를 불러올 수 없습니다'),
-                      ),
-                    ),
+                    loading: () => LoadingBox('loading.....'),
+                    error: (err,stack) => LoadingBox('데이터를 불러올 수 없습니다'),
                     data: (data){
                       var arrivalA = data.arrival!.where((e) => updnLine1.contains(e.updnLine));
                       var arrivalB = data.arrival!.where((e) => updnLine2.contains(e.updnLine));
 
-                      var subNumber1 = arrivalA.map((e) => '${e.btrainNo}').first;
+                      var subNumber1 = arrivalA.map((e) => e.btrainNo).first;
                       box.write('subNumber1', subNumber1);
-                      var subState1 = arrivalA.map((e) => '${e.arvlCd}').first;
+                      var subState1 = arrivalA.map((e) => e.arvlCd).first;
                       box.write('subState1', subState1);
-                      var subSttus1 = arrivalA.map((e) => '${e.btrainSttus}').first;
+                      var subSttus1 = arrivalA.map((e) => e.btrainSttus).first;
                       box.write('state1', subSttus1);
-                      var destination1 = arrivalA.map((e) => '${e.trainLineNm}').first;
+                      var destination1 = arrivalA.map((e) => e.trainLineNm).first;
                       String filtedDestination1 = destination1.split(" - ")[0];
                       box.write('destination1', filtedDestination1);
 
-                      var subNumber2 = arrivalB.map((e) => '${e.btrainNo}').first;
+                      var subNumber2 = arrivalB.map((e) => e.btrainNo).first;
                       box.write('subNumber2', subNumber2);
-                      var subState2 = arrivalB.map((e) => '${e.arvlCd}').first;
+                      var subState2 = arrivalB.map((e) => e.arvlCd).first;
                       box.write('subState2', subState2);
-                      var subSttus2 = arrivalB.map((e) => '${e.btrainSttus}').first;
+                      var subSttus2 = arrivalB.map((e) => e.btrainSttus).first;
                       box.write('state2', subSttus2);
-                      var destination2 = arrivalB.map((e) => '${e.trainLineNm}').first;
+                      var destination2 = arrivalB.map((e) => e.trainLineNm).first;
                       String filtedDestination2 = destination2.split(" - ")[0];
                       box.write('destination2', filtedDestination2);
                       return Column(
@@ -92,9 +87,11 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                       );
                     },
                   );
-                }),
+                },
+                ),
             ),
           ),
+
           Container(
             width: double.maxFinite,
             color: Colors.white,
@@ -103,7 +100,7 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                   svg.when(
                     loading: () => const Center(
                         child: TextFrame(comment: 'loading.....')),
-                    error: (err, stack) => Text(err.toString()),
+                    error: (err, stack) => Icon(Icons.question_mark),
                     data: (data){
                       return data;
                     },
@@ -115,12 +112,9 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                     data: (data){
                       return Container(
                           color: Colors.white,
-                          child: Text(data.first.description,
-                            style: TextStyle(
-                              fontSize: 3.7.w,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ));
+                          child: TextFrame(
+                            comment: data.first.description),
+                      );
                     },
                   ),
                   Expanded(child: Text('')),

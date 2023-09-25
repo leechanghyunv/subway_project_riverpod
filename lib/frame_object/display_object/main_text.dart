@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:subway_project_230704/setting/export+.dart';
 
@@ -14,9 +13,7 @@ class MainText extends ConsumerWidget {
     final firstRoute = ref.watch(routeProvider);
     final secondRoute = ref.watch(secondRouteProvider);
     final secondRoad = ref.watch(secondRoadProvider);
-    final secondfare = ref.watch(secondCostProvider);
-    final secondTime = ref.watch(secondtimeProvider);
-
+    String timeState = (time/60).toStringAsFixed(0);
     return Container(
       height: Device.aspectRatio >= 0.5 ? 50.3.h : 44.5.h,
       child: RotatedBox(
@@ -26,14 +23,14 @@ class MainText extends ConsumerWidget {
         children: [
           Tooltip(
             message: firstRoute == ''
-                ? '${secondRoute}\n${secondRoad}\n운행요금: ${secondfare}원\n소요시간: ${(secondTime/60).toStringAsFixed(0)}분'
-                : '${firstRoute}\n운행요금: ${fare}원\n소요시간: ${(time/60).toStringAsFixed(0)}분',
-            textStyle: TextStyle(
+                ? '$secondRoute\n$secondRoad\n운행요금: $fare원\n소요시간: $timeState분'
+                : '$firstRoute\n운행요금: $fare원\n소요시간: $timeState분',
+            textStyle: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white),
             child: GestureDetector(
               onTap: () => maintextguide(),
-              child: AutoSizeText(name == 'SEOUL' ? 'SEOUL' : '${name}역',
+              child: AutoSizeText(name == 'SEOUL' ? 'SEOUL' : '$name역',
                   maxLines: 1,
                   style: TextStyle(
                     color: Colors.black,
@@ -52,12 +49,12 @@ class MainText extends ConsumerWidget {
                         : name.length == 13 ? 24.sp /// 45
                         : 21.5.sp,
                     overflow: TextOverflow.ellipsis,
-                  )
+                  ),
               ),
             ),
           ),
               Text(
-              engName == 'SEOUL' ? ' SEOUL' : ' ${engName}',
+              engName == 'SEOUL' ? ' SEOUL' : ' $engName',
               style: TextStyle(
                   color: Colors.black,
                   fontSize: engName.length < 35 ? 15.sp : 14.sp,

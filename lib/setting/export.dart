@@ -22,11 +22,11 @@ export '../insidetoggle_object/switch_dialogA.dart';
 export '../insidetoggle_object/switch_dialogB.dart';
 export '../insidetoggle_object/switch_dialogC.dart';
 export '../insidedialog_object/dialog_button.dart';
-export '../chopper_refository/restApi_room.dart';
+export '../chopper_repository/restApi_room.dart';
 export '../../custom/question_tilebox.dart';
 export '../data_provider/filted_provider/filter_provider.dart';
 export '../data_provider/store_provider/store_provider.dart';
-export '../data_provider/discance_provider.dart';
+export '../data_provider/distance_provider.dart';
 export '../data_provider/arrival_provider.dart';
 export '../data_provider/dust_provider.dart';
 export '../../model/feedback_model.dart';
@@ -48,9 +48,8 @@ export '../custom/text_frame_error.dart';
 export '../custom/text_frame.dart';
 export '../model/data_model.dart';
 export '../../model/code_model.dart';
+export '../../custom/common_text.dart';
 
-
-export 'package:flutter_local_notifications/flutter_local_notifications.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:flutter_naver_map/flutter_naver_map.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';

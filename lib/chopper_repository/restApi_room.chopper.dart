@@ -108,3 +108,33 @@ class _$WeatherApiService extends WeatherApiService {
     return client.send<dynamic, dynamic>($request);
   }
 }
+
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations, unnecessary_brace_in_string_interps
+class _$SkOpenApiService extends SkOpenApiService {
+  _$SkOpenApiService([ChopperClient? client]) {
+    if (client == null) return;
+    this.client = client;
+  }
+
+  @override
+  final definitionType = SkOpenApiService;
+
+  @override
+  Future<Response<dynamic>> getskmapservice(Map<String, dynamic> body) {
+    final Uri $url = Uri.parse('routes');
+    final Map<String, String> $headers = {
+      'accept': 'application/json',
+      'appKey': 'ceevGND92fauEWQ8gfEnJ2i2gTlX1sxT2DBh3XRh',
+      'content-type': 'application/json',
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<dynamic, dynamic>($request);
+  }
+}

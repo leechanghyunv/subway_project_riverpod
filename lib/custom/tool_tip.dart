@@ -1,11 +1,11 @@
 import '../setting/export.dart';
 
-class ToopTipWidget extends StatelessWidget {
+class ToolTipWidget extends StatelessWidget {
 
   final String? message;
   final Widget? child;
 
-  ToopTipWidget({super.key, this.message, this.child,});
+  ToolTipWidget({super.key, this.message, this.child,});
 
   @override
   Widget build(BuildContext context) {

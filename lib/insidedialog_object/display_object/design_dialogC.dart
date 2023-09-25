@@ -3,17 +3,17 @@ import 'package:subway_project_230704/setting/export.dart';
 
 class DialogDesignBoxC extends StatelessWidget {
 
-  final String stringNumber;
-  final String subwayName;
-  DialogDesignBoxC({Key? key, required this.stringNumber, required this.subwayName}) : super(key: key);
+  final String line;
+  final String name;
+
+  DialogDesignBoxC({Key? key, required this.line, required this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final filtered = subwayName.replaceAll(RegExp(r'\([^()]*\)'), '');
+    final filtered = name.replaceAll(RegExp(r'\([^()]*\)'), '');
 
     double sizeWidth = 2.42.w;
     double sizeWidth2 = 1.8.w;
-    double textSize = 3.6.w;
     double contHeight = 17.w;
 
     return Container(
@@ -23,7 +23,7 @@ class DialogDesignBoxC extends StatelessWidget {
           SizedBox(
             height: 14.5.w,
             width: 3.6.w,
-            child: ColorContainer(stringNumber),
+            child: ColorContainer(line),
           ),
           SizedBox(
             width: 1.8.w,
@@ -37,20 +37,13 @@ class DialogDesignBoxC extends StatelessWidget {
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('LineN',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize)),
+                Text('LineN', style: dialogABC,
+                ),
                 SizedBox(
                   height: sizeWidth,
                 ),
                 Text(
-                  '${stringNumber}',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: textSize),
+                  line, style: dialogABC,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
@@ -68,19 +61,13 @@ class DialogDesignBoxC extends StatelessWidget {
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('Location',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize)),
+                Text('Location', style: dialogABC,
+                ),
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('${filtered}역',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize),
+                Text('$filtered역',
+                    style: dialogABC,
                     overflow: TextOverflow.ellipsis),
               ],
             ),
@@ -98,28 +85,23 @@ class DialogDesignBoxC extends StatelessWidget {
                   height: sizeWidth,
                 ),
                 Text('SMS Call',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize)),
+                  style: dialogABC,
+                ),
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text( stringNumber == 'Line1' ? '1577-1234'
-                    : stringNumber == 'Line2' ? '1577-1234'
-                    : stringNumber == 'Line3' ? '1577-1234'
-                    : stringNumber == 'Line4' ? '1577-1234'
-                    : stringNumber == 'Line5' ? '1577-1234'
-                    : stringNumber == 'Line6' ? '1577-1234'
-                    : stringNumber == 'Line7' ? '1577-1234'
-                    : stringNumber == 'Line8' ? '1577-1234'
-                    : stringNumber == 'Line9' ? '1577-4009'
-                    : stringNumber == '신분당' ? '(031)8018-7777'
+                Text( line == 'Line1' ? '1577-1234'
+                    : line == 'Line2' ? '1577-1234'
+                    : line == 'Line3' ? '1577-1234'
+                    : line == 'Line4' ? '1577-1234'
+                    : line == 'Line5' ? '1577-1234'
+                    : line == 'Line6' ? '1577-1234'
+                    : line == 'Line7' ? '1577-1234'
+                    : line == 'Line8' ? '1577-1234'
+                    : line == 'Line9' ? '1577-4009'
+                    : line == '신분당' ? '(031)8018-7777'
                     : '1544-7769',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: textSize),
+                    style: dialogABC,
                     overflow: TextOverflow.ellipsis)
               ],
             ),

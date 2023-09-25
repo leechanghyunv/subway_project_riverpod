@@ -1,7 +1,7 @@
 import '../setting/export.dart';
 import '../setting/export+.dart';
 import 'main_screen/layout_screen_widget.dart';
-import 'table_screen.dart';
+import 'table_screen/timetable_screen.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -14,6 +14,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   SharedPreManager sharedPreManager = SharedPreManager();
   late String subwayname = 'SEOUL';
+  late List<String> subwayList = [];
 
   @override
   void initState() {
@@ -31,7 +32,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     });
     return LayoutMainScreen(
       colorBar: ColorBar(
-        stringNumber: ref.watch(lineProvider),
+        line: ref.watch(lineProvider),
       ),
       dropDown: DropdownCustom(
         value: ref.watch(lineProvider),
@@ -51,9 +52,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   onSelected: (value){
                     setState(() => subwayname = value);
                     ref.read(infoProvider.notifier).searchSubway(name: value);
-                    Get.dialog(
-                      LinePickerA(),
-                    );
+                    Get.dialog( LinePickerA());
                   },
                   onSubmitted: (name){
                     ref.read(userNameProvier.notifier).state = name;
@@ -66,9 +65,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                     onPressed: () async {
                       if(subwayname != 'SEOUL'){
                         await ref.read(storeProviderA.notifier).storeSubData('A');
-                        savemsg('목적지 A', box.read('nameA'), box.read('engnameA'));
-                        sharedPreManager.addList(box.read('nameA'));
-                        print('box.read codeA ${box.read('codeA')}');
+                        savemsg('목적지 A', nameA, engA);
+                        sharedPreManager.addList(subwayname);
+                        addlist(subwayList,subwayname);
+                        print('box.read codeA $codeA');
                       } else if(
                       subwayname == 'SEOUL'){
                         showmsg();
@@ -77,9 +77,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                     onLongPress: () async {
                       if(subwayname != 'SEOUL'){
                         await ref.read(storeProviderA.notifier).storeSubData('B');
-                        savemsg('목적지 B', box.read('nameB'), box.read('engnameB'));
-                        sharedPreManager.addList(box.read('nameB'));
-                        print('box.read codeA ${box.read('codeB')}');
+                        savemsg('목적지 B', nameB, engB);
+                        sharedPreManager.addList(subwayname);
+                        addlist(subwayList,subwayname);
+                        print('box.read codeB $codeB');
                       } else if(
                       subwayname == 'SEOUL'){
                         showmsg();
@@ -105,16 +106,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                   onSelectedA: (valueA){
                     setState(() => subwayname = valueA);
                     ref.read(infoProvider.notifier).searchSubway(name: valueA);
-                    Get.dialog(
-                      LinePickerA(),
-                    );
+                    Get.dialog( LinePickerA());
                   },
                   onSelectedB: (valueB){
                     setState(() => subwayname = valueB);
                     ref.read(infoProvider.notifier).searchSubway(name: valueB);
-                    Get.dialog(
-                      LinePickerB(),
-                    );
+                    Get.dialog( LinePickerB());
                   },
                   onSubmitted: (name){
                     ref.read(userNameProvier.notifier).state = name;
@@ -127,8 +124,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                     onPressed: () async {
                       if(subwayname != 'SEOUL'){
                         await ref.read(storeProviderA.notifier).storeSubData('A');
-                        savemsg('목적지 A', box.read('nameA'), box.read('engnameA'));
-                        sharedPreManager.addList(box.read('nameA'));
+                        savemsg('목적지 A', nameA, engA);
+                        sharedPreManager.addList(subwayname);
+                        addlist(subwayList,subwayname);
                       } else if(
                       subwayname == 'SEOUL'){
                         showmsg();
@@ -137,8 +135,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                     onLongPress: () async {
                       if(subwayname != 'SEOUL'){
                         await ref.read(storeProviderA.notifier).storeSubData('B');
-                        savemsg('목적지 B', box.read('nameB'), box.read('engnameB'));
-                        sharedPreManager.addList(box.read('nameB'));
+                        savemsg('목적지 B', nameB, engB);
+                        sharedPreManager.addList(subwayname);
+                        addlist(subwayList,subwayname);
                       } else if(
                       subwayname == 'SEOUL'){
                         showmsg();
@@ -156,31 +155,25 @@ class _HomePageState extends ConsumerState<HomePage> {
       ),
       upandDown: UpandDown(
         color1: ref.watch(convertProvdier) == true ? Colors.grey[100] : Colors.grey[400],
-        onTap1: () {
-          ref.read(convertProvdier.notifier).update((state) => state = false);
-        },
+        onTap1: () => ref.read(convertProvdier.notifier).update((state) => state = false),
         color2: ref.watch(convertProvdier) == false ? Colors.grey[100] : Colors.grey[400],
-        onTap2: ()  {
-          ref.read(convertProvdier.notifier).update((state) => state = true);
-        },
+        onTap2: () => ref.read(convertProvdier.notifier).update((state) => state = true),
       ),
       toggleCustom: ToggleController(
         onToggle: (index) {
           if(index == 0){
-            if(box.read('nameA') != null || box.read('nameB') != null){
+            if(nameA.isNotEmpty || nameB.isNotEmpty){
               toggleguide();
               Get.dialog(
                 AlertDialog(
                   content: data.when(
-                    loading: () => Container(
-                        color: Colors.white,
-                        height: 90.w,
-                        alignment: Alignment.center,
-                        child: const TextFrame(comment: 'loading.....')),
-                    error: (err, stack) => Text(err.toString()),
+                    loading: () => LoadingBox('loading.....'),
+                    error: (err, stack) => LoadingBox(err.toString()),
                     data: (data){
-                      ref.read(infoProvider.notifier).searchSubway(name: box.read('nameB'));
-                      return SwitchDialogA(box.read('nameB'),box.read('sublistB'),box.read('nameA'),box.read('lineBB'));
+                      ref.read(infoProvider.notifier).searchSubway(name: nameB);
+                      return SwitchDialogA(
+                          nameB,sublistB.toString(), nameA,lineBB
+                      );
                     },
                   ),
                   actions: [
@@ -193,19 +186,16 @@ class _HomePageState extends ConsumerState<HomePage> {
                           return DialogButton(
                             onPressed: (){
                               var data = DistModel(
-                                latA: box.read('latA').toString(),
-                                lngA: box.read('lngA').toString(),
-                                latB: box.read('latB').toString(),
-                                lngB: box.read('lngB').toString(),
-                                nameA: box.read('nameA'),
-                                nameB: box.read('nameB'),
+                                latA: latA.toString(), lngA: lngA.toString(),
+                                latB: latB.toString(), lngB: lngB.toString(),
+                                nameA: nameA, nameB: nameB,
                               );
                               ref.read(apiresult(data));
-                              ref.read(nameProvider.notifier).state = box.read('nameA') ?? '';
-                              ref.read(engNameProvider.notifier).state = box.read('engnameA') ?? '';
-                              ref.read(lineProvider.notifier).state = box.read('lineA') ?? '';
-                              ref.read(headingProvider.notifier).state = box.read('headingA') ?? '';
-                              ref.read(codeConveyProvider.notifier).state = box.read('codeB') ?? '';
+                              ref.read(nameProvider.notifier).state = nameA;
+                              ref.read(engNameProvider.notifier).state = engA;
+                              ref.read(lineProvider.notifier).state = lineA;
+                              ref.read(headingProvider.notifier).state = headA;
+                              ref.read(codeConveyProvider.notifier).state = codeB;
                               Navigator.pop(context);
                             },
                             comment: 'Adapt',
@@ -217,23 +207,32 @@ class _HomePageState extends ConsumerState<HomePage> {
             } else {
               showmsg();
             }
-          }else if(index == 1){
+          }
+          else if(index == 1){
             toggleguide2();
-            print(sharedPreManager.getList());
+            subwayList = box.read('List').cast<String>().toList() ?? [];
+            List<String> sharedList = sharedPreManager.getList();
+            List<String> reversed = subwayList.reversed.toSet().toList();
+            print(sharedList);
+            print(reversed);
             Get.dialog(
               AlertDialog(
-                content: SwitchDialogB(sharedPreManager.getList()),
+                content: SwitchDialogB(
+                    reversed.length > sharedList.length
+                        ? reversed : sharedList),
                 actions: [
                   DialogButton(
                     onPressed: () async {
                       await ref.read(storeProviderA.notifier).storeSubData('A');
-                      savemsg('목적지 A', box.read('nameA'), box.read('engnameA'));
-                      sharedPreManager.addList(box.read('nameA'));
+                      savemsg('목적지 A', nameA, engA);
+                      sharedPreManager.addList(nameA);
+                      addlist(subwayList,nameA);
                     },
                     onLongPress: () async {
                       await ref.read(storeProviderA.notifier).storeSubData('B');
-                      savemsg('목적지 B', box.read('nameB'), box.read('engnameB'));
-                      sharedPreManager.addList(box.read('nameB'));
+                      savemsg('목적지 B', nameB, engB);
+                      sharedPreManager.addList(nameB);
+                      addlist(subwayList,nameB);
                     },
                     comment: 'Save',
                   ),
@@ -244,21 +243,20 @@ class _HomePageState extends ConsumerState<HomePage> {
                 ],
               ),
             );
-          }else if(index == 2){
-            if(box.read('nameB') != null || box.read('nameA') != null){
+          }
+          else if(index == 2){
+            if(nameB.isNotEmpty || nameA.isNotEmpty){
               toggleguide();
               Get.dialog(
                 AlertDialog(
                   content: data.when(
-                    loading: () => Container(
-                        color: Colors.white,
-                        height: 90.w,
-                        alignment: Alignment.center,
-                        child: const TextFrame(comment: 'loading.....')),
-                    error: (err, stack) => Text(err.toString()),
+                    loading: () => LoadingBox('loading.....'),
+                    error: (err, stack) => LoadingBox(err.toString()),
                     data: (data){
-                      ref.read(infoProvider.notifier).searchSubway(name: box.read('nameA'));
-                      return SwitchDialogA(box.read('nameA'),box.read('sublistA'),box.read('nameB'),box.read('lineAA'));
+                      ref.read(infoProvider.notifier).searchSubway(name: nameA);
+                      return SwitchDialogA(
+                          nameA,sublistA.toString(),nameB,lineAA
+                      );
                     },
                   ),
                   actions: [
@@ -266,28 +264,26 @@ class _HomePageState extends ConsumerState<HomePage> {
                       onPressed: () => Navigator.pop(context),
                       comment: 'Cancel',
                     ),
-                    StatefulBuilder(builder: (__,StateSetter setState){
+                    StatefulBuilder(
+                        builder: (__,StateSetter setState){
                       return DialogButton(
                         onPressed: (){
                           var data = DistModel(
-                            latA: box.read('latB').toString(),
-                            lngA: box.read('lngB').toString(),
-                            latB: box.read('latA').toString(),
-                            lngB: box.read('lngA').toString(),
-                            nameA: box.read('nameB'),
-                            nameB: box.read('nameA'),
+                            latA: latB.toString(), lngA: lngB.toString(),
+                            latB: latA.toString(), lngB: lngA.toString(),
+                            nameA: nameB, nameB: nameA,
                           );
                           ref.read(apiresult(data));
-                          ref.read(nameProvider.notifier).state = box.read('nameB') ?? '';
-                          ref.read(engNameProvider.notifier).state = box.read('engnameB') ?? '';
-                          ref.read(lineProvider.notifier).state = box.read('lineB') ?? '';
-                          ref.read(headingProvider.notifier).state = box.read('headingB') ?? '';
-                          ref.read(codeConveyProvider.notifier).state = box.read('codeA') ?? '';
+                          ref.read(nameProvider.notifier).state = nameB;
+                          ref.read(engNameProvider.notifier).state = engB;
+                          ref.read(lineProvider.notifier).state = lineB;
+                          ref.read(headingProvider.notifier).state = headB;
+                          ref.read(codeConveyProvider.notifier).state = codeA;
                           Navigator.pop(context);
                         },
                         comment: 'Adapt',
                       );
-                    })
+                    }),
                   ],
                 ),
               );
@@ -301,6 +297,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         var codeConvey = ref.read(codeConveyProvider.notifier).state;
         var name = ref.read(nameProvider.notifier).state;
         var eng = ref.read(engNameProvider.notifier).state;
+        print('codeConvey: $codeConvey');
         showModalBottomSheet(
             context: context,
             isScrollControlled: true,
@@ -311,17 +308,21 @@ class _HomePageState extends ConsumerState<HomePage> {
                     child: codeConvey == ''
                         ? TextFrame(comment: '목적지를 설정해주세요')
                         : TableScreen(
-                      name == box.read('nameA')
-                          ? box.read('nameB')
-                          : name == box.read('nameB') ? box.read('nameA') : '',
-
-                      eng == box.read('engnameA')
-                          ? box.read('engnameB')
-                          : eng == box.read('engnameB') ? box.read('engnameA') : '',
+                      name == nameA ? nameB : name == nameB ? nameA : '',
+                      eng == engA ? engB : eng == engB ? engA : '',
                     ),
                   ));
             });
       },
     );
+  }
+  void addlist (List<dynamic> list, String name) async {
+    if(list.length <= 5){
+      list.add(name);
+      await box.write('List', list);
+    } else {
+      list.removeAt(0);
+      await box.write('List', list);
+    }
   }
 }

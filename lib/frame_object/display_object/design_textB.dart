@@ -4,13 +4,11 @@ import 'package:subway_project_230704/setting/export+.dart';
 class TextContainerB extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final common = TextStyle(
-      fontSize: Device.aspectRatio >= 0.5 ? 19.sp : 18.sp,
-      fontWeight: FontWeight.bold,
-      color: Colors.black,
-    );
+
+     String msg2(String cost) => '지하철요금\n$cost원';
 
     final userName = ref.watch(userNameProvier);
+
     return RotatedBox(
       quarterTurns: 3,
       child: Container(
@@ -23,21 +21,17 @@ class TextContainerB extends ConsumerWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ToopTipWidget(
-                      message: DateFormat('EEEE\naa hh:mm').format(DateTime.now()),
-                      child: Text(
-                        'DATE',
-                        style: common,
+                    ToolTipWidget(
+                      message: timetext,
+                      child: Text('DATE', style: textframe,
                       ),
                     ),
                     SizedBox(
                       height: 2.w,
                     ),
-                    ToopTipWidget(
-                          message: DateFormat('EEEE\naa hh:mm').format(DateTime.now()),
-                          child: Text(
-                            DateFormat('MM/dd ').format(DateTime.now()),
-                            style: common,
+                    ToolTipWidget(
+                          message: timetext,
+                          child: Text(timetextB, style: textframe,
                           ),
                         ),
                   ],
@@ -52,22 +46,19 @@ class TextContainerB extends ConsumerWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ToopTipWidget(
-                        message: '지하철요금\n${cost}원',
-                        child: Text(
-                          'FARE ',
-                          style: common,
-                        ),
+                      ToolTipWidget(
+                        message: msg2(cost),
+                        child: Text('FARE ', style: textframe),
                       ),
                       SizedBox(
                         height: 2.w,
                       ),
-                      ToopTipWidget(
-                              message: '지하철요금\n${cost}원',
+                      ToolTipWidget(
+                              message: msg2(cost),
                               child: Text(cost.isNotEmpty
-                                  ? '${cost}'
+                                  ? cost
                                   : '0000',
-                                style: common,
+                                style: textframe
                               ),
                             ),
                     ],
@@ -81,12 +72,9 @@ class TextContainerB extends ConsumerWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ToopTipWidget(
-                      message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : ITX(T)',
-                      child: Text(
-                        'CLASS',
-                        style: common,
-                      ),
+                    ToolTipWidget(
+                      message: frame_msg,
+                      child: Text('CLASS', style: textframe),
                     ),
                     SizedBox(
                       height: 2.w,
@@ -96,26 +84,24 @@ class TextContainerB extends ConsumerWidget {
                       final upDown = ref.watch(upDownProvider);
                       /// btrainSttus
                       if(upDown == 1){
-                        return ToopTipWidget(
-                          message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : ITX(T)',
-                          child: Text( '${sttuus(box.read('state1') ?? 'NOR(S)')}',
-                            style: common,
+                        return ToolTipWidget(
+                          message: frame_msg,
+                          child: Text( status(trainstate1),
+                            style: textframe,
                           ),
                         );
                       }else if(upDown == -1){
 
-                        return ToopTipWidget(
-                          message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : ITX(T)',
-                          child: Text( '${sttuus(box.read('state2') ?? 'NOR(S)')}',
-                            style: common,
+                        return ToolTipWidget(
+                          message: frame_msg,
+                          child: Text( status(trainstate2),
+                            style: textframe
                           ),
                         );
                       }
-                      return ToopTipWidget(
-                        message: '일반열차 : NOR(S)\n급행열차 : EXP(S)\nITX : TIX(T)',
-                        child: Text( 'NOR(S)',
-                          style: common,
-                        ),
+                      return ToolTipWidget(
+                        message: frame_msg,
+                        child: Text( 'NOR(S)', style: textframe),
                       );
                     }),
 
@@ -129,30 +115,23 @@ class TextContainerB extends ConsumerWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'PASSENGER :',
-                  style: common,
-                ),
+                Text('PASSENGER :', style: textframe),
                 SizedBox(
                   height: 1.4.h,
                 ),
                 Text(
                   box.read('name') ?? userName,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17.sp),
+                  style: name_textframe,
                 ),
               ],
             ),
-            /// PASSENGER NAME
           ],
         ),
       ),
     );
   }
 
-  String sttuus (String state){
+  String status (String state){
     if(state == '일반'){
       return 'NOR(S)';
     }else if(state == '급행'){

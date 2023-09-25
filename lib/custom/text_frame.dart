@@ -23,32 +23,19 @@ class TextFrame extends StatelessWidget {
       color: color,
     );
 
-    if(comment.contains('급행')){ /// 급행일때는 깜빡이고 도착일때는 색깔이 바뀌는 에니매이션을 고려중이다.
+    if (comment.contains('급행') || comment.contains('진입')) {
       return BlinkText(
         filtered,
-        style: commonTextStyle.copyWith(
-          color: Colors.black,
-        ),
+        style: commonTextStyle,
         beginColor: Colors.black,
-        duration: Duration(milliseconds: 500), /// 깜빡이는 간격이라고 한다.
-        times: 2, /// 깜빡이는 횟수라고 한다.
+        duration: Duration(milliseconds: 500),
+        times: 2,
       );
-    } else if(comment.contains('진입')){
-      return BlinkText(
-        filtered,
-        style: commonTextStyle.copyWith(
-          color: Colors.black,
-        ),
-        beginColor: Colors.black,
-        duration: Duration(milliseconds: 500), /// 깜빡이는 간격이라고 한다.
-        times: 2, /// 깜빡이는 횟수라고 한다.
-      );
-    } else
+    } else {
       return Text(
         filtered,
-        style: commonTextStyle.copyWith(
-          color: Colors.black,
-        ),
+        style: commonTextStyle,
       );
+    }
   }
 }

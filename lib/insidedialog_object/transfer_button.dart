@@ -1,5 +1,5 @@
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:subway_project_230704/setting/export.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 
 class TransferIcon extends ConsumerStatefulWidget {
   const TransferIcon({super.key});
@@ -13,7 +13,8 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () async {
-        if(box.read('nameT') != null){
+        if(nameT.isNotEmpty)
+        {
           Get.dialog(
               AlertDialog(
                 content: Container(
@@ -31,18 +32,15 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
                             builder: (context,ref,child){
                               final filted = ref.watch(filtedarrivalProviderT);
                               return filted.when(
-                                loading: () => TextFrame(comment: 'loading.....'),
-                                error: (err, stack) => Container(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(25.0),
-                                      child: TextFrame(comment: '데이터를 불러올 수 없습니다'),
-                                    )),
+                                loading: () => LoadingBox('loading.....'),
+                                error: (err, stack) =>
+                                    LoadingBox('데이터를 불러올 수 없습니다'),
                                 data: (data){
                                   return Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       TextFrame(
-                                        comment: '\n${box.read('lineTT')} ${box.read('nameT')}역\n',
+                                        comment: '\n$lineTT $nameT역\n',
                                       ),
                                       TextFrame(comment: data.upfirst.toString()),
                                       TextFrame(comment: data.uplast.toString()),
@@ -85,7 +83,8 @@ class _TransferIconState extends ConsumerState<TransferIcon> {
                 ),
               )
           );
-        }else if((box.read('nameT') == null)){
+        }
+        else if((nameT.isEmpty)){
           Get.dialog(
               AlertDialog(
               content: Container(

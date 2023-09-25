@@ -4,10 +4,10 @@ import '../../data_provider/weather_provider.dart';
 
 class ColorBar extends ConsumerWidget {
 
-  final String stringNumber;
+  final String line;
 
   ColorBar({
-    required this.stringNumber});
+    required this.line});
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
@@ -18,6 +18,8 @@ class ColorBar extends ConsumerWidget {
     final svg = ref.watch(svgProvider); /// icon
     final dustlevel = ref.watch(dustLevelProvider);
     final dust = ref.watch(dustProvider);
+
+    Widget gap = const SizedBox(height: 15);
 
     return Column(
       children: [
@@ -32,28 +34,12 @@ class ColorBar extends ConsumerWidget {
               'This is a snackbar message',
               icon: svg.when(
                 loading: () => const Icon(Icons.question_mark),
-                error: (err, stack) => Text(err.toString()),
+                error: (err, stack) => const Icon(Icons.question_mark),
                 data: (data){
                   return data;
                 },
               ),
-              titleText: TimerBuilder.periodic(
-                const Duration(seconds: 1),
-                builder: (context) {
-                  return Row(
-                    children: [
-                      TextFrame(
-                        comment:
-                        DateFormat('M월 dd일').format(DateTime.now()),
-                      ),
-                      TextFrame(
-                          comment: formatDate(DateTime.now(),
-                              [' ',am ,  ' ', hh, '시 ', nn, '분'])
-                      ),
-                    ],
-                  );
-                },
-              ),
+              titleText: Time(),
               messageText: Column(
                 children: [
                   Row(
@@ -94,7 +80,8 @@ class ColorBar extends ConsumerWidget {
                   onPressed: (){
                     Get.dialog(
                         AlertDialog(
-                          content: StatefulBuilder(builder: (__,StateSetter setState){
+                          content: StatefulBuilder(
+                              builder: (__,StateSetter setState){
                             return SingleChildScrollView(
                                 child: Container(
                                   width: double.maxFinite,
@@ -104,9 +91,7 @@ class ColorBar extends ConsumerWidget {
                                       DialogDesign(
                                         designText: '스크롤로 화면을 내려주세요',
                                       ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
+                                      gap,
                                       QuestionTile(
                                         text: '성별을 선택해주세요',
                                         onSelected: (String, index, isSelected) {
@@ -120,9 +105,7 @@ class ColorBar extends ConsumerWidget {
                                         },
                                         buttons: ["남자", "여자",],
                                       ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
+                                      gap,
                                       QuestionTile(
                                         text: '나이대를 선택해주세요',
                                         onSelected: (String, index, isSelected) {
@@ -136,9 +119,7 @@ class ColorBar extends ConsumerWidget {
                                         },
                                         buttons: ["20~25", "25~30", "30~35","35~40","40~45","45~50"],
                                       ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
+                                      gap,
                                       QuestionTile(
                                         text: '지하철 사용빈도를 알려주세요',
                                         onSelected: (String, index, isSelected) {
@@ -152,9 +133,7 @@ class ColorBar extends ConsumerWidget {
                                         },
                                         buttons: ["주1~2회", "주3~4회", "주5회이상","매일사용"],
                                       ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
+                                      gap,
                                       QuestionTile(
                                         text: '가장 유용하게 사용했던 기능은?',
                                         onSelected: (String, index, isSelected) {
@@ -168,9 +147,7 @@ class ColorBar extends ConsumerWidget {
                                         },
                                         buttons: ["미세먼지농도,날씨확인", "실시간도착정보", "문자민원","열차시간표","도착알람"],
                                       ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
+                                      gap,
                                       QuestionTile(
                                         text: '불편했던점이 있었나요?',
                                         onSelected: (String, index, isSelected) {
@@ -184,9 +161,7 @@ class ColorBar extends ConsumerWidget {
                                         },
                                         buttons: ["불편한 사용방법", "정보 신뢰도","지하철노선도없음","원하는정보없음"],
                                       ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
+                                      gap,
                                       QuestionBox(
                                         text: '개선되었으면 하는 점은?',
                                         onSubmitted: (val){
@@ -196,9 +171,7 @@ class ColorBar extends ConsumerWidget {
                                           });
                                         },
                                       ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
+                                      gap,
                                       Container(
                                           width: double.maxFinite,
                                           color: Colors.grey[300],
@@ -226,9 +199,10 @@ class ColorBar extends ConsumerWidget {
                     )
                     );
               },
-                  child: TextFrame(
+                  child: const TextFrame(
                     comment: '설문조사',
-                    color: Colors.black,)),
+                    color: Colors.black,),
+              ),
               backgroundColor: Colors.grey[200],
               shouldIconPulse: true,
               duration: Duration(seconds: 5),
@@ -240,13 +214,31 @@ class ColorBar extends ConsumerWidget {
                 : 52.h,
 
             width: 8.w,
-            child: ColorContainer(stringNumber),
+            child: ColorContainer(line),
           ),
         )
       ],
     );
   }
 }
+
+Widget Time() => TimerBuilder.periodic(
+  const Duration(seconds: 1),
+  builder: (context) {
+    return Row(
+      children: [
+        TextFrame(
+          comment:
+          DateFormat('M월 dd일').format(DateTime.now()),
+        ),
+        TextFrame(
+            comment: formatDate(DateTime.now(),
+                [' ',am ,  ' ', hh, '시 ', nn, '분'])
+        ),
+      ],
+    );
+  },
+);
 
 
 

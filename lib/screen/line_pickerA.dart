@@ -7,7 +7,6 @@ class LinePickerA extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double appWidth = MediaQuery.of(context).size.width;
     var filtered = ref.watch(infoProvider);
     return AlertDialog(
       content: StatefulBuilder(
@@ -32,10 +31,11 @@ class LinePickerA extends ConsumerWidget {
                     color: Colors.grey[200],
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: List.generate(filtered.length,
-                              (index) => CheckboxListTile(
-                                  value: filtered[index].isSelected,
-                                  activeColor: Colors.grey[600],
+                      children: List.generate(
+                        filtered.length, (index){
+                          return CheckboxListTile(
+                              value: filtered[index].isSelected,
+                              activeColor: Colors.grey[600],
                               title: Row(
                                 children: [
                                   IconCustom(filtered[index].line_ui),
@@ -44,27 +44,22 @@ class LinePickerA extends ConsumerWidget {
                                 ],
                               ),
                               subtitle: Consumer(
-                                  builder: (context,ref,child){
-                                    var lineList = filtered[index].subwayid.toString();
-                                    final filted = ref.watch(filtedInPickerProvider(lineList));
-                                    return filted.when(
-                                      loading: () => TextFrame(comment: 'loading.....'),
-                                      error: (err, stack) => TextFrame(comment: '데이터를 불러올 수 없습니다'),
-                                      data: (data){
-                                        return Text(lineList.isNotEmpty
-                                            ? '${filted.value!.upfirst!.split(
-                                            "-")[1]}  -  ${filted.value!.downfirst!.split("-")[1]}'
-                                            : '',
-                                          style: TextStyle(
-                                            fontSize: appWidth * 0.0242,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                  ),
+                                builder: (context,ref,child){
+                                  var lineList = filtered[index].subwayid.toString();
+                                  final filted = ref.watch(filtedInPickerProvider(lineList));
+                                  return filted.when(
+                                    loading: () => const TextFrame(comment: 'loading.....'),
+                                    error: (err, stack) => const TextFrame(comment: '데이터를 불러올 수 없습니다'),
+                                    data: (data){
+                                      return TextFrame_min(comment: lineList.isNotEmpty
+                                          ? '${filted.value!.upfirst!.split(
+                                          "-")[1]}  -  ${filted.value!.downfirst!.split("-")[1]}'
+                                          : '');
+
+                                    },
+                                  );
+                                },
+                              ),
                               onChanged: (value){
                                 if(value != null){
                                   filtered = List.from(filtered.map((e) {
@@ -78,7 +73,10 @@ class LinePickerA extends ConsumerWidget {
                                   );
                                 }
                                 setState(() {});
-                              })),
+                              });
+                      }
+
+                      ),
                     ),
                   ),
                 ],
@@ -100,15 +98,11 @@ class LinePickerA extends ConsumerWidget {
                     onPressed: (){
                       ref.read(infoProvider.notifier).searchSubway(
                           name: filtered[0].subname, line: lineNumber);
-                      print('LinePickerA: ${lineNumber} ${filtered[0].subname}');
-
+                      print('LinePickerA: $lineNumber ${filtered[0].subname}');
                       Navigator.of(context).pop();
                 },
                     child: Text('Done',
-                      style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black
-                    ),
+                      style: commonmin,
                     ),
                 ),
               ),

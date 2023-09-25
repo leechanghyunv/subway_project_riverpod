@@ -1,9 +1,12 @@
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import '../../setting/export.dart';
 import '../../setting/export+.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 FlutterLocalNotificationsPlugin();
+
+final skapiservice = SkOpenApiService.create();
 
 final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) async {
 
@@ -32,26 +35,23 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
       utfIntoList.sort((a,b)=> a.totalTime.compareTo(b.totalTime));
 
       if(utfIntoList.any((element) => element.pathType == 1)){
-        var route = utfIntoList.where((element) => element.pathType == 1).first.legs.
-        map((e) => '${e.end.name}').toSet().toList();
-
+        var info = utfIntoList.where((element) => element.pathType == 1);
+        var route =info.first.legs.map((e) => '${e.end.name}').toSet().toList();
         String formattedRoute = route.join(' > ');
-
         ref.read(routeProvider.notifier).state = formattedRoute;
 
-        var ListFiltered1 = utfIntoList.where((element) => element.pathType == 1).
-        map((e) => '${(e.totalTime/60).toStringAsFixed(0)}분' ).toList();
+        var ListFiltered1 = info.map((e) => '${(e.totalTime/60).toStringAsFixed(0)}분' ).toList();
 
         print('totalSubTimeList: ${ListFiltered1}');
 
-        var time = utfIntoList.where((element) => element.pathType == 1).first.totalTime; /// 지하철기준 시간순
+        var time = info.first.totalTime; /// 지하철기준 시간순
         ref.read(timeProvider.notifier).state = time;
         noticeTime(dist.nameA,dist.nameB,formattedRoute,time);
         /// 상행선일까 하행선일까 상행선일까 하행선일까 구분/// /// /// /// /// /// /// /// /// /// ///
-        var subId = utfIntoList.where((element) => element.pathType == 1).first.legs.where((e) => e.route != null).map((e) => e.passStopList?.stationList.map((e) => e.stationId));
+        var subId = info.first.legs.where((e) => e.route != null).map((e) => e.passStopList?.stationList.map((e) => e.stationId));
 
-        var subName = utfIntoList.where((element) => element.pathType == 1).first.legs.
-        where((e) => e.route != null).map((e) => e.passStopList?.stationList.map((e) => e.stationName)).toList();
+        var subName = info.first.legs.where((e) => e.route != null).
+        map((e) => e.passStopList?.stationList.map((e) => e.stationName)).toList();
         ref.read(routeListProvider.notifier).state = subName.toList();
 
         var firstElement = subId.elementAt(0);
@@ -72,6 +72,7 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
         ref.read(costProvider.notifier).state = fare.toString();
         return utfIntoList;
       }
+      /// else {}
       /// pathType 1-지하철, pathType 2-버스, pathType 3-버스+지하철
       var pathtype = utfIntoList.first.pathType.toString();
       var routename = utfIntoList.first.legs.map((e) => '${e.route}').where((e) => e != 'null').toSet().toList();
@@ -83,8 +84,8 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
       ref.read(secondRouteProvider.notifier).state = formattedpathtype;
       ref.read(secondRoadProvider.notifier).state = formattedRoute;
       var time = utfIntoList.first.totalTime; ///  시간순
-      ref.read(secondtimeProvider.notifier).state = time;
-      ref.read(secondCostProvider.notifier).state = fare.toString();
+      ref.read(timeProvider.notifier).state = time;
+      ref.read(costProvider.notifier).state = fare.toString();
       noticeTime(dist.nameA,dist.nameB,formattedRoute,time);
       Get.snackbar(
         '지하철기준 빠른 경로가 없습니다.',
@@ -95,7 +96,7 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
       );
 
     }
-    throw('Error');
+    throw('distance_calculate: ${response.statusCode}');
   }catch(e){
     throw(e.toString());
   }

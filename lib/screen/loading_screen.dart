@@ -1,7 +1,6 @@
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:subway_project_230704/setting/export+.dart';
 
-
 class LoadingPage extends StatefulWidget {
   const LoadingPage({Key? key}) : super(key: key);
   @override
@@ -15,15 +14,6 @@ class _LoadingPageState extends State<LoadingPage> {
   final CollectionReference _dailyComment = FirebaseFirestore.
   instance.collection('daily_comment');
   late Future<DocumentSnapshot> _futureDailyComment;
-
-  Widget BlinkComment(String text,double size) => BlinkText(text,
-    style: TextStyle(
-      fontSize: size,
-      fontWeight: FontWeight.bold,
-      color: Colors.black,
-    ),
-    duration: Duration(milliseconds: 410), /// 깜빡이는 간격이라고 한다
-  );
 
   @override
   void initState() {

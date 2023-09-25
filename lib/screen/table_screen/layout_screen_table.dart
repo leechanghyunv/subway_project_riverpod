@@ -1,6 +1,6 @@
-import '../data_provider/weather_provider.dart';
-import '../setting/export.dart';
-import '../setting/export+.dart';
+import '../../data_provider/weather_provider.dart';
+import '../../setting/export.dart';
+import '../../setting/export+.dart';
 
 
 class LayoutTable extends ConsumerWidget {
@@ -17,9 +17,7 @@ class LayoutTable extends ConsumerWidget {
     return SafeArea(
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.black,
           body: Center(
-            child: Center(
               child: Container(
                 alignment: Alignment.center,
                 color: Colors.white,
@@ -29,7 +27,8 @@ class LayoutTable extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Consumer(builder: (__,ref,widget){
+                      Consumer(
+                          builder: (__,ref,widget){
                         final weather = ref.watch(weatherProvider);
                         final temp = ref.watch(tempProvider);
                         final svg = ref.watch(svgProvider);
@@ -38,7 +37,8 @@ class LayoutTable extends ConsumerWidget {
                           width:  double.maxFinite,
                           alignment: Alignment.centerLeft,
                           height: 14.4.w, /// appWidth * 0.1449,
-                          child: Column(
+                          child:
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -48,7 +48,7 @@ class LayoutTable extends ConsumerWidget {
                                   svg.when(
                                     loading: () => const Center(
                                         child: TextFrame(comment: 'loading.....')),
-                                    error: (err, stack) => Text(err.toString()),
+                                    error: (err, stack) => Icon(Icons.question_mark),
                                     data: (data){
                                       return data;
                                     },
@@ -70,7 +70,8 @@ class LayoutTable extends ConsumerWidget {
                                     error: (err, stack) => Text(err.toString()),
                                     data: (data){
                                       return TextFrame(
-                                          comment: '${(data.temp- 273.15).toStringAsFixed(0)}\u2103');
+                                          comment: '${(data.temp- 273.15).toStringAsFixed(0)}\u2103'
+                                      );
                                     },
                                   ),
                                   Expanded(child: Text('')),
@@ -105,13 +106,14 @@ class LayoutTable extends ConsumerWidget {
                           child: Container(
                             alignment: Alignment.center,
                             child: child,
-                          )),
+                          )
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-          ),
+
           floatingActionButton: floatingActionButton,
         )
     );

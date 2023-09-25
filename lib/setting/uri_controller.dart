@@ -2,9 +2,9 @@ import 'package:subway_project_230704/setting/export.dart';
 
 class SmsFunction extends StatelessWidget {
 
-  final String subwayline;
+  final String line;
 
-  const SmsFunction({Key? key, required this.subwayline}) : super(key: key);
+  const SmsFunction({Key? key, required this.line}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,20 +13,20 @@ class SmsFunction extends StatelessWidget {
     return TextButton(
       onPressed: () async {
 
-        if (subwayline == 'Line1' || subwayline == 'Line2' ||
-            subwayline == 'Line3' || subwayline == 'Line4' ||
-            subwayline == 'Line5' || subwayline == 'Line6' ||
-            subwayline == 'Line7' || subwayline == 'Line8') {
+        if (line == 'Line1' || line == 'Line2' ||
+            line == 'Line3' || line == 'Line4' ||
+            line == 'Line5' || line == 'Line6' ||
+            line == 'Line7' || line == 'Line8') {
           Uri url = Uri.parse('sms:+8215771234');/// 1~8호선
           if (await canLaunchUrl(url)) {
             await launchUrl(url);
           }
-        } else if (subwayline =='Line9') {
+        } else if (line =='Line9') {
           Uri url = Uri.parse('sms:+8215444009');/// 9호선
           if (await canLaunchUrl(url)) {
             await launchUrl(url);
           }
-        } else if (subwayline =='신분당선') {
+        } else if (line =='신분당선') {
           Uri url = Uri.parse('sms:+8203180187777');/// 신분당선
           if (await canLaunchUrl(url)) {
             await launchUrl(url);
@@ -43,7 +43,8 @@ class SmsFunction extends StatelessWidget {
         style: TextStyle(
             fontSize: appWidth * 0.0362,
             fontWeight: FontWeight.bold,
-            color: Colors.black),
+            color: Colors.black
+        ),
       ),
     );
   }

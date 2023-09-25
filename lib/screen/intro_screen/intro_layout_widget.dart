@@ -238,7 +238,8 @@ class _LayoutIntroState extends State<LayoutIntro> {
   }
 }
 
-Widget TutorialContainer(List<Widget> widget) => Container(
+Widget TutorialContainer(
+    List<Widget> widget) => Container(
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(15),
     border: Border.all(width: 1,color: Colors.black),
@@ -267,7 +268,6 @@ Widget Container_Right(key) => Container(
   height: Device.aspectRatio >= 0.5 ? 12.h : 11.5.h,
   color: Colors.transparent,
 );
-
 Widget BottomForIntro() => Container(
     alignment: Alignment.center,
     width: 55.w,

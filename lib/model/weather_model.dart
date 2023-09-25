@@ -1,6 +1,18 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../setting/export.dart';
 part 'weather_model.freezed.dart';
 part 'weather_model.g.dart';
+
+
+@freezed
+class WeatherInfo with _$WeatherInfo {
+  const factory WeatherInfo({
+    required Main main,
+    required Weather weather,
+  }) = _WeatherInfo;
+  factory WeatherInfo.fromJson(Map<String, dynamic> json) => _$WeatherInfoFromJson(json);
+}
 
 @Freezed()
 class Main with _$Main{

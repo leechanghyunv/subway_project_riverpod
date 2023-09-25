@@ -7,7 +7,6 @@ class LinePickerB extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double appWidth = MediaQuery.of(context).size.width;
     var filtered = ref.watch(infoProvider);
     return AlertDialog(
       content: StatefulBuilder(
@@ -51,16 +50,10 @@ class LinePickerB extends ConsumerWidget {
                                     loading: () => TextFrame(comment: 'loading.....'),
                                     error: (err, stack) => TextFrame(comment: '데이터를 불러올 수 없습니다'),
                                     data: (data){
-                                      return Text(lineList.isNotEmpty
+                                      return TextFrame_min(comment: lineList.isNotEmpty
                                           ? '${filted.value!.upfirst!.split(
                                           "-")[1]}  -  ${filted.value!.downfirst!.split("-")[1]}'
-                                          : '',
-                                        style: TextStyle(
-                                          fontSize: appWidth * 0.0242,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        ),
-                                      );
+                                          : '');
                                     },
                                   );
                                 },
@@ -104,11 +97,8 @@ class LinePickerB extends ConsumerWidget {
                     savemsg2(filtered[0].subname);
                     Navigator.of(context).pop();
                   },
-                  child: Text('Done',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black
-                  ),
+                  child: Text(
+                    'Done', style: commonmin,
                   ),
                 ),
               ),

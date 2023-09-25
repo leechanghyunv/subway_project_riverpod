@@ -16,7 +16,7 @@ class BottomDesign extends StatelessWidget {
         children: <Widget>[
           Container(
             width: 15.w,
-            height: Device.aspectRatio >= 0.5 ? 12.h : 11.5.h,
+            height: Device.aspectRatio >= 0.5 ? 12.h : 11.h,
             color: Colors.transparent,
           ),
           GestureDetector(
@@ -25,7 +25,7 @@ class BottomDesign extends StatelessWidget {
             child: Container(
                 alignment: Alignment.center,
                 width: 55.w,
-                height: Device.aspectRatio >= 0.5 ? 12.h : 11.5.h,
+                height: Device.aspectRatio >= 0.5 ? 12.h : 11.h,
                 child: BarcodeWidget(
                   data: '------LAFAYETTE.co-------',
                   style: TextStyle(
@@ -46,7 +46,7 @@ class BottomDesign extends StatelessWidget {
                 onTap: onTap,
                 child: Container(
                   width: 15.w,
-                  height: Device.aspectRatio >= 0.5 ? 12.h : 11.5.h,
+                  height: Device.aspectRatio >= 0.5 ? 12.h : 11.h,
                   color: Colors.transparent,
                 ),
               ),
