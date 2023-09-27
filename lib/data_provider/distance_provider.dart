@@ -2,6 +2,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import '../../setting/export.dart';
 import '../../setting/export+.dart';
+import '../custom/for_distance_provider.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 FlutterLocalNotificationsPlugin();
@@ -42,7 +43,7 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
 
         var ListFiltered1 = info.map((e) => '${(e.totalTime/60).toStringAsFixed(0)}분' ).toList();
 
-        print('totalSubTimeList: ${ListFiltered1}');
+        print('totalSubTimeList: $ListFiltered1');
 
         var time = info.first.totalTime; /// 지하철기준 시간순
         ref.read(timeProvider.notifier).state = time;
@@ -64,7 +65,7 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
           print('${intValue1-intValue2}'); // 1이면 상행 -1이면 하행
           ref.read(upDownProvider.notifier).state = (intValue1-intValue2);
 
-          print('route: ${subName}');
+          print('route: $subName');
 
         }
         /// 요금정보 /// /// /// //// /// /// /// //// /// /// /// //// /// /// /// //// /// /// /// /
@@ -87,9 +88,16 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
       ref.read(timeProvider.notifier).state = time;
       ref.read(costProvider.notifier).state = fare.toString();
       noticeTime(dist.nameA,dist.nameB,formattedRoute,time);
+
       Get.snackbar(
-        '지하철기준 빠른 경로가 없습니다.',
-        '빠른경로 ${pathtype == '2' ? '(버스)' : pathtype == '3' ? '(버스-지하철)' : '---'} : ${formattedpathtype}\n${formattedRoute}\n${(time/60).toStringAsFixed(0)}분 소요',
+        '', '',
+        titleText: titleTextWidget(
+            '지하철기준 빠른 경로가 없습니다.',
+            '다른 교통 수단 검색경로:',
+            '${(time/60).toStringAsFixed(0)}분'),
+        messageText: messageTextWidget(
+            '빠른경로 ${pathtype == '2' ? '(버스)' : pathtype == '3' ? '(버스-지하철)' : '---'} : $formattedpathtype',
+            formattedRoute),
         backgroundColor: Colors.grey[100],
         shouldIconPulse: true,
         duration: Duration(seconds: 7),
@@ -103,15 +111,22 @@ final apiresult = FutureProvider.family<List<Itinerary>,DistModel>((ref,dist) as
 });
 
 void noticeTime(String nameA, nameB,route, int time){
-  print('start scheduleNotification');
   Get.snackbar(
-    '$nameB -> $nameA (${(time/60).toStringAsFixed(0)}분 소요)',
-    '도착 시간 2분전에 알람을 울립니다.\n\n이동경로 : ${route}',
+    '', '',
+    titleText: titleTextWidgetB(
+        '$nameB -> $nameA ',
+        '${(time/60).toStringAsFixed(0)}분'),
+
+    messageText: messageTextWidget(
+        '도착 시간 2분전에 알람을 울립니다.',
+        '이동경로 : $route'),
+
     backgroundColor: Colors.grey[100],
-    icon: Icon(Icons.subway),
+    icon: const Icon(Icons.subway),
     shouldIconPulse: true,
     duration: Duration(seconds: 7),
   );
+
   Noti.scheduleNotification(
       title: "목적지에 곧 도착합니다.",
       body: "목적지인 ${nameA}(으)로 이동합니다. 내리실때 안전에 유의해 주시기 바랍니다.",

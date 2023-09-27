@@ -5,5 +5,5 @@ Widget LoadingBox(String text) => Container(
   color: Colors.grey[200],
   height: 40.w,
   alignment: Alignment.center,
-  child:  TextFrame(comment: text),
+  child: TextFrame(comment: text),
 );

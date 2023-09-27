@@ -48,7 +48,6 @@ export '../custom/text_frame_error.dart';
 export '../custom/text_frame.dart';
 export '../model/data_model.dart';
 export '../../model/code_model.dart';
-export '../../custom/common_text.dart';
 
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:flutter_naver_map/flutter_naver_map.dart';

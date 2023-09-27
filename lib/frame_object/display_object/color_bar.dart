@@ -222,23 +222,6 @@ class ColorBar extends ConsumerWidget {
   }
 }
 
-Widget Time() => TimerBuilder.periodic(
-  const Duration(seconds: 1),
-  builder: (context) {
-    return Row(
-      children: [
-        TextFrame(
-          comment:
-          DateFormat('M월 dd일').format(DateTime.now()),
-        ),
-        TextFrame(
-            comment: formatDate(DateTime.now(),
-                [' ',am ,  ' ', hh, '시 ', nn, '분'])
-        ),
-      ],
-    );
-  },
-);
 
 
 

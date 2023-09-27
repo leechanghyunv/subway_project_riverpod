@@ -36,7 +36,7 @@ class DialogDesign extends StatelessWidget {
 
               TextFrame(
                 comment: DateFormat('y-MM-dd EEE').
-                format(DateTime.now()),),
+                format(DateTime.now())),
               TimerBuilder.periodic(
                 const Duration(seconds: 1),
                 builder: (context) {

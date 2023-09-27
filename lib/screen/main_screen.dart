@@ -32,7 +32,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     });
     return LayoutMainScreen(
       colorBar: ColorBar(
-        line: ref.watch(lineProvider),
+        line: ref.watch(lineProvider) ?? 'Line2',
       ),
       dropDown: DropdownCustom(
         value: ref.watch(lineProvider),
@@ -308,8 +308,13 @@ class _HomePageState extends ConsumerState<HomePage> {
                     child: codeConvey == ''
                         ? TextFrame(comment: '목적지를 설정해주세요')
                         : TableScreen(
-                      name == nameA ? nameB : name == nameB ? nameA : '',
-                      eng == engA ? engB : eng == engB ? engA : '',
+                      name == nameA ? nameB
+                          : name == nameB ? nameA
+                          : '',
+
+                      eng == engA ? engB
+                          : eng == engB ? engA
+                          : '',
                     ),
                   ));
             });

@@ -16,6 +16,26 @@ const String qrdata = '1234ffov3pp5oq23lk';
 
 final timetext = DateFormat('EEEE\naa hh:mm').format(DateTime.now());
 final timetextB = DateFormat('MM/dd ').format(DateTime.now());
+final providertome = DateFormat('aa hh:mm').format(DateTime.now());
+
+Widget Time() => TimerBuilder.periodic(
+  const Duration(seconds: 1),
+  builder: (context) => TextFrame(
+          comment: '${DateFormat('M월 dd일').
+          format(DateTime.now())} ${formatDate(DateTime.now(),
+          [' ',am ,  ' ', hh, '시 ', nn, '분'])}'
+      ),
+);
+
+/// distance_provider에 들어감
+Widget Time_Provider() => TimerBuilder.periodic(
+  const Duration(seconds: 1),
+  builder: (context) =>
+      TextFrame(
+          comment: '현재시간: ${formatDate(DateTime.now(),
+          [' ',am ,  ' ', hh, '시 ', nn, '분'])}'
+      ),
+);
 
 Widget BlinkComment(String text,double size) => BlinkText(text,
   style: TextStyle(
@@ -39,7 +59,10 @@ textAstyleR(String head,String state) => TextStyle(
     fontWeight: FontWeight.bold
 );
 
-
+final commonTextStyle = TextStyle(
+  fontSize: 3.7.w,
+  fontWeight: FontWeight.bold,
+);
 
 tableexstyle(String express) => TextStyle(
     fontSize: 2.8.w,
