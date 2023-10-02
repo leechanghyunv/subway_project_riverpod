@@ -34,10 +34,10 @@ dependencies:
 
   # Ui - design (6)
   responsive_sizer: ^3.2.0
-  barcode_widget: ^2.0.1
+  barcode_widget: ^2.0.4
   blinking_text: ^1.0.2
-  dotted_line: ^3.1.0
-  qr_flutter: ^4.0.0
+  dotted_line: ^3.2.2
+  qr_flutter: ^4.1.0
   sizer: ^2.0.15
 
   # Ui - design & function (2)
@@ -83,6 +83,9 @@ dependencies:
   # permission (1)
   app_tracking_transparency: ^2.0.4
 
+  # key_info
+  flutter_dotenv: ^5.1.0
+
 
 dev_dependencies:
   flutter_test:
@@ -126,6 +129,7 @@ flutter:
      - appIcon/appstore.png
      - svg/
      - images/
+     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

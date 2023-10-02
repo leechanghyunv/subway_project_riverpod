@@ -1,13 +1,12 @@
 import 'package:chopper/chopper.dart';
+import '../setting/apikey.dart';
 part 'restApi_room.chopper.dart';
-
-String key = '4c6f72784b6272613735677166456d';
 
 @ChopperApi()
 abstract class SeoulApiService extends ChopperService {
   static SeoulApiService create() {
     final client = ChopperClient(
-      baseUrl:Uri.parse('http://openapi.seoul.go.kr:8088/$key/json'),
+      baseUrl:Uri.parse('http://openapi.seoul.go.kr:8088/$seoulKey/json'),
       services: [_$SeoulApiService()],
     );
     return _$SeoulApiService(client);
@@ -31,7 +30,7 @@ abstract class SeoulApiService extends ChopperService {
 abstract class ArrivalApiService extends ChopperService{
   static ArrivalApiService create(){
     final client = ChopperClient(
-      baseUrl: Uri.parse('http://swopenapi.seoul.go.kr/api/subway/$key/json'),
+      baseUrl: Uri.parse('http://swopenapi.seoul.go.kr/api/subway/$seoulKey/json'),
       services: [_$ArrivalApiService()],
     );
     return _$ArrivalApiService(client);
@@ -74,9 +73,6 @@ abstract class SkOpenApiService extends ChopperService{
         'accept': 'application/json',
         'appKey': 'ceevGND92fauEWQ8gfEnJ2i2gTlX1sxT2DBh3XRh',
         'content-type': 'application/json',
-        // "lang": '0',
-        // "format": "json",
-        // "count": '10'
   })
   Future<Response> getskmapservice(
       @Body() Map<String, dynamic> body,

@@ -127,9 +127,7 @@ class SwitchDialogB extends ConsumerWidget {
                                   actions: [
                                     DialogButton(
                                       comment: 'Cencel',
-                                      onPressed: (){
-                                        Navigator.pop(context);
-                                      },
+                                      onPressed: () => Navigator.pop(context),
                                     ),
                                     DialogButton(
                                       comment: 'Select',

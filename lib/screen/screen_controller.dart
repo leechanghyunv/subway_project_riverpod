@@ -1,3 +1,4 @@
+import 'package:subway_project_230704/screen/loading_screen/loading_main.dart';
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:subway_project_230704/setting/export+.dart';
 import 'main_screen.dart';
@@ -26,7 +27,7 @@ class ScreenController extends ConsumerStatefulWidget {
         future: _futureData,
         builder: (BuildContext context, AsyncSnapshot<String> snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
-            return LoadingPage(); /// 2초간 유지후 Layout_Screen으로 넘어감 
+            return LoadingFrame(); /// 2초간 유지후 Layout_Screen으로 넘어감
           } else {
             if(sharedPreManager.getIsFirst()){
               return LayoutIntro();

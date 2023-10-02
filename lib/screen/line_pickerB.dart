@@ -34,15 +34,15 @@ class LinePickerB extends ConsumerWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: List.generate(filtered.length,
-                          (index) => CheckboxListTile(
-                              value: filtered[index].isSelected,
-                              activeColor: Colors.grey[600],
-                              title: Row(
-                                children: [
-                                  IconCustom(filtered[index].line_ui),
-                                  SizedBox(width: 10,),
-                                  TextFrame(comment: filtered[index].line_ui),
-                                ],
+                        (index) => CheckboxListTile(
+                            value: filtered[index].isSelected,
+                            activeColor: Colors.grey[600],
+                            title: Row(
+                              children: [
+                                IconCustom(filtered[index].line_ui),
+                                SizedBox(width: 10,),
+                                TextFrame(comment: filtered[index].line_ui),
+                              ],
                               ),
                               subtitle: Consumer(
                                 builder: (context,ref,child){
@@ -52,7 +52,8 @@ class LinePickerB extends ConsumerWidget {
                                     loading: () => TextFrame(comment: 'loading.....'),
                                     error: (err, stack) => TextFrame(comment: '데이터를 불러올 수 없습니다'),
                                     data: (data){
-                                      return TextFrame_min(comment: lineList.isNotEmpty
+                                      return TextFrame_min(
+                                          comment: lineList.isNotEmpty
                                           ? '${filted.value!.upfirst!.split(
                                           "-")[1]}  -  ${filted.value!.downfirst!.split("-")[1]}'
                                           : '');

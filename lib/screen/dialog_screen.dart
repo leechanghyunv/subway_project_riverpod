@@ -27,7 +27,8 @@ class DialogPage extends ConsumerWidget {
                         children:[
                           SlidableAction(
                               onPressed: ((context){
-                                ref.read(infoProvider.notifier).searchSubway(name: row.subname);
+                                ref.read(infoProvider.notifier).
+                                searchSubway(name: row.subname);
                                 showDialog(
                                     context: context,
                                     builder: (BuildContext context){
@@ -45,12 +46,9 @@ class DialogPage extends ConsumerWidget {
                                             Padding(
                                               padding: const EdgeInsets.all(6.0),
                                               child: DialogButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
+                                                  onPressed: () => Navigator.pop(context),
                                                   comment: 'Done'),
                                             ),
-
                                           ],
                                         );
                                 });
@@ -92,9 +90,7 @@ class DialogPage extends ConsumerWidget {
                                   ),
                                   actions: [
                                     DialogButton(
-                                        onPressed: (){
-                                          Navigator.pop(context);
-                                        },
+                                        onPressed: () => Navigator.pop(context),
                                         comment: 'Cancel'),
                                     SizedBox(
                                       child: SmsFunction(
@@ -123,18 +119,18 @@ class DialogPage extends ConsumerWidget {
                                     loading: () => LoadingBox('loading.....'),
                                     error: (err, stack) => LoadingBox(err.toString()),
                                     data: (data){
-                                      ref.read(infoProvider.notifier).searchSubway(name: row.subname, line: row.line_ui);
-                                      ref.read(infoProviderB.notifier).searchSubway(name: row.subname);
+                                      ref.read(infoProvider.notifier).
+                                      searchSubway(name: row.subname, line: row.line_ui);
+
+                                      ref.read(infoProviderB.notifier).
+                                      searchSubway(name: row.subname);
                                       return SwitchDialogC();
                                     },
                                   ),
                                   actions: [
                                     DialogButton(
                                       comment: 'Cencel',
-                                      onPressed: (){
-                                        Navigator.pop(context);
-                                      },
-                                    ),
+                                      onPressed: () => Navigator.pop(context)),
                                     DialogButton(
                                       comment: 'Select',
                                       onPressed: (){

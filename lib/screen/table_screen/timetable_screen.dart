@@ -41,9 +41,7 @@ class _TableScreenState extends ConsumerState<TableScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(5.0))
               ),
               elevation: 0.1,
-              onPressed: (){
-                Navigator.pop(context);
-              },
+              onPressed: () => Navigator.pop(context),
               child: Icon(
                 Icons.keyboard_return,
                 color: Colors.white,
@@ -98,7 +96,6 @@ class _TableScreenState extends ConsumerState<TableScreen> {
                     var row = filtedA[index];
                     return TableList(
                         row.sname,row.ename, row.express.name,row.arrivetime);
-
                   }),
               childB: ListView.builder(
                   controller: _scrollControllerB,
@@ -107,7 +104,6 @@ class _TableScreenState extends ConsumerState<TableScreen> {
                     var row = filtedB[index];
                     return TableList(
                         row.sname,row.ename, row.express.name,row.arrivetime);
-
                   }),
             );
             }

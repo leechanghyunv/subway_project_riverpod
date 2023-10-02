@@ -37,8 +37,8 @@ Widget Time_Provider() => TimerBuilder.periodic(
       ),
 );
 
-Widget BlinkComment(String text,double size) => BlinkText(text,
-  style: TextStyle(
+Widget BlinkComment(String text,double size) => BlinkText(
+  text, style: TextStyle(
     fontSize: size,
     fontWeight: FontWeight.bold,
     color: Colors.black,

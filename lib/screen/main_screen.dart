@@ -31,15 +31,12 @@ class _HomePageState extends ConsumerState<HomePage> {
       state = ref.watch(dustProvider).elementAtOrNull(0)!.barLevel.toString());
     });
     return LayoutMainScreen(
-      colorBar: ColorBar(
-        line: ref.watch(lineProvider) ?? 'Line2',
-      ),
+      colorBar: ColorBar(line: ref.watch(lineProvider) ?? 'Line2'),
       dropDown: DropdownCustom(
         value: ref.watch(lineProvider),
         onChanged: (value){
-          ref.read(lineProvider.notifier).update((state) => state = value) ;
-        },
-      ),
+          ref.read(lineProvider.notifier).update((state) => state = value);
+        }),
       iconCustom: IconCustom(
         onTap: (){
           iconbuttonguide();
@@ -181,26 +178,23 @@ class _HomePageState extends ConsumerState<HomePage> {
                       onPressed: () => Navigator.pop(context),
                       comment: 'Cancel',
                     ),
-                    StatefulBuilder(
-                        builder: (__,StateSetter setState){
-                          return DialogButton(
-                            onPressed: (){
-                              var data = DistModel(
-                                latA: latA.toString(), lngA: lngA.toString(),
-                                latB: latB.toString(), lngB: lngB.toString(),
-                                nameA: nameA, nameB: nameB,
-                              );
-                              ref.read(apiresult(data));
-                              ref.read(nameProvider.notifier).state = nameA;
-                              ref.read(engNameProvider.notifier).state = engA;
-                              ref.read(lineProvider.notifier).state = lineA;
-                              ref.read(headingProvider.notifier).state = headA;
-                              ref.read(codeConveyProvider.notifier).state = codeB;
-                              Navigator.pop(context);
-                            },
-                            comment: 'Adapt',
-                          );
-                        })
+                    DialogButton(
+                      onPressed: (){
+                        var data = DistModel(
+                          latA: latA.toString(), lngA: lngA.toString(),
+                          latB: latB.toString(), lngB: lngB.toString(),
+                          nameA: nameA, nameB: nameB,
+                        );
+                        ref.read(apiresult(data));
+                        ref.read(nameProvider.notifier).state = nameA;
+                        ref.read(engNameProvider.notifier).state = engA;
+                        ref.read(lineProvider.notifier).state = lineA;
+                        ref.read(headingProvider.notifier).state = headA;
+                        ref.read(codeConveyProvider.notifier).state = codeB;
+                        Navigator.pop(context);
+                      },
+                      comment: 'Adapt',
+                    ),
                   ],
                 ),
               );
@@ -264,15 +258,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                       onPressed: () => Navigator.pop(context),
                       comment: 'Cancel',
                     ),
-                    StatefulBuilder(
-                        builder: (__,StateSetter setState){
-                      return DialogButton(
+                      DialogButton(
                         onPressed: (){
                           var data = DistModel(
                             latA: latB.toString(), lngA: lngB.toString(),
                             latB: latA.toString(), lngB: lngA.toString(),
-                            nameA: nameB, nameB: nameA,
-                          );
+                            nameA: nameB, nameB: nameA);
                           ref.read(apiresult(data));
                           ref.read(nameProvider.notifier).state = nameB;
                           ref.read(engNameProvider.notifier).state = engB;
@@ -280,10 +271,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                           ref.read(headingProvider.notifier).state = headB;
                           ref.read(codeConveyProvider.notifier).state = codeA;
                           Navigator.pop(context);
-                        },
+                          },
                         comment: 'Adapt',
-                      );
-                    }),
+                      ),
                   ],
                 ),
               );
@@ -306,12 +296,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                   height: 76.5.h,
                   child: Center(
                     child: codeConvey == ''
-                        ? TextFrame(comment: '목적지를 설정해주세요')
+                        ? const TextFrame(comment: '목적지를 설정해주세요')
                         : TableScreen(
                       name == nameA ? nameB
                           : name == nameB ? nameA
                           : '',
-
+                      
                       eng == engA ? engB
                           : eng == engB ? engA
                           : '',

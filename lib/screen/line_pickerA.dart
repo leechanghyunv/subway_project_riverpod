@@ -53,11 +53,11 @@ class LinePickerA extends ConsumerWidget {
                                     loading: () => const TextFrame(comment: 'loading.....'),
                                     error: (err, stack) => const TextFrame(comment: '데이터를 불러올 수 없습니다'),
                                     data: (data){
-                                      return TextFrame_min(comment: lineList.isNotEmpty
-                                          ? '${filted.value!.upfirst!.split(
-                                          "-")[1]}  -  ${filted.value!.downfirst!.split("-")[1]}'
-                                          : '');
-
+                                      return TextFrame_min(
+                                          comment: lineList.isNotEmpty
+                                              ? '${filted.value!.upfirst!.split(
+                                              "-")[1]}  -  ${filted.value!.downfirst!.split("-")[1]}'
+                                              : '');
                                     },
                                   );
                                 },

@@ -1,7 +1,7 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:subway_project_230704/setting/export.dart';
+import '../setting/apikey.dart';
 import '../setting/geolocator.dart';
-
-final key = '391af738f3d6aea930da389c0e6041ff';
 
 final apiservice = WeatherApiService.create();
 
@@ -14,7 +14,7 @@ final weatherProvider = FutureProvider.autoDispose<List<Weather>>((ref) async {
     var lat = location.value?.latitude.toString();
     var lng = location.value?.longitude.toString();
 
-    final response = await apiservice.getWeather(lat!, lng!, key);
+    final response = await apiservice.getWeather(lat!, lng!, weatherKey);
     if(response.statusCode == 200){
       final List<dynamic> jsonBody = jsonDecode(response.body)['weather'];
       print(jsonBody);
@@ -36,7 +36,7 @@ final tempProvider = FutureProvider.autoDispose<Main>((ref) async {
     var lat = location.value?.latitude.toString();
     var lng = location.value?.longitude.toString();
 
-    final response = await apiservice.getWeather(lat!, lng!, key);
+    final response = await apiservice.getWeather(lat!, lng!, weatherKey);
 
     if(response.statusCode == 200){
       final Map<String, Object?> jsonBody = jsonDecode(response.body)['main'];

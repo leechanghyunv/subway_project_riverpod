@@ -1,3 +1,5 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:subway_project_230704/setting/apikey.dart';
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:subway_project_230704/setting/export+.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
@@ -5,6 +7,7 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'firebase_options.dart';
 
 void main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -31,7 +34,7 @@ void main() async {
 Future<void> _initialize() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NaverMapSdk.instance.initialize(
-      clientId: 'udn9m0j2pb',
+      clientId: naverKey,
       onAuthFailed: (ex) => log("********* 네이버맵 인증오류 : $ex *********"));
 }
 
