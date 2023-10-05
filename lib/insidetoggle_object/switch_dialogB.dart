@@ -1,5 +1,6 @@
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:subway_project_230704/setting/export+.dart';
+import '../data_provider/hive_provider.dart';
 
 List<Color> kDefaultRainbowColors2 = [
   Colors.grey.shade600,
@@ -14,6 +15,7 @@ class SwitchDialogB extends ConsumerWidget {
   SwitchDialogB(this.subwayList, {super.key});
 
   SharedPreManager sharedPreManager = SharedPreManager();
+  HiveService hiveService = HiveService();
 
   final List<String> subwayList;
 
@@ -106,7 +108,7 @@ class SwitchDialogB extends ConsumerWidget {
                           padding: const EdgeInsets.all(4.0),
                           child: ChoiceChip(
                             label: TextFrame(
-                                comment: '$row'),
+                                comment: row),
                             labelStyle: const TextStyle(
                                 fontWeight: FontWeight.bold,color: Colors.black),
                             selected: true,
@@ -133,14 +135,12 @@ class SwitchDialogB extends ConsumerWidget {
                                       comment: 'Select',
                                       onPressed: (){
                                         Select(row);
-                                        sharedPreManager.addList(row);
-                                        addlist(subwayList,row);
+                                        hiveService.putBox(ChipModel(name: row));
                                         Navigator.pop(context);
                                       },
                                     ),
                                   ],
                                 ),
-                                // LinePickerA(),
                               );
                             },
                           ),
@@ -159,15 +159,6 @@ class SwitchDialogB extends ConsumerWidget {
     'Line1', 'Line2', 'Line3', 'Line4', 'Line5', 'Line6', 'Line7', 'Line8', 'Line9', '신분당', '수인분당', '경의선', '우이신설', '공항철도',
   ];
 
-  void addlist (List<dynamic> list, String name) async {
-    if(list.length <= 6){
-      list.add(name);
-      await box.write('List', list);
-    } else {
-      list.removeAt(0);
-      await box.write('List', list);
-    }
-  }
 }
 
 

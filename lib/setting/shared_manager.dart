@@ -2,17 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreManager {
   SharedPreferences? _preferences;
-  late List<String> _subwayList = [];
-
-  void addList(String name) {
-    if(_subwayList.length <= 5){
-      _subwayList.add(name);
-      _preferences?.setStringList('list', _subwayList);
-    } else {
-      _subwayList.removeAt(0);
-      _preferences?.setStringList('list', _subwayList);
-    }
-  }
 
   List<String> getList(){
     List<String>? original = _preferences?.getStringList('list');

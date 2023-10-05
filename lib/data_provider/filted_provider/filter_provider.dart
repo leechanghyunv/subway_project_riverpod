@@ -3,6 +3,7 @@ import 'package:subway_project_230704/setting/export.dart';
 class DataController extends StateNotifier<List<SubwayModel>>{
 
   final AsyncValue<List<SubwayModel>> subwaydata;
+
   DataController(this.subwaydata) : super([]);
 
   void searchSubway({required name, String? line}) {

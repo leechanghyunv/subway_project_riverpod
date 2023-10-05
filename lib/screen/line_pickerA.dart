@@ -1,6 +1,6 @@
 import 'package:subway_project_230704/setting/export.dart';
+import 'package:subway_project_230704/setting/export+.dart';
 
-import '../custom/common_text.dart';
 
 class LinePickerA extends ConsumerWidget {
   LinePickerA({super.key});

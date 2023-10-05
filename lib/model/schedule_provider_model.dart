@@ -1,6 +1,4 @@
 import 'package:subway_project_230704/setting/export.dart';
-import 'package:flutter/foundation.dart';
-
 part 'schedule_provider_model.freezed.dart';
 part 'schedule_provider_model.g.dart';
 

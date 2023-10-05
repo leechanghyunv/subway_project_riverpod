@@ -1,7 +1,5 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:subway_project_230704/setting/export.dart';
-import '../setting/apikey.dart';
-import '../setting/geolocator.dart';
+import '../repository/geolocator.dart';
 
 final apiservice = WeatherApiService.create();
 

@@ -1,5 +1,4 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:subway_project_230704/setting/apikey.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:subway_project_230704/setting/export.dart';
 import 'package:subway_project_230704/setting/export+.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
@@ -9,6 +8,10 @@ import 'firebase_options.dart';
 void main() async {
   await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(ChipModelAdapter());
+  HiveService hiveService = HiveService();
+  hiveService.openBox();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -34,7 +37,7 @@ void main() async {
 Future<void> _initialize() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NaverMapSdk.instance.initialize(
-      clientId: naverKey,
+      clientId: naverId,
       onAuthFailed: (ex) => log("********* 네이버맵 인증오류 : $ex *********"));
 }
 

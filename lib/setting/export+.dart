@@ -11,15 +11,17 @@ export 'package:intl/intl.dart';
 export 'dart:developer';
 export 'dart:async';
 
+export '../custom_widget/for_distance_provider.dart';
 export '../data_provider/filted_provider/latlong_provider.dart';
 export '../data_provider/timetable_provider.dart';
 export '../setting/get_value_setting.dart';
 export '../setting/shared_manager.dart';
 export '../../setting/notification.dart';
-export '../../setting/geolocator.dart';
+export '../repository/geolocator.dart';
 export '../../model/sk_map_model.dart';
-export '../custom/common_text.dart';
-export '../custom/loadingbox.dart';
+export '../custom_widget/common_text.dart';
+export '../custom_widget/loadingbox.dart';
+
 
 
 

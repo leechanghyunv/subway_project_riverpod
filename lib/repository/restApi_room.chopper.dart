@@ -121,7 +121,7 @@ class _$SkOpenApiService extends SkOpenApiService {
 
   @override
   Future<Response<dynamic>> getskmapservice(Map<String, dynamic> body) {
-    final Uri $url = Uri.parse('routes');
+    final Uri $url = Uri.parse('');
     final Map<String, String> $headers = {
       'accept': 'application/json',
       'appKey': 'ceevGND92fauEWQ8gfEnJ2i2gTlX1sxT2DBh3XRh',

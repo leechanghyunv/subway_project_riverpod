@@ -24,11 +24,6 @@ extension MutableSubwayModelExtension on SubwayModel {
     return copyWith(km: newKm);
   }
 }
-/// json file에서 데이터를 가져옴
-final dataProviderInside = FutureProvider<List<SubwayModel>>((ref) async {
-  final  jsonData = await rootBundle.loadString('assets/test.json');
-  final List<dynamic> data = jsonDecode(jsonData)['subwaydata'];
-  return data.map((e) => SubwayModel.fromJson(e)).toList();
-});
-/// subwayname, line을 사용자가 선택한 이후에 결과를 가지고 데이터 필터링
+
+
 

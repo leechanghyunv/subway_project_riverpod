@@ -13,6 +13,7 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
 
   SharedPreManager sharedPreManager = SharedPreManager();
+  HiveService hiveService = HiveService();
   late String subwayname = 'SEOUL';
   late List<String> subwayList = [];
 
@@ -26,10 +27,10 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     final data = ref.watch(dataProviderInside);
-    ref.listen(dustProvider, (previous, next) {
-      ref.read(lineProvider.notifier).update((state) =>
-      state = ref.watch(dustProvider).elementAtOrNull(0)!.barLevel.toString());
-    });
+    ref.listen(dustProvider, (previous, next) =>
+        ref.read(lineProvider.notifier).update((state) =>
+      state = ref.watch(dustProvider).elementAtOrNull(0)!.barLevel.toString()));
+
     return LayoutMainScreen(
       colorBar: ColorBar(line: ref.watch(lineProvider) ?? 'Line2'),
       dropDown: DropdownCustom(
@@ -63,8 +64,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       if(subwayname != 'SEOUL'){
                         await ref.read(storeProviderA.notifier).storeSubData('A');
                         savemsg('목적지 A', nameA, engA);
-                        sharedPreManager.addList(subwayname);
-                        addlist(subwayList,subwayname);
+                        hiveService.putBox(ChipModel(name: subwayname));
                         print('box.read codeA $codeA');
                       } else if(
                       subwayname == 'SEOUL'){
@@ -75,8 +75,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       if(subwayname != 'SEOUL'){
                         await ref.read(storeProviderA.notifier).storeSubData('B');
                         savemsg('목적지 B', nameB, engB);
-                        sharedPreManager.addList(subwayname);
-                        addlist(subwayList,subwayname);
+                        hiveService.putBox(ChipModel(name: subwayname));
                         print('box.read codeB $codeB');
                       } else if(
                       subwayname == 'SEOUL'){
@@ -122,8 +121,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       if(subwayname != 'SEOUL'){
                         await ref.read(storeProviderA.notifier).storeSubData('A');
                         savemsg('목적지 A', nameA, engA);
-                        sharedPreManager.addList(subwayname);
-                        addlist(subwayList,subwayname);
+                        hiveService.putBox(ChipModel(name: subwayname));
                       } else if(
                       subwayname == 'SEOUL'){
                         showmsg();
@@ -133,8 +131,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       if(subwayname != 'SEOUL'){
                         await ref.read(storeProviderA.notifier).storeSubData('B');
                         savemsg('목적지 B', nameB, engB);
-                        sharedPreManager.addList(subwayname);
-                        addlist(subwayList,subwayname);
+                        hiveService.putBox(ChipModel(name: subwayname));
                       } else if(
                       subwayname == 'SEOUL'){
                         showmsg();
@@ -156,6 +153,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         color2: ref.watch(convertProvdier) == false ? Colors.grey[100] : Colors.grey[400],
         onTap2: () => ref.read(convertProvdier.notifier).update((state) => state = true),
       ),
+
       toggleCustom: ToggleController(
         onToggle: (index) {
           if(index == 0){
@@ -204,29 +202,24 @@ class _HomePageState extends ConsumerState<HomePage> {
           }
           else if(index == 1){
             toggleguide2();
-            subwayList = box.read('List').cast<String>().toList() ?? [];
-            List<String> sharedList = sharedPreManager.getList();
-            List<String> reversed = subwayList.reversed.toSet().toList();
-            print(sharedList);
-            print(reversed);
+            List<String> list = chipbox?.values.map((e) => e.name).toSet().toList() ?? [];
+            List<String> reversedList = list.reversed.toList();
             Get.dialog(
               AlertDialog(
-                content: SwitchDialogB(
-                    reversed.length > sharedList.length
-                        ? reversed : sharedList),
+                content: SwitchDialogB(reversedList),
                 actions: [
                   DialogButton(
                     onPressed: () async {
                       await ref.read(storeProviderA.notifier).storeSubData('A');
                       savemsg('목적지 A', nameA, engA);
-                      sharedPreManager.addList(nameA);
-                      addlist(subwayList,nameA);
+                      hiveService.putBox(ChipModel(name: nameA));
+                      setState(() {});
                     },
                     onLongPress: () async {
                       await ref.read(storeProviderA.notifier).storeSubData('B');
                       savemsg('목적지 B', nameB, engB);
-                      sharedPreManager.addList(nameB);
-                      addlist(subwayList,nameB);
+                      hiveService.putBox(ChipModel(name: nameB));
+                      setState(() {});
                     },
                     comment: 'Save',
                   ),
@@ -301,7 +294,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                       name == nameA ? nameB
                           : name == nameB ? nameA
                           : '',
-                      
                       eng == engA ? engB
                           : eng == engB ? engA
                           : '',
@@ -310,14 +302,5 @@ class _HomePageState extends ConsumerState<HomePage> {
             });
       },
     );
-  }
-  void addlist (List<dynamic> list, String name) async {
-    if(list.length <= 5){
-      list.add(name);
-      await box.write('List', list);
-    } else {
-      list.removeAt(0);
-      await box.write('List', list);
-    }
   }
 }
