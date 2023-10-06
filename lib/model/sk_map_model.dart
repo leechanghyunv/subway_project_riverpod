@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'sk_map_model.freezed.dart';
 part 'sk_map_model.g.dart';
 

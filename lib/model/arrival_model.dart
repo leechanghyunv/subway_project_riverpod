@@ -1,4 +1,6 @@
+// Project imports:
 import 'package:subway_project_230704/setting/export.dart';
+
 part 'arrival_model.freezed.dart';
 part 'arrival_model.g.dart';
 

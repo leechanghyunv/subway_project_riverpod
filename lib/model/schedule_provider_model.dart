@@ -1,4 +1,6 @@
+// Project imports:
 import 'package:subway_project_230704/setting/export.dart';
+
 part 'schedule_provider_model.freezed.dart';
 part 'schedule_provider_model.g.dart';
 

@@ -1,5 +1,6 @@
-import 'package:subway_project_230704/setting/export.dart';
+// Project imports:
 import 'package:subway_project_230704/setting/export+.dart';
+import 'package:subway_project_230704/setting/export.dart';
 import 'map_screen.dart';
 
 class DialogPage extends ConsumerWidget {
@@ -9,7 +10,6 @@ class DialogPage extends ConsumerWidget {
   Widget build(BuildContext context,WidgetRef ref) {
     final latlongData = ref.watch(latlngProvider);
     final initialdata = ref.watch(dataProviderInside);
-
     return Scaffold(
       body: latlongData.when(
         error: (err, stack) => LoadingBox(err.toString()),

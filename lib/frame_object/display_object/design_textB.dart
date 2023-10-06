@@ -1,5 +1,6 @@
-import 'package:subway_project_230704/setting/export.dart';
+// Project imports:
 import 'package:subway_project_230704/setting/export+.dart';
+import 'package:subway_project_230704/setting/export.dart';
 
 class TextContainerB extends ConsumerWidget {
   @override
@@ -130,7 +131,7 @@ class TextContainerB extends ConsumerWidget {
       ),
     );
   }
-
+/// 한글이 들어가있어서 freezed에서 분류하지 못했다.
   String status (String state){
     if(state == '일반'){
       return 'NOR(S)';

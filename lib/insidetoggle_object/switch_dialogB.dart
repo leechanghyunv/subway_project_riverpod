@@ -1,5 +1,6 @@
-import 'package:subway_project_230704/setting/export.dart';
+// Project imports:
 import 'package:subway_project_230704/setting/export+.dart';
+import 'package:subway_project_230704/setting/export.dart';
 import '../data_provider/hive_provider.dart';
 
 List<Color> kDefaultRainbowColors2 = [
@@ -84,6 +85,7 @@ class SwitchDialogB extends ConsumerWidget {
                       }).toList(),
                       onChanged: (val){
                         ref.read(latlngProvider);
+                        // ref.read(latlongProvider.notifier).latlngservice();
                         ref.read(latlonglineProvier.notifier).update((state) => state = val);
                       }),
                 ),

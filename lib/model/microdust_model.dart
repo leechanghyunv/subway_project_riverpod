@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'microdust_model.g.dart';
 part 'microdust_model.freezed.dart';
 

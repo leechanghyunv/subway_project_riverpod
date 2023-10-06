@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+// Project imports:
 import '../setting/export.dart';
+
 part 'weather_model.freezed.dart';
 part 'weather_model.g.dart';
 

@@ -1,4 +1,6 @@
+// Project imports:
 import 'package:subway_project_230704/setting/export.dart';
+
 part 'distance_model.freezed.dart';
 part 'distance_model.g.dart';
 

@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+// Project imports:
 import 'arrival_model.dart';
+
 part 'arrival_filted_model.freezed.dart';
 part 'arrival_filted_model.g.dart';
 

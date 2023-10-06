@@ -3,6 +3,7 @@ export 'package:subway_project_230704/insidedialog_object/input_object/form_fiel
 export 'package:subway_project_230704/insidedialog_object/input_object/form_fieldB.dart';
 export 'package:subway_project_230704/frame_object/input_object/iconbutton_custom.dart';
 export 'package:subway_project_230704/frame_object/design_object/top_design.dart';
+export 'package:subway_project_230704/data_provider/trainstate_provider.dart';
 export 'package:subway_project_230704/data_provider/hive_provider.dart';
 export '../insidedialog_object/display_object/design_dialogC.dart';
 export '../insidedialog_object/display_object/sms_container.dart';
@@ -51,6 +52,7 @@ export '../custom_widget/text_frame_error.dart';
 export '../custom_widget/text_frame.dart';
 export '../model/data_model.dart';
 export '../../model/code_model.dart';
+
 
 export 'package:subway_project_230704/model/choice_chip_model.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';

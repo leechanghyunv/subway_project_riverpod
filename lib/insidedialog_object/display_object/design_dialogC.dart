@@ -1,6 +1,6 @@
-import 'package:subway_project_230704/setting/export.dart';
+// Project imports:
 import 'package:subway_project_230704/setting/export+.dart';
-
+import 'package:subway_project_230704/setting/export.dart';
 
 class DialogDesignBoxC extends StatelessWidget {
 
@@ -23,7 +23,7 @@ class DialogDesignBoxC extends StatelessWidget {
         children: [
           SizedBox(
             height: 14.5.w,
-            width: 3.6.w,
+            width: 3.5.w,
             child: ColorContainer(line),
           ),
           SizedBox(

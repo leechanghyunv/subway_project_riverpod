@@ -1,6 +1,7 @@
+// Project imports:
 import '../../data_provider/weather_provider.dart';
-import '../../setting/export.dart';
 import '../../setting/export+.dart';
+import '../../setting/export.dart';
 
 class LayoutTable extends ConsumerWidget {
 

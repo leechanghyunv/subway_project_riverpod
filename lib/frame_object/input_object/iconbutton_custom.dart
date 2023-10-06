@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class IconCustom extends StatelessWidget {

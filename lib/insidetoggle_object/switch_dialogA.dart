@@ -1,5 +1,6 @@
-import 'package:subway_project_230704/setting/export.dart';
+// Project imports:
 import 'package:subway_project_230704/setting/export+.dart';
+import 'package:subway_project_230704/setting/export.dart';
 import '../data_provider/weather_provider.dart';
 
 class SwitchDialogA extends ConsumerStatefulWidget {
@@ -51,28 +52,7 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                     loading: () => LoadingBox('loading.....'),
                     error: (err,stack) => LoadingBox('데이터를 불러올 수 없습니다'),
                     data: (data){
-                      var arrivalA = data.arrival!.where((e) => updnLine1.contains(e.updnLine));
-                      var arrivalB = data.arrival!.where((e) => updnLine2.contains(e.updnLine));
-
-                      var subNumber1 = arrivalA.map((e) => e.btrainNo).first;
-                      box.write('subNumber1', subNumber1);
-                      var subState1 = arrivalA.map((e) => e.arvlCd).first;
-                      box.write('subState1', subState1);
-                      var subSttus1 = arrivalA.map((e) => e.btrainSttus).first;
-                      box.write('state1', subSttus1);
-                      var destination1 = arrivalA.map((e) => e.trainLineNm).first;
-                      String filtedDestination1 = destination1.split(" - ")[0];
-                      box.write('destination1', filtedDestination1);
-
-                      var subNumber2 = arrivalB.map((e) => e.btrainNo).first;
-                      box.write('subNumber2', subNumber2);
-                      var subState2 = arrivalB.map((e) => e.arvlCd).first;
-                      box.write('subState2', subState2);
-                      var subSttus2 = arrivalB.map((e) => e.btrainSttus).first;
-                      box.write('state2', subSttus2);
-                      var destination2 = arrivalB.map((e) => e.trainLineNm).first;
-                      String filtedDestination2 = destination2.split(" - ")[0];
-                      box.write('destination2', filtedDestination2);
+                      ref.read(TrainStateProvider.notifier).filtedTrainstate(data.arrival);
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
