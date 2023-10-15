@@ -11,7 +11,6 @@ class SharedPreManager {
     } else {
       return [];
     }
-
   }
 
   // SharedPreferences를 초기화하는 메서드

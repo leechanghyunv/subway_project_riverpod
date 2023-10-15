@@ -24,7 +24,7 @@ class _QuestionBoxState extends State<QuestionBox> {
             borderRadius: BorderRadius.circular(5),
           ),
           hintText: widget.text,
-          hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          hintStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
         onSubmitted: widget.onSubmitted,
       ),

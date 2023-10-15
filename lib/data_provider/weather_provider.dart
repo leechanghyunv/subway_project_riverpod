@@ -8,12 +8,12 @@ final weatherProvider = FutureProvider.autoDispose<List<Weather>>((ref) async {
 
   final location = ref.watch(locationProvider);
 
-  if(location.value != null){
+  if(location!= null){
 
-    var lat = location.value?.latitude.toString();
-    var lng = location.value?.longitude.toString();
+    var lat = location.latitude.toString();
+    var lng = location.longitude.toString();
 
-    final response = await apiservice.getWeather(lat!, lng!, weatherKey);
+    final response = await apiservice.getWeather(lat, lng, weatherKey);
     if(response.statusCode == 200){
       final List<dynamic> jsonBody = jsonDecode(response.body)['weather'];
       print(jsonBody);
@@ -30,12 +30,12 @@ final tempProvider = FutureProvider.autoDispose<Main>((ref) async {
 
   final location = ref.watch(locationProvider);
 
-  if(location.value != null){
+  if(location!= null){
 
-    var lat = location.value?.latitude.toString();
-    var lng = location.value?.longitude.toString();
+    var lat = location.latitude.toString();
+    var lng = location.longitude.toString();
 
-    final response = await apiservice.getWeather(lat!, lng!, weatherKey);
+    final response = await apiservice.getWeather(lat, lng, weatherKey);
 
     if(response.statusCode == 200){
       final Map<String, Object?> jsonBody = jsonDecode(response.body)['main'];

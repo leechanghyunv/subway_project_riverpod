@@ -28,7 +28,11 @@ class TextFrame extends StatelessWidget {
     } else {
       return Text(
         filtered,
-        style: commonTextStyle,
+        style: TextStyle(
+          color: color,
+          fontSize: 3.7.w,
+          fontWeight: FontWeight.bold,
+        ),
       );
     }
   }

@@ -45,8 +45,8 @@ final filtedInPickerProvider = FutureProvider.family<FiltedArrivalModel,String>(
     var downside = filtedModel.where((e) => updnLine2.contains(e.updnLine));
 
     return FiltedArrivalModel(
-      upfirst: upside.map((e) => '${e.trainLineNm}').first,
-      downfirst: downside.map((e) => '${e.trainLineNm}').first,
+      upfirst: upside.map((e) => e.trainLineNm).first,
+      downfirst: downside.map((e) => e.trainLineNm).first,
     );
   } else {
     throw Exception('Failed to load arrival in picker data');

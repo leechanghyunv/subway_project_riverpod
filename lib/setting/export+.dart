@@ -1,6 +1,6 @@
 export 'package:subway_project_230704/model/schedule_provider_model.dart';
-export 'package:subway_project_230704/screen/intro_screen/intro_layout_widget.dart';
-export 'package:subway_project_230704/screen/intro_screen/intro_seframe.dart';
+export 'package:subway_project_230704/presentation/screen/intro_screen/intro_layout_widget.dart';
+export 'package:subway_project_230704/presentation/screen/intro_screen/intro_seframe.dart';
 export 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 export 'package:responsive_sizer/responsive_sizer.dart';
 export 'package:flutter_slidable/flutter_slidable.dart';

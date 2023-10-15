@@ -6,7 +6,7 @@ import 'package:timezone/data/latest.dart' as tz;
 // Project imports:
 import 'package:subway_project_230704/setting/export+.dart';
 import 'package:subway_project_230704/setting/export.dart';
-import 'firebase_options.dart';
+import 'setting/firebase_options.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");

@@ -20,7 +20,6 @@ final nameProviderU = StateProvider<String>((ref) => ''); /// in toggle switch
 final lineProvider = StateProvider<String>((ref) => 'Line2');
 final lineToArrivalProvider = StateProvider<String>((ref) => '');
 final convertProvdier = StateProvider<bool>((ref) => false);
-
 final routeListProvider = StateProvider<List<Iterable<String?>?>>((ref) => []);
 
 

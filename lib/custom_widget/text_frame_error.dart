@@ -16,9 +16,6 @@ class TextFrame_min extends StatelessWidget {
         fontWeight: FontWeight.bold,
         fontSize: 2.4.w,
         color: color,
-
-
-
     ),
     );
   }

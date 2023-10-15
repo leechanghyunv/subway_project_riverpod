@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // Project imports:
 import '../model/arrival_model.dart';
 import '../model/trainstate_model.dart';
-import '../screen/layout_screen.dart';
+import '../presentation/screen/layout_screen.dart';
 
 class TrainStateController extends StateNotifier<TrainModel>{
 

@@ -56,7 +56,7 @@ dependencies:
   gsheets: ^0.4.2
   intl: ^0.18.0
 
-  # state_management & data_manager (4)
+  # state_management & data_manager (6)
   shared_preferences: ^2.2.1
   flutter_riverpod: ^2.3.6
   get_storage: ^2.0.3

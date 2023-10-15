@@ -12,7 +12,7 @@ class ToolTipWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tooltip(
       message: message,
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.white),
       showDuration: Duration(seconds: 3),

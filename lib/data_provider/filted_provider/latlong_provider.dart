@@ -12,16 +12,13 @@ final latlngProvider = FutureProvider.autoDispose<List<SubwayModel>>
   final data = ref.watch(dataProviderInside);
 
   data.whenData((value){
-
       for (var i = 0; i < data.value!.length; i++) {
         final km = _distance.as(
             LengthUnit.Meter,
-            LatLng(location.value!.latitude, location.value!.longitude),
+            LatLng(location!.latitude, location!.longitude),
             LatLng(data.value![i].lat, data.value![i].lng));
         data.value![i] = data.value![i].setKm(km);
       }
-
-
   });
 
   data.value!.sort((a, b) => a.km!.compareTo(b.km!));

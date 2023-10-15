@@ -3,13 +3,8 @@
 A new Flutter project.
 
 main package : 
-riverpod_flutter,
-freezed,chopper,
-local_notification,
-cloud_firestore,
-get_storage,
-geolocator,
-http,
+riverpod_flutter, freezed,chopper, local_notification,
+cloud_firestore, get_storage, geolocator, http, hive
 
 ## Getting Started
 
