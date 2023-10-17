@@ -3,7 +3,9 @@ import 'package:hive/hive.dart';
 import 'package:subway_project_230704/setting/export.dart';
 
 // Project imports:
-import '../model/choice_chip_model.dart';
+import '../../model/choice_chip_model.dart';
+
+/// 검색후 출발지 혹은 도착지를 저장했던 지하철역의 이름들을 저장해주는 프로바이더 구간
 
 Box<ChipModel>? chipbox;
 

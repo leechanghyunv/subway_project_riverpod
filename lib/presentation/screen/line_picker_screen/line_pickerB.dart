@@ -3,6 +3,8 @@ import '../../../custom_widget/icon_custom.dart';
 import '../../../setting/export.dart';
 import '../../../setting/export+.dart';
 
+/// main page에서 지하철역을 검색한 이후에 이 부분에서 몇호선을 선택할지 정해야함 이 부분은 환승역에 대한 정보를 저장하기 위함임
+
 class LinePickerB extends ConsumerWidget {
    LinePickerB({super.key});
 

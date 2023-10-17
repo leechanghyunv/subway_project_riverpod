@@ -1,8 +1,9 @@
 // Project imports:
-import '../../setting/export.dart';
-import '../../setting/export+.dart';
-import 'main_screen/layout_screen_widget.dart';
-import 'table_screen/timetable_screen.dart';
+import '../../../setting/export.dart';
+import '../../../setting/export+.dart';
+import '../screen_controller.dart';
+import 'layout_screen_widget.dart';
+import '../table_screen/timetable_screen.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -23,9 +24,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     super.initState();
     sharedPreManager.init();
     sharedPreManager.setFirstLoading(false);
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +52,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 child: TextFormA(
                   onSelected: (value){
                     setState(() => subwayname = value);
+                    /// 호선정보 등등을 필터링합니다.
                     ref.read(infoProvider.notifier).searchSubway(name: value);
                     /// LinePicker는 지하철 이름을 검색 후 정확한 호선명을 등록하기 위한 페이지임
                     Get.dialog( LinePickerA());
@@ -69,8 +69,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                       if(subwayname != 'SEOUL'){
                         /// subData A 는 출발지점을 나타냄 B는 목적지점을 나타냄
                         await ref.read(storeProviderA.notifier).storeSubData('A');
+                        /// storeProviderA 에서 infoprovider의 값들과 코드정보를 get_storage로 저장
                         savemsg('목적지 A', nameA, engA);
                         hiveService.putBox(ChipModel(name: subwayname));
+                        /// 저장했던 지하철역의 이름만 따로 리스트로 저장
                         print('box.read codeA $codeA');
                       } else if(
                       subwayname == 'SEOUL'){
@@ -80,8 +82,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                     onLongPress: () async {
                       if(subwayname != 'SEOUL'){
                         await ref.read(storeProviderA.notifier).storeSubData('B');
+                        /// storeProviderA 에서 infoprovider의 값들과 코드정보를 get_storage로 저장
                         savemsg('목적지 B', nameB, engB);
                         hiveService.putBox(ChipModel(name: subwayname));
+                        /// 저장했던 지하철역의 이름만 따로 리스트로 저장
                         print('box.read codeB $codeB');
                       } else if(
                       subwayname == 'SEOUL'){
@@ -175,6 +179,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     error: (err, stack) => LoadingBox(err.toString()),
                     data: (data){
                       ref.read(infoProvider.notifier).searchSubway(name: nameB);
+                      /// 지하철 호선정보, 영어이름 등등 데이터를 출력합니다.
                       return SwitchDialogA(
                           nameB,sublistB.toString(), nameA,lineBB
                       );
@@ -192,7 +197,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                           latB: latB.toString(), lngB: lngB.toString(),
                           nameA: nameA, nameB: nameB,
                         );
+                        /// nameA,engA ... 등등이 업데이트되면서 UI의 요소들이 바뀝니다.
                         ref.read(apiresult(data));
+                        /// 이동경로,예상시간 등등을 출력합니다.
                         ref.read(nameProvider.notifier).state = nameA;
                         ref.read(engNameProvider.notifier).state = engA;
                         ref.read(lineProvider.notifier).state = lineA;
@@ -214,9 +221,11 @@ class _HomePageState extends ConsumerState<HomePage> {
             ref.read(locationProvider.notifier).getlocation();
             List<String> list = chipbox?.values.map((e) => e.name).toSet().toList() ?? [];
             List<String> reversedList = list.reversed.toList();
+            /// 하이브에서 저장했던 지하철역들의 리스트들을 다시 불러옴
             Get.dialog(
               AlertDialog(
                 content: SwitchDialogB(reversedList),
+                /// 하이브에서 저장했던 지하철역들의 리스트들을 SwitchDialogB로 이동
                 actions: [
                   DialogButton(
                     onPressed: () async {
@@ -251,6 +260,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     error: (err, stack) => LoadingBox(err.toString()),
                     data: (data){
                       ref.read(infoProvider.notifier).searchSubway(name: nameA);
+                      /// 지하철 호선정보, 영어이름 등등 데이터를 출력합니다.
                       return SwitchDialogA(
                           nameA,sublistA.toString(),nameB,lineAA
                       );
@@ -267,7 +277,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                             latA: latB.toString(), lngA: lngB.toString(),
                             latB: latA.toString(), lngB: lngA.toString(),
                             nameA: nameB, nameB: nameA);
+                          /// nameB,engB ... 등등이 업데이트되면서 UI의 요소들이 바뀝니다.
                           ref.read(apiresult(data));
+                          /// 이동경로,예상시간 등등을 출력합니다.
                           ref.read(nameProvider.notifier).state = nameB;
                           ref.read(engNameProvider.notifier).state = engB;
                           ref.read(lineProvider.notifier).state = lineB;
@@ -286,7 +298,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           }
         },
       ),
-      /// time table page로 넘어감 api를 얻기 위해선 지하철 코드가 필요함
+      /// time table page로 넘어감 api를 얻기 위해선 지하철 코드 (codeConvey) 가 필요함
       onTap: (){
         var codeConvey = ref.read(codeConveyProvider.notifier).state;
         var name = ref.read(nameProvider.notifier).state;

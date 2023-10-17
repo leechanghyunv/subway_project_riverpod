@@ -1,6 +1,7 @@
 // Project imports:
 import 'package:subway_project_230704/setting/export.dart';
 
+/// 지하철의 이름을 검색한 뒤에 구체적인 정보를 필터링하는 구간임
 class DataController extends StateNotifier<List<SubwayModel>>{
 
   final AsyncValue<List<SubwayModel>> subwaydata;

@@ -1,7 +1,8 @@
 // Project imports:
 import 'package:subway_project_230704/setting/export+.dart';
 import 'package:subway_project_230704/setting/export.dart';
-
+import '../screen/screen_controller.dart';
+/// 환승역에대한 정보를 저장하기 위한 구간임 사람들이 잘 안쓸것 같아 바꾸고싶음
 class TransferIcon extends ConsumerStatefulWidget {
   const TransferIcon({super.key});
 

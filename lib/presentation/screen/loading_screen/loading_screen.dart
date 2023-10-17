@@ -1,7 +1,7 @@
 // Project imports:
 import 'package:subway_project_230704/setting/export+.dart';
 import 'package:subway_project_230704/setting/export.dart';
-
+/// 로딩화면으로 불규칙적인 지하철정보를 불러오려했으나 현재는 UI에 안나오도록 막아둔상태
 class IrregularEvent extends StatefulWidget {
   const IrregularEvent({Key? key}) : super(key: key);
   @override

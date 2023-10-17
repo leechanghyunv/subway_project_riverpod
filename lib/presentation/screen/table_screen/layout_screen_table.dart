@@ -1,8 +1,8 @@
 // Project imports:
-import '../../../data_provider/weather_provider.dart';
+import '../../../data_provider/subordinate_provider/weather_provider.dart';
 import '../../../setting/export.dart';
 import '../../../setting/export+.dart';
-
+/// 출발지점의 시간표를 보여주는 테이블 레이아웃에 시간정보 날씨정보를 보여주기위해만든 부분임
 class LayoutTable extends ConsumerWidget {
 
    final Widget? child;

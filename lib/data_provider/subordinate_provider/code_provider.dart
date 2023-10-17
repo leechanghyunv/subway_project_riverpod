@@ -1,5 +1,7 @@
 // Project imports:
-import '../setting/export.dart';
+import '../../setting/export.dart';
+
+/// 지하철 코드를 써칭해주는 프로바이더
 
 final apiCodeProvider = FutureProvider<List<CodeModel>>((ref) async {
 

@@ -2,7 +2,10 @@
 import 'package:subway_project_230704/setting/export+.dart';
 import 'package:subway_project_230704/setting/export.dart';
 
-import '../../data_provider/weather_provider.dart';
+import '../../data_provider/subordinate_provider/weather_provider.dart';
+import '../screen/screen_controller.dart';
+
+/// 실시간 지하철 열차 정보를 보여주기 위한 부분임
 
 class SwitchDialogA extends ConsumerStatefulWidget {
   final String name;
@@ -57,6 +60,7 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          /// 실시간 지하철 열차 정보를 보여주기 위한 부분임
                           TextFrame(
                             comment: '\n${widget.line} ${widget.name}역 -> ${widget.dest}역\n',
                           ),
@@ -99,6 +103,7 @@ class _SwitchDialogAState extends ConsumerState<SwitchDialogA> {
                     },
                   ),
                   const Expanded(child: Text('')),
+                  /// 환승역에대한 정보를 저장하기 위한 구간임 사람들이 잘 안쓸것 같아 바꾸고싶음
                   TransferIcon(),
                 ],
               ),

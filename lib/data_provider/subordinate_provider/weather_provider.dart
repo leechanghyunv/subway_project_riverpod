@@ -1,6 +1,8 @@
 // Project imports:
 import 'package:subway_project_230704/setting/export.dart';
-import '../repository/geolocator.dart';
+import '../../repository/geolocator.dart';
+
+/// 날씨정보
 
 final apiservice = WeatherApiService.create();
 
@@ -25,6 +27,7 @@ final weatherProvider = FutureProvider.autoDispose<List<Weather>>((ref) async {
   throw Exception('Failed to load Weather data');
 });
 
+/// 온도 데이터
 
 final tempProvider = FutureProvider.autoDispose<Main>((ref) async {
 
@@ -48,6 +51,7 @@ final tempProvider = FutureProvider.autoDispose<Main>((ref) async {
   throw Exception('Failed to load Main data');
 });
 
+/// 날씨정보에 따른 아이콘 변경
 
 final svgProvider = FutureProvider.autoDispose<Widget>((ref){
 

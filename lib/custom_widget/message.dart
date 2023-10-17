@@ -1,6 +1,8 @@
 // Project imports:
 import 'package:subway_project_230704/setting/export.dart';
 
+import '../presentation/screen/screen_controller.dart';
+
 Future<String> fetchData() async {
   await Future.delayed(Duration(milliseconds: 1100));
   return "Data loaded successfully";

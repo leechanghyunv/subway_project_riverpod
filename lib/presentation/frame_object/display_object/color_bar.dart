@@ -2,7 +2,7 @@
 import 'package:subway_project_230704/setting/export+.dart';
 import 'package:subway_project_230704/setting/export.dart';
 
-import '../../../data_provider/weather_provider.dart';
+import '../../../data_provider/subordinate_provider/weather_provider.dart';
 
 class ColorBar extends ConsumerStatefulWidget {
 

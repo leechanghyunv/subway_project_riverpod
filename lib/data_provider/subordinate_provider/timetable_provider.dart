@@ -1,6 +1,8 @@
 // Project imports:
-import '../../setting/export+.dart';
-import '../../setting/export.dart';
+import '../../../setting/export+.dart';
+import '../../../setting/export.dart';
+
+/// code 값을 바탕으로 지하철역 정보를 받아오는 구간
 
 final apiservice = SeoulApiService.create();
 

@@ -3,8 +3,11 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 
 // Project imports:
-import '../../setting/export+.dart';
-import '../../setting/export.dart';
+import '../../../setting/export+.dart';
+import '../../../setting/export.dart';
+
+/// 출발지점 도착지점의 파라미터를 받은 후에 최적의 이동경로, 도착 예상시간을 필터링, 도착예상시간전에 알림기능
+/// 제이슨 데이터가 상당히 네스팅구간이 많아서 복잡함 유료데이터임
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 FlutterLocalNotificationsPlugin();

@@ -1,7 +1,7 @@
 // Project imports:
-import '../../setting/export.dart';
-import '../../setting/export+.dart';
-
+import '../../../setting/export.dart';
+import '../../../setting/export+.dart';
+/// 네이버 맵을 보여줌
 class MapSample extends ConsumerWidget {
 
   final double maplat;

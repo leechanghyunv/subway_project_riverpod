@@ -1,7 +1,7 @@
 // Project imports:
 import 'package:subway_project_230704/setting/export+.dart';
 import 'package:subway_project_230704/setting/export.dart';
-import '../main_screen.dart';
+import '../main_screen/main_screen.dart';
 import 'intro_mainframe.dart';
 
 class LayoutIntro extends StatefulWidget {

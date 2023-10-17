@@ -2,6 +2,7 @@
 import 'package:subway_project_230704/setting/export+.dart';
 import 'package:subway_project_230704/setting/export.dart';
 
+/// 현재위치와 데이터에 저장된 위도,경도값을 비교해 디바이스와 가까운 지하철역 순으로 리스팅하는 프로바이더
 final latlngProvider = FutureProvider.autoDispose<List<SubwayModel>>
   ((ref) async {
 

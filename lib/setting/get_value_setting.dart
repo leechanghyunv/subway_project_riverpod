@@ -1,5 +1,5 @@
 // Project imports:
-import '../presentation/screen/layout_screen.dart';
+import '../presentation/screen/screen_controller.dart';
 
 String get name => box.read('name') ?? '';
 

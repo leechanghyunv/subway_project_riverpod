@@ -1,7 +1,6 @@
 // Project imports:
 import '../../setting/export.dart';
 
-final box = GetStorage();
 
 class LayoutScreen extends StatelessWidget {
 

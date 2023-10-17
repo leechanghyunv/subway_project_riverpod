@@ -1,6 +1,7 @@
 // Package imports:
 import 'package:hive_flutter/adapters.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
+import 'package:subway_project_230704/presentation/screen/screen_controller.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
 // Project imports:
@@ -26,7 +27,8 @@ void main() async {
           observers: [
             Logger(),
           ],
-          child: const MyApp())
+          child: const MyApp()
+      ),
   );
 
   await GetStorage.init();

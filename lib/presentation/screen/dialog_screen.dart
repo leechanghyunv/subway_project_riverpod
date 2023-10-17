@@ -2,7 +2,9 @@
 
 import '../../setting/export.dart';
 import '../../setting/export+.dart';
-import 'map_screen.dart';
+import 'map_screen/map_screen.dart';
+
+/// 호선정보 등등을 필터링합니다.
 
 class DialogPage extends ConsumerWidget {
    DialogPage({super.key});
@@ -10,6 +12,7 @@ class DialogPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     final latlongData = ref.watch(latlngProvider);
+    /// 디바이스의 위치와 내부데이터의 position 정보를 비교해 현재 위치와 가장 가까운 지하철역 리스팅
     final initialdata = ref.watch(dataProviderInside);
     return Scaffold(
       body: latlongData.when(
@@ -23,6 +26,7 @@ class DialogPage extends ConsumerWidget {
                 itemBuilder: (context, index){
                   var row = data[index];
                   return Slidable(
+                    /// Naver Map을 보여주는 부분
                     startActionPane: ActionPane(
                         motion: StretchMotion(),
                         children:[
@@ -61,6 +65,7 @@ class DialogPage extends ConsumerWidget {
                           ),
                         ]
                     ),
+                    /// 민원신고부분을 불러오는 부분
                       endActionPane: ActionPane(
                           motion: StretchMotion(),
                           children: [
@@ -108,7 +113,8 @@ class DialogPage extends ConsumerWidget {
                               label: 'help',
                             ),
                           ]),
-                      child: AnimatedContainer(
+                    /// 리스팅된 지하철역들을 탭하면 실시간 지하철 정보를 보여주도록 설계된 부분
+                    child: AnimatedContainer(
                         duration: Duration(seconds: 3),
                         child: Material(
                           child: InkWell(
@@ -122,9 +128,12 @@ class DialogPage extends ConsumerWidget {
                                     data: (data){
                                       ref.read(infoProvider.notifier).
                                       searchSubway(name: row.subname, line: row.line_ui);
-
+                                      /// SwitchDialogC에 실시간 열차 데이터를 불러오기위해 콜백
                                       ref.read(infoProviderB.notifier).
                                       searchSubway(name: row.subname);
+                                      /// infoProviderB는 popupmenubutton을 구성하기 위해 콜백함
+                                      /// ex 가산디지털단지 1호선,7호선 모두 포함되어야함 이 정보를 가져오기위함
+                                      /// SwitchDialogC에서 보여짐
                                       return SwitchDialogC();
                                     },
                                   ),

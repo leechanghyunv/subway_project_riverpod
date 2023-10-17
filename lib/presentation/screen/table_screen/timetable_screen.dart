@@ -4,6 +4,7 @@ import 'package:subway_project_230704/setting/export+.dart';
 import 'package:subway_project_230704/setting/export.dart';
 import 'layout_screen_table.dart';
 
+/// 출발지점의 시간표를 보여주는 테이블
 class TableScreen extends ConsumerStatefulWidget {
 
   final subName;
@@ -28,6 +29,7 @@ class _TableScreenState extends ConsumerState<TableScreen> {
   @override
   Widget build(BuildContext context) {
     final table = ref.watch(subTableProvider(ref.watch(codeConveyProvider)));
+    /// codeConveyProvider는 지하철 코드임 이 파라미터로 타임 테이블을 불러올 수 있음
     return LayoutTable(
       floatingActionButton: Stack(
         children: <Widget>[
@@ -88,6 +90,9 @@ class _TableScreenState extends ConsumerState<TableScreen> {
           subTableB.sort((a,b)=>a.arrivetime.compareTo(b.arrivetime));
           var filtedA = subTableA.where((e) => e.arrivetime != '00:00:00').toList();
           var filtedB = subTableB.where((e) => e.arrivetime != '00:00:00').toList();
+          /// 지하철 오픈 api에서 받는 시간표 정보에는 시간표 순서로 정렬되어있지 않다는점, 의미없는 기록 00:00:00이 너무 많다는 점이 있어
+          /// 모두 필터링한 후에 UI에 나타나도록함 futureProvider 대신에 statenotifeirprovider로 하면 컨트롤러 안에다 필터링된 값들을
+          /// 넣고 불러올 수 있을 거라 생
           if(filtedA.isNotEmpty && filtedB.isNotEmpty){
             return TimeTable(
               childA: ListView.builder(
