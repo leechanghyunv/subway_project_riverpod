@@ -6,7 +6,7 @@ class DialogDesignBoxA extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double sizeWidth = 2.42.w;
+    double sizeWidth = 2.4.w;
     double contHeight = 16.8.w;
 
     final line = ref.watch(lineProvider);
@@ -16,17 +16,16 @@ class DialogDesignBoxA extends ConsumerWidget {
       decoration: const BoxDecoration(color: Colors.white),
       child: Row(
         children: [
-          SizedBox(
+          Container(
             height: 14.5.w,
             width: 3.6.w,
+            alignment: Alignment.center,
             child: ColorContainer(line),
           ),
           SizedBox(
             width: sizeWidth,
           ),
           Container(
-            height: contHeight,
-            width: 12.5.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -39,7 +38,7 @@ class DialogDesignBoxA extends ConsumerWidget {
                   height: sizeWidth,
                 ),
                 Text(
-                    DateFormat('MM-dd').format(DateTime.now()),
+                    DateFormat('MM/dd').format(DateTime.now()),
                     style: dialogABC,
                 ),
               ],
@@ -50,14 +49,14 @@ class DialogDesignBoxA extends ConsumerWidget {
           ),
           Container(
             height: 17.w,
-            width: 17.w,
+            width: 21.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('Location', style: dialogABC,
+                Text('Destination', style: dialogABC,
                 ),
                 SizedBox(
                   height: sizeWidth,
@@ -88,7 +87,7 @@ class DialogDesignBoxA extends ConsumerWidget {
           ),
           Container(
             height: 17.w,
-            width: 22.w,
+            width: 24.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

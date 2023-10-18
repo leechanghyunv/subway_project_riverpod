@@ -71,6 +71,7 @@ class _LayoutIntroState extends State<LayoutIntro> {
               type: PageTransitionType.fade
           ),
           );
+          return true;
         },
         targets: targets)..show(context: context);
 

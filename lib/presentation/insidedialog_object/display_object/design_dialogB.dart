@@ -28,8 +28,6 @@ class DialogDesignBoxB extends StatelessWidget {
             width: sizeWidth,
           ),
           Container(
-            height: contHeight,
-            width: 12.5.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -42,7 +40,7 @@ class DialogDesignBoxB extends StatelessWidget {
                   height: sizeWidth,
                 ),
                 Text(
-                    DateFormat('MM-dd').format(DateTime.now()),
+                    DateFormat('MM/dd').format(DateTime.now()),
                     style: dialogABC,
                 ),
               ],
@@ -53,21 +51,21 @@ class DialogDesignBoxB extends StatelessWidget {
           ),
           Container(
             height: 17.w,
-            width: 17.w,
+            width: 21.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('Transfer', style: dialogABC,
+                Text('TransferSt', style: dialogABC,
                 ),
                 SizedBox(
                   height: sizeWidth,
                 ),
                 Text(
                     nameT.isNotEmpty
-                        ? '$filtered역'
+                        ? filtered
                         : '',
                     style: dialogABC,
                     overflow: TextOverflow.ellipsis),

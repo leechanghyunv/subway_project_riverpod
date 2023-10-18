@@ -38,7 +38,7 @@ class SmsContainer extends ConsumerWidget {
                   ClipboardData(text: '$des1 $sub1번'));
               return BlinkText(
                 sms1, style: common(textSize2),
-                duration: Duration(milliseconds: 500), /// 깜빡이는 간격이라고 한다.
+                duration: const Duration(milliseconds: 500), /// 깜빡이는 간격이라고 한다.
                 times: 2, /// 깜빡이는 횟수라고 한다.
               );
             }else if(upDown == -1){
@@ -46,7 +46,7 @@ class SmsContainer extends ConsumerWidget {
                   ClipboardData(text: '$des2 $sub2번'));
               return BlinkText(
                 sms2, style: common(textSize2),
-                duration: Duration(milliseconds: 500), /// 깜빡이는 간격이라고 한다.
+                duration: const Duration(milliseconds: 500), /// 깜빡이는 간격이라고 한다.
                 times: 2, /// 깜빡이는 횟수라고 한다.
               );
             }

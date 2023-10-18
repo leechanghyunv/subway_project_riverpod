@@ -14,7 +14,7 @@ class DialogDesignBoxC extends StatelessWidget {
     final filtered = name.replaceAll(RegExp(r'\([^()]*\)'), '');
 
     double sizeWidth = 2.42.w;
-    double sizeWidth2 = 1.8.w;
+    double sizeWidth2 = 2.w;
     double contHeight = 17.w;
 
     return Container(
@@ -27,11 +27,9 @@ class DialogDesignBoxC extends StatelessWidget {
             child: ColorContainer(line),
           ),
           SizedBox(
-            width: 1.8.w,
+            width: 2.w,
           ),
           Container(
-            height: contHeight,
-            width: 13.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -51,23 +49,23 @@ class DialogDesignBoxC extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 1.w,
+            width: 2.w,
           ),
           Container(
             height: contHeight,
-            width: 16.w,
+            width: 20.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('Location', style: dialogABC,
+                Text('SubStation', style: dialogABC,
                 ),
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('$filtered역',
+                Text(filtered,
                     style: dialogABC,
                     overflow: TextOverflow.ellipsis),
               ],
@@ -78,14 +76,13 @@ class DialogDesignBoxC extends StatelessWidget {
           ),
           Container(
             height: contHeight,
-            width: 12.h,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   height: sizeWidth,
                 ),
-                Text('SMS Call',
+                Text('SMS Number',
                   style: dialogABC,
                 ),
                 SizedBox(
@@ -100,7 +97,7 @@ class DialogDesignBoxC extends StatelessWidget {
                     : line == 'Line7' ? '1577-1234'
                     : line == 'Line8' ? '1577-1234'
                     : line == 'Line9' ? '1577-4009'
-                    : line == '신분당' ? '(031)8018-7777'
+                    : line == '신분당' ? '8018-7777'
                     : '1544-7769',
                     style: dialogABC,
                     overflow: TextOverflow.ellipsis)

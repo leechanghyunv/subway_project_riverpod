@@ -10,6 +10,10 @@
  5. 실시간 열차 데이터 제공 
  6. 열차 시간표 데이터 제공
 
+<p align="center">
+ <img src = "images/subway_project_drawio.jpg">
+</p>
+
 ### 파일구조
 
 * **custom_widget**
